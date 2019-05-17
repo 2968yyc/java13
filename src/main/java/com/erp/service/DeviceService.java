@@ -11,4 +11,6 @@ import java.util.List;
  */
 public interface DeviceService {
     QueryVo getDeviceInPage(int page, int rows);
+
+    int addNew(Device device);
 }
