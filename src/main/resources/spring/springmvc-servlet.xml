@@ -13,4 +13,47 @@ http://www.springframework.org/schema/mvc https://www.springframework.org/schema
 http://www.springframework.org/schema/tx https://www.springframework.org/schema/tx/spring-tx.xsd
 http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
+    <context:component-scan base-package="com.erp">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="typeAliasesPackage" value="com.erp.bean"/>
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/erp?characterEncoding=utf-8&amp;autoReconnect=true&amp;serverTimezone=GMT&amp;userSSL=false"/>
+        <property name="username" value="root"/>
+        <property name="password" value="123456"/>
+        <!--配置初始化大小-->
+        <property name="initialSize" value="5"/>
+        <property name="minIdle" value="1"/>
+        <property name="maxActive" value="300"/>
+        <!--配置获取连接等待的超时时间-->
+        <property name="maxWait" value="60000"/>
+        <!--配置多久才检测一次,检测需要关闭的空闲连接-->
+        <property name="timeBetweenEvictionRunsMillis" value="60000"/>
+        <!--配置一个在连接池中最小生存的时间-->
+        <property name="minEvictableIdleTimeMillis" value="300000"/>
+        <property name="validationQuery" value="select 1"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="testOnBorrow" value="false"/>
+        <property name="testOnReturn" value="false"/>
+        <property name="poolPreparedStatements" value="false"/>
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="-1"/>
+
+    </bean>
+    <bean id="connectionFactory" class="com.erp.utils.MyDruid" factory-method="getConnection"/>
+
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.erp.mapper"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+
 </beans>
