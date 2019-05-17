@@ -256,4 +256,8 @@
       note = #{note,jdbcType=VARCHAR}
     where unqualify_apply_id = #{unqualifyApplyId,jdbcType=VARCHAR}
   </update>
+
+  <select id="selectAllUnqualify" resultType="unqualify">
+    select <include refid="Base_Column_List" /> from unqualify_apply
+  </select>
 </mapper>
