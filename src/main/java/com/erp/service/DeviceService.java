@@ -1,9 +1,7 @@
 package com.erp.service;
 
 import com.erp.bean.device.Device;
-import com.erp.bean.device.QueryVo;
-
-import java.util.List;
+import com.erp.bean.QueryVo;
 
 /**
  * @Author: yyc
@@ -13,4 +11,6 @@ public interface DeviceService {
     QueryVo getDeviceInPage(int page, int rows);
 
     int addNew(Device device);
+
+    int update(Device device);
 }

@@ -1,4 +1,4 @@
-package com.erp.bean.device;
+package com.erp.bean;
 
 
 import java.util.List;

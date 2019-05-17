@@ -2,7 +2,7 @@ package com.erp.service.impl;
 
 import com.erp.bean.device.Device;
 import com.erp.bean.device.DeviceExample;
-import com.erp.bean.device.QueryVo;
+import com.erp.bean.QueryVo;
 import com.erp.mapper.device.DeviceMapper;
 import com.erp.service.DeviceService;
 import com.github.pagehelper.PageHelper;
@@ -25,8 +25,9 @@ public class DeviceServiceImpl implements DeviceService {
 
         int l = deviceMapper.countAll();
         PageHelper.startPage(page, rows);
-
-        List<Device> devices = deviceMapper.selectAll();
+        DeviceExample deviceExample = new DeviceExample();
+        deviceExample.or();
+        List<Device> devices = deviceMapper.selectByExample(deviceExample);
         return new QueryVo<Device>( l,devices);
     }
 
@@ -34,5 +35,11 @@ public class DeviceServiceImpl implements DeviceService {
     public int addNew(Device device) {
         int insert = deviceMapper.insert(device);
         return insert;
+    }
+
+    @Override
+    public int update(Device device) {
+        int update = deviceMapper.updateByPrimaryKeySelective(device);
+        return update;
     }
 }
