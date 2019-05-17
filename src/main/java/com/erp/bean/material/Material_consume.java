@@ -1,15 +1,17 @@
-package com.erp.bean;
+package com.erp.bean.material;
 
 import java.util.Date;
 
-public class Material_receive {
-    private String receiveId;
+public class Material_consume {
+    private String consumeId;
+
+    private String workId;
 
     private String materialId;
 
-    private Integer amount;
+    private Integer consumeAmount;
 
-    private Date receiveDate;
+    private Date consumeDate;
 
     private String sender;
 
@@ -17,12 +19,20 @@ public class Material_receive {
 
     private String note;
 
-    public String getReceiveId() {
-        return receiveId;
+    public String getConsumeId() {
+        return consumeId;
     }
 
-    public void setReceiveId(String receiveId) {
-        this.receiveId = receiveId == null ? null : receiveId.trim();
+    public void setConsumeId(String consumeId) {
+        this.consumeId = consumeId == null ? null : consumeId.trim();
+    }
+
+    public String getWorkId() {
+        return workId;
+    }
+
+    public void setWorkId(String workId) {
+        this.workId = workId == null ? null : workId.trim();
     }
 
     public String getMaterialId() {
@@ -33,20 +43,20 @@ public class Material_receive {
         this.materialId = materialId == null ? null : materialId.trim();
     }
 
-    public Integer getAmount() {
-        return amount;
+    public Integer getConsumeAmount() {
+        return consumeAmount;
     }
 
-    public void setAmount(Integer amount) {
-        this.amount = amount;
+    public void setConsumeAmount(Integer consumeAmount) {
+        this.consumeAmount = consumeAmount;
     }
 
-    public Date getReceiveDate() {
-        return receiveDate;
+    public Date getConsumeDate() {
+        return consumeDate;
     }
 
-    public void setReceiveDate(Date receiveDate) {
-        this.receiveDate = receiveDate;
+    public void setConsumeDate(Date consumeDate) {
+        this.consumeDate = consumeDate;
     }
 
     public String getSender() {

@@ -1,4 +1,4 @@
-package com.erp.bean;
+package com.erp.bean.material;
 
 /**
  * @Author: Qiu
