@@ -257,7 +257,7 @@
     where unqualify_apply_id = #{unqualifyApplyId,jdbcType=VARCHAR}
   </update>
 
-  <select id="selectAllUnqualify" resultType="unqualify">
+  <select id="selectAllUnqualify" resultMap="BaseResultMap">
     select <include refid="Base_Column_List" /> from unqualify_apply
   </select>
 </mapper>
