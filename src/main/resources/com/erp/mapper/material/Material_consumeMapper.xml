@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.erp.mapper.material.Material_consumeMapper">
-  <update id="updateByPrimaryKeySelective" parameterType="com.erp.bean.Material_consume">
+  <update id="updateByPrimaryKeySelective" parameterType="com.erp.bean.material.Material_consume">
     update material_consume
     <set>
       <if test="workId != null">
@@ -28,7 +28,7 @@
     </set>
     where consume_id = #{consumeId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.erp.bean.Material_consume">
+  <update id="updateByPrimaryKey" parameterType="com.erp.bean.material.Material_consume">
     update material_consume
     set work_id = #{workId,jdbcType=VARCHAR},
       material_id = #{materialId,jdbcType=VARCHAR},

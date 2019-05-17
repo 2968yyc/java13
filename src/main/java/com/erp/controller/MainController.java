@@ -13,6 +13,7 @@ public class MainController {
 
     @RequestMapping("home")
     public String toHome(){
+        System.out.println(111);
         return "home";
     }
 

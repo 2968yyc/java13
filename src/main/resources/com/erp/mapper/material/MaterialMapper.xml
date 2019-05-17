@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.erp.mapper.material.MaterialMapper">
-  <update id="updateByPrimaryKeySelective" parameterType="com.erp.bean.Material">
+  <update id="updateByPrimaryKeySelective" parameterType="com.erp.bean.material.Material">
     update material
     <set>
       <if test="materialType != null">
@@ -19,7 +19,7 @@
     </set>
     where material_id = #{materialId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.erp.bean.Material">
+  <update id="updateByPrimaryKey" parameterType="com.erp.bean.material.Material">
     update material
     set material_type = #{materialType,jdbcType=VARCHAR},
       status = #{status,jdbcType=VARCHAR},
