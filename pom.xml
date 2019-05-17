@@ -16,8 +16,6 @@
         <spring.version>5.1.6.RELEASE</spring.version>
     </properties>
 
-
-    <!--spring相关-->
     <dependencies>
         <dependency>
             <groupId>org.mybatis.generator</groupId>
@@ -211,6 +209,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>
