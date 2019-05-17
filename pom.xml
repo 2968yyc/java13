@@ -16,8 +16,6 @@
         <spring.version>5.1.6.RELEASE</spring.version>
     </properties>
 
-
-    <!--spring相关-->
     <dependencies>
         <!-- 时间操作组件 -->
         <dependency>
@@ -206,6 +204,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>
