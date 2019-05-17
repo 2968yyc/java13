@@ -1,6 +1,6 @@
 package com.erp.bean.technology;
 
-public class process {
+public class Process {
     private String processId;
 
     private String technologyPlanId;

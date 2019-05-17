@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.erp.mapper.technology.technology_requirementMapper">
-  <resultMap id="BaseResultMap" type="com.erp.bean.technology.technology_requirement">
+<mapper namespace="com.erp.mapper.technology.Technology_requirementMapper">
+  <resultMap id="BaseResultMap" type="com.erp.bean.technology.Technology_requirement">
     <id column="technology_requirement_id" jdbcType="VARCHAR" property="technologyRequirementId" />
     <result column="technology_id" jdbcType="VARCHAR" property="technologyId" />
     <result column="requirement" jdbcType="VARCHAR" property="requirement" />
@@ -69,7 +69,7 @@
   <sql id="Base_Column_List">
     technology_requirement_id, technology_id, requirement, add_time, revise_time
   </sql>
-  <select id="selectByExample" parameterType="com.erp.bean.technology.technology_requirementExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.erp.bean.technology.Technology_requirementExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -93,13 +93,13 @@
     delete from technology_requirement
     where technology_requirement_id = #{technologyRequirementId,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.erp.bean.technology.technology_requirementExample">
+  <delete id="deleteByExample" parameterType="com.erp.bean.technology.Technology_requirementExample">
     delete from technology_requirement
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.erp.bean.technology.technology_requirement">
+  <insert id="insert" parameterType="com.erp.bean.technology.Technology_requirement">
     insert into technology_requirement (technology_requirement_id, technology_id, 
       requirement, add_time, revise_time
       )
@@ -107,7 +107,7 @@
       #{requirement,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP}, #{reviseTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.erp.bean.technology.technology_requirement">
+  <insert id="insertSelective" parameterType="com.erp.bean.technology.Technology_requirement">
     insert into technology_requirement
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="technologyRequirementId != null">
@@ -144,7 +144,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.erp.bean.technology.technology_requirementExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.erp.bean.technology.Technology_requirementExample" resultType="java.lang.Long">
     select count(*) from technology_requirement
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -184,7 +184,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.erp.bean.technology.technology_requirement">
+  <update id="updateByPrimaryKeySelective" parameterType="com.erp.bean.technology.Technology_requirement">
     update technology_requirement
     <set>
       <if test="technologyId != null">
@@ -202,7 +202,7 @@
     </set>
     where technology_requirement_id = #{technologyRequirementId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.erp.bean.technology.technology_requirement">
+  <update id="updateByPrimaryKey" parameterType="com.erp.bean.technology.Technology_requirement">
     update technology_requirement
     set technology_id = #{technologyId,jdbcType=VARCHAR},
       requirement = #{requirement,jdbcType=VARCHAR},

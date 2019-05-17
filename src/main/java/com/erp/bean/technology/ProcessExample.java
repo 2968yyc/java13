@@ -3,14 +3,14 @@ package com.erp.bean.technology;
 import java.util.ArrayList;
 import java.util.List;
 
-public class processExample {
+public class ProcessExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public processExample() {
+    public ProcessExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
