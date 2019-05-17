@@ -41,6 +41,9 @@ http://www.springframework.org/schema/context https://www.springframework.org/sc
     </bean>
 
     <mvc:annotation-driven/>
+    <mvc:resources mapping="/js/**" location="/WEB-INF/js/"/>
+    <mvc:resources mapping="/css/**" location="/WEB-INF/css/"/>
+    <mvc:resources mapping="/image/**" location="/WEB-INF/image/"/>
 
 
 
