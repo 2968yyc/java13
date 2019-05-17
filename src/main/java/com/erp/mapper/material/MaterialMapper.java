@@ -1,4 +1,4 @@
-package com.erp.mapper;
+package com.erp.mapper.material;
 
 import com.erp.bean.material.Material;
 
