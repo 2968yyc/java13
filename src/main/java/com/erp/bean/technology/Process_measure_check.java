@@ -2,7 +2,7 @@ package com.erp.bean.technology;
 
 import java.util.Date;
 
-public class process_measure_check {
+public class Process_measure_check {
     private String pMeasureCheckId;
 
     private String processId;

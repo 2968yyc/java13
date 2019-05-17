@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class process_measure_checkExample {
+public class Process_measure_checkExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public process_measure_checkExample() {
+    public Process_measure_checkExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 

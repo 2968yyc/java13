@@ -2,7 +2,7 @@ package com.erp.bean.technology;
 
 import java.util.Date;
 
-public class technology_requirement {
+public class Technology_requirement {
     private String technologyRequirementId;
 
     private String technologyId;

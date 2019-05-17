@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.erp.mapper.technology.technology_planMapper">
-  <resultMap id="BaseResultMap" type="com.erp.bean.technology.technology_plan">
+<mapper namespace="com.erp.mapper.technology.Technology_planMapper">
+  <resultMap id="BaseResultMap" type="com.erp.bean.technology.Technology_plan">
     <id column="technology_plan_id" jdbcType="VARCHAR" property="technologyPlanId" />
     <result column="technology_id" jdbcType="VARCHAR" property="technologyId" />
     <result column="batch_amount" jdbcType="INTEGER" property="batchAmount" />
@@ -73,7 +73,7 @@
     technology_plan_id, technology_id, batch_amount, start_plan, end_plan, commit_plan, 
     technology_plan_start, technology_plan_end
   </sql>
-  <select id="selectByExample" parameterType="com.erp.bean.technology.technology_planExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.erp.bean.technology.Technology_planExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -97,13 +97,13 @@
     delete from technology_plan
     where technology_plan_id = #{technologyPlanId,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.erp.bean.technology.technology_planExample">
+  <delete id="deleteByExample" parameterType="com.erp.bean.technology.Technology_planExample">
     delete from technology_plan
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.erp.bean.technology.technology_plan">
+  <insert id="insert" parameterType="com.erp.bean.technology.Technology_plan">
     insert into technology_plan (technology_plan_id, technology_id, batch_amount, 
       start_plan, end_plan, commit_plan, 
       technology_plan_start, technology_plan_end
@@ -113,7 +113,7 @@
       #{technologyPlanStart,jdbcType=TIMESTAMP}, #{technologyPlanEnd,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.erp.bean.technology.technology_plan">
+  <insert id="insertSelective" parameterType="com.erp.bean.technology.Technology_plan">
     insert into technology_plan
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="technologyPlanId != null">
@@ -168,7 +168,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.erp.bean.technology.technology_planExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.erp.bean.technology.Technology_planExample" resultType="java.lang.Long">
     select count(*) from technology_plan
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -220,7 +220,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.erp.bean.technology.technology_plan">
+  <update id="updateByPrimaryKeySelective" parameterType="com.erp.bean.technology.Technology_plan">
     update technology_plan
     <set>
       <if test="technologyId != null">
@@ -247,7 +247,7 @@
     </set>
     where technology_plan_id = #{technologyPlanId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.erp.bean.technology.technology_plan">
+  <update id="updateByPrimaryKey" parameterType="com.erp.bean.technology.Technology_plan">
     update technology_plan
     set technology_id = #{technologyId,jdbcType=VARCHAR},
       batch_amount = #{batchAmount,jdbcType=INTEGER},
