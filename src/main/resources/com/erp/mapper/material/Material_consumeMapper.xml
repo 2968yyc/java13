@@ -39,4 +39,9 @@
       note = #{note,jdbcType=VARCHAR}
     where consume_id = #{consumeId,jdbcType=VARCHAR}
   </update>
+
+  <select id="queryAllMaterialConsume" resultType="com.erp.bean.material.Material_consume">
+    select consume_id as consumeId,work_id as workId,material_id as materialId,consume_amount as consumeAmount,
+    consume_date as consumeDate,sender,receiver,note from material_consume
+  </select>
 </mapper>

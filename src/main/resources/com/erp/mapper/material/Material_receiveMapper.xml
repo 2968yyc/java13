@@ -35,4 +35,19 @@
       note = #{note,jdbcType=VARCHAR}
     where receive_id = #{receiveId,jdbcType=VARCHAR}
   </update>
+
+
+  <select id="queryAllMaterialReceive" resultType="com.erp.bean.material.Material_receive">
+    select receive_id as receiveId,material_id as materialId,amount,receive_date as receiveDate,sender,receiver,note from material_receive
+  </select>
+
+  <select id="queryReceiveByReceiveId" resultType="com.erp.bean.material.Material_receive">
+select receive_id as receiveId,material_id as materialId,amount,receive_date as receiveDate,sender,receiver,note from material_receive
+where receive_id like #{searchValue}
+  </select>
+
+  <select id="queryReceiveByMaterialId" resultType="com.erp.bean.material.Material_receive">
+    select receive_id as receiveId,material_id as materialId,amount,receive_date as receiveDate,sender,receiver,note from material_receive
+where material_id like #{searchValue}
+  </select>
 </mapper>
