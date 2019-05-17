@@ -1,3 +1,5 @@
 .idea/
 SSM.iml
 target/
+*.class
+.gitignore
