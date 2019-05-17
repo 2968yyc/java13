@@ -3,4 +3,4 @@ SSM.iml
 target/
 *.class
 .gitignore
-druid.properties
+src/main/resources/druid.properties

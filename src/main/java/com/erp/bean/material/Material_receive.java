@@ -72,4 +72,30 @@ public class Material_receive {
     public void setNote(String note) {
         this.note = note == null ? null : note.trim();
     }
+
+    public Material_receive(String receiveId, String materialId, Integer amount, Date receiveDate, String sender, String receiver, String note) {
+        this.receiveId = receiveId;
+        this.materialId = materialId;
+        this.amount = amount;
+        this.receiveDate = receiveDate;
+        this.sender = sender;
+        this.receiver = receiver;
+        this.note = note;
+    }
+
+    public Material_receive() {
+    }
+
+    @Override
+    public String toString() {
+        return "Material_receive{" +
+                "receiveId='" + receiveId + '\'' +
+                ", materialId='" + materialId + '\'' +
+                ", amount=" + amount +
+                ", receiveDate=" + receiveDate +
+                ", sender='" + sender + '\'' +
+                ", receiver='" + receiver + '\'' +
+                ", note='" + note + '\'' +
+                '}';
+    }
 }
