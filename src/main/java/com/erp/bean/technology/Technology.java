@@ -2,7 +2,7 @@ package com.erp.bean.technology;
 
 import java.math.BigDecimal;
 
-public class technology {
+public class Technology {
     private String technologyId;
 
     private String technologyName;

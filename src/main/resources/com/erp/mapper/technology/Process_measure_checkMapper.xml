@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.erp.mapper.technology.process_count_checkMapper">
-  <resultMap id="BaseResultMap" type="com.erp.bean.technology.process_count_check">
-    <id column="p_count_check_id" jdbcType="VARCHAR" property="pCountCheckId" />
+<mapper namespace="com.erp.mapper.technology.Process_measure_checkMapper">
+  <resultMap id="BaseResultMap" type="com.erp.bean.technology.Process_measure_check">
+    <id column="p_measure_check_id" jdbcType="VARCHAR" property="pMeasureCheckId" />
     <result column="process_id" jdbcType="VARCHAR" property="processId" />
     <result column="check_item" jdbcType="VARCHAR" property="checkItem" />
-    <result column="sample" jdbcType="INTEGER" property="sample" />
-    <result column="check_number" jdbcType="INTEGER" property="checkNumber" />
-    <result column="unqualify" jdbcType="INTEGER" property="unqualify" />
-    <result column="qualify" jdbcType="DECIMAL" property="qualify" />
     <result column="cdate" jdbcType="TIMESTAMP" property="cdate" />
     <result column="measure_data" jdbcType="VARCHAR" property="measureData" />
     <result column="emp_id" jdbcType="VARCHAR" property="empId" />
@@ -74,16 +70,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    p_count_check_id, process_id, check_item, sample, check_number, unqualify, qualify, 
-    cdate, measure_data, emp_id, result, note
+    p_measure_check_id, process_id, check_item, cdate, measure_data, emp_id, result, 
+    note
   </sql>
-  <select id="selectByExample" parameterType="com.erp.bean.technology.process_count_checkExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.erp.bean.technology.Process_measure_checkExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from process_count_check
+    from process_measure_check
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -94,54 +90,38 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from process_count_check
-    where p_count_check_id = #{pCountCheckId,jdbcType=VARCHAR}
+    from process_measure_check
+    where p_measure_check_id = #{pMeasureCheckId,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from process_count_check
-    where p_count_check_id = #{pCountCheckId,jdbcType=VARCHAR}
+    delete from process_measure_check
+    where p_measure_check_id = #{pMeasureCheckId,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.erp.bean.technology.process_count_checkExample">
-    delete from process_count_check
+  <delete id="deleteByExample" parameterType="com.erp.bean.technology.Process_measure_checkExample">
+    delete from process_measure_check
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.erp.bean.technology.process_count_check">
-    insert into process_count_check (p_count_check_id, process_id, check_item, 
-      sample, check_number, unqualify, 
-      qualify, cdate, measure_data, 
-      emp_id, result, note
-      )
-    values (#{pCountCheckId,jdbcType=VARCHAR}, #{processId,jdbcType=VARCHAR}, #{checkItem,jdbcType=VARCHAR}, 
-      #{sample,jdbcType=INTEGER}, #{checkNumber,jdbcType=INTEGER}, #{unqualify,jdbcType=INTEGER}, 
-      #{qualify,jdbcType=DECIMAL}, #{cdate,jdbcType=TIMESTAMP}, #{measureData,jdbcType=VARCHAR}, 
-      #{empId,jdbcType=VARCHAR}, #{result,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}
-      )
+  <insert id="insert" parameterType="com.erp.bean.technology.Process_measure_check">
+    insert into process_measure_check (p_measure_check_id, process_id, check_item, 
+      cdate, measure_data, emp_id, 
+      result, note)
+    values (#{pMeasureCheckId,jdbcType=VARCHAR}, #{processId,jdbcType=VARCHAR}, #{checkItem,jdbcType=VARCHAR}, 
+      #{cdate,jdbcType=TIMESTAMP}, #{measureData,jdbcType=VARCHAR}, #{empId,jdbcType=VARCHAR}, 
+      #{result,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.erp.bean.technology.process_count_check">
-    insert into process_count_check
+  <insert id="insertSelective" parameterType="com.erp.bean.technology.Process_measure_check">
+    insert into process_measure_check
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="pCountCheckId != null">
-        p_count_check_id,
+      <if test="pMeasureCheckId != null">
+        p_measure_check_id,
       </if>
       <if test="processId != null">
         process_id,
       </if>
       <if test="checkItem != null">
         check_item,
-      </if>
-      <if test="sample != null">
-        sample,
-      </if>
-      <if test="checkNumber != null">
-        check_number,
-      </if>
-      <if test="unqualify != null">
-        unqualify,
-      </if>
-      <if test="qualify != null">
-        qualify,
       </if>
       <if test="cdate != null">
         cdate,
@@ -160,26 +140,14 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="pCountCheckId != null">
-        #{pCountCheckId,jdbcType=VARCHAR},
+      <if test="pMeasureCheckId != null">
+        #{pMeasureCheckId,jdbcType=VARCHAR},
       </if>
       <if test="processId != null">
         #{processId,jdbcType=VARCHAR},
       </if>
       <if test="checkItem != null">
         #{checkItem,jdbcType=VARCHAR},
-      </if>
-      <if test="sample != null">
-        #{sample,jdbcType=INTEGER},
-      </if>
-      <if test="checkNumber != null">
-        #{checkNumber,jdbcType=INTEGER},
-      </if>
-      <if test="unqualify != null">
-        #{unqualify,jdbcType=INTEGER},
-      </if>
-      <if test="qualify != null">
-        #{qualify,jdbcType=DECIMAL},
       </if>
       <if test="cdate != null">
         #{cdate,jdbcType=TIMESTAMP},
@@ -198,35 +166,23 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.erp.bean.technology.process_count_checkExample" resultType="java.lang.Long">
-    select count(*) from process_count_check
+  <select id="countByExample" parameterType="com.erp.bean.technology.Process_measure_checkExample" resultType="java.lang.Long">
+    select count(*) from process_measure_check
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update process_count_check
+    update process_measure_check
     <set>
-      <if test="record.pCountCheckId != null">
-        p_count_check_id = #{record.pCountCheckId,jdbcType=VARCHAR},
+      <if test="record.pMeasureCheckId != null">
+        p_measure_check_id = #{record.pMeasureCheckId,jdbcType=VARCHAR},
       </if>
       <if test="record.processId != null">
         process_id = #{record.processId,jdbcType=VARCHAR},
       </if>
       <if test="record.checkItem != null">
         check_item = #{record.checkItem,jdbcType=VARCHAR},
-      </if>
-      <if test="record.sample != null">
-        sample = #{record.sample,jdbcType=INTEGER},
-      </if>
-      <if test="record.checkNumber != null">
-        check_number = #{record.checkNumber,jdbcType=INTEGER},
-      </if>
-      <if test="record.unqualify != null">
-        unqualify = #{record.unqualify,jdbcType=INTEGER},
-      </if>
-      <if test="record.qualify != null">
-        qualify = #{record.qualify,jdbcType=DECIMAL},
       </if>
       <if test="record.cdate != null">
         cdate = #{record.cdate,jdbcType=TIMESTAMP},
@@ -249,14 +205,10 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update process_count_check
-    set p_count_check_id = #{record.pCountCheckId,jdbcType=VARCHAR},
+    update process_measure_check
+    set p_measure_check_id = #{record.pMeasureCheckId,jdbcType=VARCHAR},
       process_id = #{record.processId,jdbcType=VARCHAR},
       check_item = #{record.checkItem,jdbcType=VARCHAR},
-      sample = #{record.sample,jdbcType=INTEGER},
-      check_number = #{record.checkNumber,jdbcType=INTEGER},
-      unqualify = #{record.unqualify,jdbcType=INTEGER},
-      qualify = #{record.qualify,jdbcType=DECIMAL},
       cdate = #{record.cdate,jdbcType=TIMESTAMP},
       measure_data = #{record.measureData,jdbcType=VARCHAR},
       emp_id = #{record.empId,jdbcType=VARCHAR},
@@ -266,26 +218,14 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.erp.bean.technology.process_count_check">
-    update process_count_check
+  <update id="updateByPrimaryKeySelective" parameterType="com.erp.bean.technology.Process_measure_check">
+    update process_measure_check
     <set>
       <if test="processId != null">
         process_id = #{processId,jdbcType=VARCHAR},
       </if>
       <if test="checkItem != null">
         check_item = #{checkItem,jdbcType=VARCHAR},
-      </if>
-      <if test="sample != null">
-        sample = #{sample,jdbcType=INTEGER},
-      </if>
-      <if test="checkNumber != null">
-        check_number = #{checkNumber,jdbcType=INTEGER},
-      </if>
-      <if test="unqualify != null">
-        unqualify = #{unqualify,jdbcType=INTEGER},
-      </if>
-      <if test="qualify != null">
-        qualify = #{qualify,jdbcType=DECIMAL},
       </if>
       <if test="cdate != null">
         cdate = #{cdate,jdbcType=TIMESTAMP},
@@ -303,21 +243,17 @@
         note = #{note,jdbcType=VARCHAR},
       </if>
     </set>
-    where p_count_check_id = #{pCountCheckId,jdbcType=VARCHAR}
+    where p_measure_check_id = #{pMeasureCheckId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.erp.bean.technology.process_count_check">
-    update process_count_check
+  <update id="updateByPrimaryKey" parameterType="com.erp.bean.technology.Process_measure_check">
+    update process_measure_check
     set process_id = #{processId,jdbcType=VARCHAR},
       check_item = #{checkItem,jdbcType=VARCHAR},
-      sample = #{sample,jdbcType=INTEGER},
-      check_number = #{checkNumber,jdbcType=INTEGER},
-      unqualify = #{unqualify,jdbcType=INTEGER},
-      qualify = #{qualify,jdbcType=DECIMAL},
       cdate = #{cdate,jdbcType=TIMESTAMP},
       measure_data = #{measureData,jdbcType=VARCHAR},
       emp_id = #{empId,jdbcType=VARCHAR},
       result = #{result,jdbcType=VARCHAR},
       note = #{note,jdbcType=VARCHAR}
-    where p_count_check_id = #{pCountCheckId,jdbcType=VARCHAR}
+    where p_measure_check_id = #{pMeasureCheckId,jdbcType=VARCHAR}
   </update>
 </mapper>

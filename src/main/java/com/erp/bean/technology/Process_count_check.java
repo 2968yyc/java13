@@ -3,7 +3,7 @@ package com.erp.bean.technology;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class process_count_check {
+public class Process_count_check {
     private String pCountCheckId;
 
     private String processId;

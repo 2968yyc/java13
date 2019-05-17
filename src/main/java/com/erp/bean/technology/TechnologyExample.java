@@ -4,14 +4,14 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class technologyExample {
+public class TechnologyExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public technologyExample() {
+    public TechnologyExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
