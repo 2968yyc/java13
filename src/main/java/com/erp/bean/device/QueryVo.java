@@ -7,14 +7,14 @@ import java.util.List;
  * @Author: yyc
  * @Date: 2019/5/17 17:49
  */
-public class QueryVo {
+public  class  QueryVo <T> {
     private int total;
-    private List<Device> rows;
+    private List<T> rows;
 
     public QueryVo() {
     }
 
-    public QueryVo(int total, List<Device> rows) {
+    public QueryVo(int total, List<T> rows) {
         this.total = total;
         this.rows = rows;
     }
@@ -27,11 +27,11 @@ public class QueryVo {
         this.total = total;
     }
 
-    public List<Device> getRows() {
+    public List<T> getRows() {
         return rows;
     }
 
-    public void setRows(List<Device> rows) {
+    public void setRows(List<T> rows) {
         this.rows = rows;
     }
 }

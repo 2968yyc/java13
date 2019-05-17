@@ -1,4 +1,4 @@
-package com.erp.controller;
+package com.erp.controller.device;
 
 import com.erp.bean.device.Device;
 import com.erp.bean.device.QueryVo;
@@ -17,20 +17,18 @@ import java.util.List;
  * @Date: 2019/5/17 15:57
  */
 @Controller
-
+@RequestMapping("device")
 public class DeviceController {
-    @Autowired
-    DeviceService deviceService;
 
-    @RequestMapping("device/deviceList")
+
+    @RequestMapping("deviceList")
     public String devicelist(){
         return "deviceList";
     }
 
-    @RequestMapping("deviceList/list")
-    public @ResponseBody QueryVo getDeviceInPage(int page, int rows){
-        return deviceService.getDeviceInPage(page, rows);
-    }
+
+
+
 
 
 }

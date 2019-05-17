@@ -24,9 +24,15 @@ public class DeviceServiceImpl implements DeviceService {
     public QueryVo getDeviceInPage(int page, int rows) {
 
         int l = deviceMapper.countAll();
-//        PageHelper.startPage(page, rows);
+        PageHelper.startPage(page, rows);
 
         List<Device> devices = deviceMapper.selectAll();
-        return new QueryVo( l,devices);
+        return new QueryVo<Device>( l,devices);
+    }
+
+    @Override
+    public int addNew(Device device) {
+        int insert = deviceMapper.insert(device);
+        return insert;
     }
 }
