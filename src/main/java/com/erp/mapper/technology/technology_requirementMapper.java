@@ -1,30 +1,30 @@
 package com.erp.mapper.technology;
 
-import com.erp.bean.technology.technology_requirement;
-import com.erp.bean.technology.technology_requirementExample;
+import com.erp.bean.technology.Technology_requirement;
+import com.erp.bean.technology.Technology_requirementExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface technology_requirementMapper {
-    long countByExample(technology_requirementExample example);
+public interface Technology_requirementMapper {
+    long countByExample(Technology_requirementExample example);
 
-    int deleteByExample(technology_requirementExample example);
+    int deleteByExample(Technology_requirementExample example);
 
     int deleteByPrimaryKey(String technologyRequirementId);
 
-    int insert(technology_requirement record);
+    int insert(Technology_requirement record);
 
-    int insertSelective(technology_requirement record);
+    int insertSelective(Technology_requirement record);
 
-    List<technology_requirement> selectByExample(technology_requirementExample example);
+    List<Technology_requirement> selectByExample(Technology_requirementExample example);
 
-    technology_requirement selectByPrimaryKey(String technologyRequirementId);
+    Technology_requirement selectByPrimaryKey(String technologyRequirementId);
 
-    int updateByExampleSelective(@Param("record") technology_requirement record, @Param("example") technology_requirementExample example);
+    int updateByExampleSelective(@Param("record") Technology_requirement record, @Param("example") Technology_requirementExample example);
 
-    int updateByExample(@Param("record") technology_requirement record, @Param("example") technology_requirementExample example);
+    int updateByExample(@Param("record") Technology_requirement record, @Param("example") Technology_requirementExample example);
 
-    int updateByPrimaryKeySelective(technology_requirement record);
+    int updateByPrimaryKeySelective(Technology_requirement record);
 
-    int updateByPrimaryKey(technology_requirement record);
+    int updateByPrimaryKey(Technology_requirement record);
 }

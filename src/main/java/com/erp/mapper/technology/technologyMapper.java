@@ -1,30 +1,30 @@
 package com.erp.mapper.technology;
 
-import com.erp.bean.technology.technology;
-import com.erp.bean.technology.technologyExample;
+import com.erp.bean.technology.Technology;
+import com.erp.bean.technology.TechnologyExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface technologyMapper {
-    long countByExample(technologyExample example);
+public interface TechnologyMapper {
+    long countByExample(TechnologyExample example);
 
-    int deleteByExample(technologyExample example);
+    int deleteByExample(TechnologyExample example);
 
     int deleteByPrimaryKey(String technologyId);
 
-    int insert(technology record);
+    int insert(Technology record);
 
-    int insertSelective(technology record);
+    int insertSelective(Technology record);
 
-    List<technology> selectByExample(technologyExample example);
+    List<Technology> selectByExample(TechnologyExample example);
 
-    technology selectByPrimaryKey(String technologyId);
+    Technology selectByPrimaryKey(String technologyId);
 
-    int updateByExampleSelective(@Param("record") technology record, @Param("example") technologyExample example);
+    int updateByExampleSelective(@Param("record") Technology record, @Param("example") TechnologyExample example);
 
-    int updateByExample(@Param("record") technology record, @Param("example") technologyExample example);
+    int updateByExample(@Param("record") Technology record, @Param("example") TechnologyExample example);
 
-    int updateByPrimaryKeySelective(technology record);
+    int updateByPrimaryKeySelective(Technology record);
 
-    int updateByPrimaryKey(technology record);
+    int updateByPrimaryKey(Technology record);
 }

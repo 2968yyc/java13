@@ -1,30 +1,30 @@
 package com.erp.mapper.technology;
 
-import com.erp.bean.technology.process;
-import com.erp.bean.technology.processExample;
+import com.erp.bean.technology.Process;
+import com.erp.bean.technology.ProcessExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface processMapper {
-    long countByExample(processExample example);
+public interface ProcessMapper {
+    long countByExample(ProcessExample example);
 
-    int deleteByExample(processExample example);
+    int deleteByExample(ProcessExample example);
 
     int deleteByPrimaryKey(String processId);
 
-    int insert(process record);
+    int insert(Process record);
 
-    int insertSelective(process record);
+    int insertSelective(Process record);
 
-    List<process> selectByExample(processExample example);
+    List<Process> selectByExample(ProcessExample example);
 
-    process selectByPrimaryKey(String processId);
+    Process selectByPrimaryKey(String processId);
 
-    int updateByExampleSelective(@Param("record") process record, @Param("example") processExample example);
+    int updateByExampleSelective(@Param("record") Process record, @Param("example") ProcessExample example);
 
-    int updateByExample(@Param("record") process record, @Param("example") processExample example);
+    int updateByExample(@Param("record") Process record, @Param("example") ProcessExample example);
 
-    int updateByPrimaryKeySelective(process record);
+    int updateByPrimaryKeySelective(Process record);
 
-    int updateByPrimaryKey(process record);
+    int updateByPrimaryKey(Process record);
 }
