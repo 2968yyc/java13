@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.alan.mapper.quality.ProcessMeasureMapper">
-  <resultMap id="BaseResultMap" type="com.alan.bean.quality.ProcessMeasure">
+<mapper namespace="com.erp.mapper.quality.ProcessMeasureMapper">
+  <resultMap id="BaseResultMap" type="com.erp.bean.quality.ProcessMeasure">
     <id column="p_measure_check_id" jdbcType="VARCHAR" property="pMeasureCheckId" />
     <result column="process_id" jdbcType="VARCHAR" property="processId" />
     <result column="check_item" jdbcType="VARCHAR" property="checkItem" />
@@ -73,7 +73,7 @@
     p_measure_check_id, process_id, check_item, cdate, measure_data, emp_id, result, 
     note
   </sql>
-  <select id="selectByExample" parameterType="com.alan.bean.quality.ProcessMeasureExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.erp.bean.quality.ProcessMeasureExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -97,13 +97,13 @@
     delete from process_measure_check
     where p_measure_check_id = #{pMeasureCheckId,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.alan.bean.quality.ProcessMeasureExample">
+  <delete id="deleteByExample" parameterType="com.erp.bean.quality.ProcessMeasureExample">
     delete from process_measure_check
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.alan.bean.quality.ProcessMeasure">
+  <insert id="insert" parameterType="com.erp.bean.quality.ProcessMeasure">
     insert into process_measure_check (p_measure_check_id, process_id, check_item, 
       cdate, measure_data, emp_id, 
       result, note)
@@ -111,7 +111,7 @@
       #{cdate,jdbcType=TIMESTAMP}, #{measureData,jdbcType=VARCHAR}, #{empId,jdbcType=VARCHAR}, 
       #{result,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.alan.bean.quality.ProcessMeasure">
+  <insert id="insertSelective" parameterType="com.erp.bean.quality.ProcessMeasure">
     insert into process_measure_check
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="pMeasureCheckId != null">
@@ -166,7 +166,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.alan.bean.quality.ProcessMeasureExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.erp.bean.quality.ProcessMeasureExample" resultType="java.lang.Long">
     select count(*) from process_measure_check
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -218,7 +218,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.alan.bean.quality.ProcessMeasure">
+  <update id="updateByPrimaryKeySelective" parameterType="com.erp.bean.quality.ProcessMeasure">
     update process_measure_check
     <set>
       <if test="processId != null">
@@ -245,7 +245,7 @@
     </set>
     where p_measure_check_id = #{pMeasureCheckId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.alan.bean.quality.ProcessMeasure">
+  <update id="updateByPrimaryKey" parameterType="com.erp.bean.quality.ProcessMeasure">
     update process_measure_check
     set process_id = #{processId,jdbcType=VARCHAR},
       check_item = #{checkItem,jdbcType=VARCHAR},

@@ -1,11 +1,9 @@
 package com.erp.mapper.quality;
 
-
 import com.erp.bean.quality.finalMeasuret;
 import com.erp.bean.quality.finalMeasuretExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface finalMeasuretMapper {
     long countByExample(finalMeasuretExample example);

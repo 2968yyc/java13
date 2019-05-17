@@ -1,11 +1,9 @@
 package com.erp.mapper.quality;
 
-
 import com.erp.bean.quality.ProcessCount;
 import com.erp.bean.quality.ProcessCountExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface ProcessCountMapper {
     long countByExample(ProcessCountExample example);

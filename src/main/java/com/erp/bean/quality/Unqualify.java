@@ -19,20 +19,6 @@ public class Unqualify {
 
     private String note;
 
-    public Unqualify() {
-    }
-
-    public Unqualify(String unqualifyApplyId, String productId, String unqualifyItem, Integer unqualifyCount, Date assemblyDate, String empId, Date applyDate, String note) {
-        this.unqualifyApplyId = unqualifyApplyId;
-        this.productId = productId;
-        this.unqualifyItem = unqualifyItem;
-        this.unqualifyCount = unqualifyCount;
-        this.assemblyDate = assemblyDate;
-        this.empId = empId;
-        this.applyDate = applyDate;
-        this.note = note;
-    }
-
     public String getUnqualifyApplyId() {
         return unqualifyApplyId;
     }
@@ -95,19 +81,5 @@ public class Unqualify {
 
     public void setNote(String note) {
         this.note = note == null ? null : note.trim();
-    }
-
-    @Override
-    public String toString() {
-        return "Unqualify{" +
-                "unqualifyApplyId='" + unqualifyApplyId + '\'' +
-                ", productId='" + productId + '\'' +
-                ", unqualifyItem='" + unqualifyItem + '\'' +
-                ", unqualifyCount=" + unqualifyCount +
-                ", assemblyDate=" + assemblyDate +
-                ", empId='" + empId + '\'' +
-                ", applyDate=" + applyDate +
-                ", note='" + note + '\'' +
-                '}';
     }
 }

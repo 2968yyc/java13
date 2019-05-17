@@ -2,9 +2,8 @@ package com.erp.mapper.quality;
 
 import com.erp.bean.quality.FinalCount;
 import com.erp.bean.quality.FinalCountExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface FinalCountMapper {
     long countByExample(FinalCountExample example);

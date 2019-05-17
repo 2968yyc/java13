@@ -1,11 +1,9 @@
 package com.erp.mapper.quality;
 
-
 import com.erp.bean.quality.Unqualify;
 import com.erp.bean.quality.UnqualifyExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface UnqualifyMapper {
     long countByExample(UnqualifyExample example);

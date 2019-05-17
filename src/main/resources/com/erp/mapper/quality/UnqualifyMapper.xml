@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.alan.mapper.quality.UnqualifyMapper">
-  <resultMap id="BaseResultMap" type="com.alan.bean.quality.Unqualify">
+<mapper namespace="com.erp.mapper.quality.UnqualifyMapper">
+  <resultMap id="BaseResultMap" type="com.erp.bean.quality.Unqualify">
     <id column="unqualify_apply_id" jdbcType="VARCHAR" property="unqualifyApplyId" />
     <result column="product_id" jdbcType="VARCHAR" property="productId" />
     <result column="unqualify_item" jdbcType="VARCHAR" property="unqualifyItem" />
@@ -73,7 +73,7 @@
     unqualify_apply_id, product_id, unqualify_item, unqualify_count, assembly_date, emp_id, 
     apply_date, note
   </sql>
-  <select id="selectByExample" parameterType="com.alan.bean.quality.UnqualifyExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.erp.bean.quality.UnqualifyExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -97,13 +97,13 @@
     delete from unqualify_apply
     where unqualify_apply_id = #{unqualifyApplyId,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.alan.bean.quality.UnqualifyExample">
+  <delete id="deleteByExample" parameterType="com.erp.bean.quality.UnqualifyExample">
     delete from unqualify_apply
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.alan.bean.quality.Unqualify">
+  <insert id="insert" parameterType="com.erp.bean.quality.Unqualify">
     insert into unqualify_apply (unqualify_apply_id, product_id, unqualify_item, 
       unqualify_count, assembly_date, emp_id, 
       apply_date, note)
@@ -111,7 +111,7 @@
       #{unqualifyCount,jdbcType=INTEGER}, #{assemblyDate,jdbcType=TIMESTAMP}, #{empId,jdbcType=VARCHAR}, 
       #{applyDate,jdbcType=TIMESTAMP}, #{note,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.alan.bean.quality.Unqualify">
+  <insert id="insertSelective" parameterType="com.erp.bean.quality.Unqualify">
     insert into unqualify_apply
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="unqualifyApplyId != null">
@@ -166,7 +166,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.alan.bean.quality.UnqualifyExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.erp.bean.quality.UnqualifyExample" resultType="java.lang.Long">
     select count(*) from unqualify_apply
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -218,7 +218,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.alan.bean.quality.Unqualify">
+  <update id="updateByPrimaryKeySelective" parameterType="com.erp.bean.quality.Unqualify">
     update unqualify_apply
     <set>
       <if test="productId != null">
@@ -245,7 +245,7 @@
     </set>
     where unqualify_apply_id = #{unqualifyApplyId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.alan.bean.quality.Unqualify">
+  <update id="updateByPrimaryKey" parameterType="com.erp.bean.quality.Unqualify">
     update unqualify_apply
     set product_id = #{productId,jdbcType=VARCHAR},
       unqualify_item = #{unqualifyItem,jdbcType=VARCHAR},

@@ -28,24 +28,6 @@ public class FinalCount {
 
     private String note;
 
-    public FinalCount() {
-    }
-
-    public FinalCount(String fCountCheckId, String orderId, String checkItem, Integer sample, Integer checkNumber, Integer unqualify, BigDecimal qualify, Date cdate, String measureData, String empId, String result, String note) {
-        this.fCountCheckId = fCountCheckId;
-        this.orderId = orderId;
-        this.checkItem = checkItem;
-        this.sample = sample;
-        this.checkNumber = checkNumber;
-        this.unqualify = unqualify;
-        this.qualify = qualify;
-        this.cdate = cdate;
-        this.measureData = measureData;
-        this.empId = empId;
-        this.result = result;
-        this.note = note;
-    }
-
     public String getfCountCheckId() {
         return fCountCheckId;
     }
@@ -140,23 +122,5 @@ public class FinalCount {
 
     public void setNote(String note) {
         this.note = note == null ? null : note.trim();
-    }
-
-    @Override
-    public String toString() {
-        return "FinalCount{" +
-                "fCountCheckId='" + fCountCheckId + '\'' +
-                ", orderId='" + orderId + '\'' +
-                ", checkItem='" + checkItem + '\'' +
-                ", sample=" + sample +
-                ", checkNumber=" + checkNumber +
-                ", unqualify=" + unqualify +
-                ", qualify=" + qualify +
-                ", cdate=" + cdate +
-                ", measureData='" + measureData + '\'' +
-                ", empId='" + empId + '\'' +
-                ", result='" + result + '\'' +
-                ", note='" + note + '\'' +
-                '}';
     }
 }

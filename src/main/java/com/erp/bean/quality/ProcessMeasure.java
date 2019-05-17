@@ -19,20 +19,6 @@ public class ProcessMeasure {
 
     private String note;
 
-    public ProcessMeasure() {
-    }
-
-    public ProcessMeasure(String pMeasureCheckId, String processId, String checkItem, Date cdate, String measureData, String empId, String result, String note) {
-        this.pMeasureCheckId = pMeasureCheckId;
-        this.processId = processId;
-        this.checkItem = checkItem;
-        this.cdate = cdate;
-        this.measureData = measureData;
-        this.empId = empId;
-        this.result = result;
-        this.note = note;
-    }
-
     public String getpMeasureCheckId() {
         return pMeasureCheckId;
     }
@@ -95,19 +81,5 @@ public class ProcessMeasure {
 
     public void setNote(String note) {
         this.note = note == null ? null : note.trim();
-    }
-
-    @Override
-    public String toString() {
-        return "ProcessMeasure{" +
-                "pMeasureCheckId='" + pMeasureCheckId + '\'' +
-                ", processId='" + processId + '\'' +
-                ", checkItem='" + checkItem + '\'' +
-                ", cdate=" + cdate +
-                ", measureData='" + measureData + '\'' +
-                ", empId='" + empId + '\'' +
-                ", result='" + result + '\'' +
-                ", note='" + note + '\'' +
-                '}';
     }
 }

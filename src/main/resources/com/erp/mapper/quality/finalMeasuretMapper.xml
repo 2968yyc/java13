@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.alan.mapper.quality.finalMeasuretMapper">
-  <resultMap id="BaseResultMap" type="com.alan.bean.quality.finalMeasuret">
+<mapper namespace="com.erp.mapper.quality.finalMeasuretMapper">
+  <resultMap id="BaseResultMap" type="com.erp.bean.quality.finalMeasuret">
     <id column="f_measure_check_id" jdbcType="VARCHAR" property="fMeasureCheckId" />
     <result column="order_id" jdbcType="VARCHAR" property="orderId" />
     <result column="check_item" jdbcType="VARCHAR" property="checkItem" />
@@ -72,7 +72,7 @@
   <sql id="Base_Column_List">
     f_measure_check_id, order_id, check_item, cdate, measure_data, emp_id, result, note
   </sql>
-  <select id="selectByExample" parameterType="com.alan.bean.quality.finalMeasuretExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.erp.bean.quality.finalMeasuretExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -96,13 +96,13 @@
     delete from final_measuret_check
     where f_measure_check_id = #{fMeasureCheckId,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.alan.bean.quality.finalMeasuretExample">
+  <delete id="deleteByExample" parameterType="com.erp.bean.quality.finalMeasuretExample">
     delete from final_measuret_check
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.alan.bean.quality.finalMeasuret">
+  <insert id="insert" parameterType="com.erp.bean.quality.finalMeasuret">
     insert into final_measuret_check (f_measure_check_id, order_id, check_item, 
       cdate, measure_data, emp_id, 
       result, note)
@@ -110,7 +110,7 @@
       #{cdate,jdbcType=TIMESTAMP}, #{measureData,jdbcType=VARCHAR}, #{empId,jdbcType=VARCHAR}, 
       #{result,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.alan.bean.quality.finalMeasuret">
+  <insert id="insertSelective" parameterType="com.erp.bean.quality.finalMeasuret">
     insert into final_measuret_check
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="fMeasureCheckId != null">
@@ -165,7 +165,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.alan.bean.quality.finalMeasuretExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.erp.bean.quality.finalMeasuretExample" resultType="java.lang.Long">
     select count(*) from final_measuret_check
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -217,7 +217,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.alan.bean.quality.finalMeasuret">
+  <update id="updateByPrimaryKeySelective" parameterType="com.erp.bean.quality.finalMeasuret">
     update final_measuret_check
     <set>
       <if test="orderId != null">
@@ -244,7 +244,7 @@
     </set>
     where f_measure_check_id = #{fMeasureCheckId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.alan.bean.quality.finalMeasuret">
+  <update id="updateByPrimaryKey" parameterType="com.erp.bean.quality.finalMeasuret">
     update final_measuret_check
     set order_id = #{orderId,jdbcType=VARCHAR},
       check_item = #{checkItem,jdbcType=VARCHAR},

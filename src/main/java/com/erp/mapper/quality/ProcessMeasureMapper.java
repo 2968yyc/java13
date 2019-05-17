@@ -2,9 +2,8 @@ package com.erp.mapper.quality;
 
 import com.erp.bean.quality.ProcessMeasure;
 import com.erp.bean.quality.ProcessMeasureExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface ProcessMeasureMapper {
     long countByExample(ProcessMeasureExample example);

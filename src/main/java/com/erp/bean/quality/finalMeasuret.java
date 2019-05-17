@@ -19,20 +19,6 @@ public class finalMeasuret {
 
     private String note;
 
-    public finalMeasuret() {
-    }
-
-    public finalMeasuret(String fMeasureCheckId, String orderId, String checkItem, Date cdate, String measureData, String empId, String result, String note) {
-        this.fMeasureCheckId = fMeasureCheckId;
-        this.orderId = orderId;
-        this.checkItem = checkItem;
-        this.cdate = cdate;
-        this.measureData = measureData;
-        this.empId = empId;
-        this.result = result;
-        this.note = note;
-    }
-
     public String getfMeasureCheckId() {
         return fMeasureCheckId;
     }
@@ -95,19 +81,5 @@ public class finalMeasuret {
 
     public void setNote(String note) {
         this.note = note == null ? null : note.trim();
-    }
-
-    @Override
-    public String toString() {
-        return "finalMeasuret{" +
-                "fMeasureCheckId='" + fMeasureCheckId + '\'' +
-                ", orderId='" + orderId + '\'' +
-                ", checkItem='" + checkItem + '\'' +
-                ", cdate=" + cdate +
-                ", measureData='" + measureData + '\'' +
-                ", empId='" + empId + '\'' +
-                ", result='" + result + '\'' +
-                ", note='" + note + '\'' +
-                '}';
     }
 }
