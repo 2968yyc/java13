@@ -82,4 +82,32 @@ public class Material_consume {
     public void setNote(String note) {
         this.note = note == null ? null : note.trim();
     }
+
+    public Material_consume() {
+    }
+
+    public Material_consume(String consumeId, String workId, String materialId, Integer consumeAmount, Date consumeDate, String sender, String receiver, String note) {
+        this.consumeId = consumeId;
+        this.workId = workId;
+        this.materialId = materialId;
+        this.consumeAmount = consumeAmount;
+        this.consumeDate = consumeDate;
+        this.sender = sender;
+        this.receiver = receiver;
+        this.note = note;
+    }
+
+    @Override
+    public String toString() {
+        return "Material_consume{" +
+                "consumeId='" + consumeId + '\'' +
+                ", workId='" + workId + '\'' +
+                ", materialId='" + materialId + '\'' +
+                ", consumeAmount=" + consumeAmount +
+                ", consumeDate=" + consumeDate +
+                ", sender='" + sender + '\'' +
+                ", receiver='" + receiver + '\'' +
+                ", note='" + note + '\'' +
+                '}';
+    }
 }
