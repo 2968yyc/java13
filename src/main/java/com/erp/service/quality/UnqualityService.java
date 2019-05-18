@@ -12,4 +12,5 @@ public interface UnqualityService {
     boolean insertUnqualify(Unqualify unqualify);
     boolean deleteUnqualifyById(String[] ids);
     QueryVO searchUnqualifyByUnqualifyId(String searchValue, int page, int rows);
+    boolean updateUnqualifyByUnqualifyId(Unqualify unqualify);
 }

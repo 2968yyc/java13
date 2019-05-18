@@ -62,4 +62,10 @@ public class UnqualityServiceImpl implements UnqualityService {
         int total = (unqualifies == null? 0 : unqualifies.size());
         return new QueryVO(total, unqualifies);
     }
+
+    @Override
+    public boolean updateUnqualifyByUnqualifyId(Unqualify unqualify){
+        int update = unqualifyMapper.updateByPrimaryKey(unqualify);
+        return update == 1;
+    }
 }
