@@ -69,6 +69,9 @@ public class UserController {
             sysPermissionList.add("custom:add");
             sysPermissionList.add("custom:edit");
             sysPermissionList.add("custom:delete");
+            sysPermissionList.add("work:add");
+            sysPermissionList.add("work:edit");
+            sysPermissionList.add("work:delete");
 
             sysPermissionList.add("material:add");
             sysPermissionList.add("material:edit");
@@ -86,6 +89,14 @@ public class UserController {
 
 
 
+
+            sysPermissionList.add("unqualify:add");
+            sysPermissionList.add("unqualify:edit");
+            sysPermissionList.add("unqualify:delete");
+
+            sysPermissionList.add("pMeasureCheck:add");
+            sysPermissionList.add("pMeasureCheck:edit");
+            sysPermissionList.add("pMeasureCheck:delete");
 
             session.setAttribute("sysPermissionList",sysPermissionList);
             return new Info(1,"success",null);

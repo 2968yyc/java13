@@ -18,4 +18,8 @@ public interface MaterialMapper {
     List<Material> getMaterialByType(String searchValue);
 
     int insertMaterial(Material material);
+
+    int update_note(Material material);
+
+    int delete_batch(String ids);
 }

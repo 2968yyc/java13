@@ -6,9 +6,9 @@ import java.util.List;
  * @Author: xf
  * @Date: 2019/5/17 21:47
  */
-public class PageHander {
+public class PageHander<T> {
     private int total;
-    private List<Custom> rows;
+    private List<T> rows;
 
     public PageHander() {
     }
@@ -21,11 +21,11 @@ public class PageHander {
         this.total = total;
     }
 
-    public List<Custom> getRows() {
+    public List<T> getRows() {
         return rows;
     }
 
-    public void setRows(List<Custom> rows) {
+    public void setRows(List<T> rows) {
         this.rows = rows;
     }
 

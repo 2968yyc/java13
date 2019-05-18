@@ -28,8 +28,8 @@ public class MaterialController {
     public QueryVO<Material> materialPageList(@RequestParam(defaultValue = "1",
             value = "page") Integer page, Integer rows) {
 
-        PageHelper.startPage(page,rows);
-        QueryVO<Material> materialList = materialService.getMaterialList();
+
+        QueryVO<Material> materialList = materialService.getMaterialList(page,rows);
 
         return materialList;
     }
@@ -46,7 +46,7 @@ public class MaterialController {
 
         PageHelper.startPage(page,rows);
 
-        QueryVO<Material> materialById = materialService.queryMaterialById(searchValue);
+        QueryVO<Material> materialById = materialService.queryMaterialById(searchValue,page,rows);
 
 
         return materialById;
@@ -60,7 +60,7 @@ public class MaterialController {
 
         PageHelper.startPage(page,rows);
 
-        QueryVO<Material> materialById = materialService.queryMaterialByType(searchValue);
+        QueryVO<Material> materialById = materialService.queryMaterialByType(searchValue,page,rows);
 
         return materialById;
 
@@ -124,6 +124,80 @@ public class MaterialController {
         return materialList;
 
     }
+
+    @RequestMapping("delete_judge")
+    @ResponseBody
+    public String  deleteDudge(){
+        return "";
+    }
+
+    @RequestMapping("edit_judge")
+    @ResponseBody
+    public  String  editDudge(){
+        return "";
+    }
+
+    @RequestMapping("update_note")
+    @ResponseBody
+    public Info update_note(Material material){
+
+        Info info = new Info();
+
+        boolean update = materialService.update_note(material);
+
+        if (update){
+            info.setStatus(200);
+            info.setMsg("更新成功");
+        }else {
+            info.setStatus(0);
+            info.setMsg("更新失败");
+        }
+
+
+        return info;
+    }
+
+    @RequestMapping("delete_batch")
+    @ResponseBody
+    public Info delete_batch(String ids){
+
+        Info info = new Info();
+
+        boolean isDele = materialService.delete_batch(ids);
+        if (isDele){
+            info.setStatus(200);
+            info.setMsg("删除成功");
+        }else {
+            info.setStatus(0);
+            info.setMsg("删除失败");
+        }
+
+        return info;
+    }
+
+    @RequestMapping("edit")
+    public String  materialEdit(){
+        return "material_edit";
+    }
+
+    @RequestMapping(value = "update_all",method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public Info update_all(Material material){
+        Info info = new Info();
+
+        boolean isUpdate = materialService.update_all(material);
+
+        if (isUpdate){
+            info.setStatus(200);
+            info.setMsg("编辑成功");
+        }else {
+            info.setStatus(0);
+            info.setMsg("编辑失败");
+        }
+
+        return info;
+    }
+
 
 
 

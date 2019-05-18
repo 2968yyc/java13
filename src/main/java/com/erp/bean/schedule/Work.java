@@ -13,6 +13,16 @@ public class Work {
 
     private Integer rating;
 
+    private String workparams;
+
+    public String getWorkparams() {
+        return workparams;
+    }
+
+    public void setWorkparams(String workparams) {
+        this.workparams = workparams;
+    }
+
     public String getWorkId() {
         return workId;
     }
