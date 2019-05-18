@@ -51,4 +51,15 @@ public class UnqualityServiceImpl implements UnqualityService {
         }
         return true;
     }
+
+    @Override
+    public QueryVO searchUnqualifyByUnqualifyId(String searchValue, int page, int rows){
+        PageHelper.startPage(page, rows);
+        UnqualifyExample unqualifyExample = new UnqualifyExample();
+        UnqualifyExample.Criteria criteria = unqualifyExample.createCriteria();
+        criteria.andUnqualifyApplyIdEqualTo(searchValue);
+        List<Unqualify> unqualifies = unqualifyMapper.selectByExample(unqualifyExample);
+        int total = (unqualifies == null? 0 : unqualifies.size());
+        return new QueryVO(total, unqualifies);
+    }
 }

@@ -63,6 +63,12 @@ public class UnqualityController {
         }else {
             return new Info(0,"error",null);
         }
+    }
 
+    @RequestMapping("search_unqualify_by_unqualifyId")
+    @ResponseBody
+    //根据不合格品申请编号查询的功能
+    public QueryVO searchUnqualifyByUnqualifyId(String searchValue, int page, int rows){
+        return unqualityService.searchUnqualifyByUnqualifyId(searchValue, page, rows);
     }
 }
