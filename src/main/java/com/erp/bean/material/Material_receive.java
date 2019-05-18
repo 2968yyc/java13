@@ -19,6 +19,16 @@ public class Material_receive {
 
     private String note;
 
+    private String materialReceiveParams;
+
+    public String getMaterialReceiveParams() {
+        return materialReceiveParams;
+    }
+
+    public void setMaterialReceiveParams(String materialReceiveParams) {
+        this.materialReceiveParams = materialReceiveParams;
+    }
+
     public String getReceiveId() {
         return receiveId;
     }

@@ -34,7 +34,7 @@
 
     <select id="queryMaterialById" resultType="com.erp.bean.material.Material">
         select material_id as materialId,material_type as materialType,status,remaining,note from material
-        where material_id = #{materialId}
+        where material_id = #{searchValue}
     </select>
 
     <select id="getMaterialById" resultType="com.erp.bean.material.Material">
@@ -46,5 +46,10 @@
        select material_id as materialId,material_type as materialType,status,remaining,note from material
        where material_type like #{searchValue}
     </select>
+
+    <insert id="insertMaterial">
+        insert into material (material_id,material_type,status,remaining,note) values (#{materialId},#{materialType},
+        #{status},#{remaining},#{note})
+    </insert>
 
 </mapper>

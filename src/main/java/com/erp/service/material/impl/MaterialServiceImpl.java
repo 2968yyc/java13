@@ -1,6 +1,7 @@
-package com.erp.service.impl.material;
+package com.erp.service.material.impl;
 
 import com.erp.bean.QueryVO;
+
 import com.erp.bean.material.Material;
 import com.erp.mapper.material.MaterialMapper;
 import com.erp.service.material.MaterialService;
@@ -48,5 +49,27 @@ public class MaterialServiceImpl implements MaterialService {
         List<Material> materialList = materialMapper.getMaterialByType(searchValue);
 
         return new QueryVO<Material>(materialList.size(),materialList);
+    }
+
+    @Override
+    public Material queryMaterial(String id) {
+        Material material = materialMapper.queryMaterialById(id);
+        return material;
+    }
+
+    @Override
+    public boolean insertMaterial(Material material) {
+
+
+        int insert = materialMapper.insertMaterial(material);
+
+        return insert == 1?true:false;
+
+    }
+
+    @Override
+    public List<Material> queryAllMaterial() {
+        List<Material> materialList = materialMapper.queryAllMaterial();
+        return materialList;
     }
 }

@@ -17,6 +17,11 @@ public class DeviceController {
         return "deviceList";
     }
 
+    @RequestMapping("deviceType")
+    public String deviceType(){
+        return "deviceType";
+    }
+
 
 
 

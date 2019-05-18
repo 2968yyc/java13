@@ -22,6 +22,16 @@ public class Material_consume {
 
     private String note;
 
+    private String materialConsumeParams;
+
+    public String getMaterialConsumeParams() {
+        return materialConsumeParams;
+    }
+
+    public void setMaterialConsumeParams(String materialConsumeParams) {
+        this.materialConsumeParams = materialConsumeParams;
+    }
+
     public Material getMaterial() {
         return material;
     }

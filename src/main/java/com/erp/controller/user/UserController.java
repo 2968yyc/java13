@@ -42,6 +42,10 @@ public class UserController {
             sysPermissionList.add("device:add");
             sysPermissionList.add("device:edit");
             sysPermissionList.add("device:delete");
+            sysPermissionList.add("deviceType:add");
+            sysPermissionList.add("deviceType:edit");
+            sysPermissionList.add("deviceType:delete");
+
             //这里就按这样写
             sysPermissionList.add("technology:add");
             sysPermissionList.add("technology:edit");
@@ -54,6 +58,29 @@ public class UserController {
             sysPermissionList.add("employee:add");
             sysPermissionList.add("employee:edit");
             sysPermissionList.add("employee:delete");
+
+
+            //schedule
+            sysPermissionList.add("custom:add");
+            sysPermissionList.add("custom:edit");
+            sysPermissionList.add("custom:delete");
+
+            sysPermissionList.add("material:add");
+            sysPermissionList.add("material:edit");
+            sysPermissionList.add("material:delete");
+
+            sysPermissionList.add("materialReceive:add");
+            sysPermissionList.add("materialReceive:edit");
+            sysPermissionList.add("materialReceive:delete");
+
+            sysPermissionList.add("materialConsume:add");
+            sysPermissionList.add("materialConsume:edit");
+            sysPermissionList.add("materialConsume:delete");
+
+
+
+
+
 
             session.setAttribute("sysPermissionList",sysPermissionList);
             return new Info(1,"success",null);
