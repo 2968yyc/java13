@@ -45,4 +45,24 @@ public class EmployeeController {
         return "employee_list";
     }
 
+    @RequestMapping("add_judge")
+    public String add_judge(){
+        return "employee_add";
+    }
+
+    @RequestMapping("add")
+    public String add(){
+        return "employee_add";
+    }
+
+    @RequestMapping("delete_judge")
+    public String delete(){
+        return null;
+    }
+
+    @RequestMapping("edit_judge")
+    public String edit(){
+        return "employee_edit";
+    }
+
 }
