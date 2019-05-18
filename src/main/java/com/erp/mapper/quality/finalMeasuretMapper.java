@@ -1,30 +1,30 @@
 package com.erp.mapper.quality;
 
-import com.erp.bean.quality.finalMeasuret;
-import com.erp.bean.quality.finalMeasuretExample;
+import com.erp.bean.quality.FinalMeasuret;
+import com.erp.bean.quality.FinalMeasuretExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface finalMeasuretMapper {
-    long countByExample(finalMeasuretExample example);
+public interface FinalMeasuretMapper {
+    long countByExample(FinalMeasuretExample example);
 
-    int deleteByExample(finalMeasuretExample example);
+    int deleteByExample(FinalMeasuretExample example);
 
     int deleteByPrimaryKey(String fMeasureCheckId);
 
-    int insert(finalMeasuret record);
+    int insert(FinalMeasuret record);
 
-    int insertSelective(finalMeasuret record);
+    int insertSelective(FinalMeasuret record);
 
-    List<finalMeasuret> selectByExample(finalMeasuretExample example);
+    List<FinalMeasuret> selectByExample(FinalMeasuretExample example);
 
-    finalMeasuret selectByPrimaryKey(String fMeasureCheckId);
+    FinalMeasuret selectByPrimaryKey(String fMeasureCheckId);
 
-    int updateByExampleSelective(@Param("record") finalMeasuret record, @Param("example") finalMeasuretExample example);
+    int updateByExampleSelective(@Param("record") FinalMeasuret record, @Param("example") FinalMeasuretExample example);
 
-    int updateByExample(@Param("record") finalMeasuret record, @Param("example") finalMeasuretExample example);
+    int updateByExample(@Param("record") FinalMeasuret record, @Param("example") FinalMeasuretExample example);
 
-    int updateByPrimaryKeySelective(finalMeasuret record);
+    int updateByPrimaryKeySelective(FinalMeasuret record);
 
-    int updateByPrimaryKey(finalMeasuret record);
+    int updateByPrimaryKey(FinalMeasuret record);
 }

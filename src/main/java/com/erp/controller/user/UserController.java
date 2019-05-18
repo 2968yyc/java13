@@ -51,6 +51,10 @@ public class UserController {
             sysPermissionList.add("unqualify:edit");
             sysPermissionList.add("unqualify:delete");
 
+            sysPermissionList.add("pMeasureCheck:add");
+            sysPermissionList.add("pMeasureCheck:edit");
+            sysPermissionList.add("pMeasureCheck:delete");
+
             session.setAttribute("sysPermissionList",sysPermissionList);
             return new Info(1,"success",null);
 
