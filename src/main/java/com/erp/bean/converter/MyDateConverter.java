@@ -12,11 +12,17 @@ import java.util.Date;
  */
 public class MyDateConverter implements Converter<String, Date> {
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
     @Override
     public Date convert(String s) {
         try {
-            Date parse = simpleDateFormat.parse(s);
-            return parse;
+            if (s.length()>10) {
+                Date parse = simpleDateFormat.parse(s);
+                return parse;
+            }else{
+                Date parse = simpleDateFormat2.parse(s);
+                return parse;
+            }
         } catch (ParseException e) {
             e.printStackTrace();
 
