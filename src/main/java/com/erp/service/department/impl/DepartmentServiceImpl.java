@@ -1,13 +1,10 @@
-package com.erp.service.impl;
+package com.erp.service.department.impl;
 
 import com.erp.bean.QueryVO;
 import com.erp.bean.department.Department;
 import com.erp.bean.department.DepartmentExample;
-import com.erp.bean.employee.Employee;
-import com.erp.bean.employee.EmployeeExample;
 import com.erp.mapper.department.DepartmentMapper;
-import com.erp.mapper.employee.EmployeeMapper;
-import com.erp.service.DepartmentService;
+import com.erp.service.department.DepartmentService;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package com.erp.service;
+package com.erp.service.department;
 
 import com.erp.bean.QueryVO;
 import com.erp.bean.department.Department;

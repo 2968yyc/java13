@@ -34,4 +34,6 @@ public interface EmployeeMapper {
     List<Employee> selectEmployees();
 
     List<Employee> selectAll();
+
+    Employee selectByID(@Param("id") String id);
 }

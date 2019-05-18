@@ -2,7 +2,7 @@ package com.erp.controller.department;
 
 import com.erp.bean.QueryVO;
 import com.erp.bean.department.Department;
-import com.erp.service.DepartmentService;
+import com.erp.service.department.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
