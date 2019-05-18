@@ -29,8 +29,7 @@ public class UnqualityServiceImpl implements UnqualityService {
     public QueryVO selectPageUnqualify(int page, int rows){
         int total = unqualifyMapper.countAllUnqualify();
         PageHelper.startPage(page, rows);
-        UnqualifyExample unqualifyExample = new UnqualifyExample();
-        List<Unqualify> unqualifies = unqualifyMapper.selectByExample(unqualifyExample);
+        List<Unqualify> unqualifies = unqualifyMapper.selectAllPageUnqualifyLeft();
         return new QueryVO(total, unqualifies);
     }
 
@@ -56,21 +55,7 @@ public class UnqualityServiceImpl implements UnqualityService {
     public QueryVO searchUnqualifyByUnqualifyId(String searchValue, int page, int rows){
         int total = unqualifyMapper.countAllUnqualify();
         PageHelper.startPage(page, rows);
-        UnqualifyExample unqualifyExample = new UnqualifyExample();
-        UnqualifyExample.Criteria criteria = unqualifyExample.createCriteria();
-        criteria.andUnqualifyApplyIdLike("%" + searchValue + "%");
-        List<Unqualify> unqualifies = unqualifyMapper.selectByExample(unqualifyExample);
-        return new QueryVO(total, unqualifies);
-    }
-
-    @Override
-    public QueryVO searchUnqualifyByUnqualifyItem(String searchValue, int page, int rows){
-        int total = unqualifyMapper.countAllUnqualify();
-        PageHelper.startPage(page, rows);
-        UnqualifyExample unqualifyExample = new UnqualifyExample();
-        UnqualifyExample.Criteria criteria = unqualifyExample.createCriteria();
-        criteria.andUnqualifyItemLike("%" + searchValue + "%");
-        List<Unqualify> unqualifies = unqualifyMapper.selectByExample(unqualifyExample);
+        List<Unqualify> unqualifies = unqualifyMapper.selectAllPageUnqualifyLeftByUnqualifyId(searchValue);
         return new QueryVO(total, unqualifies);
     }
 
@@ -78,5 +63,13 @@ public class UnqualityServiceImpl implements UnqualityService {
     public boolean updateUnqualifyByUnqualifyId(Unqualify unqualify){
         int update = unqualifyMapper.updateByPrimaryKey(unqualify);
         return update == 1;
+    }
+
+    @Override
+    public QueryVO searchUnqualifyByProductName(String searchValue, int page, int rows) {
+        int total = unqualifyMapper.countAllUnqualify();
+        PageHelper.startPage(page, rows);
+        List<Unqualify> unqualifies = unqualifyMapper.selectAllPageUnqualifyLeftByProductName(searchValue);
+        return new QueryVO(total, unqualifies);
     }
 }

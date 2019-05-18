@@ -264,4 +264,48 @@
   <select id="countAllUnqualify" resultType="_int">
     select count(*) from unqualify_apply
   </select>
+
+  <resultMap id="BaseResultMapLeft" type="com.erp.bean.quality.Unqualify">
+    <id column="unqualify_apply_id" jdbcType="VARCHAR" property="unqualifyApplyId" />
+    <result column="product_id" jdbcType="VARCHAR" property="productId" />
+    <result column="unqualify_item" jdbcType="VARCHAR" property="unqualifyItem" />
+    <result column="unqualify_count" jdbcType="INTEGER" property="unqualifyCount" />
+    <result column="assembly_date" jdbcType="TIMESTAMP" property="assemblyDate" />
+    <result column="emp_id" jdbcType="VARCHAR" property="empId" />
+    <result column="apply_date" jdbcType="TIMESTAMP" property="applyDate" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="emp_name" property="empName"/>
+    <result column="product_name" property="productName"/>
+  </resultMap>
+
+  <select id="selectAllPageUnqualifyLeft" resultMap="BaseResultMapLeft">
+    SELECT un.unqualify_apply_id, un.product_id, un.unqualify_item,
+      un.unqualify_count, un.assembly_date, un.emp_id,
+      un.apply_date, un.note, e.emp_name, p.product_name FROM
+			unqualify_apply un
+			LEFT JOIN employee e on un.emp_id = e.emp_id
+			LEFT JOIN product p on un.product_id = p.product_id
+  </select>
+
+  <select id="selectAllPageUnqualifyLeftByUnqualifyId" resultMap="BaseResultMapLeft">
+    SELECT un.unqualify_apply_id, un.product_id, un.unqualify_item,
+      un.unqualify_count, un.assembly_date, un.emp_id,
+      un.apply_date, un.note, e.emp_name, p.product_name FROM
+			unqualify_apply un
+			LEFT JOIN employee e on un.emp_id = e.emp_id
+			LEFT JOIN product p on un.product_id = p.product_id
+			where un.unqualify_apply_id like '%${id}%'
+  </select>
+
+  <select id="selectAllPageUnqualifyLeftByProductName" resultMap="BaseResultMapLeft">
+    SELECT un.unqualify_apply_id, un.product_id, un.unqualify_item,
+      un.unqualify_count, un.assembly_date, un.emp_id,
+      un.apply_date, un.note, e.emp_name, p.product_name FROM
+			unqualify_apply un
+			LEFT JOIN employee e on un.emp_id = e.emp_id
+			LEFT JOIN product p on un.product_id = p.product_id
+			where p.product_name like '%${productName}%'
+  </select>
+
+
 </mapper>

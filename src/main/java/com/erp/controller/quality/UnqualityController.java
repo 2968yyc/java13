@@ -85,6 +85,13 @@ public class UnqualityController {
         return unqualityService.searchUnqualifyByUnqualifyId(searchValue, page, rows);
     }
 
+    @RequestMapping("search_unqualify_by_productName")
+    @ResponseBody
+    //根据不合格品申请编号查询的功能
+    public QueryVO searchUnqualifyByProductName(String searchValue, int page, int rows){
+        return unqualityService.searchUnqualifyByProductName(searchValue, page, rows);
+    }
+
 
     /*----------------------------以下是编辑功能----------------------------*/
 
