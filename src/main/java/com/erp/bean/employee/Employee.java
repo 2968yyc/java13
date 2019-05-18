@@ -1,5 +1,7 @@
 package com.erp.bean.employee;
 
+import com.erp.bean.department.Department;
+
 import java.util.Date;
 
 public class Employee {
@@ -28,6 +30,16 @@ public class Employee {
     private String educationForm;
 
     private String departmentId;
+
+    private Department department;
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
 
     public String getEmpId() {
         return empId;

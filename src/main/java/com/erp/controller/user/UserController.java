@@ -50,6 +50,14 @@ public class UserController {
             sysPermissionList.add("technology:add");
             sysPermissionList.add("technology:edit");
             sysPermissionList.add("technology:delete");
+            //部门
+            sysPermissionList.add("department:add");
+            sysPermissionList.add("department:edit");
+            sysPermissionList.add("department:delete");
+            //人员
+            sysPermissionList.add("employee:add");
+            sysPermissionList.add("employee:edit");
+            sysPermissionList.add("employee:delete");
 
 
             //schedule
@@ -73,6 +81,14 @@ public class UserController {
 
 
 
+
+            sysPermissionList.add("unqualify:add");
+            sysPermissionList.add("unqualify:edit");
+            sysPermissionList.add("unqualify:delete");
+
+            sysPermissionList.add("pMeasureCheck:add");
+            sysPermissionList.add("pMeasureCheck:edit");
+            sysPermissionList.add("pMeasureCheck:delete");
 
             session.setAttribute("sysPermissionList",sysPermissionList);
             return new Info(1,"success",null);
