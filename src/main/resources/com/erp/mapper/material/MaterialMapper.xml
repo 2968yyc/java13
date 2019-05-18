@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.erp.mapper.material.MaterialMapper">
-  <update id="updateByPrimaryKeySelective" parameterType="com.erp.bean.material.Material">
-    update material
-    <set>
-      <if test="materialType != null">
-        material_type = #{materialType,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=VARCHAR},
-      </if>
-      <if test="remaining != null">
-        remaining = #{remaining,jdbcType=INTEGER},
-      </if>
-      <if test="note != null">
-        note = #{note,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where material_id = #{materialId,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.erp.bean.material.Material">
+    <update id="updateByPrimaryKeySelective" parameterType="com.erp.bean.material.Material">
+        update material
+        <set>
+            <if test="materialType != null">
+                material_type = #{materialType,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="remaining != null">
+                remaining = #{remaining,jdbcType=INTEGER},
+            </if>
+            <if test="note != null">
+                note = #{note,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where material_id = #{materialId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.erp.bean.material.Material">
     update material
     set material_type = #{materialType,jdbcType=VARCHAR},
       status = #{status,jdbcType=VARCHAR},
@@ -27,4 +27,29 @@
       note = #{note,jdbcType=VARCHAR}
     where material_id = #{materialId,jdbcType=VARCHAR}
   </update>
+
+    <select id="queryAllMaterial" resultType="com.erp.bean.material.Material">
+    select material_id as materialId,material_type as materialType,status,remaining,note from material
+  </select>
+
+    <select id="queryMaterialById" resultType="com.erp.bean.material.Material">
+        select material_id as materialId,material_type as materialType,status,remaining,note from material
+        where material_id = #{searchValue}
+    </select>
+
+    <select id="getMaterialById" resultType="com.erp.bean.material.Material">
+        select material_id as materialId,material_type as materialType,status,remaining,note from material
+        where material_id like #{searchValue}
+    </select>
+
+    <select id="getMaterialByType" resultType="com.erp.bean.material.Material">
+       select material_id as materialId,material_type as materialType,status,remaining,note from material
+       where material_type like #{searchValue}
+    </select>
+
+    <insert id="insertMaterial">
+        insert into material (material_id,material_type,status,remaining,note) values (#{materialId},#{materialType},
+        #{status},#{remaining},#{note})
+    </insert>
+
 </mapper>

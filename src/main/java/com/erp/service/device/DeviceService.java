@@ -1,4 +1,4 @@
-package com.erp.service;
+package com.erp.service.device;
 
 import com.erp.bean.device.Device;
 import com.erp.bean.QueryVO;
@@ -14,4 +14,8 @@ public interface DeviceService {
     int addNew(Device device);
 
     int update(Device device);
+
+    int deleteByIDs(String[] ids);
+
+
 }

@@ -3,5 +3,4 @@ SSM.iml
 target/
 *.class
 .gitignore
-src/main/resources/druid.properties
-spring/applicationContext-spring.xml
+src/main/resources/spring/applicationContext-spring.xml
