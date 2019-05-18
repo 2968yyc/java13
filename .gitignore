@@ -4,3 +4,4 @@ target/
 *.class
 .gitignore
 src/main/resources/druid.properties
+spring/applicationContext-spring.xml

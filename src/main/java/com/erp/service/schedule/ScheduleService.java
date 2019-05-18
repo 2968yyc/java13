@@ -1,4 +1,4 @@
-package com.erp.service.shcedule;
+package com.erp.service.schedule;
 
 /**
  * @Author: xf

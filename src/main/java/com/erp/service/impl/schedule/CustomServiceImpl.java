@@ -1,5 +1,6 @@
-package com.erp.service.impl;
+package com.erp.service.impl.schedule;
 
+import com.erp.bean.device.Info;
 import com.erp.bean.schedule.Custom;
 import com.erp.bean.schedule.CustomExample;
 import com.erp.bean.schedule.PageHander;
@@ -21,6 +22,7 @@ public class CustomServiceImpl {
 
     @Autowired
     SqlSessionFactory sqlSessionFactory;
+
     public PageHander findCustom(int page, int rows){
         /*SqlSession sqlSession=sqlSessionFactory.openSession();
         CustomMapper mapper=sqlSession.getMapper(CustomMapper.class);*/
@@ -39,5 +41,10 @@ public class CustomServiceImpl {
         pageHander.setRows(list);
 
         return pageHander;
+    }
+
+    public int deleteCustomById(String customId){
+        int result=customMapper.deleteByPrimaryKey(customId);
+        return result;
     }
 }
