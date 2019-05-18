@@ -29,9 +29,22 @@ http://www.springframework.org/schema/context https://www.springframework.org/sc
     </bean>
 
     <bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sessionFactory">
-        <!--<property name="configLocation" value="classpath:mybatis.xml"/>-->
+        <!--<property name="configLocation" value="classpath:mybatis-config.xml"/>-->
+
         <property name="typeAliasesPackage" value="com.erp.bean"/>
         <property name="dataSource" ref="dataSource"/>
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <!--使用下面的方式配置参数，一行配置一个 -->
+                        <value>
+                            reasonable=true
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
 
     </bean>
 

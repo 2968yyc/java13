@@ -1,48 +1,40 @@
 package com.erp.bean;
-import com.erp.bean.material.Material;
-import com.github.pagehelper.PageInfo;
+
 
 import java.util.List;
 
-
 /**
- * @Author: Qiu
- * @Date: 2019/5/17 20:50
+ * @Author: yyc
+ * @Date: 2019/5/17 17:49
  */
-public class QueryVO<T>{
-    
-    Integer total;
-    List<T> rows;
+public  class  QueryVO <T> {
+    private int total;
+    private List<T> rows;
 
-    public QueryVO(Integer total, List<T> rows) {
-        this.total = total;
-        this.rows = rows;
-    }
 
     public QueryVO() {
     }
 
-    @Override
-    public String toString() {
-        return "QueryVO{" +
-                "total=" + total +
-                ", rows=" + rows +
-                '}';
+
+    public QueryVO(int total, List<T> rows) {
+        this.total = total;
+        this.rows = rows;
     }
 
-    public Integer gettotal() {
+    public int getTotal() {
         return total;
     }
 
-    public void settotal(Integer total) {
+    public void setTotal(int total) {
         this.total = total;
     }
 
-    public List<T> getrows() {
+    public List<T> getRows() {
         return rows;
     }
 
-    public void setrows(List<T> rows) {
+    public void setRows(List<T> rows) {
+
         this.rows = rows;
     }
 }
