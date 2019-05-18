@@ -19,6 +19,16 @@ public class Device_type {
 
     private Date deviceTypeWarranty;
 
+    private String deviceTypeParams;
+
+    public String getDeviceTypeParams() {
+        return deviceTypeParams;
+    }
+
+    public void setDeviceTypeParams(String deviceTypeParams) {
+        this.deviceTypeParams = deviceTypeParams;
+    }
+
     public String getDeviceTypeId() {
         return deviceTypeId;
     }

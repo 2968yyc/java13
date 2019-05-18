@@ -3,8 +3,7 @@ package com.erp.controller.device;
 import com.erp.bean.QueryVO;
 import com.erp.bean.device.Device;
 import com.erp.bean.device.Info;
-import com.erp.bean.QueryVO;
-import com.erp.service.DeviceService;
+import com.erp.service.device.DeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,11 +53,28 @@ public class DeviceListController {
     }
     @RequestMapping("edit")
     public String toEdit(){
-        return "deviceList_add";
+        return "deviceList_edit";
     }
     @RequestMapping("update")
     public @ResponseBody Info update(Device device){
         int res = deviceService.update(device);
+        if (res==1){
+            return new Info(200,"更新成功",null);
+        }else{
+            return new Info(res,"该设备号已经存在，请更换设备号！",null);
+        }
+    }
+
+
+    @RequestMapping("delete_judge")
+    public @ResponseBody String  deleteDudge(){
+        //Todo 判断权限
+        return "";
+    }
+
+    @RequestMapping("delete_batch")
+    public @ResponseBody Info deleteByIDs(String[] ids){
+        int res = deviceService.deleteByIDs(ids);
         if (res==1){
             return new Info(200,"更新成功",null);
         }else{

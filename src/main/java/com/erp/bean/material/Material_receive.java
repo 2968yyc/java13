@@ -7,6 +7,8 @@ public class Material_receive {
 
     private String materialId;
 
+    private Material material;
+
     private Integer amount;
 
     private Date receiveDate;
@@ -16,6 +18,16 @@ public class Material_receive {
     private String receiver;
 
     private String note;
+
+    private String materialReceiveParams;
+
+    public String getMaterialReceiveParams() {
+        return materialReceiveParams;
+    }
+
+    public void setMaterialReceiveParams(String materialReceiveParams) {
+        this.materialReceiveParams = materialReceiveParams;
+    }
 
     public String getReceiveId() {
         return receiveId;
@@ -73,9 +85,18 @@ public class Material_receive {
         this.note = note == null ? null : note.trim();
     }
 
-    public Material_receive(String receiveId, String materialId, Integer amount, Date receiveDate, String sender, String receiver, String note) {
+    public Material getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(Material material) {
+        this.material = material;
+    }
+
+    public Material_receive(String receiveId, String materialId, Material material, Integer amount, Date receiveDate, String sender, String receiver, String note) {
         this.receiveId = receiveId;
         this.materialId = materialId;
+        this.material = material;
         this.amount = amount;
         this.receiveDate = receiveDate;
         this.sender = sender;
@@ -91,6 +112,7 @@ public class Material_receive {
         return "Material_receive{" +
                 "receiveId='" + receiveId + '\'' +
                 ", materialId='" + materialId + '\'' +
+                ", material=" + material +
                 ", amount=" + amount +
                 ", receiveDate=" + receiveDate +
                 ", sender='" + sender + '\'' +
