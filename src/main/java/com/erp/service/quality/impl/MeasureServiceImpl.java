@@ -1,4 +1,4 @@
-package com.erp.service.quality.impl;
+/*package com.erp.service.quality.impl;
 
 import com.erp.bean.QueryVO;
 import com.erp.bean.quality.FinalMeasuret;
@@ -10,10 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
-/**
+*//**
  * @Author:ZCH
  * @Date:2019/5/18 10:49
- */
+ *//*
 @Service
 public class MeasureServiceImpl implements MeasureService {
 
@@ -28,4 +28,4 @@ public class MeasureServiceImpl implements MeasureService {
         int total = (measurets == null? 0 : measurets.size());
         return new QueryVO(total, measurets);
     }
-}
+}*/
