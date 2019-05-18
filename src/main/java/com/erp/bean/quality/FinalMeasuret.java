@@ -2,7 +2,7 @@ package com.erp.bean.quality;
 
 import java.util.Date;
 
-public class finalMeasuret {
+public class FinalMeasuret {
     private String fMeasureCheckId;
 
     private String orderId;

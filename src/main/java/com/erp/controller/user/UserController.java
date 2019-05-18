@@ -47,6 +47,10 @@ public class UserController {
             sysPermissionList.add("technology:edit");
             sysPermissionList.add("technology:delete");
 
+            sysPermissionList.add("unqualify:add");
+            sysPermissionList.add("unqualify:edit");
+            sysPermissionList.add("unqualify:delete");
+
             session.setAttribute("sysPermissionList",sysPermissionList);
             return new Info(1,"success",null);
 
