@@ -9,6 +9,9 @@ public class Material_consume {
 
     private String materialId;
 
+    private Material material;
+
+
     private Integer consumeAmount;
 
     private Date consumeDate;
@@ -18,6 +21,24 @@ public class Material_consume {
     private String receiver;
 
     private String note;
+
+    private String materialConsumeParams;
+
+    public String getMaterialConsumeParams() {
+        return materialConsumeParams;
+    }
+
+    public void setMaterialConsumeParams(String materialConsumeParams) {
+        this.materialConsumeParams = materialConsumeParams;
+    }
+
+    public Material getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(Material material) {
+        this.material = material;
+    }
 
     public String getConsumeId() {
         return consumeId;
@@ -86,28 +107,30 @@ public class Material_consume {
     public Material_consume() {
     }
 
-    public Material_consume(String consumeId, String workId, String materialId, Integer consumeAmount, Date consumeDate, String sender, String receiver, String note) {
-        this.consumeId = consumeId;
-        this.workId = workId;
-        this.materialId = materialId;
-        this.consumeAmount = consumeAmount;
-        this.consumeDate = consumeDate;
-        this.sender = sender;
-        this.receiver = receiver;
-        this.note = note;
-    }
-
     @Override
     public String toString() {
         return "Material_consume{" +
                 "consumeId='" + consumeId + '\'' +
                 ", workId='" + workId + '\'' +
                 ", materialId='" + materialId + '\'' +
+                ", material=" + material +
                 ", consumeAmount=" + consumeAmount +
                 ", consumeDate=" + consumeDate +
                 ", sender='" + sender + '\'' +
                 ", receiver='" + receiver + '\'' +
                 ", note='" + note + '\'' +
                 '}';
+    }
+
+    public Material_consume(String consumeId, String workId, String materialId, Material material, Integer consumeAmount, Date consumeDate, String sender, String receiver, String note) {
+        this.consumeId = consumeId;
+        this.workId = workId;
+        this.materialId = materialId;
+        this.material = material;
+        this.consumeAmount = consumeAmount;
+        this.consumeDate = consumeDate;
+        this.sender = sender;
+        this.receiver = receiver;
+        this.note = note;
     }
 }

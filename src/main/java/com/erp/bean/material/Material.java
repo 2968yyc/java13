@@ -15,6 +15,18 @@ public class Material {
 
     private String note;
 
+    private String materialParams;
+
+
+
+    public String getMaterialParams() {
+        return materialParams;
+    }
+
+    public void setMaterialParams(String materialParams) {
+        this.materialParams = materialParams;
+    }
+
     public String getMaterialId() {
         return materialId;
     }
@@ -58,12 +70,13 @@ public class Material {
     public Material() {
     }
 
-    public Material(String materialId, String materialType, String status, Integer remaining, String note) {
+    public Material(String materialId, String materialType, String status, Integer remaining, String note, String materialParams) {
         this.materialId = materialId;
         this.materialType = materialType;
         this.status = status;
         this.remaining = remaining;
         this.note = note;
+        this.materialParams = materialParams;
     }
 
     @Override

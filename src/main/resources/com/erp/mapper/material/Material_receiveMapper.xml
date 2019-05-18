@@ -35,4 +35,37 @@
       note = #{note,jdbcType=VARCHAR}
     where receive_id = #{receiveId,jdbcType=VARCHAR}
   </update>
+
+
+  <select id="queryAllMaterialReceive" resultType="com.erp.bean.material.Material_receive">
+    select receive_id as receiveId,material_id as materialId,amount,receive_date as receiveDate,sender,receiver,note from material_receive
+  </select>
+
+  <select id="queryReceiveByReceiveId" resultType="com.erp.bean.material.Material_receive">
+select receive_id as receiveId,material_id as materialId,amount,receive_date as receiveDate,sender,receiver,note from material_receive
+where receive_id like #{searchValue}
+  </select>
+
+  <select id="queryReceiveByMaterialId" resultType="com.erp.bean.material.Material_receive">
+    select receive_id as receiveId,material_id as materialId,amount,receive_date as receiveDate,sender,receiver,note from material_receive
+where material_id like #{searchValue}
+  </select>
+
+  <select id="getMaterialReceiveByReceiveId" resultType="com.erp.bean.material.Material_receive">
+    select receive_id as receiveId,material_id as materialId,amount,receive_date as receiveDate,sender,receiver,note from material_receive
+    where receive_id = #{receiveId}
+  </select>
+
+  <insert id="insertMaterialReceive">
+    insert into material_receive (receive_id,material_id,amount,receive_date,sender,receiver,note)values (#{receiveId},#{materialId},#{amount},#{receiveDate},#{sender},#{receiver},#{note})
+  </insert>
+
+  <update id="update_note" parameterType="com.erp.bean.material.Material_receive">
+    update material_receive set note = #{note} where receive_id = #{receiveId}
+  </update>
+
+  <delete id="delete_batch" parameterType="com.erp.bean.material.Material_receive">
+        delete from material_receive where receive_id =#{ids}
+    </delete>
+
 </mapper>
