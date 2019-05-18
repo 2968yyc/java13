@@ -28,4 +28,8 @@ public interface SysUserMapper {
     int updateByPrimaryKeySelective(SysUser record);
 
     int updateByPrimaryKey(SysUser record);
+
+    List<SysUser> selectSysUsers();
+
+    int countAll();
 }

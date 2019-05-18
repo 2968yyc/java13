@@ -1,5 +1,6 @@
 package com.erp.service.impl;
 
+import com.erp.bean.QueryVO;
 import com.erp.bean.user.SysUser;
 import com.erp.bean.user.SysUserExample;
 import com.erp.mapper.user.SysUserMapper;
@@ -17,6 +18,14 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     private SysUserMapper sysUserMapper;
+
+    @Override
+    public QueryVO<SysUser> getUserInPage(int page, int rows) {
+        int length = sysUserMapper.countAll();
+        List<SysUser> sysUsers = sysUserMapper.selectSysUsers();
+        return new QueryVO(length,sysUsers);
+    }
+
     @Override
     public boolean login(SysUser user) {
         SysUserExample sysUserExample = new SysUserExample();
