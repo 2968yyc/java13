@@ -86,10 +86,6 @@ public class UserController {
             sysPermissionList.add("materialConsume:delete");
 
 
-
-
-
-
             sysPermissionList.add("unqualify:add");
             sysPermissionList.add("unqualify:edit");
             sysPermissionList.add("unqualify:delete");
