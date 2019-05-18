@@ -18,4 +18,8 @@ public interface Material_receiveMapper {
     Material_receive getMaterialReceiveByReceiveId(String receiveId);
 
     int insertMaterialReceive(Material_receive material_receive);
+
+    int update_note(Material_receive material_receive);
+
+    int delete_batch(String ids);
 }

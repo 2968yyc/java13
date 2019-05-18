@@ -36,10 +36,8 @@ public class MaterialReceiveController {
     public QueryVO<Material_receive> materialReceivePageList(@RequestParam(defaultValue = "1",
             value = "page") Integer page, Integer rows) {
 
-        PageHelper.startPage(page,rows);
 
-
-        QueryVO<Material_receive> materialReceiveList = materialReceiveService.getMaterialReceiveList();
+        QueryVO<Material_receive> materialReceiveList = materialReceiveService.getMaterialReceiveList(page,rows);
 
         return materialReceiveList;
     }
@@ -50,7 +48,7 @@ public class MaterialReceiveController {
             value = "page") Integer page, Integer rows){
 
         PageHelper.startPage(page,rows);
-        QueryVO<Material_receive> materialReceiveList =  materialReceiveService.queryReceiveByReceiveId(searchValue);
+        QueryVO<Material_receive> materialReceiveList =  materialReceiveService.queryReceiveByReceiveId(searchValue,page,rows);
 
         return materialReceiveList;
     }
@@ -61,7 +59,7 @@ public class MaterialReceiveController {
             value = "page") Integer page, Integer rows){
 
         PageHelper.startPage(page,rows);
-        QueryVO<Material_receive> materialReceiveList =  materialReceiveService.queryReceiveByMaterialId(searchValue);
+        QueryVO<Material_receive> materialReceiveList =  materialReceiveService.queryReceiveByMaterialId(searchValue,page,rows);
 
 
         return materialReceiveList;
@@ -99,6 +97,80 @@ public class MaterialReceiveController {
                 info.setStatus(200);
             }
 
+        }
+
+        return info;
+    }
+
+    @RequestMapping("delete_judge")
+    @ResponseBody
+    public String  deleteDudge(){
+        return "";
+    }
+
+    @RequestMapping("edit_judge")
+    @ResponseBody
+    public  String  editDudge(){
+        return "";
+    }
+
+    @RequestMapping("update_note")
+    @ResponseBody
+    public Info update_note(Material_receive material_receive){
+
+        Info info = new Info();
+
+        boolean update = materialReceiveService.update_note(material_receive);
+
+        if (update){
+            info.setStatus(200);
+            info.setMsg("更新成功");
+        }else {
+            info.setStatus(0);
+            info.setMsg("更新失败");
+        }
+
+
+        return info;
+    }
+
+    @RequestMapping("delete_batch")
+    @ResponseBody
+    public Info delete_batch(String ids){
+
+        Info info = new Info();
+
+        boolean isDele = materialReceiveService.delete_batch(ids);
+        if (isDele){
+            info.setStatus(200);
+            info.setMsg("删除成功");
+        }else {
+            info.setStatus(0);
+            info.setMsg("删除失败");
+        }
+
+        return info;
+    }
+
+    @RequestMapping("edit")
+    public String  materialEdit(){
+        return "materialReceive_edit";
+    }
+
+
+    @RequestMapping("update_all")
+    @ResponseBody
+    public Info update_all(Material_receive material_receive){
+        Info info = new Info();
+
+        boolean isUpdate = materialReceiveService.update_all(material_receive);
+
+        if (isUpdate){
+            info.setStatus(200);
+            info.setMsg("编辑成功");
+        }else {
+            info.setStatus(0);
+            info.setMsg("编辑失败");
         }
 
         return info;

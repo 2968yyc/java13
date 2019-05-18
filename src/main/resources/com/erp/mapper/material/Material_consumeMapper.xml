@@ -70,4 +70,28 @@
     consume_date as consumeDate,sender,receiver,note from material_consume
     where material_id like #{searchValue}
   </select>
+
+    <select id="getConsumeByConsumeId" resultType="com.erp.bean.material.Material_consume">
+        select consume_id as consumeId,work_id as workId,material_id as materialId,consume_amount as consumeAmount,
+    consume_date as consumeDate,sender,receiver,note from material_consume
+    where consume_id = #{consumeId}
+    </select>
+
+    <insert id="insertMaterialConsume">
+        insert into material_consume(consume_id,work_id,material_id,consume_amount,consume_date,sender,receiver,note)values
+        (#{consumeId},#{workId},#{materialId},#{consumeAmount},#{consumeDate},#{sender},#{receiver},#{note})
+    </insert>
+
+    <update id="update_note" parameterType="com.erp.bean.material.Material_consume">
+    update material_consume set note = #{note} where consume_id = #{consumeId}
+    </update>
+    <delete id="delete_batch" parameterType="com.erp.bean.material.Material_consume">
+        delete from material_consume where consume_id =#{ids}
+    </delete>
+
+    <select id="getMaterial_consume" resultType="com.erp.bean.material.Material_consume">
+        select consume_id as consumeId,work_id as workId,material_id as materialId,consume_amount as consumeAmount,
+    consume_date as consumeDate,sender,receiver,note from material_consume
+    where consume_id = #{consumeId}
+    </select>
 </mapper>
