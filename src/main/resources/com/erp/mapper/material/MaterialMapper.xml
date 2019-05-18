@@ -52,4 +52,12 @@
         #{status},#{remaining},#{note})
     </insert>
 
+    <update id="update_note" parameterType="com.erp.bean.material.Material">
+        update material set note = #{note}  where material_id = #{materialId}
+    </update>
+
+    <delete id="delete_batch" parameterType="com.erp.bean.material.Material">
+        delete from material where material_id =#{ids}
+    </delete>
+
 </mapper>
