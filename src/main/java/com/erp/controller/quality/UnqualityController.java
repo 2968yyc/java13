@@ -24,6 +24,7 @@ public class UnqualityController {
 
     @RequestMapping("list")
     @ResponseBody
+    //分页查询
     public QueryVO list(int page, int rows){
         return  unqualityService.selectPageUnqualify(page, rows);
     }
@@ -40,6 +41,7 @@ public class UnqualityController {
     }
 
     @RequestMapping("insert")
+    //插入功能
     public String insert(Unqualify unqualify, Model model){
         boolean flag = unqualityService.insertUnqualify(unqualify);
         return "unqualify_add";
@@ -53,6 +55,7 @@ public class UnqualityController {
 
     @RequestMapping("delete_batch")
     @ResponseBody
+    //删除功能
     public Info delete_batch(String[] ids){
         boolean flag = unqualityService.deleteUnqualifyById(ids);
         if (flag){
