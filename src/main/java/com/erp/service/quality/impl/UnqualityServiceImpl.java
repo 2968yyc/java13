@@ -27,10 +27,10 @@ public class UnqualityServiceImpl implements UnqualityService {
 
     @Override
     public QueryVO selectPageUnqualify(int page, int rows){
+        int total = unqualifyMapper.countAllUnqualify();
         PageHelper.startPage(page, rows);
         UnqualifyExample unqualifyExample = new UnqualifyExample();
         List<Unqualify> unqualifies = unqualifyMapper.selectByExample(unqualifyExample);
-        int total = (unqualifies == null? 0 : unqualifies.size());
         return new QueryVO(total, unqualifies);
     }
 
@@ -54,12 +54,12 @@ public class UnqualityServiceImpl implements UnqualityService {
 
     @Override
     public QueryVO searchUnqualifyByUnqualifyId(String searchValue, int page, int rows){
+        int total = unqualifyMapper.countAllUnqualify();
         PageHelper.startPage(page, rows);
         UnqualifyExample unqualifyExample = new UnqualifyExample();
         UnqualifyExample.Criteria criteria = unqualifyExample.createCriteria();
         criteria.andUnqualifyApplyIdLike("%" + searchValue + "%");
         List<Unqualify> unqualifies = unqualifyMapper.selectByExample(unqualifyExample);
-        int total = (unqualifies == null? 0 : unqualifies.size());
         return new QueryVO(total, unqualifies);
     }
 

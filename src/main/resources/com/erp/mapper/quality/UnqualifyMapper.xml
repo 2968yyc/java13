@@ -260,4 +260,8 @@
   <select id="selectAllUnqualify" resultMap="BaseResultMap">
     select <include refid="Base_Column_List" /> from unqualify_apply
   </select>
+
+  <select id="countAllUnqualify" resultType="_int">
+    select count(*) from unqualify_apply
+  </select>
 </mapper>

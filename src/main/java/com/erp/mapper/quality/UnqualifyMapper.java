@@ -29,4 +29,6 @@ public interface UnqualifyMapper {
     int updateByPrimaryKey(Unqualify record);
 
     List<Unqualify> selectAllUnqualify();
+
+    int countAllUnqualify();
 }
