@@ -2,7 +2,6 @@ package com.erp.service.quality.impl;
 
 import com.erp.bean.QueryVO;
 import com.erp.bean.quality.Unqualify;
-import com.erp.bean.quality.UnqualifyExample;
 import com.erp.mapper.quality.UnqualifyMapper;
 import com.erp.service.quality.UnqualityService;
 import com.github.pagehelper.PageHelper;

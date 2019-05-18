@@ -77,11 +77,6 @@ public class UserController {
             sysPermissionList.add("materialConsume:edit");
             sysPermissionList.add("materialConsume:delete");
 
-
-
-
-
-
             sysPermissionList.add("unqualify:add");
             sysPermissionList.add("unqualify:edit");
             sysPermissionList.add("unqualify:delete");
@@ -89,6 +84,10 @@ public class UserController {
             sysPermissionList.add("pMeasureCheck:add");
             sysPermissionList.add("pMeasureCheck:edit");
             sysPermissionList.add("pMeasureCheck:delete");
+
+            sysPermissionList.add("fMeasureCheck:add");
+            sysPermissionList.add("fMeasureCheck:edit");
+            sysPermissionList.add("fMeasureCheck:delete");
 
             session.setAttribute("sysPermissionList",sysPermissionList);
             return new Info(1,"success",null);

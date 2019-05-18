@@ -3,6 +3,8 @@ package com.erp.mapper.quality;
 import com.erp.bean.quality.FinalMeasuret;
 import com.erp.bean.quality.FinalMeasuretExample;
 import java.util.List;
+
+import com.erp.bean.quality.Unqualify;
 import org.apache.ibatis.annotations.Param;
 
 public interface FinalMeasuretMapper {
@@ -29,4 +31,10 @@ public interface FinalMeasuretMapper {
     int updateByPrimaryKey(FinalMeasuret record);
 
     int countAllFinalMeasure();
+
+    List<FinalMeasuret> selectAllFMeasureCheckLeft();
+
+    List<FinalMeasuret> searchFMeasureCheckByFMeasureCheckIdLeft(@Param("fMeasureCheckId") String searchValue);
+
+    List<FinalMeasuret> searchfMeasureCheckByOrderIdLeft(@Param("orderId") String searchValue);
 }

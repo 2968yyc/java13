@@ -46,9 +46,6 @@ public class UnqualityController {
         return "unqualify_add";
     }
 
-
-    /*----------------------------以下是插入功能----------------------------*/
-
     @RequestMapping("insert")
     //插入功能
     public String insert(Unqualify unqualify, Model model){
