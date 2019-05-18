@@ -255,4 +255,8 @@
       note = #{note,jdbcType=VARCHAR}
     where f_measure_check_id = #{fMeasureCheckId,jdbcType=VARCHAR}
   </update>
+
+  <select id="countAllFinalMeasure" resultType="_int">
+    select count(*) from final_measuret_check
+  </select>
 </mapper>

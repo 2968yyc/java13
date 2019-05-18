@@ -27,4 +27,6 @@ public interface FinalMeasuretMapper {
     int updateByPrimaryKeySelective(FinalMeasuret record);
 
     int updateByPrimaryKey(FinalMeasuret record);
+
+    int countAllFinalMeasure();
 }

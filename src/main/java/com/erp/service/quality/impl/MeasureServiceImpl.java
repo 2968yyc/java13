@@ -22,10 +22,10 @@ public class MeasureServiceImpl implements MeasureService {
 
     @Override
     public QueryVO selectPageMeasure(int page, int rows) {
+        int total = finalMeasuretMapper.countAllFinalMeasure();
         PageHelper.startPage(page, rows);
         FinalMeasuretExample finalMeasuretExample = new FinalMeasuretExample();
         List<FinalMeasuret> measurets = finalMeasuretMapper.selectByExample(finalMeasuretExample);
-        int total = (measurets == null? 0 : measurets.size());
         return new QueryVO(total, measurets);
     }
 }
