@@ -16,4 +16,6 @@ public interface MaterialMapper {
     List<Material> getMaterialById(String searchValue);
 
     List<Material> getMaterialByType(String searchValue);
+
+    int insertMaterial(Material material);
 }

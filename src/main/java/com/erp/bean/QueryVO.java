@@ -15,7 +15,6 @@ public  class  QueryVO <T> {
     public QueryVO() {
     }
 
-
     public QueryVO(int total, List<T> rows) {
         this.total = total;
         this.rows = rows;
@@ -34,7 +33,6 @@ public  class  QueryVO <T> {
     }
 
     public void setRows(List<T> rows) {
-
         this.rows = rows;
     }
 }

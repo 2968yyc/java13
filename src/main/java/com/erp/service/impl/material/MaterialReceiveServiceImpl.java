@@ -28,12 +28,7 @@ public class MaterialReceiveServiceImpl implements MaterialReceiveService {
     public QueryVO<Material_receive> getMaterialReceiveList() {
         List<Material_receive> list = material_receiveMapper.queryAllMaterialReceive();
 
-        for (int i = 0; i < list.size(); i++) {
-            Material_receive material_consume = list.get(i);
-            String materialId = material_consume.getMaterialId();
-            Material material = materialMapper.queryMaterialById(materialId);
-            material_consume.setMaterial(material);
-        }
+        getMaterial(list);
 
         return new QueryVO<>(list.size(),list);
     }
@@ -42,25 +37,40 @@ public class MaterialReceiveServiceImpl implements MaterialReceiveService {
     public QueryVO<Material_receive> queryReceiveByReceiveId(String searchValue) {
         searchValue = "%"+searchValue+"%";
         List<Material_receive> list = material_receiveMapper.queryReceiveByReceiveId(searchValue);
+        List<Material_receive> material = getMaterial(list);
+
+        return new QueryVO<Material_receive>(material.size(),material);
+    }
+
+    private List<Material_receive> getMaterial(List<Material_receive> list) {
         for (int i = 0; i < list.size(); i++) {
             Material_receive material_consume = list.get(i);
             String materialId = material_consume.getMaterialId();
             Material material = materialMapper.queryMaterialById(materialId);
             material_consume.setMaterial(material);
         }
-        return new QueryVO<Material_receive>(list.size(),list);
+
+        return list;
     }
 
     @Override
     public QueryVO<Material_receive> queryReceiveByMaterialId(String searchValue) {
         searchValue = "%"+searchValue+"%";
         List<Material_receive> MaterialList = material_receiveMapper.queryReceiveByMaterialId(searchValue);
-        for (int i = 0; i < MaterialList.size(); i++) {
-            Material_receive material_consume = MaterialList.get(i);
-            String materialId = material_consume.getMaterialId();
-            Material material = materialMapper.queryMaterialById(materialId);
-            material_consume.setMaterial(material);
-        }
-        return new QueryVO<Material_receive>(MaterialList.size(),MaterialList);
+        List<Material_receive> material = getMaterial(MaterialList);
+        return new QueryVO<Material_receive>(material.size(),material);
     }
+
+    @Override
+    public Material_receive getMaterialReceive(String receiveId) {
+        return material_receiveMapper.getMaterialReceiveByReceiveId(receiveId);
+    }
+
+    @Override
+    public boolean insertMaterialReceive(Material_receive material_receive) {
+        int insert = material_receiveMapper.insertMaterialReceive(material_receive);
+
+        return insert == 1?true:false;
+    }
+
 }

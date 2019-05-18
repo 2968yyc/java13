@@ -13,4 +13,8 @@ public interface MaterialReceiveService {
     QueryVO<Material_receive> queryReceiveByReceiveId(String searchValue);
 
     QueryVO<Material_receive> queryReceiveByMaterialId(String searchValue);
+
+    Material_receive getMaterialReceive(String materialId);
+
+    boolean insertMaterialReceive(Material_receive material_receive);
 }
