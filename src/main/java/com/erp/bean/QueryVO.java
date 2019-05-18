@@ -11,6 +11,7 @@ public  class  QueryVO <T> {
     private int total;
     private List<T> rows;
 
+
     public QueryVO() {
     }
 

@@ -51,6 +51,12 @@ public class UserController {
             sysPermissionList.add("technology:edit");
             sysPermissionList.add("technology:delete");
 
+
+            //schedule
+            sysPermissionList.add("custom:add");
+            sysPermissionList.add("custom:edit");
+            sysPermissionList.add("custom:delete");
+
             sysPermissionList.add("material:add");
             sysPermissionList.add("material:edit");
             sysPermissionList.add("material:delete");
@@ -62,6 +68,7 @@ public class UserController {
             sysPermissionList.add("materialConsume:add");
             sysPermissionList.add("materialConsume:edit");
             sysPermissionList.add("materialConsume:delete");
+
 
 
 
