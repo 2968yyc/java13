@@ -23,7 +23,7 @@ http://www.springframework.org/schema/context https://www.springframework.org/sc
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
         <property name="url" value="jdbc:mysql://127.0.0.1:3306/erp?serverTimezone=GMT&amp;useSSL=false&amp;rewriteBatchedStatements=true"/>
         <property name="username" value="root"/>
-        <property name="password" value="1234"/>
+        <property name="password" value="123456"/>
 
     </bean>
 
