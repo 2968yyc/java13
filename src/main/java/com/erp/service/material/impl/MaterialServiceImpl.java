@@ -1,4 +1,4 @@
-package com.erp.service.impl.material;
+package com.erp.service.material.impl;
 
 import com.erp.bean.QueryVO;
 
