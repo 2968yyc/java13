@@ -1,5 +1,6 @@
 package com.erp.controller.user;
 
+import com.erp.bean.QueryVO;
 import com.erp.bean.device.Info;
 import com.erp.bean.user.SysUser;
 import com.erp.service.UserService;
@@ -58,6 +59,10 @@ public class UserController {
             sysPermissionList.add("employee:add");
             sysPermissionList.add("employee:edit");
             sysPermissionList.add("employee:delete");
+            //管理
+            sysPermissionList.add("user:add");
+            sysPermissionList.add("user:edit");
+            sysPermissionList.add("user:delete");
 
 
             //schedule
@@ -86,5 +91,15 @@ public class UserController {
             return new Info(1,"success",null);
 
         }
+    }
+
+    @RequestMapping("user/find")
+    public String userpage(){
+        return "user_list";
+    }
+
+    @RequestMapping("user/list")
+    public @ResponseBody QueryVO userList(int page,int rows){
+        return userService.getUserInPage(page,rows);
     }
 }
