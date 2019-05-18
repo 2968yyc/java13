@@ -75,7 +75,7 @@ public class UnqualityController {
         }
     }
 
-    /*----------------------------以下是查询功能----------------------------*/
+    /*----------------------------以下是模糊查询功能----------------------------*/
 
     @RequestMapping("search_unqualify_by_unqualifyId")
     @ResponseBody
