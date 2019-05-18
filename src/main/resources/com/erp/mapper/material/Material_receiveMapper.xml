@@ -50,4 +50,14 @@ where receive_id like #{searchValue}
     select receive_id as receiveId,material_id as materialId,amount,receive_date as receiveDate,sender,receiver,note from material_receive
 where material_id like #{searchValue}
   </select>
+
+  <select id="getMaterialReceiveByReceiveId" resultType="com.erp.bean.material.Material_receive">
+    select receive_id as receiveId,material_id as materialId,amount,receive_date as receiveDate,sender,receiver,note from material_receive
+    where receive_id = #{receiveId}
+  </select>
+
+  <insert id="insertMaterialReceive">
+    insert into material_receive (receive_id,material_id,amount,receive_date,sender,receiver,note)values (#{receiveId},#{materialId},#{amount},#{receiveDate},#{sender},#{receiver},#{note})
+  </insert>
+
 </mapper>

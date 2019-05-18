@@ -48,9 +48,6 @@ public class MaterialController {
 
         QueryVO<Material> materialById = materialService.queryMaterialById(searchValue);
 
-        List<Material> getrows = materialById.getrows();
-
-        System.out.printf(getrows.toString());
 
         return materialById;
 
@@ -115,6 +112,16 @@ public class MaterialController {
         }
 
         return info;
+
+    }
+
+    @RequestMapping("get_data")
+    @ResponseBody
+    public List<Material> getMaterial(){
+
+        List<Material> materialList = materialService.queryAllMaterial();
+
+        return materialList;
 
     }
 

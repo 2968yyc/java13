@@ -66,4 +66,10 @@ public class MaterialServiceImpl implements MaterialService {
         return insert == 1?true:false;
 
     }
+
+    @Override
+    public List<Material> queryAllMaterial() {
+        List<Material> materialList = materialMapper.queryAllMaterial();
+        return materialList;
+    }
 }

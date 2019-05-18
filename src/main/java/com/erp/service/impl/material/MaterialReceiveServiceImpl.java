@@ -60,4 +60,17 @@ public class MaterialReceiveServiceImpl implements MaterialReceiveService {
         List<Material_receive> material = getMaterial(MaterialList);
         return new QueryVO<Material_receive>(material.size(),material);
     }
+
+    @Override
+    public Material_receive getMaterialReceive(String receiveId) {
+        return material_receiveMapper.getMaterialReceiveByReceiveId(receiveId);
+    }
+
+    @Override
+    public boolean insertMaterialReceive(Material_receive material_receive) {
+        int insert = material_receiveMapper.insertMaterialReceive(material_receive);
+
+        return insert == 1?true:false;
+    }
+
 }

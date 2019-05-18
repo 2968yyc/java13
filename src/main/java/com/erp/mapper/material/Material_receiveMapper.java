@@ -14,4 +14,8 @@ public interface Material_receiveMapper {
     List<Material_receive> queryReceiveByReceiveId(String searchValue);
 
     List<Material_receive> queryReceiveByMaterialId(String searchValue);
+
+    Material_receive getMaterialReceiveByReceiveId(String receiveId);
+
+    int insertMaterialReceive(Material_receive material_receive);
 }

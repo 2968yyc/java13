@@ -1,16 +1,14 @@
 package com.erp.controller.material;
 
 import com.erp.bean.QueryVO;
+import com.erp.bean.device.Info;
 import com.erp.bean.material.Material;
 import com.erp.bean.material.Material_consume;
 import com.erp.service.material.MaterialConsumeService;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @Author: Qiu
@@ -74,6 +72,27 @@ public class MaterialConsumeController {
 
 
         return materialReceiveList;
+    }
+
+    @RequestMapping("add_judge")
+    public String  materialConsumeAdd_judge(){
+        return "materialConsume_add";
+    }
+
+    @RequestMapping("add")
+    public String  materialConsumeAdd(){
+        return "materialConsume_add";
+    }
+
+    @RequestMapping("insert")
+    @ResponseBody
+    public Info insertMaterialConsume(@ModelAttribute("materialConsume")Material_consume material_consume){
+
+        Info info = new Info();
+
+
+
+        return info;
     }
 
 }
