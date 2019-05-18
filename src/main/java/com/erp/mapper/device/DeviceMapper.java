@@ -28,4 +28,7 @@ public interface DeviceMapper {
     int updateByPrimaryKeySelective(Device record);
 
     int updateByPrimaryKey(Device record);
+
+    int countAll();
+    List<Device> selectAll();
 }

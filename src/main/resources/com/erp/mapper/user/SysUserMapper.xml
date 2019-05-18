@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.erp.mapper.department.DepartmentMapper">
-  <select id="countAll" resultType="int">
-    select count(*) FROM department
-  </select>
-  <resultMap id="BaseResultMap" type="com.erp.bean.department.Department">
-    <id column="department_id" jdbcType="VARCHAR" property="departmentId" />
-    <result column="department_name" jdbcType="VARCHAR" property="departmentName" />
-    <result column="note" jdbcType="VARCHAR" property="note" />
+<mapper namespace="com.erp.mapper.user.SysUserMapper">
+  <resultMap id="BaseResultMap" type="com.erp.bean.user.SysUser">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="locked" jdbcType="CHAR" property="locked" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,15 +66,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    department_id, department_name, note
+    id, username, password, locked
   </sql>
-  <select id="selectByExample" parameterType="com.erp.bean.department.DepartmentExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.erp.bean.user.SysUserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from department
+    from sys_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -87,67 +85,76 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from department
-    where department_id = #{departmentId,jdbcType=VARCHAR}
+    from sys_user
+    where id = #{id,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from department
-    where department_id = #{departmentId,jdbcType=VARCHAR}
+    delete from sys_user
+    where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.erp.bean.department.DepartmentExample">
-    delete from department
+  <delete id="deleteByExample" parameterType="com.erp.bean.user.SysUserExample">
+    delete from sys_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.erp.bean.department.Department">
-    insert into department (department_id, department_name, note
-      )
-    values (#{departmentId,jdbcType=VARCHAR}, #{departmentName,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}
-      )
+  <insert id="insert" parameterType="com.erp.bean.user.SysUser">
+    insert into sys_user (id, username, password, 
+      locked)
+    values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{locked,jdbcType=CHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.erp.bean.department.Department">
-    insert into department
+  <insert id="insertSelective" parameterType="com.erp.bean.user.SysUser">
+    insert into sys_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="departmentId != null">
-        department_id,
+      <if test="id != null">
+        id,
       </if>
-      <if test="departmentName != null">
-        department_name,
+      <if test="username != null">
+        username,
       </if>
-      <if test="note != null">
-        note,
+      <if test="password != null">
+        password,
+      </if>
+      <if test="locked != null">
+        locked,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="departmentId != null">
-        #{departmentId,jdbcType=VARCHAR},
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
       </if>
-      <if test="departmentName != null">
-        #{departmentName,jdbcType=VARCHAR},
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
       </if>
-      <if test="note != null">
-        #{note,jdbcType=VARCHAR},
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="locked != null">
+        #{locked,jdbcType=CHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.erp.bean.department.DepartmentExample" resultType="java.lang.Long">
-    select count(*) from department
+  <select id="countByExample" parameterType="com.erp.bean.user.SysUserExample" resultType="java.lang.Long">
+    select count(*) from sys_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update department
+    update sys_user
     <set>
-      <if test="record.departmentId != null">
-        department_id = #{record.departmentId,jdbcType=VARCHAR},
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
       </if>
-      <if test="record.departmentName != null">
-        department_name = #{record.departmentName,jdbcType=VARCHAR},
+      <if test="record.username != null">
+        username = #{record.username,jdbcType=VARCHAR},
       </if>
-      <if test="record.note != null">
-        note = #{record.note,jdbcType=VARCHAR},
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.locked != null">
+        locked = #{record.locked,jdbcType=CHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -155,30 +162,35 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update department
-    set department_id = #{record.departmentId,jdbcType=VARCHAR},
-      department_name = #{record.departmentName,jdbcType=VARCHAR},
-      note = #{record.note,jdbcType=VARCHAR}
+    update sys_user
+    set id = #{record.id,jdbcType=VARCHAR},
+      username = #{record.username,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      locked = #{record.locked,jdbcType=CHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.erp.bean.department.Department">
-    update department
+  <update id="updateByPrimaryKeySelective" parameterType="com.erp.bean.user.SysUser">
+    update sys_user
     <set>
-      <if test="departmentName != null">
-        department_name = #{departmentName,jdbcType=VARCHAR},
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
       </if>
-      <if test="note != null">
-        note = #{note,jdbcType=VARCHAR},
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="locked != null">
+        locked = #{locked,jdbcType=CHAR},
       </if>
     </set>
-    where department_id = #{departmentId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.erp.bean.department.Department">
-    update department
-    set department_name = #{departmentName,jdbcType=VARCHAR},
-      note = #{note,jdbcType=VARCHAR}
-    where department_id = #{departmentId,jdbcType=VARCHAR}
+  <update id="updateByPrimaryKey" parameterType="com.erp.bean.user.SysUser">
+    update sys_user
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      locked = #{locked,jdbcType=CHAR}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>
