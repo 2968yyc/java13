@@ -83,6 +83,7 @@ public class MaterialReceiveController {
 
         Info info = new Info();
 
+
         Material_receive queryMaterial_receive = materialReceiveService.getMaterialReceive(material_receive.getReceiveId());
 
         if (queryMaterial_receive!=null){
