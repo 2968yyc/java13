@@ -26,6 +26,7 @@ public class UnqualityController {
 
     @RequestMapping("list")
     @ResponseBody
+
     //分页查询
     public QueryVO list(int page, int rows){
         return  unqualityService.selectPageUnqualify(page, rows);
