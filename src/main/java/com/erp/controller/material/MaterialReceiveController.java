@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 /**
  * @Author: Qiu
  * @Date: 2019/5/17 21:37
@@ -44,6 +46,7 @@ public class MaterialReceiveController {
     }
 
     @RequestMapping("search_materialReceive_by_receiveId")
+    @ResponseBody
     public QueryVO<Material_receive> queryReceiveByReceiveId(String searchValue,@RequestParam(defaultValue = "1",
             value = "page") Integer page, Integer rows){
 
@@ -53,6 +56,7 @@ public class MaterialReceiveController {
         return materialReceiveList;
     }
     @RequestMapping("search_materialReceive_by_materialId")
+    @ResponseBody
     public QueryVO<Material_receive> queryReceiveByMaterialId(String searchValue,@RequestParam(defaultValue = "1",
             value = "page") Integer page, Integer rows){
 

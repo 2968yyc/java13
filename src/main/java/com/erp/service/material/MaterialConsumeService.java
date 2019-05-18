@@ -10,4 +10,10 @@ import com.erp.bean.material.Material_consume;
 public interface MaterialConsumeService {
 
     QueryVO<Material_consume> getMaterialConsumeList();
+
+    QueryVO<Material_consume> queryConsumeByConsumeId(String searchValue);
+
+    QueryVO<Material_consume> queryConsumeByWorkId(String searchValue);
+
+    QueryVO<Material_consume> queryConsumeByMaterialId(String searchValue);
 }

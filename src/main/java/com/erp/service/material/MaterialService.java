@@ -14,4 +14,8 @@ public interface MaterialService {
 
 
     QueryVO<Material> queryMaterialByType(String searchValue);
+
+    Material queryMaterial(String id);
+
+    boolean insertMaterial(Material material);
 }

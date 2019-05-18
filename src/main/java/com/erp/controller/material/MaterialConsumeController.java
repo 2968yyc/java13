@@ -41,4 +41,39 @@ public class MaterialConsumeController {
         return materialConsumeList;
     }
 
+
+    @RequestMapping("search_materialConsume_by_consumeId")
+    @ResponseBody
+    public QueryVO<Material_consume> queryReceiveByConsumeId(String searchValue,@RequestParam(defaultValue = "1",
+            value = "page") Integer page, Integer rows){
+
+        PageHelper.startPage(page,rows);
+        QueryVO<Material_consume> materialReceiveList =  materialConsumeService.queryConsumeByConsumeId(searchValue);
+
+
+        return materialReceiveList;
+    }
+    @RequestMapping("search_materialConsume_by_workId")
+    @ResponseBody
+    public QueryVO<Material_consume> queryReceiveByWorkId(String searchValue,@RequestParam(defaultValue = "1",
+            value = "page") Integer page, Integer rows){
+
+        PageHelper.startPage(page,rows);
+        QueryVO<Material_consume> materialReceiveList =  materialConsumeService.queryConsumeByWorkId(searchValue);
+
+
+        return materialReceiveList;
+    }
+    @RequestMapping("search_materialConsume_by_materialId")
+    @ResponseBody
+    public QueryVO<Material_consume> queryReceiveByMaterialId(String searchValue,@RequestParam(defaultValue = "1",
+            value = "page") Integer page, Integer rows){
+
+        PageHelper.startPage(page,rows);
+        QueryVO<Material_consume> materialReceiveList =  materialConsumeService.queryConsumeByMaterialId(searchValue);
+
+
+        return materialReceiveList;
+    }
+
 }
