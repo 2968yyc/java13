@@ -6,8 +6,11 @@ import com.erp.bean.device.Info;
 import com.erp.service.device.DeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 /**
  * @Author: yyc
@@ -81,6 +84,43 @@ public class DeviceListController {
             return new Info(res,"该设备号已经存在，请更换设备号！",null);
         }
     }
+
+    @RequestMapping("search_device_by_deviceId")
+    public @ResponseBody QueryVO searchDeviceByDeviceId(String searchValue,int page,int rows){
+        QueryVO<Device> deviceQueryVO = deviceService.searchDeviceByDeviceId(searchValue, page, rows);
+        return deviceQueryVO;
+    }
+
+    @RequestMapping("search_device_by_deviceName")
+    public @ResponseBody QueryVO searchDeviceByDeviceName(String searchValue,int page,int rows){
+        return deviceService.searchDeviceByDeviceName(searchValue,page,rows);
+    }
+
+    @RequestMapping("search_device_by_deviceTypeName")
+    public @ResponseBody QueryVO searchDeviceByDeviceTypeName(String searchValue,int page,int rows){
+        return deviceService.searchDeviceByDeviceTypeName(searchValue,page,rows);
+    }
+    @RequestMapping("get_data")
+    public @ResponseBody
+    List<Device> getData(){
+        return deviceService.getAllData();
+    }
+    @RequestMapping("get/{id}")
+    public @ResponseBody Device getByDeviceTypeId(@PathVariable("id") String id){
+        return deviceService.getByDeviceId(id);
+    }
+
+    @RequestMapping("update_note")
+    public @ResponseBody Info updateNote(String deviceId,String note){
+
+        int res = deviceService.updateNoteById(deviceId,note);
+        if (res==1){
+            return new Info(200,"更新成功",null);
+        }else{
+            return new Info(res,"该设备号已经存在，请更换设备号！",null);
+        }
+    }
+
 
 
 

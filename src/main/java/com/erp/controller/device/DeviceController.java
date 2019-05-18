@@ -21,8 +21,19 @@ public class DeviceController {
     public String deviceType(){
         return "deviceType";
     }
+    @RequestMapping("deviceCheck")
+    public String deviceCheck(){
+        return "deviceCheck";
+    }
+    @RequestMapping("deviceFault")
+    public String deviceFault(){
+        return "deviceFault";
+    }
 
-
+    @RequestMapping("deviceMaintain")
+    public String deviceMaintain(){
+        return "deviceMaintain";
+    }
 
 
 

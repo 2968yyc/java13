@@ -45,6 +45,15 @@ public class UserController {
             sysPermissionList.add("deviceType:add");
             sysPermissionList.add("deviceType:edit");
             sysPermissionList.add("deviceType:delete");
+            sysPermissionList.add("deviceCheck:add");
+            sysPermissionList.add("deviceCheck:edit");
+            sysPermissionList.add("deviceCheck:delete");
+            sysPermissionList.add("deviceFault:add");
+            sysPermissionList.add("deviceFault:edit");
+            sysPermissionList.add("deviceFault:delete");
+            sysPermissionList.add("deviceMaintain:add");
+            sysPermissionList.add("deviceMaintain:edit");
+            sysPermissionList.add("deviceMaintain:delete");
 
             //这里就按这样写
             sysPermissionList.add("technology:add");

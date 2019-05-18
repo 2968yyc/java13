@@ -13,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 /**
  * @Author: yyc
@@ -83,5 +85,35 @@ public class DeviceTypeController {
             return new Info(res,"该设备号已经存在，请更换设备号！",null);
         }
     }
+    @RequestMapping("search_deviceType_by_deviceTypeId")
+    public @ResponseBody QueryVO<Device_type> searchDeviceTypeByDeviceTypeId(String searchValue,int page,int rows){
+        return deviceTypeService.searchDeviceTypeByDeviceTypeId(searchValue, page, rows);
 
+    }
+    @RequestMapping("search_deviceType_by_deviceTypeName")
+    public @ResponseBody QueryVO<Device_type> searchDeviceTypeBydeviceTypeName(String searchValue,int page,int rows){
+        return deviceTypeService.searchDeviceTypeByDeviceTypeName(searchValue, page, rows);
+
+    }
+
+    @RequestMapping("update_all")
+    public @ResponseBody Info updateDeviceTypeById(Device_type device_type){
+        int res = deviceTypeService.update(device_type);
+        if (res==1){
+            return new Info(200,"更新成功",null);
+        }else{
+            return new Info(res,"该设备号已经存在，请更换设备号！",null);
+        }
+    }
+
+
+    @RequestMapping("get_data")
+    public @ResponseBody List<Device_type> getData(){
+        return deviceTypeService.getAllData();
+    }
+
+    @RequestMapping("get/{id}")
+    public @ResponseBody Device_type getByDeviceTypeId(@PathVariable("id") String id){
+        return deviceTypeService.getByDeviceTypeId(id);
+    }
 }

@@ -28,4 +28,6 @@ public interface Device_checkMapper {
     int updateByPrimaryKeySelective(Device_check record);
 
     int updateByPrimaryKey(Device_check record);
+
+    int updateResultById(@Param("deviceCheckId") String deviceCheckId, @Param("deviceCheckResult") String deviceCheckResult);
 }
