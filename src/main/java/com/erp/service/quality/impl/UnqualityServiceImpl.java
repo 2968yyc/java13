@@ -57,7 +57,7 @@ public class UnqualityServiceImpl implements UnqualityService {
         PageHelper.startPage(page, rows);
         UnqualifyExample unqualifyExample = new UnqualifyExample();
         UnqualifyExample.Criteria criteria = unqualifyExample.createCriteria();
-        criteria.andUnqualifyApplyIdLike(searchValue);
+        criteria.andUnqualifyApplyIdLike("%" + searchValue + "%");
         List<Unqualify> unqualifies = unqualifyMapper.selectByExample(unqualifyExample);
         int total = (unqualifies == null? 0 : unqualifies.size());
         return new QueryVO(total, unqualifies);
