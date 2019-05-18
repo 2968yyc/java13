@@ -2,7 +2,6 @@ package com.erp.service.impl;
 
 import com.erp.bean.schedule.Custom;
 import com.erp.bean.schedule.CustomExample;
-import com.erp.bean.schedule.ManufactureExample;
 import com.erp.bean.schedule.PageHander;
 import com.erp.mapper.schedule.CustomMapper;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -22,7 +21,7 @@ public class CustomServiceImpl {
 
     @Autowired
     SqlSessionFactory sqlSessionFactory;
-    public PageHander findCustom(int page,int rows){
+    public PageHander findCustom(int page, int rows){
         /*SqlSession sqlSession=sqlSessionFactory.openSession();
         CustomMapper mapper=sqlSession.getMapper(CustomMapper.class);*/
 
