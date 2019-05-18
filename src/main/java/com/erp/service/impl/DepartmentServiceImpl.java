@@ -24,6 +24,14 @@ public class DepartmentServiceImpl implements DepartmentService {
     DepartmentMapper departmentMapper;
 
     @Override
+    public List<Department> getDepartmentData() {
+        DepartmentExample departmentExample = new DepartmentExample();
+        departmentExample.or();
+        List<Department> departments = departmentMapper.selectByExample(departmentExample);
+        return departments;
+    }
+
+    @Override
     public QueryVO getDepartmentInPage(int page, int rows) {
         int length = departmentMapper.countAll();
         PageHelper.startPage(page, rows);

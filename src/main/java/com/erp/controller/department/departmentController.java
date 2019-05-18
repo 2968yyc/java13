@@ -1,11 +1,14 @@
 package com.erp.controller.department;
 
 import com.erp.bean.QueryVO;
+import com.erp.bean.department.Department;
 import com.erp.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 /**
  * @Author: xu
@@ -28,5 +31,11 @@ public class departmentController {
     public @ResponseBody
     QueryVO findDepartmentInPage(int page, int rows){
         return departmentService.getDepartmentInPage(page,rows);
+    }
+
+    @RequestMapping("get_data")
+    public @ResponseBody
+    List<Department> departmentGetData(){
+        return departmentService.getDepartmentData();
     }
 }

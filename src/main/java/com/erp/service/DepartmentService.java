@@ -1,6 +1,9 @@
 package com.erp.service;
 
 import com.erp.bean.QueryVO;
+import com.erp.bean.department.Department;
+
+import java.util.List;
 
 /**
  * @Author: xu
@@ -8,4 +11,6 @@ import com.erp.bean.QueryVO;
  */
 public interface DepartmentService {
     QueryVO getDepartmentInPage(int page, int rows);
+    List<Department> getDepartmentData();
+
 }
