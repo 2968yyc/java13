@@ -4,6 +4,7 @@ import com.erp.bean.QueryVO;
 import com.erp.bean.material.Material;
 import com.erp.bean.material.Material_receive;
 import com.erp.service.material.MaterialReceiveService;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,9 @@ public class MaterialReceiveController {
     public QueryVO<Material_receive> materialReceivePageList(@RequestParam(defaultValue = "1",
             value = "page") Integer page, Integer rows) {
 
+        PageHelper.startPage(page,rows);
+
+
         QueryVO<Material_receive> materialReceiveList = materialReceiveService.getMaterialReceiveList();
 
         return materialReceiveList;
@@ -43,6 +47,7 @@ public class MaterialReceiveController {
     public QueryVO<Material_receive> queryReceiveByReceiveId(String searchValue,@RequestParam(defaultValue = "1",
             value = "page") Integer page, Integer rows){
 
+        PageHelper.startPage(page,rows);
         QueryVO<Material_receive> materialReceiveList =  materialReceiveService.queryReceiveByReceiveId(searchValue);
 
         return materialReceiveList;
@@ -51,6 +56,7 @@ public class MaterialReceiveController {
     public QueryVO<Material_receive> queryReceiveByMaterialId(String searchValue,@RequestParam(defaultValue = "1",
             value = "page") Integer page, Integer rows){
 
+        PageHelper.startPage(page,rows);
         QueryVO<Material_receive> materialReceiveList =  materialReceiveService.queryReceiveByMaterialId(searchValue);
 
 

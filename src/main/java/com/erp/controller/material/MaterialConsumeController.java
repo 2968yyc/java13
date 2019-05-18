@@ -4,6 +4,7 @@ import com.erp.bean.QueryVO;
 import com.erp.bean.material.Material;
 import com.erp.bean.material.Material_consume;
 import com.erp.service.material.MaterialConsumeService;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +33,8 @@ public class MaterialConsumeController {
     @ResponseBody
     public QueryVO<Material_consume> materialConsumePageList(@RequestParam(defaultValue = "1",
             value = "page") Integer page, Integer rows) {
+        PageHelper.startPage(page,rows);
+
 
         QueryVO<Material_consume> materialConsumeList = materialConsumeService.getMaterialConsumeList();
 

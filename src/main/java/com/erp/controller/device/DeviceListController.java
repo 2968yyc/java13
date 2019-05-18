@@ -1,10 +1,9 @@
 package com.erp.controller.device;
 
+import com.erp.bean.QueryVO;
 import com.erp.bean.device.Device;
 import com.erp.bean.device.Info;
-import com.erp.bean.device.QueryVo;
 import com.erp.service.DeviceService;
-import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +22,7 @@ public class DeviceListController {
 
     @RequestMapping("list")
     public @ResponseBody
-    QueryVo getDeviceInPage(int page, int rows){
+    QueryVO getDeviceInPage(int page, int rows){
         return deviceService.getDeviceInPage(page, rows);
     }
 

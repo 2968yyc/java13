@@ -3,6 +3,7 @@ package com.erp.controller.material;
 import com.erp.bean.QueryVO;
 import com.erp.bean.material.Material;
 import com.erp.service.material.MaterialService;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +29,7 @@ public class MaterialController {
     public QueryVO<Material> materialPageList(@RequestParam(defaultValue = "1",
             value = "page") Integer page, Integer rows) {
 
+        PageHelper.startPage(page,rows);
         QueryVO<Material> materialList = materialService.getMaterialList();
 
         return materialList;
@@ -43,6 +45,8 @@ public class MaterialController {
     public QueryVO<Material> queryMaterialById(String searchValue,@RequestParam(defaultValue = "1",
             value = "page") Integer page, Integer rows){
 
+        PageHelper.startPage(page,rows);
+
         QueryVO<Material> materialById = materialService.queryMaterialById(searchValue);
 
         return materialById;
@@ -53,6 +57,8 @@ public class MaterialController {
     @ResponseBody
     public QueryVO<Material> queryMaterialByType(String searchValue,@RequestParam(defaultValue = "1",
             value = "page") Integer page, Integer rows){
+
+        PageHelper.startPage(page,rows);
 
         QueryVO<Material> materialById = materialService.queryMaterialByType(searchValue);
 

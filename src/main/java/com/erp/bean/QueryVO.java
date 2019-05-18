@@ -2,6 +2,7 @@ package com.erp.bean;
 import com.erp.bean.material.Material;
 import com.github.pagehelper.PageInfo;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 

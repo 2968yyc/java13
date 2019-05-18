@@ -47,6 +47,22 @@ public class UserController {
             sysPermissionList.add("technology:edit");
             sysPermissionList.add("technology:delete");
 
+            sysPermissionList.add("material:add");
+            sysPermissionList.add("material:edit");
+            sysPermissionList.add("material:delete");
+
+            sysPermissionList.add("materialReceive:add");
+            sysPermissionList.add("materialReceive:edit");
+            sysPermissionList.add("materialReceive:delete");
+
+            sysPermissionList.add("materialConsume:add");
+            sysPermissionList.add("materialConsume:edit");
+            sysPermissionList.add("materialConsume:delete");
+
+
+
+
+
             session.setAttribute("sysPermissionList",sysPermissionList);
             return new Info(1,"success",null);
 
