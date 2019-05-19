@@ -159,7 +159,7 @@ public class MaterialController {
 
     @RequestMapping("delete_batch")
     @ResponseBody
-    public Info delete_batch(String ids){
+    public Info delete_batch(List<String> ids){
 
         Info info = new Info();
 
