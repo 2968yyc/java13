@@ -51,11 +51,6 @@ public class departmentController {
         return departmentService.getDepartmentData();
     }
 
-    @RequestMapping("get/{id}")
-    @ResponseBody
-    public Department getById(@PathVariable("id")String id){
-        return departmentService.getDataById(id);
-    }
 
     //增加
     @RequestMapping("add_judge")
