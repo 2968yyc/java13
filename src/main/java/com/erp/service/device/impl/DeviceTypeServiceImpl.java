@@ -53,4 +53,41 @@ public class DeviceTypeServiceImpl implements DeviceTypeService {
         }
         return 1;
     }
+
+    @Override
+    public List<Device_type> getAllData() {
+        Device_typeExample device_typeExample = new Device_typeExample();
+        device_typeExample.or();
+
+        return device_typeMapper.selectByExample(device_typeExample);
+    }
+
+    @Override
+    public QueryVO<Device_type> searchDeviceTypeByDeviceTypeId(String searchValue, int page, int rows) {
+        Device_typeExample device_typeExample = new Device_typeExample();
+        device_typeExample.or().andDeviceTypeIdLike("%"+searchValue+"%");
+        long l = device_typeMapper.countByExample(device_typeExample);
+        PageHelper.startPage(page, rows);
+        List<Device_type> devices = device_typeMapper.selectByExample(device_typeExample);
+
+        return new QueryVO( (int)l,devices);
+
+    }
+
+    @Override
+    public QueryVO<Device_type> searchDeviceTypeByDeviceTypeName(String searchValue, int page, int rows) {
+        Device_typeExample device_typeExample = new Device_typeExample();
+        device_typeExample.or().andDeviceTypeNameLike("%"+searchValue+"%");
+        long l = device_typeMapper.countByExample(device_typeExample);
+        PageHelper.startPage(page, rows);
+        List<Device_type> devices = device_typeMapper.selectByExample(device_typeExample);
+
+        return new QueryVO( (int)l,devices);
+    }
+
+    @Override
+    public Device_type getByDeviceTypeId(String id) {
+        Device_type device_type = device_typeMapper.selectByPrimaryKey(id);
+        return device_type;
+    }
 }

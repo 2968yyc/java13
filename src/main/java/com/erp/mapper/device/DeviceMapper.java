@@ -31,4 +31,7 @@ public interface DeviceMapper {
 
     int countAll();
     List<Device> selectAll();
+    String  getNameById(String deviceId);
+
+    int updateNoteById(@Param("deviceId") String deviceId, @Param("note") String note);
 }
