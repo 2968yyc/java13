@@ -19,4 +19,6 @@ public interface DeviceMaintainService {
     QueryVO<Device_maintain> searchDeviceMaintainByDeviceMaintainId(String searchValue, int page, int rows);
 
     QueryVO<Device_maintain> searchDeviceMaintainByDeviceFaultId(String searchValue, int page, int rows);
+
+    int updateNoteById(String deviceMaintainId, String note);
 }

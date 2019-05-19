@@ -74,4 +74,12 @@ public class DeviceMaintainServiceImpl implements DeviceMaintainService {
 
         return new QueryVO( (int)l,devices);
     }
+
+    @Override
+    public int updateNoteById(String deviceMaintainId, String note) {
+        Device_maintain device_maintain = new Device_maintain();
+        device_maintain.setDeviceMaintainId(deviceMaintainId);
+        device_maintain.setNote(note);
+        return device_maintainMapper.updateByPrimaryKeySelective(device_maintain);
+    }
 }

@@ -104,7 +104,9 @@ public class DeviceServiceImpl implements DeviceService {
 
     @Override
     public List<Device> getAllData() {
-        List<Device> devices = deviceMapper.selectAll();
+        DeviceExample deviceExample = new DeviceExample();
+        deviceExample.or();
+        List<Device> devices = deviceMapper.selectByExample(deviceExample);
         return devices;
     }
 

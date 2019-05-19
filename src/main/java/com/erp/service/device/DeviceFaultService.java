@@ -25,4 +25,6 @@ public interface DeviceFaultService {
     List<Device_fault> getAllData();
 
     Device_fault getByDeviceFaultId(String id);
+
+    int updateDetailById(Device_fault device_fault);
 }

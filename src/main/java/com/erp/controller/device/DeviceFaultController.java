@@ -46,6 +46,11 @@ public class DeviceFaultController {
             return new Info(res,"该设备号已经存在，请更换设备号！",null);
         }
     }
+    @RequestMapping("edit_judge")
+    public @ResponseBody String  editDudge(){
+        //Todo 判断权限
+        return "";
+    }
     @RequestMapping("edit")
     public String toEdit(){
         return "deviceFault_edit";
@@ -93,6 +98,16 @@ public class DeviceFaultController {
     @RequestMapping("get/{id}")
     public @ResponseBody Device_fault getByDeviceTypeId(@PathVariable("id") String id){
         return deviceFaultService.getByDeviceFaultId(id);
+    }
+    @RequestMapping("update_note")
+    public @ResponseBody Info updateNote(Device_fault device_fault){
+
+        int res = deviceFaultService.updateDetailById(device_fault);
+        if (res==1){
+            return new Info(200,"更新成功",null);
+        }else{
+            return new Info(res,"该设备号已经存在，请更换设备号！",null);
+        }
     }
 
 

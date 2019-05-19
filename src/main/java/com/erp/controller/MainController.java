@@ -22,19 +22,30 @@ import java.util.Date;
 public class MainController {
 
     @RequestMapping("home")
-    public String toHome(){
+    public String toHome() {
         System.out.println(111);
         return "home";
     }
+
     @RequestMapping("pic/upload")
     public @ResponseBody
-    UploadInfo uploadImg(String dir, @RequestParam(value="uploadFile",required=false)MultipartFile file, HttpServletRequest request) throws IOException {
+    UploadInfo uploadImg(String dir, @RequestParam(value = "uploadFile", required = false) MultipartFile file, HttpServletRequest request) {
         System.out.println(dir);
+        String pathdir = null;
+        if ("image".equals(dir)){
+            pathdir="pic/";
+        }else if ("flash".equals(dir)){
+            pathdir="flash/";
+        }else if ("media".equals(dir)){
+            pathdir="media/";
+        }else{
+            pathdir = "others/";
+        }
         String fileName = file.getOriginalFilename();
         String contentType = file.getContentType();
-        if (contentType.contains("jpeg")||contentType.contains("jpg")
-                ||contentType.contains("png") || contentType.contains("gif") || contentType.contains("application/octet-stream")) {
-            String path = request.getSession().getServletContext().getRealPath("/WEB-INF/pic/");
+        if (contentType.contains("jpeg") || contentType.contains("jpg")
+                || contentType.contains("png") || contentType.contains("gif") || contentType.contains("video") ||contentType.contains("application/octet-stream")) {
+            String path = request.getSession().getServletContext().getRealPath("/WEB-INF/"+pathdir);
             String suffix = fileName.substring(fileName.lastIndexOf("."));
             String prefix = fileName.substring(0, fileName.lastIndexOf("."));
             long time = new Date().getTime();
@@ -43,12 +54,19 @@ public class MainController {
             if (!imgfile.getParentFile().exists()) {
                 imgfile.getParentFile().mkdir();
             }
-            file.transferTo(imgfile);
-            return new UploadInfo(0, "pic/" + imgname);
+            try {
+                file.transferTo(imgfile);
+                return new UploadInfo(0, pathdir + imgname);
+            } catch (IOException e) {
+                e.printStackTrace();
+                return new UploadInfo(1, null);
+            }
+
+        }else{
+            //未知格式
+            return new UploadInfo(1, null);
         }
-        else {
-            return new UploadInfo(1,null);
-        }
+
     }
 
 }

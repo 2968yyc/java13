@@ -101,7 +101,14 @@ public class DeviceFaultServiceImpl implements DeviceFaultService {
     @Override
     public Device_fault getByDeviceFaultId(String id) {
         Device_fault device_fault = device_faultMapper.selectByPrimaryKey(id);
+        String deviceName = deviceMapper.getNameById(device_fault.getDeviceId());
+        device_fault.setDeviceName(deviceName);
         return device_fault;
+    }
+
+    @Override
+    public int updateDetailById(Device_fault device_fault) {
+        return device_faultMapper.updateByPrimaryKeySelective(device_fault);
     }
 
     private List<Device_fault> fillDeviceCheck(List<Device_fault> devices) {

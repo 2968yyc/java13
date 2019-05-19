@@ -87,6 +87,16 @@ public class DeviceMaintainController {
         return deviceMaintainService.searchDeviceMaintainByDeviceFaultId(searchValue, page, rows);
 
     }
+    @RequestMapping("update_note")
+    public @ResponseBody Info updateNote(String deviceMaintainId,String note){
+
+        int res = deviceMaintainService.updateNoteById(deviceMaintainId,note);
+        if (res==1){
+            return new Info(200,"更新成功",null);
+        }else{
+            return new Info(res,"该设备号已经存在，请更换设备号！",null);
+        }
+    }
 
 
 
