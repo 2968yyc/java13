@@ -82,12 +82,39 @@ public class MainController {
         return map;
     }
 
-
-
     @RequestMapping("file/upload")
     public @ResponseBody
-    UploadInfo uploadfile(String dir, @RequestParam(value = "uploadFile", required = false) MultipartFile file, HttpServletRequest request) {
-        return null;
+    UploadInfo uploadfile( @RequestParam(value = "file", required = false) MultipartFile file, HttpServletRequest request) {
+        String fileName=file.getOriginalFilename();
+        String path = request.getSession().getServletContext().getRealPath("/WEB-INF/file/");
+        String suffix = fileName.substring(fileName.lastIndexOf("."));
+        String prefix = fileName.substring(0, fileName.lastIndexOf("."));
+        long time = new Date().getTime();
+        String newFileName = prefix + time + suffix;
+        File newFile = new File(path + newFileName);
+        if (!newFile.getParentFile().exists()) {
+            newFile.getParentFile().mkdir();
+        }
+        try {
+            file.transferTo(newFile);
+            return new UploadInfo(0, "file/"+newFileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new UploadInfo(1, null,"网络异常，请重新上传");
+        }
+    }
+
+    @RequestMapping("file/delete")
+    @ResponseBody
+    public Map<String, String> deletefile(String fileName,HttpServletRequest request){
+        Map<String ,String > map =new HashMap<>();
+
+        String newFilePath=fileName.substring(fileName.lastIndexOf("="));
+        String path=request.getSession().getServletContext().getRealPath(newFilePath);
+        File file =new File(path);
+        boolean res=file.delete();
+        map.put("data","success");
+        return map;
     }
 
 }
