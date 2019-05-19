@@ -225,4 +225,10 @@
       status = #{status,jdbcType=INTEGER}
     where product_id = #{productId,jdbcType=VARCHAR}
   </update>
+
+
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from product limit #{start},#{rows}
+  </select>
 </mapper>

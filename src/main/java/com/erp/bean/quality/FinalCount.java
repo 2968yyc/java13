@@ -28,12 +28,33 @@ public class FinalCount {
 
     private String note;
 
+    private String empName;
+
+    public FinalCount() {
+    }
+
+    public FinalCount(String fCountCheckId, String orderId, String checkItem, Integer sample, Integer checkNumber, Integer unqualify, BigDecimal qualify, Date cdate, String measureData, String empId, String result, String note, String empName) {
+        this.fCountCheckId = fCountCheckId;
+        this.orderId = orderId;
+        this.checkItem = checkItem;
+        this.sample = sample;
+        this.checkNumber = checkNumber;
+        this.unqualify = unqualify;
+        this.qualify = qualify;
+        this.cdate = cdate;
+        this.measureData = measureData;
+        this.empId = empId;
+        this.result = result;
+        this.note = note;
+        this.empName = empName;
+    }
+
     public String getfCountCheckId() {
         return fCountCheckId;
     }
 
     public void setfCountCheckId(String fCountCheckId) {
-        this.fCountCheckId = fCountCheckId == null ? null : fCountCheckId.trim();
+        this.fCountCheckId = fCountCheckId;
     }
 
     public String getOrderId() {
@@ -41,7 +62,7 @@ public class FinalCount {
     }
 
     public void setOrderId(String orderId) {
-        this.orderId = orderId == null ? null : orderId.trim();
+        this.orderId = orderId;
     }
 
     public String getCheckItem() {
@@ -49,7 +70,7 @@ public class FinalCount {
     }
 
     public void setCheckItem(String checkItem) {
-        this.checkItem = checkItem == null ? null : checkItem.trim();
+        this.checkItem = checkItem;
     }
 
     public Integer getSample() {
@@ -97,7 +118,7 @@ public class FinalCount {
     }
 
     public void setMeasureData(String measureData) {
-        this.measureData = measureData == null ? null : measureData.trim();
+        this.measureData = measureData;
     }
 
     public String getEmpId() {
@@ -105,7 +126,7 @@ public class FinalCount {
     }
 
     public void setEmpId(String empId) {
-        this.empId = empId == null ? null : empId.trim();
+        this.empId = empId;
     }
 
     public String getResult() {
@@ -113,7 +134,7 @@ public class FinalCount {
     }
 
     public void setResult(String result) {
-        this.result = result == null ? null : result.trim();
+        this.result = result;
     }
 
     public String getNote() {
@@ -121,6 +142,33 @@ public class FinalCount {
     }
 
     public void setNote(String note) {
-        this.note = note == null ? null : note.trim();
+        this.note = note;
+    }
+
+    public String getEmpName() {
+        return empName;
+    }
+
+    public void setEmpName(String empName) {
+        this.empName = empName;
+    }
+
+    @Override
+    public String toString() {
+        return "FinalCount{" +
+                "fCountCheckId='" + fCountCheckId + '\'' +
+                ", orderId='" + orderId + '\'' +
+                ", checkItem='" + checkItem + '\'' +
+                ", sample=" + sample +
+                ", checkNumber=" + checkNumber +
+                ", unqualify=" + unqualify +
+                ", qualify=" + qualify +
+                ", cdate=" + cdate +
+                ", measureData='" + measureData + '\'' +
+                ", empId='" + empId + '\'' +
+                ", result='" + result + '\'' +
+                ", note='" + note + '\'' +
+                ", empName='" + empName + '\'' +
+                '}';
     }
 }

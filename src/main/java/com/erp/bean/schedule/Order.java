@@ -8,7 +8,11 @@ public class Order {
 
     private String customId;
 
+    private Custom custom;
+
     private String productId;
+
+    private Product product;
 
     private Date orderDate;
 
@@ -27,6 +31,22 @@ public class Order {
     private String file;
 
     private Integer status;
+
+    public Custom getCustom() {
+        return custom;
+    }
+
+    public void setCustom(Custom custom) {
+        this.custom = custom;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 
     public String getOrderId() {
         return orderId;

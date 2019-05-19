@@ -27,4 +27,6 @@ public interface ProductMapper {
     int updateByPrimaryKeySelective(Product record);
 
     int updateByPrimaryKey(Product record);
+
+    List<Product> selectAll(@Param("start") int start, @Param("rows") int rows);
 }

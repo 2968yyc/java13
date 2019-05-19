@@ -27,4 +27,16 @@ public interface FinalMeasuretMapper {
     int updateByPrimaryKeySelective(FinalMeasuret record);
 
     int updateByPrimaryKey(FinalMeasuret record);
+
+    /*添加的方法*/
+
+    int countAllFinalMeasure();
+
+    int countAllFinalMeasureBySomething(@Param("fMeasureCheckId") String searchValue1,@Param("orderId") String searchValue2);
+
+    List<FinalMeasuret> selectAllFMeasureCheckLeft();
+
+    List<FinalMeasuret> searchFMeasureCheckByFMeasureCheckIdLeft(@Param("fMeasureCheckId") String searchValue);
+
+    List<FinalMeasuret> searchfMeasureCheckByOrderIdLeft(@Param("orderId") String searchValue);
 }

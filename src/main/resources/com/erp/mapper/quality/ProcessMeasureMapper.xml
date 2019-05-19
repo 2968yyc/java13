@@ -256,4 +256,42 @@
       note = #{note,jdbcType=VARCHAR}
     where p_measure_check_id = #{pMeasureCheckId,jdbcType=VARCHAR}
   </update>
+
+  <select id="countAllProcessMeasure" resultType="_int">
+    select count(*) from process_measure_check;
+  </select>
+
+  <resultMap id="BaseResultMapLeft" type="com.erp.bean.quality.ProcessMeasure">
+    <id column="p_measure_check_id" jdbcType="VARCHAR" property="pMeasureCheckId" />
+    <result column="process_id" jdbcType="VARCHAR" property="processId" />
+    <result column="check_item" jdbcType="VARCHAR" property="checkItem" />
+    <result column="cdate" jdbcType="TIMESTAMP" property="cdate" />
+    <result column="measure_data" jdbcType="VARCHAR" property="measureData" />
+    <result column="emp_id" jdbcType="VARCHAR" property="empId" />
+    <result column="result" jdbcType="VARCHAR" property="result" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="emp_name" property="empName"/>
+  </resultMap>
+
+  <select id="selectPMeasureCheckLeft" resultMap="BaseResultMapLeft">
+    select pm.p_measure_check_id,pm.process_id,pm.check_item,pm.cdate,pm.measure_data,pm.emp_id,pm.result,pm.note,e.emp_name
+		FROM process_measure_check pm
+		LEFT JOIN employee e on pm.emp_id = e.emp_id
+		<where>
+            <if test="pMeasureCheckId != null">
+              and pm.p_measure_check_id like '%${pMeasureCheckId}%'
+            </if>
+        </where>
+  </select>
+
+  <select id="countAllProcessMeasureBySomething" resultType="_int">
+    select count(*)
+    FROM process_measure_check pm
+    LEFT JOIN employee e on pm.emp_id = e.emp_id
+    <where>
+      <if test="pMeasureCheckId != null">
+        and pm.p_measure_check_id like '%${pMeasureCheckId}%'
+      </if>
+    </where>
+  </select>
 </mapper>

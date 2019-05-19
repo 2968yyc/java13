@@ -46,14 +46,16 @@ public class UnqualityController {
         return "unqualify_add";
     }
 
-
-    /*----------------------------以下是插入功能----------------------------*/
-
     @RequestMapping("insert")
+    @ResponseBody
     //插入功能
-    public String insert(Unqualify unqualify, Model model){
+    public Info insert(Unqualify unqualify, Model model){
         boolean flag = unqualityService.insertUnqualify(unqualify);
-        return "unqualify_add";
+        if (flag){
+            return new Info(200,"OK",null);
+        }else {
+            return new Info(0,"error",null);
+        }
     }
 
     /*----------------------------以下是删除功能----------------------------*/
@@ -83,6 +85,13 @@ public class UnqualityController {
     //根据不合格品申请编号查询的功能
     public QueryVO searchUnqualifyByUnqualifyId(String searchValue, int page, int rows){
         return unqualityService.searchUnqualifyByUnqualifyId(searchValue, page, rows);
+    }
+
+    @RequestMapping("search_unqualify_by_productName")
+    @ResponseBody
+    //根据不合格品申请编号查询的功能
+    public QueryVO searchUnqualifyByProductName(String searchValue, int page, int rows){
+        return unqualityService.searchUnqualifyByProductName(searchValue, page, rows);
     }
 
 
