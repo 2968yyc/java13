@@ -21,6 +21,10 @@
 </head>
 <body class="easyui-layout">
 
+<c:if test="${activeUser == null }">
+	<jsp:forward page="/"></jsp:forward>
+</c:if>
+
 	<!-- North Title -->
 	<div class="divNorth" style="height:100px;" data-options="region:'north'" >
 		<table id="_TableHeader" width="100%" border="0" cellpadding="0"

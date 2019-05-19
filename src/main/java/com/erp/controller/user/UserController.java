@@ -32,6 +32,16 @@ public class UserController {
         return "login";
     }
 
+    @RequestMapping("logout")
+    public String logout(HttpServletRequest request){
+
+        HttpSession session = request.getSession();
+        session.invalidate();
+
+        return "login";
+
+    }
+
     @RequestMapping("ajaxLogin")
     public @ResponseBody Info login(SysUser user, HttpServletRequest request){
         boolean login = userService.login(user);
@@ -151,7 +161,7 @@ public class UserController {
             sysPermissionList.add("pCountCheck:delete");
 
             session.setAttribute("sysPermissionList",sysPermissionList);
-            session.setAttribute("activeUser",new ActiveUser("aa","超级管理员"));
+            session.setAttribute("activeUser",new ActiveUser(user.getUsername(),"超级管理员"));
             return new Info(1,"success",null);
 
         }
