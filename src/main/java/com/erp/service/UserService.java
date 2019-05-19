@@ -1,5 +1,6 @@
 package com.erp.service;
 
+import com.erp.bean.QueryVO;
 import com.erp.bean.user.SysUser;
 
 /**
@@ -8,4 +9,12 @@ import com.erp.bean.user.SysUser;
  */
 public interface UserService {
     boolean login(SysUser user);
+    QueryVO<SysUser> getUserInPage(int page,int rows);
+    boolean insertSysUser(SysUser sysUser);
+    boolean deleteSysUser(String id);
+    boolean updateSysUser(SysUser sysUser);
+    boolean selectById(String id);
+    boolean selectByName(String name);
+    QueryVO<SysUser> queryById(int page,int rows,String id);
+    QueryVO<SysUser> queryByName(int page,int rows,String name);
 }

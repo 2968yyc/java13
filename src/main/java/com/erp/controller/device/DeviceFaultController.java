@@ -1,9 +1,9 @@
 package com.erp.controller.device;
 
 import com.erp.bean.QueryVO;
-import com.erp.bean.device.Device;
+import com.erp.bean.device.Device_fault;
 import com.erp.bean.device.Info;
-import com.erp.service.device.DeviceService;
+import com.erp.service.device.DeviceFaultService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,41 +14,38 @@ import java.util.List;
 
 /**
  * @Author: yyc
- * @Date: 2019/5/17 21:13
+ * @Date: 2019/5/18 20:01
  */
 @Controller
-@RequestMapping("deviceList")
-public class DeviceListController {
+@RequestMapping("deviceFault")
+public class DeviceFaultController {
     @Autowired
-    private DeviceService deviceService;
-
+    private DeviceFaultService deviceFaultService;
 
     @RequestMapping("list")
     public @ResponseBody
-    QueryVO getDeviceInPage(int page, int rows){
-        return deviceService.getDeviceInPage(page, rows);
+    QueryVO getDeviceTypeInPage(int page, int rows){
+        return deviceFaultService.getDeviceFaultInPage(page, rows);
     }
-
     @RequestMapping("add_judge")
     public @ResponseBody String  addDudge(){
         //Todo 判断权限
-        return "";
+        return null;
     }
     @RequestMapping("add")
     public String toAdd(){
-        return "deviceList_add";
+        return "deviceFault_add";
     }
-    @RequestMapping("insert")
-    public @ResponseBody Info insert(Device device){
-        int res = deviceService.addNew(device);
+    @RequestMapping(value = "insert")
+    public @ResponseBody
+    Info insert(Device_fault device_fault){
+        int res = deviceFaultService.addNew(device_fault);
         if (res==1){
             return new Info(200,"更新成功",null);
         }else{
             return new Info(res,"该设备号已经存在，请更换设备号！",null);
         }
     }
-
-
     @RequestMapping("edit_judge")
     public @ResponseBody String  editDudge(){
         //Todo 判断权限
@@ -56,19 +53,17 @@ public class DeviceListController {
     }
     @RequestMapping("edit")
     public String toEdit(){
-        return "deviceList_edit";
+        return "deviceFault_edit";
     }
     @RequestMapping("update")
-    public @ResponseBody Info update(Device device){
-        int res = deviceService.update(device);
+    public @ResponseBody Info update(Device_fault device_fault){
+        int res = deviceFaultService.update(device_fault);
         if (res==1){
             return new Info(200,"更新成功",null);
         }else{
             return new Info(res,"该设备号已经存在，请更换设备号！",null);
         }
     }
-
-
     @RequestMapping("delete_judge")
     public @ResponseBody String  deleteDudge(){
         //Todo 判断权限
@@ -77,58 +72,43 @@ public class DeviceListController {
 
     @RequestMapping("delete_batch")
     public @ResponseBody Info deleteByIDs(String[] ids){
-        int res = deviceService.deleteByIDs(ids);
+        int res = deviceFaultService.deleteByIDs(ids);
         if (res==1){
             return new Info(200,"更新成功",null);
         }else{
             return new Info(res,"该设备号已经存在，请更换设备号！",null);
         }
     }
+    @RequestMapping("search_deviceFault_by_deviceFaultId")
+    public @ResponseBody QueryVO<Device_fault> searchDeviceFaultByDeviceFaultId(String searchValue,int page,int rows){
+        return deviceFaultService.searchDeviceFaultByDeviceFaultId(searchValue, page, rows);
 
-    @RequestMapping("search_device_by_deviceId")
-    public @ResponseBody QueryVO searchDeviceByDeviceId(String searchValue,int page,int rows){
-        QueryVO<Device> deviceQueryVO = deviceService.searchDeviceByDeviceId(searchValue, page, rows);
-        return deviceQueryVO;
+    }
+    @RequestMapping("search_deviceFault_by_deviceName")
+    public @ResponseBody QueryVO<Device_fault> searchDeviceFaultByDeviceFaultName(String searchValue,int page,int rows){
+        return deviceFaultService.searchDeviceFaultByDeviceName(searchValue, page, rows);
+
     }
 
-    @RequestMapping("search_device_by_deviceName")
-    public @ResponseBody QueryVO searchDeviceByDeviceName(String searchValue,int page,int rows){
-        return deviceService.searchDeviceByDeviceName(searchValue,page,rows);
-    }
-
-    @RequestMapping("search_device_by_deviceTypeName")
-    public @ResponseBody QueryVO searchDeviceByDeviceTypeName(String searchValue,int page,int rows){
-        return deviceService.searchDeviceByDeviceTypeName(searchValue,page,rows);
-    }
     @RequestMapping("get_data")
     public @ResponseBody
-    List<Device> getData(){
-        return deviceService.getAllData();
+    List<Device_fault> getData(){
+        return deviceFaultService.getAllData();
     }
     @RequestMapping("get/{id}")
-    public @ResponseBody Device getByDeviceTypeId(@PathVariable("id") String id){
-        return deviceService.getByDeviceId(id);
+    public @ResponseBody Device_fault getByDeviceTypeId(@PathVariable("id") String id){
+        return deviceFaultService.getByDeviceFaultId(id);
     }
-
     @RequestMapping("update_note")
-    public @ResponseBody Info updateNote(String deviceId,String note){
+    public @ResponseBody Info updateNote(Device_fault device_fault){
 
-        int res = deviceService.updateNoteById(deviceId,note);
+        int res = deviceFaultService.updateDetailById(device_fault);
         if (res==1){
             return new Info(200,"更新成功",null);
         }else{
             return new Info(res,"该设备号已经存在，请更换设备号！",null);
         }
     }
-
-
-
-
-
-
-
-
-
 
 
 }

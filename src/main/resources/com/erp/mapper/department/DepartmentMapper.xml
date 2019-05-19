@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.erp.mapper.department.DepartmentMapper">
+
   <select id="countAll" resultType="int">
     select count(*) FROM department
   </select>
+
+  <select id="queryById" resultMap="BaseResultMap">
+    select * from department where department_id=#{id}
+  </select>
+
+  <select id="queryByName" resultMap="BaseResultMap">
+    select * from department where department_name=#{name}
+  </select>
+
   <resultMap id="BaseResultMap" type="com.erp.bean.department.Department">
     <id column="department_id" jdbcType="VARCHAR" property="departmentId" />
     <result column="department_name" jdbcType="VARCHAR" property="departmentName" />
