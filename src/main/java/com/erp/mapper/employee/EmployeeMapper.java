@@ -42,4 +42,5 @@ public interface EmployeeMapper {
     List<Employee> selectAll();
 
     Employee selectByID(@Param("id") String id);
+    String selectEmpNameByID(@Param("id") String id);
 }
