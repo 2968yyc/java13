@@ -125,14 +125,30 @@ public class UserController {
             sysPermissionList.add("materialConsume:edit");
             sysPermissionList.add("materialConsume:delete");
 
-
+            //不合格品管理
             sysPermissionList.add("unqualify:add");
             sysPermissionList.add("unqualify:edit");
             sysPermissionList.add("unqualify:delete");
 
+            //成品计量质检
+            sysPermissionList.add("fMeasureCheck:add");
+            sysPermissionList.add("fMeasureCheck:edit");
+            sysPermissionList.add("fMeasureCheck:delete");
+
+            //成品计数质检
+            sysPermissionList.add("fCountCheck:add");
+            sysPermissionList.add("fCountCheck:edit");
+            sysPermissionList.add("fCountCheck:delete");
+
+            //工序计量质检
             sysPermissionList.add("pMeasureCheck:add");
             sysPermissionList.add("pMeasureCheck:edit");
             sysPermissionList.add("pMeasureCheck:delete");
+
+            //工序计数质检
+            sysPermissionList.add("pCountCheck:add");
+            sysPermissionList.add("pCountCheck:edit");
+            sysPermissionList.add("pCountCheck:delete");
 
             session.setAttribute("sysPermissionList",sysPermissionList);
             session.setAttribute("activeUser",new ActiveUser("aa","超级管理员"));

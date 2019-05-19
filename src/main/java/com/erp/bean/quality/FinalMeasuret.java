@@ -19,12 +19,29 @@ public class FinalMeasuret {
 
     private String note;
 
+    private String empName;
+
+    public FinalMeasuret() {
+    }
+
+    public FinalMeasuret(String fMeasureCheckId, String orderId, String checkItem, Date cdate, String measureData, String empId, String result, String note, String empName) {
+        this.fMeasureCheckId = fMeasureCheckId;
+        this.orderId = orderId;
+        this.checkItem = checkItem;
+        this.cdate = cdate;
+        this.measureData = measureData;
+        this.empId = empId;
+        this.result = result;
+        this.note = note;
+        this.empName = empName;
+    }
+
     public String getfMeasureCheckId() {
         return fMeasureCheckId;
     }
 
     public void setfMeasureCheckId(String fMeasureCheckId) {
-        this.fMeasureCheckId = fMeasureCheckId == null ? null : fMeasureCheckId.trim();
+        this.fMeasureCheckId = fMeasureCheckId;
     }
 
     public String getOrderId() {
@@ -32,7 +49,7 @@ public class FinalMeasuret {
     }
 
     public void setOrderId(String orderId) {
-        this.orderId = orderId == null ? null : orderId.trim();
+        this.orderId = orderId;
     }
 
     public String getCheckItem() {
@@ -40,7 +57,7 @@ public class FinalMeasuret {
     }
 
     public void setCheckItem(String checkItem) {
-        this.checkItem = checkItem == null ? null : checkItem.trim();
+        this.checkItem = checkItem;
     }
 
     public Date getCdate() {
@@ -56,7 +73,7 @@ public class FinalMeasuret {
     }
 
     public void setMeasureData(String measureData) {
-        this.measureData = measureData == null ? null : measureData.trim();
+        this.measureData = measureData;
     }
 
     public String getEmpId() {
@@ -64,7 +81,7 @@ public class FinalMeasuret {
     }
 
     public void setEmpId(String empId) {
-        this.empId = empId == null ? null : empId.trim();
+        this.empId = empId;
     }
 
     public String getResult() {
@@ -72,7 +89,7 @@ public class FinalMeasuret {
     }
 
     public void setResult(String result) {
-        this.result = result == null ? null : result.trim();
+        this.result = result;
     }
 
     public String getNote() {
@@ -80,6 +97,29 @@ public class FinalMeasuret {
     }
 
     public void setNote(String note) {
-        this.note = note == null ? null : note.trim();
+        this.note = note;
+    }
+
+    public String getEmpName() {
+        return empName;
+    }
+
+    public void setEmpName(String empName) {
+        this.empName = empName;
+    }
+
+    @Override
+    public String toString() {
+        return "FinalMeasuret{" +
+                "fMeasureCheckId='" + fMeasureCheckId + '\'' +
+                ", orderId='" + orderId + '\'' +
+                ", checkItem='" + checkItem + '\'' +
+                ", cdate=" + cdate +
+                ", measureData='" + measureData + '\'' +
+                ", empId='" + empId + '\'' +
+                ", result='" + result + '\'' +
+                ", note='" + note + '\'' +
+                ", empName='" + empName + '\'' +
+                '}';
     }
 }
