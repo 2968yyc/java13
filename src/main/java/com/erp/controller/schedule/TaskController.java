@@ -94,10 +94,10 @@ public class TaskController {
 
     @RequestMapping("delete_batch")
     @ResponseBody
-    public Info deleteTask(String ids){
+    public Info deleteTask(String[] ids){
         int i =taskService.deleteTaskById(ids);
         Info info=new Info(200,"ok",null);
-        return i==1?info:null;
+        return i!=0?info:null;
     }
 
     @RequestMapping("search_task_by_taskId")

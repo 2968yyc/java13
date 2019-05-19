@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -59,8 +60,10 @@ public class ProductServiceImpl {
         return productMapper.updateByPrimaryKeySelective(product);
     }
 
-    public int deleteProductById(String productId){
-        int result=productMapper.deleteByPrimaryKey(productId);
+    public int deleteProductById(String[] productId){
+        ProductExample productExample=new ProductExample();
+        productExample.or().andProductIdIn(Arrays.asList(productId));
+        int result=productMapper.deleteByExample(productExample);
         return result;
     }
 
