@@ -225,4 +225,10 @@
       rating = #{rating,jdbcType=INTEGER}
     where work_id = #{workId,jdbcType=VARCHAR}
   </update>
+
+
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from work  limit #{start},#{rows}
+  </select>
 </mapper>

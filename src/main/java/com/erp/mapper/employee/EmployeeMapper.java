@@ -31,7 +31,16 @@ public interface EmployeeMapper {
 
     int countAll();
 
+    List<Employee> selectByDepartment(@Param("department") String department);
+
+    List<Employee> queryById(@Param("id") String id);
+
+    List<Employee> queryByName(@Param("name") String name);
+
     List<Employee> selectEmployees();
 
     List<Employee> selectAll();
+
+    Employee selectByID(@Param("id") String id);
+    String selectEmpNameByID(@Param("id") String id);
 }

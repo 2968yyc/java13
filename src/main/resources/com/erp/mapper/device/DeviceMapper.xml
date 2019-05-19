@@ -7,6 +7,12 @@
   <select id="selectAll" resultType="device" >
     select * from device
   </select>
+  <select id="getNameById" resultType="string" >
+    select device_name from device where device_id = #{id}
+  </select>
+  <update id="updateNoteById">
+    update device set note = #{note} where device_id = #{deviceId}
+  </update>
   <resultMap id="BaseResultMap" type="com.erp.bean.device.Device">
     <id column="device_id" jdbcType="VARCHAR" property="deviceId" />
     <result column="device_name" jdbcType="VARCHAR" property="deviceName" />

@@ -28,4 +28,13 @@ public interface SysUserMapper {
     int updateByPrimaryKeySelective(SysUser record);
 
     int updateByPrimaryKey(SysUser record);
+
+    List<SysUser> selectSysUsers();
+
+    int countAll();
+
+    List<SysUser> queryById(@Param("id") String id);
+
+    List<SysUser> queryByName(@Param("name") String name);
+
 }

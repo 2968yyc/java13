@@ -1,6 +1,5 @@
-package com.erp.service.impl.schedule;
+package com.erp.service.schedule.impl;
 
-import com.erp.bean.device.Info;
 import com.erp.bean.schedule.Custom;
 import com.erp.bean.schedule.CustomExample;
 import com.erp.bean.schedule.PageHander;
@@ -41,6 +40,15 @@ public class CustomServiceImpl {
         pageHander.setRows(list);
 
         return pageHander;
+    }
+
+
+    public int insertCustom(Custom custom){
+        return customMapper.insertSelective(custom);
+    }
+
+    public int updateCustom(Custom custom){
+        return customMapper.updateByPrimaryKeySelective(custom);
     }
 
     public int deleteCustomById(String customId){

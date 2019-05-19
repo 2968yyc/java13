@@ -34,7 +34,7 @@ public class MaterialConsumeController {
         PageHelper.startPage(page,rows);
 
 
-        QueryVO<Material_consume> materialConsumeList = materialConsumeService.getMaterialConsumeList();
+        QueryVO<Material_consume> materialConsumeList = materialConsumeService.getMaterialConsumeList(page,rows);
 
         return materialConsumeList;
     }
@@ -46,7 +46,7 @@ public class MaterialConsumeController {
             value = "page") Integer page, Integer rows){
 
         PageHelper.startPage(page,rows);
-        QueryVO<Material_consume> materialReceiveList =  materialConsumeService.queryConsumeByConsumeId(searchValue);
+        QueryVO<Material_consume> materialReceiveList =  materialConsumeService.queryConsumeByConsumeId(searchValue,page,rows);
 
 
         return materialReceiveList;
@@ -57,7 +57,7 @@ public class MaterialConsumeController {
             value = "page") Integer page, Integer rows){
 
         PageHelper.startPage(page,rows);
-        QueryVO<Material_consume> materialReceiveList =  materialConsumeService.queryConsumeByWorkId(searchValue);
+        QueryVO<Material_consume> materialReceiveList =  materialConsumeService.queryConsumeByWorkId(searchValue,page,rows);
 
 
         return materialReceiveList;
@@ -68,7 +68,7 @@ public class MaterialConsumeController {
             value = "page") Integer page, Integer rows){
 
         PageHelper.startPage(page,rows);
-        QueryVO<Material_consume> materialReceiveList =  materialConsumeService.queryConsumeByMaterialId(searchValue);
+        QueryVO<Material_consume> materialReceiveList =  materialConsumeService.queryConsumeByMaterialId(searchValue,page,rows);
 
 
         return materialReceiveList;
@@ -90,9 +90,99 @@ public class MaterialConsumeController {
 
         Info info = new Info();
 
+        Material_consume queryMaterialConsume = materialConsumeService.getConsumeByConsumeId(material_consume.getConsumeId());
+
+        if (queryMaterialConsume!= null){
+            info.setStatus(0);
+            info.setMsg("该消耗编号已存在");
+        }else {
+            boolean insert = materialConsumeService.insertMaterialConsume(material_consume);
+            if (!insert){
+                info.setStatus(0);
+                info.setMsg("新增失败");
+            }else {
+                info.setMsg("新增成功");
+                info.setStatus(200);
+            }
+        }
 
 
         return info;
     }
+
+
+    @RequestMapping("delete_judge")
+    @ResponseBody
+    public String  deleteDudge(){
+        return "";
+    }
+
+    @RequestMapping("edit_judge")
+    @ResponseBody
+    public  String  editDudge(){
+        return "";
+    }
+
+    @RequestMapping("update_note")
+    @ResponseBody
+    public Info update_note(Material_consume material_consume){
+
+        Info info = new Info();
+
+        boolean update = materialConsumeService.update_note(material_consume);
+
+        if (update){
+            info.setStatus(200);
+            info.setMsg("更新成功");
+        }else {
+            info.setStatus(0);
+            info.setMsg("更新失败");
+        }
+
+
+        return info;
+    }
+
+    @RequestMapping("delete_batch")
+    @ResponseBody
+    public Info delete_batch(String ids){
+
+        Info info = new Info();
+
+        boolean isDele = materialConsumeService.delete_batch(ids);
+        if (isDele){
+            info.setStatus(200);
+            info.setMsg("删除成功");
+        }else {
+            info.setStatus(0);
+            info.setMsg("删除失败");
+        }
+
+        return info;
+    }
+
+    @RequestMapping("edit")
+    public String  materialEdit(){
+        return "materialConsume_edit";
+    }
+
+    @RequestMapping("update_all")
+    @ResponseBody
+    public Info update_all(Material_consume material_consume){
+        Info info = new Info();
+
+        boolean isUpdate = materialConsumeService.update_all(material_consume);
+
+        if (isUpdate){
+            info.setStatus(200);
+            info.setMsg("编辑成功");
+        }else {
+            info.setStatus(0);
+            info.setMsg("编辑失败");
+        }
+
+        return info;
+    }
+
 
 }

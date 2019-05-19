@@ -1,6 +1,10 @@
 package com.erp.bean.schedule;
 
+import org.apache.ibatis.annotations.Param;
+
+
 public class Custom {
+    private String customParams;
     private String customId;
 
     private String customName;
@@ -20,6 +24,14 @@ public class Custom {
     private Integer status;
 
     private String note;
+
+    public String getCustomParams() {
+        return customParams;
+    }
+
+    public void setCustomParams(String customParams) {
+        this.customParams = customParams;
+    }
 
     public String getCustomId() {
         return customId;

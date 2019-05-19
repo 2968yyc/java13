@@ -30,4 +30,9 @@ public interface DepartmentMapper {
     int updateByPrimaryKey(Department record);
 
     int countAll();
+
+    List<Department> queryById(@Param("id") String id);
+
+    List<Department> queryByName(@Param("name") String name);
+
 }

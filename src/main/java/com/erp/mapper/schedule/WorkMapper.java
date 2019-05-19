@@ -27,4 +27,6 @@ public interface WorkMapper {
     int updateByPrimaryKeySelective(Work record);
 
     int updateByPrimaryKey(Work record);
+
+    List<Work> selectAll(@Param("start") int start, @Param("rows") int rows);
 }

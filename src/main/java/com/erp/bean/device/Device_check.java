@@ -14,6 +14,15 @@ public class Device_check {
     private String deviceCheckResult;
 
     private String deviceCheckFaultId;
+    private String deviceName;
+
+    public String getDeviceName() {
+        return deviceName;
+    }
+
+    public void setDeviceName(String deviceName) {
+        this.deviceName = deviceName;
+    }
 
     public String getDeviceCheckId() {
         return deviceCheckId;
