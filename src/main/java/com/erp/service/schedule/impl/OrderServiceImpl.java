@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -74,8 +75,10 @@ public class OrderServiceImpl {
         return orderMapper.updateByPrimaryKeySelective(order);
     }
 
-    public int deleteOrderById(String orderId){
-        int result=orderMapper.deleteByPrimaryKey(orderId);
+    public int deleteOrderById(String[] orderId){
+        OrderExample orderExample=new OrderExample();
+        orderExample.or().andOrderIdIn(Arrays.asList(orderId));
+        int result=orderMapper.deleteByExample(orderExample);
         return result;
     }
 

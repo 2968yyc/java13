@@ -94,10 +94,10 @@ public class ManufactureController {
 
     @RequestMapping("delete_batch")
     @ResponseBody
-    public Info deleteManufacture(String ids){
+    public Info deleteManufacture(String[] ids){
         int i =manufactureService.deleteManufactureById(ids);
         Info info=new Info(200,"ok",null);
-        return i==1?info:null;
+        return i!=0?info:null;
     }
 
     @RequestMapping("search_manufacture_by_manufactureId")
