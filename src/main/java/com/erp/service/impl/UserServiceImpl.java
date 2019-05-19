@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public QueryVO<SysUser> queryById(int page, int rows, String id) {
         List<SysUser> sysUsers = sysUserMapper.queryById(id);
-        int i = sysUserMapper.countAll();
+        int i = sysUsers.size();
         QueryVO<SysUser> sysUserQueryVO = new QueryVO<>(i, sysUsers);
         return sysUserQueryVO;
     }
@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public QueryVO<SysUser> queryByName(int page, int rows, String name) {
         List<SysUser> sysUsers = sysUserMapper.queryByName(name);
-        int i = sysUserMapper.countAll();
+        int i = sysUsers.size();
         QueryVO<SysUser> sysUserQueryVO = new QueryVO<>(i, sysUsers);
         return sysUserQueryVO;
     }
