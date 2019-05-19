@@ -1,5 +1,6 @@
 package com.erp.mapper.quality;
 
+import com.erp.bean.quality.FinalMeasuret;
 import com.erp.bean.quality.ProcessMeasure;
 import com.erp.bean.quality.ProcessMeasureExample;
 import java.util.List;
@@ -27,4 +28,8 @@ public interface ProcessMeasureMapper {
     int updateByPrimaryKeySelective(ProcessMeasure record);
 
     int updateByPrimaryKey(ProcessMeasure record);
+
+    int countAllProcessMeasure();
+
+    List<FinalMeasuret> selectPMeasureCheckLeft(@Param("pMeasureCheckId") String pMeasureCheckId);
 }

@@ -2,8 +2,8 @@ package com.erp.controller.quality;
 
 import com.erp.bean.QueryVO;
 import com.erp.bean.device.Info;
-import com.erp.bean.quality.FinalMeasuret;
-import com.erp.service.quality.FMeasureService;
+import com.erp.bean.quality.ProcessMeasure;
+import com.erp.service.quality.PMeasureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,45 +11,45 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @Author:ZCH
- * @Date:2019/5/18 8:57
+ * @Date:2019/5/19 9:45
  */
 
 @Controller
-public class FMeasureController {
+public class PMeasureController {
 
     @Autowired
-    FMeasureService fMeasureService;
+    PMeasureService pMeasureService;
 
     /*----------------------------以下是分页查询功能----------------------------*/
 
-    @RequestMapping("measure/find")
+    @RequestMapping("p_measure_check/find")
     public String find(){
-        return "measurement_list";
+        return "p_measure_check_list";
     }
 
-    @RequestMapping("measure/list")
+    @RequestMapping("p_measure_check/list")
     @ResponseBody
     public QueryVO list(int page, int rows){
-        return fMeasureService.selectPageMeasure(page, rows);
+        return pMeasureService.selectPageProcessMeasure(page, rows);
     }
 
     /*----------------------------以下是添加功能----------------------------*/
 
-    @RequestMapping("fMeasureCheck/add_judge")
+    @RequestMapping("pMeasureCheck/add_judge")
     @ResponseBody
     public String add_judge(){
         return "";
     }
 
-    @RequestMapping("measure/add")
+    @RequestMapping("p_measure_check/add")
     public String add(){
-        return "measurement_add";
+        return "p_measure_check_add";
     }
 
-    @RequestMapping("measure/insert")
+    @RequestMapping("p_measure_check/insert")
     @ResponseBody
-    public Info insert(FinalMeasuret finalMeasuret){
-        boolean flag = fMeasureService.insert(finalMeasuret);
+    public Info insert(ProcessMeasure processMeasure){
+        boolean flag = pMeasureService.insert(processMeasure);
         if (flag){
             return new Info(200,"OK",null);
         }else {
@@ -59,21 +59,21 @@ public class FMeasureController {
 
     /*----------------------------以下是修改功能----------------------------*/
 
-    @RequestMapping("fMeasureCheck/edit_judge")
+    @RequestMapping("pMeasureCheck/edit_judge")
     @ResponseBody
     public String edit_judge(){
         return "";
     }
 
-    @RequestMapping("measure/edit")
+    @RequestMapping("p_measure_check/edit")
     public String edit(){
-        return "measurement_edit";
+        return "p_measure_check_edit";
     }
 
-    @RequestMapping("fMeasureCheck/update_all")
+    @RequestMapping("p_measure_check/update_all")
     @ResponseBody
-    public Info update_all(FinalMeasuret finalMeasuret){
-        boolean flag = fMeasureService.updateMeasureByfMeasureCheckId(finalMeasuret);
+    public Info update_all(ProcessMeasure processMeasure){
+        boolean flag = pMeasureService.updatePMeasureBypMeasureCheckId(processMeasure);
         if (flag){
             return new Info(200,"OK",null);
         }else {
@@ -83,17 +83,17 @@ public class FMeasureController {
 
     /*----------------------------以下是删除功能----------------------------*/
 
-    @RequestMapping("fMeasureCheck/delete_judge")
+    @RequestMapping("pMeasureCheck/delete_judge")
     @ResponseBody
     public String delete_judge(){
         return "";
     }
 
-    @RequestMapping("measure/delete_batch")
+    @RequestMapping("p_measure_check/delete_batch")
     @ResponseBody
     //删除功能
     public Info delete_batch(String[] ids){
-        boolean flag = fMeasureService.deleteMeasureByfMeasureCheckIds(ids);
+        boolean flag = pMeasureService.deletePMeasureBypMeasureCheckIds(ids);
         if (flag){
             return new Info(200,"OK",null);
         }else {
@@ -103,15 +103,9 @@ public class FMeasureController {
 
     /*----------------------------以下是模糊查询功能----------------------------*/
 
-    @RequestMapping("measure/search_fMeasureCheck_by_fMeasureCheckId")
+    @RequestMapping("p_measure_check/search_pMeasureCheck_by_pMeasureCheckId")
     @ResponseBody
     public QueryVO searchFMeasureCheckByFMeasureCheckId(String searchValue, int page, int rows){
-        return fMeasureService.searchFMeasureCheckByFMeasureCheckId(searchValue, page, rows);
-    }
-
-    @RequestMapping("measure/search_fMeasureCheck_by_orderId")
-    @ResponseBody
-    public QueryVO searchfMeasureCheckByOrderId(String searchValue, int page, int rows){
-        return fMeasureService.searchfMeasureCheckByOrderId(searchValue, page, rows);
+        return pMeasureService.searchPMeasureByfpMeasureCheckId(searchValue, page, rows);
     }
 }

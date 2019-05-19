@@ -89,6 +89,10 @@ public class UserController {
             sysPermissionList.add("fMeasureCheck:edit");
             sysPermissionList.add("fMeasureCheck:delete");
 
+            sysPermissionList.add("fCountCheck:add");
+            sysPermissionList.add("fCountCheck:edit");
+            sysPermissionList.add("fCountCheck:delete");
+
             session.setAttribute("sysPermissionList",sysPermissionList);
             return new Info(1,"success",null);
 

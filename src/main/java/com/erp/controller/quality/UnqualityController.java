@@ -47,10 +47,15 @@ public class UnqualityController {
     }
 
     @RequestMapping("insert")
+    @ResponseBody
     //插入功能
-    public String insert(Unqualify unqualify, Model model){
+    public Info insert(Unqualify unqualify, Model model){
         boolean flag = unqualityService.insertUnqualify(unqualify);
-        return "unqualify_add";
+        if (flag){
+            return new Info(200,"OK",null);
+        }else {
+            return new Info(0,"error",null);
+        }
     }
 
     /*----------------------------以下是删除功能----------------------------*/

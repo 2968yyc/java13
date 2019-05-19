@@ -3,6 +3,7 @@ package com.erp.mapper.quality;
 import com.erp.bean.quality.FinalCount;
 import com.erp.bean.quality.FinalCountExample;
 import java.util.List;
+import com.erp.bean.quality.FinalMeasuret;
 import org.apache.ibatis.annotations.Param;
 
 public interface FinalCountMapper {
@@ -27,4 +28,8 @@ public interface FinalCountMapper {
     int updateByPrimaryKeySelective(FinalCount record);
 
     int updateByPrimaryKey(FinalCount record);
+
+    int countAllFinalCount();
+
+    List<FinalMeasuret> selectFinalCountLeft(@Param("fCountCheckId") String fCountCheckId,@Param("orderId") String orderId);
 }
