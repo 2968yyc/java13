@@ -28,11 +28,11 @@ public interface FinalMeasuretMapper {
 
     int updateByPrimaryKey(FinalMeasuret record);
 
+    List<FinalMeasuret> searchfMeasureCheckByOrderIdLeft(@Param("orderId") String searchValue);
+
     int countAllFinalMeasure();
 
     List<FinalMeasuret> selectAllFMeasureCheckLeft();
 
     List<FinalMeasuret> searchFMeasureCheckByFMeasureCheckIdLeft(@Param("fMeasureCheckId") String searchValue);
-
-    List<FinalMeasuret> searchfMeasureCheckByOrderIdLeft(@Param("orderId") String searchValue);
 }
