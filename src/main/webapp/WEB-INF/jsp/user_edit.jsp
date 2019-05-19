@@ -22,14 +22,14 @@
 	            	<input class="easyui-textbox" type="text" name="password"/>
 	            </td>
 	        </tr>
-	        <tr>
-	            <td>角色:</td>
-	            <td>
-	            	<input class="easyui-combobox" name="roleId"  panelHeight="auto"
-    					data-options="valueField:'roleId',textField:'roleName',url:'role/get_data',required:true,
-    						 editable:false" />
-	            </td>
-	        </tr>
+<%--	        <tr>--%>
+<%--	            <td>角色:</td>--%>
+<%--	            <td>--%>
+<%--	            	<input class="easyui-combobox" name="roleId"  panelHeight="auto"--%>
+<%--    					data-options="valueField:'roleId',textField:'roleName',url:'role/get_data',required:true,--%>
+<%--    						 editable:false" />--%>
+<%--	            </td>--%>
+<%--	        </tr>--%>
 	        <tr>
 	            <td>用户状态:</td>
 	            <td>

@@ -34,7 +34,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 //        EmployeeExample employeeExample = new EmployeeExample();
 //        employeeExample.or();
         List<Employee> employees = employeeMapper.selectEmployees();
-        System.out.println(employees);
         return new QueryVO(length,employees);
     }
 
