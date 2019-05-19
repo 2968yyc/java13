@@ -2,7 +2,6 @@ package com.erp.service.quality.impl;
 
 import com.erp.bean.QueryVO;
 import com.erp.bean.quality.Unqualify;
-import com.erp.bean.quality.UnqualifyExample;
 import com.erp.mapper.quality.UnqualifyMapper;
 import com.erp.service.quality.UnqualityService;
 import com.github.pagehelper.PageHelper;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 
 @Service
@@ -27,10 +25,9 @@ public class UnqualityServiceImpl implements UnqualityService {
 
     @Override
     public QueryVO selectPageUnqualify(int page, int rows){
+        int total = unqualifyMapper.countAllUnqualify();
         PageHelper.startPage(page, rows);
-        UnqualifyExample unqualifyExample = new UnqualifyExample();
-        List<Unqualify> unqualifies = unqualifyMapper.selectByExample(unqualifyExample);
-        int total = (unqualifies == null? 0 : unqualifies.size());
+        List<Unqualify> unqualifies = unqualifyMapper.selectAllPageUnqualifyLeft();
         return new QueryVO(total, unqualifies);
     }
 
@@ -54,12 +51,9 @@ public class UnqualityServiceImpl implements UnqualityService {
 
     @Override
     public QueryVO searchUnqualifyByUnqualifyId(String searchValue, int page, int rows){
+        int total = unqualifyMapper.countAllUnqualifyBySomething(searchValue, null);
         PageHelper.startPage(page, rows);
-        UnqualifyExample unqualifyExample = new UnqualifyExample();
-        UnqualifyExample.Criteria criteria = unqualifyExample.createCriteria();
-        criteria.andUnqualifyApplyIdLike(searchValue);
-        List<Unqualify> unqualifies = unqualifyMapper.selectByExample(unqualifyExample);
-        int total = (unqualifies == null? 0 : unqualifies.size());
+        List<Unqualify> unqualifies = unqualifyMapper.selectAllPageUnqualifyLeftByUnqualifyId(searchValue);
         return new QueryVO(total, unqualifies);
     }
 
@@ -67,5 +61,13 @@ public class UnqualityServiceImpl implements UnqualityService {
     public boolean updateUnqualifyByUnqualifyId(Unqualify unqualify){
         int update = unqualifyMapper.updateByPrimaryKey(unqualify);
         return update == 1;
+    }
+
+    @Override
+    public QueryVO searchUnqualifyByProductName(String searchValue, int page, int rows) {
+        int total = unqualifyMapper.countAllUnqualifyBySomething(null, searchValue);
+        PageHelper.startPage(page, rows);
+        List<Unqualify> unqualifies = unqualifyMapper.selectAllPageUnqualifyLeftByProductName(searchValue);
+        return new QueryVO(total, unqualifies);
     }
 }

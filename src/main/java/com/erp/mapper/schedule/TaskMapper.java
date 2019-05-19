@@ -27,4 +27,6 @@ public interface TaskMapper {
     int updateByPrimaryKeySelective(Task record);
 
     int updateByPrimaryKey(Task record);
+
+    List<Task> selectAll(@Param("start") int start, @Param("rows") int rows);
 }

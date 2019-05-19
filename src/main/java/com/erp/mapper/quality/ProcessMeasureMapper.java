@@ -27,4 +27,10 @@ public interface ProcessMeasureMapper {
     int updateByPrimaryKeySelective(ProcessMeasure record);
 
     int updateByPrimaryKey(ProcessMeasure record);
+
+    int countAllProcessMeasure();
+
+    List<ProcessMeasure> selectPMeasureCheckLeft(@Param("pMeasureCheckId") String pMeasureCheckId);
+
+    int countAllProcessMeasureBySomething(@Param("pMeasureCheckId") String pMeasureCheckId);
 }

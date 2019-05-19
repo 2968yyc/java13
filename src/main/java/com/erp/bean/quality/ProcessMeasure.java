@@ -19,12 +19,29 @@ public class ProcessMeasure {
 
     private String note;
 
+    private String empName;
+
+    public ProcessMeasure() {
+    }
+
+    public ProcessMeasure(String pMeasureCheckId, String processId, String checkItem, Date cdate, String measureData, String empId, String result, String note, String empName) {
+        this.pMeasureCheckId = pMeasureCheckId;
+        this.processId = processId;
+        this.checkItem = checkItem;
+        this.cdate = cdate;
+        this.measureData = measureData;
+        this.empId = empId;
+        this.result = result;
+        this.note = note;
+        this.empName = empName;
+    }
+
     public String getpMeasureCheckId() {
         return pMeasureCheckId;
     }
 
     public void setpMeasureCheckId(String pMeasureCheckId) {
-        this.pMeasureCheckId = pMeasureCheckId == null ? null : pMeasureCheckId.trim();
+        this.pMeasureCheckId = pMeasureCheckId;
     }
 
     public String getProcessId() {
@@ -32,7 +49,7 @@ public class ProcessMeasure {
     }
 
     public void setProcessId(String processId) {
-        this.processId = processId == null ? null : processId.trim();
+        this.processId = processId;
     }
 
     public String getCheckItem() {
@@ -40,7 +57,7 @@ public class ProcessMeasure {
     }
 
     public void setCheckItem(String checkItem) {
-        this.checkItem = checkItem == null ? null : checkItem.trim();
+        this.checkItem = checkItem;
     }
 
     public Date getCdate() {
@@ -56,7 +73,7 @@ public class ProcessMeasure {
     }
 
     public void setMeasureData(String measureData) {
-        this.measureData = measureData == null ? null : measureData.trim();
+        this.measureData = measureData;
     }
 
     public String getEmpId() {
@@ -64,7 +81,7 @@ public class ProcessMeasure {
     }
 
     public void setEmpId(String empId) {
-        this.empId = empId == null ? null : empId.trim();
+        this.empId = empId;
     }
 
     public String getResult() {
@@ -72,7 +89,7 @@ public class ProcessMeasure {
     }
 
     public void setResult(String result) {
-        this.result = result == null ? null : result.trim();
+        this.result = result;
     }
 
     public String getNote() {
@@ -80,6 +97,29 @@ public class ProcessMeasure {
     }
 
     public void setNote(String note) {
-        this.note = note == null ? null : note.trim();
+        this.note = note;
+    }
+
+    public String getEmpName() {
+        return empName;
+    }
+
+    public void setEmpName(String empName) {
+        this.empName = empName;
+    }
+
+    @Override
+    public String toString() {
+        return "ProcessMeasure{" +
+                "pMeasureCheckId='" + pMeasureCheckId + '\'' +
+                ", processId='" + processId + '\'' +
+                ", checkItem='" + checkItem + '\'' +
+                ", cdate=" + cdate +
+                ", measureData='" + measureData + '\'' +
+                ", empId='" + empId + '\'' +
+                ", result='" + result + '\'' +
+                ", note='" + note + '\'' +
+                ", empName='" + empName + '\'' +
+                '}';
     }
 }
