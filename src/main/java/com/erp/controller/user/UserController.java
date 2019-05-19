@@ -268,7 +268,7 @@ public class UserController {
     @ResponseBody
     @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.REPEATABLE_READ)
     public QueryVO<SysUser> searchByName(String searchValue, int page, int rows){
-        QueryVO<SysUser> sysUserQueryVO = userService.queryByName(page,rows,searchValue);
+        QueryVO<SysUser> sysUserQueryVO = userService.queryByName(page,rows,"%"+searchValue+"%");
         return sysUserQueryVO;
     }
 

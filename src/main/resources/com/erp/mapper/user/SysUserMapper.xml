@@ -11,7 +11,7 @@
     select * from sys_user where id=#{id};
   </select>
   <select id="queryByName" resultMap="BaseResultMap">
-    select * from sys_user where username=#{name};
+    select * from sys_user where username like #{name};
   </select>
 
   <resultMap id="BaseResultMap" type="com.erp.bean.user.SysUser">
