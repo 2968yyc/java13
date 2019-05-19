@@ -47,7 +47,7 @@ public class DeviceTypeController {
         if (res==1){
             return new Info(200,"更新成功",null);
         }else{
-            return new Info(res,"该设备号已经存在，请更换设备号！",null);
+            return new Info(res,"该设备种类编号已经存在，请更换设备种类编号！",null);
         }
     }
 

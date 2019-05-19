@@ -7,6 +7,16 @@ public class Role {
 
     private String available;
 
+    private String sysPermissionId;
+
+    public String getSysPermissionId() {
+        return sysPermissionId;
+    }
+
+    public void setSysPermissionId(String sysPermissionId) {
+        this.sysPermissionId = sysPermissionId;
+    }
+
     public String getRoleId() {
         return roleId;
     }

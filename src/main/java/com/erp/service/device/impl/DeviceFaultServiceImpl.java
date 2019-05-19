@@ -39,6 +39,9 @@ public class DeviceFaultServiceImpl implements DeviceFaultService {
 
     @Override
     public int addNew(Device_fault device_fault) {
+        Device_fault device_fault1 = device_faultMapper.selectByPrimaryKey(device_fault.getDeviceFaultId());
+        if (device_fault1!=null)
+            return 2;
         int insert = device_faultMapper.insert(device_fault);
         return insert;
     }

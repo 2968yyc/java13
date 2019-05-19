@@ -47,6 +47,9 @@ public class DeviceMaintainServiceImpl implements DeviceMaintainService {
 
     @Override
     public int addNew(Device_maintain device_maintain) {
+        Device_maintain device_maintain1 = device_maintainMapper.selectByPrimaryKey(device_maintain.getDeviceMaintainId());
+        if (device_maintain1!=null)
+            return 0;
         int insert = device_maintainMapper.insert(device_maintain);
         return insert;
     }

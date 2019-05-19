@@ -41,7 +41,7 @@ public class EmployeeController {
         return employeeService.getDataById(id);
     }
 
-    @RequestMapping("get")
+    @RequestMapping("get_data")
     @ResponseBody
     public List<Employee> getData(){
         return employeeService.getData();

@@ -20,4 +20,8 @@ public interface PermissionMapper {
     int updateByExampleSelective(@Param("record") Permission record, @Param("example") PermissionExample example);
 
     int updateByExample(@Param("record") Permission record, @Param("example") PermissionExample example);
+
+    String getPermissionIdByRoleId(String roleId);
+
+    int updatePermissionByRoleId(@Param("permission") String permission, @Param("id") String roleId);
 }
