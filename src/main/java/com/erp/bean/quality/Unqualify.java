@@ -19,12 +19,32 @@ public class Unqualify {
 
     private String note;
 
+    private String empName;
+
+    private String productName;
+
+    public Unqualify() {
+    }
+
+    public Unqualify(String unqualifyApplyId, String productId, String unqualifyItem, Integer unqualifyCount, Date assemblyDate, String empId, Date applyDate, String note, String empName, String productName) {
+        this.unqualifyApplyId = unqualifyApplyId;
+        this.productId = productId;
+        this.unqualifyItem = unqualifyItem;
+        this.unqualifyCount = unqualifyCount;
+        this.assemblyDate = assemblyDate;
+        this.empId = empId;
+        this.applyDate = applyDate;
+        this.note = note;
+        this.empName = empName;
+        this.productName = productName;
+    }
+
     public String getUnqualifyApplyId() {
         return unqualifyApplyId;
     }
 
     public void setUnqualifyApplyId(String unqualifyApplyId) {
-        this.unqualifyApplyId = unqualifyApplyId == null ? null : unqualifyApplyId.trim();
+        this.unqualifyApplyId = unqualifyApplyId;
     }
 
     public String getProductId() {
@@ -32,7 +52,7 @@ public class Unqualify {
     }
 
     public void setProductId(String productId) {
-        this.productId = productId == null ? null : productId.trim();
+        this.productId = productId;
     }
 
     public String getUnqualifyItem() {
@@ -40,7 +60,7 @@ public class Unqualify {
     }
 
     public void setUnqualifyItem(String unqualifyItem) {
-        this.unqualifyItem = unqualifyItem == null ? null : unqualifyItem.trim();
+        this.unqualifyItem = unqualifyItem;
     }
 
     public Integer getUnqualifyCount() {
@@ -64,7 +84,7 @@ public class Unqualify {
     }
 
     public void setEmpId(String empId) {
-        this.empId = empId == null ? null : empId.trim();
+        this.empId = empId;
     }
 
     public Date getApplyDate() {
@@ -80,6 +100,38 @@ public class Unqualify {
     }
 
     public void setNote(String note) {
-        this.note = note == null ? null : note.trim();
+        this.note = note;
+    }
+
+    public String getEmpName() {
+        return empName;
+    }
+
+    public void setEmpName(String empName) {
+        this.empName = empName;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    @Override
+    public String toString() {
+        return "Unqualify{" +
+                "unqualifyApplyId='" + unqualifyApplyId + '\'' +
+                ", productId='" + productId + '\'' +
+                ", unqualifyItem='" + unqualifyItem + '\'' +
+                ", unqualifyCount=" + unqualifyCount +
+                ", assemblyDate=" + assemblyDate +
+                ", empId='" + empId + '\'' +
+                ", applyDate=" + applyDate +
+                ", note='" + note + '\'' +
+                ", empName='" + empName + '\'' +
+                ", productName='" + productName + '\'' +
+                '}';
     }
 }
