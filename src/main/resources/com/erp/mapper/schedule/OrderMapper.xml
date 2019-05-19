@@ -320,4 +320,9 @@
       status = #{status,jdbcType=INTEGER}
     where order_id = #{orderId,jdbcType=VARCHAR}
   </update>
+
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from c_order limit #{start},#{rows}
+  </select>
 </mapper>

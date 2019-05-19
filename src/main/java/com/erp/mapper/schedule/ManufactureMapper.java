@@ -27,4 +27,6 @@ public interface ManufactureMapper {
     int updateByPrimaryKeySelective(Manufacture record);
 
     int updateByPrimaryKey(Manufacture record);
+
+    List<Manufacture> selectAll(@Param("start") int start, @Param("rows") int rows);
 }

@@ -229,6 +229,6 @@
 
 
   <select id="selectAll" resultMap="BaseResultMap">
-    select * from custom limit #{start},#{rows}
+    select * from product limit #{start},#{rows}
   </select>
 </mapper>

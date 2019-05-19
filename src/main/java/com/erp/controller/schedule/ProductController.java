@@ -6,6 +6,7 @@ import com.erp.bean.schedule.Product;
 import com.erp.service.schedule.impl.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -25,8 +26,15 @@ public class ProductController {
     ProductServiceImpl productService;
 
     @RequestMapping("get_data")
+    @ResponseBody
     public List<Product> getData(){
         return productService.findAllProduct();
+    }
+
+    @RequestMapping("get/{id}")
+    @ResponseBody
+    public Product queryProduct(@PathVariable("id") String id){
+        return  productService.queryProduct(id);
     }
 
     @RequestMapping("find")
@@ -90,5 +98,21 @@ public class ProductController {
         int i =productService.deleteProductById(ids);
         Info info=new Info(200,"ok",null);
         return i==1?info:null;
+    }
+
+    @RequestMapping("search_product_by_productId")
+    @ResponseBody
+    public PageHander searchProductById(String searchValue,int page,int rows){
+        return productService.searchById(searchValue,page,rows);
+    }
+    @RequestMapping("search_product_by_productName")
+    @ResponseBody
+    public PageHander searchProductByName(String searchValue,int page,int rows){
+        return productService.searchByName(searchValue,page,rows);
+    }
+    @RequestMapping("search_product_by_productType")
+    @ResponseBody
+    public PageHander searchProductByType(String searchValue,int page,int rows){
+        return productService.searchByType(searchValue,page,rows);
     }
  }

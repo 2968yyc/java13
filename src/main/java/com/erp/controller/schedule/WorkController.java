@@ -6,6 +6,7 @@ import com.erp.bean.schedule.Work;
 import com.erp.service.schedule.impl.WorkServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -25,8 +26,15 @@ public class WorkController {
     WorkServiceImpl workService;
 
     @RequestMapping("get_data")
+    @ResponseBody
     public List<Work> getData(){
         return workService.findAllWork();
+    }
+
+    @RequestMapping("get/{id}")
+    @ResponseBody
+    public Work queryWork(@PathVariable("id") String id){
+        return  workService.queryWork(id);
     }
 
     @RequestMapping("find")
@@ -91,4 +99,34 @@ public class WorkController {
         Info info=new Info(200,"ok",null);
         return i==1?info:null;
     }
+
+    //search_work_by_workId
+    @RequestMapping("search_work_by_workId")
+    @ResponseBody
+    public PageHander searchWorkById(String searchValue,int page,int rows){
+        return workService.searchById(searchValue,page,rows);
+    }
+
+    //search_work_by_workProcess
+    @RequestMapping("search_work_by_workProcess")
+    @ResponseBody
+    public PageHander searchWorkByProcessId(String searchValue,int page,int rows){
+        return workService.searchByProcessId(searchValue,page,rows);
+    }
+
+    //search_work_by_workProduct
+    @RequestMapping("search_work_by_workProduct")
+    @ResponseBody
+    public PageHander searchWorkByProductName(String searchValue,int page,int rows){
+        return workService.searchByProductName(searchValue,page,rows);
+    }
+
+    //search_work_by_workDevice
+    @RequestMapping("search_work_by_workDevice")
+    @ResponseBody
+    public PageHander searchWorkByDeviceName(String searchValue,int page,int rows){
+        return workService.searchByDeviceName(searchValue,page,rows);
+    }
+
+
  }
