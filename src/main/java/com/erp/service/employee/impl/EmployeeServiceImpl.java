@@ -5,6 +5,7 @@ import com.erp.bean.employee.Employee;
 import com.erp.bean.employee.EmployeeExample;
 import com.erp.mapper.employee.EmployeeMapper;
 import com.erp.service.employee.EmployeeService;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,11 +31,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public QueryVO getEmployeeInPage(int page, int rows) {
         int length = employeeMapper.countAll();
-//        PageHelper.startPage(page, rows);
-//        EmployeeExample employeeExample = new EmployeeExample();
-//        employeeExample.or();
+        PageHelper.startPage(page, rows);
         List<Employee> employees = employeeMapper.selectEmployees();
-        System.out.println(employees);
         return new QueryVO(length,employees);
     }
 
@@ -52,6 +50,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public QueryVO<Employee> queryByID(int page, int rows, String id) {
+        PageHelper.startPage(page,rows);
         List<Employee> employees = employeeMapper.queryById(id);
         int length = employees.size();
         return new QueryVO<>(length,employees);
@@ -59,6 +58,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public QueryVO<Employee> queryByName(int page, int rows, String name) {
+        PageHelper.startPage(page,rows);
         List<Employee> employees = employeeMapper.queryByName(name);
         int length = employees.size();
         return new QueryVO<>(length,employees);
@@ -66,6 +66,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public QueryVO<Employee> queryByDepartment(int page, int rows,String department) {
+        PageHelper.startPage(page,rows);
         List<Employee> employees = employeeMapper.selectByDepartment(department);
         int length = employees.size();
         return new QueryVO<>(length,employees);
