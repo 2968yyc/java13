@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -60,17 +61,17 @@ public class CustomServiceImpl {
         return customMapper.updateByPrimaryKeySelective(custom);
     }
 
-    public int deleteCustomById(String customId){
-        int result=customMapper.deleteByPrimaryKey(customId);
+    public int deleteCustomById(String[] customId){
+        CustomExample customExample=new CustomExample();
+        customExample.or().andCustomIdIn(Arrays.asList(customId));
+        int result=customMapper.deleteByExample(customExample);
         return result;
     }
 
     public PageHander searchById(String searchValue,int page,int rows){
         PageHander pageHander=new PageHander();
         CustomExample customExample=new CustomExample();
-        if(searchValue.contains("\\") || searchValue.contains("%")){
-            return null;
-        }
+
         customExample.createCriteria().andCustomIdLike("%"+searchValue+"%");
         int total=(int) customMapper.countByExample(customExample);
         pageHander.setTotal(total);
@@ -84,9 +85,6 @@ public class CustomServiceImpl {
     public PageHander searchByName(String searchValue,int page,int rows){
         PageHander pageHander=new PageHander();
         CustomExample customExample=new CustomExample();
-        if(searchValue.contains("\\") || searchValue.contains("%")){
-            return null;
-        }
         customExample.or().andCustomNameLike("%"+searchValue+"%");
         int total=(int) customMapper.countByExample(customExample);
         pageHander.setTotal(total);

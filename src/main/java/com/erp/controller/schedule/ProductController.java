@@ -94,10 +94,10 @@ public class ProductController {
 
     @RequestMapping("delete_batch")
     @ResponseBody
-    public Info deleteProduct(String ids){
+    public Info deleteProduct(String[] ids){
         int i =productService.deleteProductById(ids);
         Info info=new Info(200,"ok",null);
-        return i==1?info:null;
+        return i!=0?info:null;
     }
 
     @RequestMapping("search_product_by_productId")
