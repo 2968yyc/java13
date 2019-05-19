@@ -2,9 +2,7 @@ package com.erp.controller;
 
 import com.erp.bean.UploadInfo;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletContext;
@@ -12,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Author: Qiu
@@ -69,6 +69,25 @@ public class MainController {
             return new UploadInfo(1, null,"不支持此类文件上传");
         }
 
+    }
+
+    @RequestMapping("pic/delete")
+    @ResponseBody
+    public Map<String, String> deletePic(String picName,HttpServletRequest request){
+        Map<String ,String > map =new HashMap<>();
+        String path=request.getSession().getServletContext().getRealPath(picName);
+        File file =new File(path);
+        boolean res=file.delete();
+        map.put("data","success");
+        return map;
+    }
+
+
+
+    @RequestMapping("file/upload")
+    public @ResponseBody
+    UploadInfo uploadfile(String dir, @RequestParam(value = "uploadFile", required = false) MultipartFile file, HttpServletRequest request) {
+        return null;
     }
 
 }
