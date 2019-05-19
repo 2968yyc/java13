@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.erp.mapper.employee.EmployeeMapper">
+  <select id="selectEmpNameByID" resultType="string" >
+    select emp_name from employee where emp_id = #{id}
+  </select>
 
   <resultMap id="employeeMapLeft" type="employee">
+    <id column="emp_id" property="empId" />
     <result column="emp_name"  property="empName" />
     <result column="sex"  property="sex" />
     <result column="id_code"  property="idCode" />
@@ -22,12 +26,45 @@
     </association>
   </resultMap>
 
+  <select id="selectByDepartment" resultMap="employeeMapLeft">
+    select d.emp_id,d.emp_name,d.sex,d.id_code,d.birthday,d.join_date,d.status,d.education,
+    d.degree,d.major,d.graduate_school,d.education_form,d.department_id,u.department_Id as UID,u.department_Name,u.note from
+    employee d left join department u
+    on d.department_id = u.department_id
+    where u.department_Name=#{department}
+  </select>
+
+  <select id="queryById" resultMap="employeeMapLeft">
+    select d.emp_id,d.emp_name,d.sex,d.id_code,d.birthday,d.join_date,d.status,d.education,
+    d.degree,d.major,d.graduate_school,d.education_form,d.department_id,u.department_Id as UID,u.department_Name,u.note from
+    employee d left join department u
+    on d.department_id = u.department_id
+    where d.emp_id=#{id}
+  </select>
+
+  <select id="queryByName" resultMap="employeeMapLeft">
+    select d.emp_id,d.emp_name,d.sex,d.id_code,d.birthday,d.join_date,d.status,d.education,
+    d.degree,d.major,d.graduate_school,d.education_form,d.department_id,u.department_Id as UID,u.department_Name,u.note from
+    employee d left join department u
+    on d.department_id = u.department_id
+    where d.emp_name=#{name}
+  </select>
+
   <select id="selectEmployees" resultMap="employeeMapLeft">
-    select d.emp_name,d.sex,d.id_code,d.birthday,d.join_date,d.status,d.education,
+    select d.emp_id,d.emp_name,d.sex,d.id_code,d.birthday,d.join_date,d.status,d.education,
     d.degree,d.major,d.graduate_school,d.education_form,d.department_id,u.department_Id as UID,u.department_Name,u.note from
     employee d left join department u
     on d.department_id = u.department_id
   </select>
+
+  <select id="selectByID" resultMap="employeeMapLeft" >
+    select d.emp_id,d.emp_name,d.sex,d.id_code,d.birthday,d.join_date,d.status,d.education,
+    d.degree,d.major,d.graduate_school,d.education_form,d.department_id,u.department_Id as UID,u.department_Name,u.note from
+    employee d left join department u
+    on d.department_id = u.department_id
+    where d.emp_id = #{id};
+  </select>
+
   <select id="countAll" resultType="int">
     select count(*) from employee
   </select>
