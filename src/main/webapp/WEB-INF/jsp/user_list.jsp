@@ -12,7 +12,7 @@
         	<th data-options="field:'id',align:'center',width:150">用户编号</th>
             <th data-options="field:'username',align:'center',width:150">用户名</th>
             <th data-options="field:'password',align:'center',width:150">密码</th>
-<%--            <th data-options="field:'roleName',align:'center',width:150,formatter:formatRole">角色</th>--%>
+            <th data-options="field:'roleName',align:'center',width:150,formatter:formatRole">角色</th>
             <th data-options="field:'locked',width:150,align:'center',formatter:formatUserStatus">状态</th>
         </tr>
     </thead>
@@ -52,7 +52,7 @@
         <div id="menu_user" style="width:120px"> 
 			<div data-options="name:'userId'">用户编号</div> 
 			<div data-options="name:'userName'">用户名称</div>
-<%--			<div data-options="name:'roleName'">角色名称</div> --%>
+			<div data-options="name:'roleName'">角色名称</div>
 		</div>     
     </div>  
 
@@ -80,7 +80,7 @@ function doSearch_user(value,name){ //用户输入用户名,点击搜素,触发�
 				{field : 'id', width : 150, align:'center', title : '用户编号'},
 				{field : 'username', width : 150, align : 'center', title : '用户名'},
 				{field : 'password', width : 150, align : 'center', title : '密码'},
-				// {field : 'roleName', width : 150, title : '角色', align:'center',formatter:formatRole},
+				{field : 'roleName', width : 150, title : '角色', align:'center',formatter:formatRole},
 				{field : 'locked', width : 150, title : '状态', align:'center', formatter:formatUserStatus}
 	        ] ],  
 	    });
@@ -94,7 +94,7 @@ function doSearch_user(value,name){ //用户输入用户名,点击搜素,触发�
 				{field : 'id', width : 150, align:'center', title : '用户编号'},
 				{field : 'username', width : 150, align : 'center', title : '用户名'},
 				{field : 'password', width : 150, align : 'center', title : '密码'},
-				// {field : 'roleName', width : 150, title : '角色', align:'center',formatter:formatRole},
+				{field : 'roleName', width : 150, title : '角色', align:'center',formatter:formatRole},
 				{field : 'locked', width : 150, title : '状态', align:'center', formatter:formatUserStatus}
 	        ] ],  
 	    });
@@ -118,24 +118,24 @@ function formatUserStatus(value){
 		
 	}
 	
-	// //格式化角色信息
-	// function formatRole(value, row, index){
-	// 	return "<a href=javascript:openRole("+index+")>"+row.roleName+"</a>";
-	// };
+	//格式化角色信息
+	function formatRole(value, row, index){
+		return "<a href=javascript:openRole("+index+")>"+row.roleName+"</a>";
+	};
 	
 	//打开角色信息
-	// function  openRole(index){
-	// 	var row = onUserClickRow(index);
-	// 	$.get("role/get/"+row.roleId,'',function(data){
-	// 		$("#userRoleWindow").window({
-	//     		onLoad :function(){
-	//     			//回显数据
-	//     			$("#userRoleEditForm").form("load", data);
-	//     			userPermissionInit();
-	//     		}
-	//     	}).window("open");
-    // 	});
-	// };
+	function  openRole(index){
+		var row = onUserClickRow(index);
+		$.get("role/get/"+row.roleId,'',function(data){
+			$("#userRoleWindow").window({
+	    		onLoad :function(){
+	    			//回显数据
+	    			$("#userRoleEditForm").form("load", data);
+	    			userPermissionInit();
+	    		}
+	    	}).window("open");
+    	});
+	};
 	
 	function submitUserRoleEditForm(){
 		if(!$('#userRoleEditForm').form('validate')){
