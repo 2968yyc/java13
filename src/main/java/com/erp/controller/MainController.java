@@ -38,6 +38,8 @@ public class MainController {
             pathdir="flash/";
         }else if ("media".equals(dir)){
             pathdir="media/";
+        }else if ("file".equals(dir)){
+            pathdir="file/";
         }else{
             pathdir = "others/";
         }
@@ -59,12 +61,12 @@ public class MainController {
                 return new UploadInfo(0, pathdir + imgname);
             } catch (IOException e) {
                 e.printStackTrace();
-                return new UploadInfo(1, null);
+                return new UploadInfo(1, null,"网络异常，请重新上传");
             }
 
         }else{
             //未知格式
-            return new UploadInfo(1, null);
+            return new UploadInfo(1, null,"不支持此类文件上传");
         }
 
     }
