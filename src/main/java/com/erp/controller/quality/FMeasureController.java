@@ -3,7 +3,7 @@ package com.erp.controller.quality;
 import com.erp.bean.QueryVO;
 import com.erp.bean.device.Info;
 import com.erp.bean.quality.FinalMeasuret;
-import com.erp.service.quality.MeasureService;
+import com.erp.service.quality.FMeasureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 
 @Controller
-public class MeasureController {
+public class FMeasureController {
 
     @Autowired
-    MeasureService measureService;
+    FMeasureService FMeasureService;
 
     /*----------------------------以下是分页查询功能----------------------------*/
 
@@ -30,7 +30,7 @@ public class MeasureController {
     @RequestMapping("measure/list")
     @ResponseBody
     public QueryVO list(int page, int rows){
-        return measureService.selectPageMeasure(page, rows);
+        return FMeasureService.selectPageMeasure(page, rows);
     }
 
     /*----------------------------以下是添加功能----------------------------*/
@@ -48,7 +48,7 @@ public class MeasureController {
 
     @RequestMapping("fMeasureCheck/insert")
     public String insert(FinalMeasuret finalMeasuret){
-        boolean falg = measureService.insert(finalMeasuret);
+        boolean falg = FMeasureService.insert(finalMeasuret);
         return "measurement_add";
     }
 
@@ -68,7 +68,7 @@ public class MeasureController {
     @RequestMapping("fMeasureCheck/update_all")
     @ResponseBody
     public Info update_all(FinalMeasuret finalMeasuret){
-        boolean flag = measureService.updateMeasureByfMeasureCheckId(finalMeasuret);
+        boolean flag = FMeasureService.updateMeasureByfMeasureCheckId(finalMeasuret);
         if (flag){
             return new Info(200,"OK",null);
         }else {
@@ -88,7 +88,7 @@ public class MeasureController {
     @ResponseBody
     //删除功能
     public Info delete_batch(String[] ids){
-        boolean flag = measureService.deleteMeasureByfMeasureCheckIds(ids);
+        boolean flag = FMeasureService.deleteMeasureByfMeasureCheckIds(ids);
         if (flag){
             return new Info(200,"OK",null);
         }else {
@@ -101,12 +101,12 @@ public class MeasureController {
     @RequestMapping("measure/search_fMeasureCheck_by_fMeasureCheckId")
     @ResponseBody
     public QueryVO searchFMeasureCheckByFMeasureCheckId(String searchValue, int page, int rows){
-        return measureService.searchFMeasureCheckByFMeasureCheckId(searchValue, page, rows);
+        return FMeasureService.searchFMeasureCheckByFMeasureCheckId(searchValue, page, rows);
     }
 
     @RequestMapping("measure/search_fMeasureCheck_by_orderId")
     @ResponseBody
     public QueryVO searchfMeasureCheckByOrderId(String searchValue, int page, int rows){
-        return measureService.searchfMeasureCheckByOrderId(searchValue, page, rows);
+        return FMeasureService.searchfMeasureCheckByOrderId(searchValue, page, rows);
     }
 }

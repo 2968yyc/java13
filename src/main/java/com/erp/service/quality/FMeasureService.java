@@ -7,7 +7,7 @@ import com.erp.bean.quality.FinalMeasuret;
  * @Author:ZCH
  * @Date:2019/5/18 10:47
  */
-public interface MeasureService {
+public interface FMeasureService {
     QueryVO selectPageMeasure(int page, int rows);
 
     boolean updateMeasureByfMeasureCheckId(FinalMeasuret finalMeasuret);
