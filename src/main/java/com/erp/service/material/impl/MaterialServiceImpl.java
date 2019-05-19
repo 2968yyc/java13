@@ -96,8 +96,14 @@ public class MaterialServiceImpl implements MaterialService {
 
 
     @Override
-    public boolean delete_batch(String ids) {
-        int isDele = materialMapper.delete_batch(ids);
+    public boolean delete_batch(List<String> ids) {
+        int isDele = 0;
+
+
+        for (int i = 0; i < ids.size(); i++) {
+            isDele = materialMapper.delete_batch(ids.get(i));
+        }
+
         return isDele==1?true:false;
     }
 
