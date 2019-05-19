@@ -36,7 +36,7 @@ public class departmentController {
     @RequestMapping("get/{id}")
     @ResponseBody
     public Department getDepartmentDataById(@PathVariable("id")String id){
-        return departmentService.getDataById(id);
+        return departmentService.queryData(id);
     }
 
     @RequestMapping("list")
@@ -49,6 +49,12 @@ public class departmentController {
     public @ResponseBody
     List<Department> departmentGetData(){
         return departmentService.getDepartmentData();
+    }
+
+    @RequestMapping("get/{id}")
+    @ResponseBody
+    public Department getById(@PathVariable("id")String id){
+        return departmentService.queryData(id);
     }
 
     //增加
@@ -167,7 +173,7 @@ public class departmentController {
     @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.REPEATABLE_READ)
     public Info updateNote(String departmentId,String note){
         Info info = new Info();
-        Department department = departmentService.getDataById(departmentId);
+        Department department = departmentService.queryData(departmentId);
         department.setNote(note);
         boolean b = departmentService.updateDepartment(department);
         if(b){
