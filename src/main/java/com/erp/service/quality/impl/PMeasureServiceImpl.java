@@ -59,7 +59,7 @@ public class PMeasureServiceImpl implements PMeasureService {
 
     @Override
     public QueryVO searchPMeasureByfpMeasureCheckId(String searchValue, int page, int rows) {
-        int total = processMeasureMapper.countAllProcessMeasure();
+        int total = processMeasureMapper.countAllProcessMeasureBySomething(searchValue);
         PageHelper.startPage(page, rows);
         List<ProcessMeasure> measurets = processMeasureMapper.selectPMeasureCheckLeft(searchValue);
         return new QueryVO(total, measurets);

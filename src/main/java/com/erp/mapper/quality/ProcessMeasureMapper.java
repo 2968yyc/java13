@@ -31,4 +31,6 @@ public interface ProcessMeasureMapper {
     int countAllProcessMeasure();
 
     List<ProcessMeasure> selectPMeasureCheckLeft(@Param("pMeasureCheckId") String pMeasureCheckId);
+
+    int countAllProcessMeasureBySomething(@Param("pMeasureCheckId") String pMeasureCheckId);
 }

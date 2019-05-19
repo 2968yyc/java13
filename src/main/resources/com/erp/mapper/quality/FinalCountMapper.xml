@@ -355,4 +355,18 @@
           </if>
         </where>
   </select>
+
+  <select id="countAllFinalCountBySomething" resultType="_int">
+    select count(*) FROM final_count_check fc LEFT JOIN
+		employee e on fc.emp_id = e.emp_id
+    <where>
+      <if test="fCountCheckId != null">
+        and fc.f_count_check_id like '%${fCountCheckId}%'
+      </if>
+
+      <if test="orderId != null">
+        and fc.order_id like '%${orderId}%'
+      </if>
+    </where>
+  </select>
 </mapper>

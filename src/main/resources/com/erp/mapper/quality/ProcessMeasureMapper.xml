@@ -283,4 +283,15 @@
             </if>
         </where>
   </select>
+
+  <select id="countAllProcessMeasureBySomething" resultType="_int">
+    select count(*)
+    FROM process_measure_check pm
+    LEFT JOIN employee e on pm.emp_id = e.emp_id
+    <where>
+      <if test="pMeasureCheckId != null">
+        and pm.p_measure_check_id like '%${pMeasureCheckId}%'
+      </if>
+    </where>
+  </select>
 </mapper>

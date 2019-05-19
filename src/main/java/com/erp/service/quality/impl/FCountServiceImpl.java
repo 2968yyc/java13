@@ -59,7 +59,7 @@ public class FCountServiceImpl implements FCountService {
 
     @Override
     public QueryVO searchFCountByfCountCheckId(String searchValue, int page, int rows) {
-        int total = finalCountMapper.countAllFinalCount();
+        int total = finalCountMapper.countAllFinalCountBySomething(searchValue, null);
         PageHelper.startPage(page, rows);
         List<FinalMeasuret> measurets = finalCountMapper.selectFinalCountLeft(searchValue, null);
         return new QueryVO(total, measurets);
@@ -67,7 +67,7 @@ public class FCountServiceImpl implements FCountService {
 
     @Override
     public QueryVO searchFCountByOrderId(String searchValue, int page, int rows) {
-        int total = finalCountMapper.countAllFinalCount();
+        int total = finalCountMapper.countAllFinalCountBySomething(null, searchValue);
         PageHelper.startPage(page, rows);
         List<FinalMeasuret> measurets = finalCountMapper.selectFinalCountLeft(null, searchValue);
         return new QueryVO(total, measurets);

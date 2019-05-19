@@ -57,7 +57,7 @@ public class PCountServiceImpl implements PCountService {
 
     @Override
     public QueryVO searchPCountBypCountCheckId(String searchValue, int page, int rows) {
-        int total = processCountMapper.countAllProcessMeasure();
+        int total = processCountMapper.countAllProcessCountBySomething(searchValue);
         PageHelper.startPage(page, rows);
         List<ProcessCount> processCounts = processCountMapper.selectPCountCheckLeft(searchValue);
         return new QueryVO(total, processCounts);

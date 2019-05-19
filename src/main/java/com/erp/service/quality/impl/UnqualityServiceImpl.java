@@ -51,7 +51,7 @@ public class UnqualityServiceImpl implements UnqualityService {
 
     @Override
     public QueryVO searchUnqualifyByUnqualifyId(String searchValue, int page, int rows){
-        int total = unqualifyMapper.countAllUnqualify();
+        int total = unqualifyMapper.countAllUnqualifyBySomething(searchValue, null);
         PageHelper.startPage(page, rows);
         List<Unqualify> unqualifies = unqualifyMapper.selectAllPageUnqualifyLeftByUnqualifyId(searchValue);
         return new QueryVO(total, unqualifies);
@@ -65,7 +65,7 @@ public class UnqualityServiceImpl implements UnqualityService {
 
     @Override
     public QueryVO searchUnqualifyByProductName(String searchValue, int page, int rows) {
-        int total = unqualifyMapper.countAllUnqualify();
+        int total = unqualifyMapper.countAllUnqualifyBySomething(null, searchValue);
         PageHelper.startPage(page, rows);
         List<Unqualify> unqualifies = unqualifyMapper.selectAllPageUnqualifyLeftByProductName(searchValue);
         return new QueryVO(total, unqualifies);

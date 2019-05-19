@@ -32,4 +32,6 @@ public interface FinalCountMapper {
     int countAllFinalCount();
 
     List<FinalMeasuret> selectFinalCountLeft(@Param("fCountCheckId") String fCountCheckId,@Param("orderId") String orderId);
+
+    int countAllFinalCountBySomething(@Param("fCountCheckId") String fCountCheckId,@Param("orderId") String orderId);
 }

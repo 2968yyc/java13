@@ -51,7 +51,7 @@ public class FMeasureServiceImpl implements FMeasureService {
 
     @Override
     public QueryVO searchFMeasureCheckByFMeasureCheckId(String searchValue, int page, int rows) {
-        int total = finalMeasuretMapper.countAllFinalMeasure();
+        int total = finalMeasuretMapper.countAllFinalMeasureBySomething(searchValue, null);
         PageHelper.startPage(page, rows);
         List<FinalMeasuret> measurets = finalMeasuretMapper.searchFMeasureCheckByFMeasureCheckIdLeft(searchValue);
         return new QueryVO(total, measurets);
@@ -59,7 +59,7 @@ public class FMeasureServiceImpl implements FMeasureService {
 
     @Override
     public QueryVO searchfMeasureCheckByOrderId(String searchValue, int page, int rows) {
-        int total = finalMeasuretMapper.countAllFinalMeasure();
+        int total = finalMeasuretMapper.countAllFinalMeasureBySomething(null, searchValue);
         PageHelper.startPage(page, rows);
         List<FinalMeasuret> measurets = finalMeasuretMapper.searchfMeasureCheckByOrderIdLeft(searchValue);
         return new QueryVO(total, measurets);

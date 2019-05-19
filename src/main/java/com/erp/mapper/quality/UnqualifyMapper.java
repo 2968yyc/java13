@@ -37,4 +37,6 @@ public interface UnqualifyMapper {
     List<Unqualify> selectAllPageUnqualifyLeftByUnqualifyId(@Param("id") String id);
 
     List<Unqualify> selectAllPageUnqualifyLeftByProductName(@Param("productName") String productName);
+
+    int countAllUnqualifyBySomething(@Param("id") String id, @Param("productName") String productName);
 }

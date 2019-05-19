@@ -291,4 +291,18 @@
 			LEFT JOIN employee e on fm.emp_id = e.emp_id
 			where fm.order_id like '%${orderId}%'
   </select>
+
+  <select id="countAllFinalMeasureBySomething" resultType="_int">
+    select count(*) from final_measuret_check fm
+    LEFT JOIN employee e on fm.emp_id = e.emp_id
+    <where>
+      <if test="fMeasureCheckId != null">
+        and fm.f_measure_check_id like '%${fMeasureCheckId}%'
+      </if>
+
+      <if test="orderId != null">
+        and fm.order_id like '%${orderId}%'
+      </if>
+    </where>
+  </select>
 </mapper>

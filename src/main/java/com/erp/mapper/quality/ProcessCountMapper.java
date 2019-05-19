@@ -31,4 +31,6 @@ public interface ProcessCountMapper {
     int countAllProcessMeasure();
 
     List<ProcessCount> selectPCountCheckLeft(@Param("pCountCheckId") String pCountCheckId);
+
+    int countAllProcessCountBySomething(@Param("pCountCheckId") String pCountCheckId);
 }
