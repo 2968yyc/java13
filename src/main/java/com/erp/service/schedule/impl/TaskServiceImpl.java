@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -58,8 +59,10 @@ public class TaskServiceImpl {
         return taskMapper.updateByPrimaryKeySelective(task);
     }
 
-    public int deleteTaskById(String taskId){
-        int result=taskMapper.deleteByPrimaryKey(taskId);
+    public int deleteTaskById(String[] taskId){
+        TaskExample taskExample=new TaskExample();
+        taskExample.or().andTaskIdIn(Arrays.asList(taskId));
+        int result=taskMapper.deleteByExample(taskExample);
         return result;
     }
 
