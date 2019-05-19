@@ -2,8 +2,8 @@ package com.erp.controller.user;
 
 import com.erp.bean.QueryVO;
 import com.erp.bean.device.Info;
+import com.erp.bean.user.ActiveUser;
 import com.erp.bean.user.SysUser;
-import com.erp.mapper.user.SysUserMapper;
 import com.erp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -109,6 +109,7 @@ public class UserController {
             sysPermissionList.add("pMeasureCheck:delete");
 
             session.setAttribute("sysPermissionList",sysPermissionList);
+            session.setAttribute("activeUser",new ActiveUser("aa","超级管理员"));
             return new Info(1,"success",null);
 
         }
