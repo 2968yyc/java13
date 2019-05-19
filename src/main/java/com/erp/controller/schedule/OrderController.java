@@ -94,10 +94,10 @@ public class OrderController {
 
     @RequestMapping("delete_batch")
     @ResponseBody
-    public Info deleteOrder(String ids){
+    public Info deleteOrder(String[] ids){
         int i =orderService.deleteOrderById(ids);
         Info info=new Info(200,"ok",null);
-        return i==1?info:null;
+        return i!=0?info:null;
     }
 
     @RequestMapping("search_order_by_orderId")

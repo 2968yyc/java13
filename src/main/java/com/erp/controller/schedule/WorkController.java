@@ -94,10 +94,10 @@ public class WorkController {
 
     @RequestMapping("delete_batch")
     @ResponseBody
-    public Info deleteWork(String ids){
+    public Info deleteWork(String[] ids){
         int i =workService.deleteWorkById(ids);
         Info info=new Info(200,"ok",null);
-        return i==1?info:null;
+        return i!=0?info:null;
     }
 
     //search_work_by_workId

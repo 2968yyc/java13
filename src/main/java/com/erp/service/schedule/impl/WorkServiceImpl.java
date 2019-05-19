@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -85,8 +86,10 @@ public class WorkServiceImpl {
         return workMapper.updateByPrimaryKeySelective(work);
     }
 
-    public int deleteWorkById(String workId){
-        int result=workMapper.deleteByPrimaryKey(workId);
+    public int deleteWorkById(String[] workId){
+        WorkExample workExample=new WorkExample();
+        workExample.or().andWorkIdIn(Arrays.asList(workId));
+        int result=workMapper.deleteByExample(workExample);
         return result;
     }
 

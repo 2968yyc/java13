@@ -92,10 +92,10 @@ public class CustomController {
 
     @RequestMapping("delete_batch")
     @ResponseBody
-    public Info deleteCustom(String ids){
+    public Info deleteCustom(String[] ids){
         int i =customService.deleteCustomById(ids);
         Info info=new Info(200,"ok",null);
-        return i==1?info:null;
+        return i!=0?info:null;
     }
 
     @RequestMapping("search_custom_by_customName")
