@@ -225,4 +225,9 @@
       end_date = #{endDate,jdbcType=TIMESTAMP}
     where manufacture_sn = #{manufactureSn,jdbcType=VARCHAR}
   </update>
+
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from manufacture limit #{start},#{rows}
+  </select>
 </mapper>

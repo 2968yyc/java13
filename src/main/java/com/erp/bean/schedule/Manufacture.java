@@ -1,5 +1,7 @@
 package com.erp.bean.schedule;
 
+import com.erp.bean.technology.Technology;
+
 import java.util.Date;
 
 public class Manufacture {
@@ -7,7 +9,11 @@ public class Manufacture {
 
     private String orderId;
 
+    private Order cOrder;
+
     private String technologyId;
+
+    private Technology technology;
 
     private Integer launchQuantity;
 
@@ -21,6 +27,22 @@ public class Manufacture {
 
     public void setManufactureSn(String manufactureSn) {
         this.manufactureSn = manufactureSn == null ? null : manufactureSn.trim();
+    }
+
+    public Order getcOrder() {
+        return cOrder;
+    }
+
+    public void setcOrder(Order cOrder) {
+        this.cOrder = cOrder;
+    }
+
+    public Technology getTechnology() {
+        return technology;
+    }
+
+    public void setTechnology(Technology technology) {
+        this.technology = technology;
     }
 
     public String getOrderId() {

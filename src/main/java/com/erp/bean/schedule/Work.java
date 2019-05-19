@@ -1,5 +1,8 @@
 package com.erp.bean.schedule;
 
+import com.erp.bean.device.Device;
+import com.erp.bean.technology.Process;
+
 public class Work {
     private String workId;
 
@@ -7,9 +10,15 @@ public class Work {
 
     private String productId;
 
+    private Product product;
+
     private String processId;
 
+    private Process process;
+
     private String deviceId;
+
+    private Device device;
 
     private Integer rating;
 
@@ -21,6 +30,30 @@ public class Work {
 
     public void setWorkparams(String workparams) {
         this.workparams = workparams;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Process getProcess() {
+        return process;
+    }
+
+    public void setProcess(Process process) {
+        this.process = process;
+    }
+
+    public Device getDevice() {
+        return device;
+    }
+
+    public void setDevice(Device device) {
+        this.device = device;
     }
 
     public String getWorkId() {
