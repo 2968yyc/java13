@@ -40,6 +40,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public QueryVO<Department> queryById(int page,int rows,String id) {
+        PageHelper.startPage(page,rows);
         List<Department> departments = departmentMapper.queryById(id);
         int i = departments.size();
         return new QueryVO<Department>(i,departments);
@@ -53,6 +54,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public QueryVO<Department> queryByName(int page,int rows,String name) {
+        PageHelper.startPage(page,rows);
         List<Department> departments = departmentMapper.queryByName(name);
         int i = departments.size();
         return new QueryVO<Department>(i,departments);

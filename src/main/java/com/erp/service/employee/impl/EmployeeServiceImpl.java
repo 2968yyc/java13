@@ -50,6 +50,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public QueryVO<Employee> queryByID(int page, int rows, String id) {
+        PageHelper.startPage(page,rows);
         List<Employee> employees = employeeMapper.queryById(id);
         int length = employees.size();
         return new QueryVO<>(length,employees);
@@ -57,6 +58,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public QueryVO<Employee> queryByName(int page, int rows, String name) {
+        PageHelper.startPage(page,rows);
         List<Employee> employees = employeeMapper.queryByName(name);
         int length = employees.size();
         return new QueryVO<>(length,employees);
@@ -64,6 +66,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public QueryVO<Employee> queryByDepartment(int page, int rows,String department) {
+        PageHelper.startPage(page,rows);
         List<Employee> employees = employeeMapper.selectByDepartment(department);
         int length = employees.size();
         return new QueryVO<>(length,employees);

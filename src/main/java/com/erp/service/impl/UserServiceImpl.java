@@ -5,6 +5,7 @@ import com.erp.bean.user.SysUser;
 import com.erp.bean.user.SysUserExample;
 import com.erp.mapper.user.SysUserMapper;
 import com.erp.service.UserService;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -67,6 +68,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public QueryVO<SysUser> getUserInPage(int page, int rows) {
+        PageHelper.startPage(page,rows);
         int length = sysUserMapper.countAll();
         List<SysUser> sysUsers = sysUserMapper.selectSysUsers();
         return new QueryVO(length,sysUsers);
