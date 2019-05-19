@@ -28,7 +28,7 @@
     d.degree,d.major,d.graduate_school,d.education_form,d.department_id,u.department_Id as UID,u.department_Name,u.note from
     employee d left join department u
     on d.department_id = u.department_id
-    where u.department_Name=#{department}
+    where u.department_Name like #{department}
   </select>
 
   <select id="queryById" resultMap="employeeMapLeft">
@@ -44,7 +44,7 @@
     d.degree,d.major,d.graduate_school,d.education_form,d.department_id,u.department_Id as UID,u.department_Name,u.note from
     employee d left join department u
     on d.department_id = u.department_id
-    where d.emp_name=#{name}
+    where d.emp_name like #{name}
   </select>
 
   <select id="selectEmployees" resultMap="employeeMapLeft">

@@ -157,7 +157,7 @@ public class EmployeeController {
     @ResponseBody
     @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.REPEATABLE_READ)
     public QueryVO<Employee> searchByName(String searchValue, int page, int rows){
-        QueryVO<Employee> employeeQueryVO = employeeService.queryByName(page,rows,searchValue);
+        QueryVO<Employee> employeeQueryVO = employeeService.queryByName(page,rows,"%"+searchValue+"%");
         return employeeQueryVO;
     }
 
@@ -165,7 +165,7 @@ public class EmployeeController {
     @ResponseBody
     @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.REPEATABLE_READ)
     public QueryVO<Employee> searchById(String searchValue, int page, int rows){
-        QueryVO<Employee> employeeQueryVO = employeeService.queryByID(page,rows,searchValue);
+        QueryVO<Employee> employeeQueryVO = employeeService.queryByID(page,rows,"%"+searchValue+"%");
         return employeeQueryVO;
     }
 }

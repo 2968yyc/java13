@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -29,6 +30,13 @@ public class departmentController {
     @RequestMapping("find")
     public String findDepartment(){
         return "department_list";
+    }
+
+
+    @RequestMapping("get/{id}")
+    @ResponseBody
+    public Department getDepartmentDataById(@PathVariable("id")String id){
+        return departmentService.getDataById(id);
     }
 
     @RequestMapping("list")
@@ -150,8 +158,25 @@ public class departmentController {
     @ResponseBody
     @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.REPEATABLE_READ)
     public QueryVO<Department> searchByName(String searchValue, int page, int rows){
-        QueryVO<Department> departmentQueryVO = departmentService.queryByName(page, rows, searchValue);
+        QueryVO<Department> departmentQueryVO = departmentService.queryByName(page, rows, "%"+searchValue+"%");
         return departmentQueryVO;
     }
 
+    @RequestMapping("update_note")
+    @ResponseBody
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.REPEATABLE_READ)
+    public Info updateNote(String departmentId,String note){
+        Info info = new Info();
+        Department department = departmentService.getDataById(departmentId);
+        department.setNote(note);
+        boolean b = departmentService.updateDepartment(department);
+        if(b){
+            info.setStatus(200);
+            info.setMsg("更新成功");
+        }else {
+            info.setStatus(0);
+            info.setMsg("更新失败");
+        }
+        return info;
+    }
 }

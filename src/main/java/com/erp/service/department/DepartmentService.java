@@ -19,4 +19,5 @@ public interface DepartmentService {
     boolean selectByName(String name);
     QueryVO<Department> queryById(int page,int rows,String id);
     QueryVO<Department> queryByName(int page,int rows,String name);
+    Department getDataById(String id);
 }

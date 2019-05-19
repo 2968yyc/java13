@@ -46,6 +46,12 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
+    public Department getDataById(String id) {
+        List<Department> departments = departmentMapper.queryById(id);
+        return departments.get(0);
+    }
+
+    @Override
     public QueryVO<Department> queryByName(int page,int rows,String name) {
         List<Department> departments = departmentMapper.queryByName(name);
         int i = departmentMapper.countAll();
