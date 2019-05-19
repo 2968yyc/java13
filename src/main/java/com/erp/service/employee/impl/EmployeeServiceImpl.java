@@ -5,6 +5,7 @@ import com.erp.bean.employee.Employee;
 import com.erp.bean.employee.EmployeeExample;
 import com.erp.mapper.employee.EmployeeMapper;
 import com.erp.service.employee.EmployeeService;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,9 +31,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public QueryVO getEmployeeInPage(int page, int rows) {
         int length = employeeMapper.countAll();
-//        PageHelper.startPage(page, rows);
-//        EmployeeExample employeeExample = new EmployeeExample();
-//        employeeExample.or();
+        PageHelper.startPage(page, rows);
         List<Employee> employees = employeeMapper.selectEmployees();
         System.out.println(employees);
         return new QueryVO(length,employees);
