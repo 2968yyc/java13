@@ -45,8 +45,8 @@ public class MainController {
         }
         String fileName = file.getOriginalFilename();
         String contentType = file.getContentType();
-        if (contentType.contains("jpeg") || contentType.contains("jpg")
-                || contentType.contains("png") || contentType.contains("gif") || contentType.contains("video") ||contentType.contains("application/octet-stream")) {
+        if (contentType.contains("text") || contentType.contains("msword")|| contentType.contains("pdf")
+                || contentType.contains("audio") || contentType.contains("image") || contentType.contains("video") ||contentType.contains("application/octet-stream")) {
             String path = request.getSession().getServletContext().getRealPath("/WEB-INF/"+pathdir);
             String suffix = fileName.substring(fileName.lastIndexOf("."));
             String prefix = fileName.substring(0, fileName.lastIndexOf("."));
