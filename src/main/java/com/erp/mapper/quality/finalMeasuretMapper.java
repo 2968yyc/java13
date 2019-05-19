@@ -28,6 +28,8 @@ public interface FinalMeasuretMapper {
 
     int updateByPrimaryKey(FinalMeasuret record);
 
+    /*添加的方法*/
+
     int countAllFinalMeasure();
 
     List<FinalMeasuret> selectAllFMeasureCheckLeft();
