@@ -29,7 +29,7 @@ public class PMeasureServiceImpl implements PMeasureService {
     public QueryVO selectPageProcessMeasure(int page, int rows) {
         int total = processMeasureMapper.countAllProcessMeasure();
         PageHelper.startPage(page, rows);
-        List<FinalMeasuret> measurets = processMeasureMapper.selectPMeasureCheckLeft(null);
+        List<ProcessMeasure> measurets = processMeasureMapper.selectPMeasureCheckLeft(null);
         return new QueryVO(total, measurets);
     }
 
@@ -61,7 +61,7 @@ public class PMeasureServiceImpl implements PMeasureService {
     public QueryVO searchPMeasureByfpMeasureCheckId(String searchValue, int page, int rows) {
         int total = processMeasureMapper.countAllProcessMeasure();
         PageHelper.startPage(page, rows);
-        List<FinalMeasuret> measurets = processMeasureMapper.selectPMeasureCheckLeft(searchValue);
+        List<ProcessMeasure> measurets = processMeasureMapper.selectPMeasureCheckLeft(searchValue);
         return new QueryVO(total, measurets);
     }
 }

@@ -1,6 +1,5 @@
 package com.erp.mapper.quality;
 
-import com.erp.bean.quality.FinalMeasuret;
 import com.erp.bean.quality.ProcessMeasure;
 import com.erp.bean.quality.ProcessMeasureExample;
 import java.util.List;
@@ -31,5 +30,5 @@ public interface ProcessMeasureMapper {
 
     int countAllProcessMeasure();
 
-    List<FinalMeasuret> selectPMeasureCheckLeft(@Param("pMeasureCheckId") String pMeasureCheckId);
+    List<ProcessMeasure> selectPMeasureCheckLeft(@Param("pMeasureCheckId") String pMeasureCheckId);
 }
