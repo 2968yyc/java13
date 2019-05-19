@@ -1,6 +1,7 @@
 package com.erp.bean.technology;
 
 import java.util.Date;
+import java.util.List;
 
 public class Technology_plan {
     private String technologyPlanId;
@@ -18,6 +19,16 @@ public class Technology_plan {
     private Date technologyPlanStart;
 
     private Date technologyPlanEnd;
+
+    private String technologyName;
+
+    public String getTechnologyName() {
+        return technologyName;
+    }
+
+    public void setTechnologyName(String technologyName) {
+        this.technologyName = technologyName;
+    }
 
     public String getTechnologyPlanId() {
         return technologyPlanId;

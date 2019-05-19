@@ -78,6 +78,19 @@ public class UserController {
             sysPermissionList.add("user:edit");
             sysPermissionList.add("user:delete");
 
+            sysPermissionList.add("technologyPlan:delete");
+            sysPermissionList.add("technologyPlan:edit");
+            sysPermissionList.add("technologyPlan:add");
+
+            sysPermissionList.add("technologyRequirement:add");
+            sysPermissionList.add("technologyRequirement:edit");
+            sysPermissionList.add("technologyRequirement:delete");
+
+            //工序
+            sysPermissionList.add("process:add");
+            sysPermissionList.add("process:edit");
+            sysPermissionList.add("process:delete");
+
 
             //schedule
             sysPermissionList.add("custom:add");
