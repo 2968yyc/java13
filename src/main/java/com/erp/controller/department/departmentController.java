@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -41,6 +42,12 @@ public class departmentController {
     public @ResponseBody
     List<Department> departmentGetData(){
         return departmentService.getDepartmentData();
+    }
+
+    @RequestMapping("get/{id}")
+    @ResponseBody
+    public Department getById(@PathVariable("id")String id){
+        return departmentService.queryData(id);
     }
 
     //增加
