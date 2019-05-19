@@ -21,6 +21,50 @@ public class DepartmentServiceImpl implements DepartmentService {
     DepartmentMapper departmentMapper;
 
     @Override
+    public boolean selectByName(String name) {
+        List<Department> departments = departmentMapper.queryByName(name);
+        return departments.size()!=0;
+    }
+
+    @Override
+    public boolean selectById(String id) {
+        List<Department> departments = departmentMapper.queryById(id);
+        return departments.size()!=0;
+    }
+
+    @Override
+    public boolean insertDepartment(Department department) {
+        int insert = departmentMapper.insert(department);
+        return insert!=0;
+    }
+
+    @Override
+    public QueryVO<Department> queryById(int page,int rows,String id) {
+        List<Department> departments = departmentMapper.queryById(id);
+        int i = departmentMapper.countAll();
+        return new QueryVO<Department>(i,departments);
+    }
+
+    @Override
+    public QueryVO<Department> queryByName(int page,int rows,String name) {
+        List<Department> departments = departmentMapper.queryByName(name);
+        int i = departmentMapper.countAll();
+        return new QueryVO<Department>(i,departments);
+    }
+
+    @Override
+    public boolean deleteDepartment(String id) {
+        int i = departmentMapper.deleteByPrimaryKey(id);
+        return i!=0;
+    }
+
+    @Override
+    public boolean updateDepartment(Department department) {
+        int i = departmentMapper.updateByPrimaryKey(department);
+        return i!=0;
+    }
+
+    @Override
     public List<Department> getDepartmentData() {
         DepartmentExample departmentExample = new DepartmentExample();
         departmentExample.or();

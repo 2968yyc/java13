@@ -7,6 +7,13 @@
   <select id="countAll" resultType="int">
     select count(*) from sys_user;
   </select>
+  <select id="queryById" resultMap="BaseResultMap">
+    select * from sys_user where id=#{id};
+  </select>
+  <select id="queryByName" resultMap="BaseResultMap">
+    select * from sys_user where username=#{name};
+  </select>
+
   <resultMap id="BaseResultMap" type="com.erp.bean.user.SysUser">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="username" jdbcType="VARCHAR" property="username" />

@@ -39,9 +39,48 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    public boolean deleteEmployee(String id) {
+        int i = employeeMapper.deleteByPrimaryKey(id);
+        return i!=0;
+    }
+
+    @Override
+    public boolean updateEmployee(Employee employee) {
+        int i = employeeMapper.updateByPrimaryKey(employee);
+        return i==1;
+    }
+
+    @Override
+    public QueryVO<Employee> queryByID(int page, int rows, String id) {
+        List<Employee> employees = employeeMapper.queryById(id);
+        int length = employeeMapper.countAll();
+        return new QueryVO<>(length,employees);
+    }
+
+    @Override
+    public QueryVO<Employee> queryByName(int page, int rows, String name) {
+        List<Employee> employees = employeeMapper.queryByName(name);
+        int length = employeeMapper.countAll();
+        return new QueryVO<>(length,employees);
+    }
+
+    @Override
+    public QueryVO<Employee> queryByDepartment(int page, int rows,String department) {
+        List<Employee> employees = employeeMapper.selectByDepartment(department);
+        int length = employeeMapper.countAll();
+        return new QueryVO<>(length,employees);
+    }
+
+    @Override
     public Employee getDataById(String id) {
         Employee employee = employeeMapper.selectByID(id);
         return employee;
+    }
+
+    @Override
+    public boolean insertEmployee(Employee employee) {
+        int insert = employeeMapper.insert(employee);
+        return insert!=0;
     }
 
 

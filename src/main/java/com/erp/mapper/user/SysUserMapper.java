@@ -32,4 +32,9 @@ public interface SysUserMapper {
     List<SysUser> selectSysUsers();
 
     int countAll();
+
+    List<SysUser> queryById(@Param("id") String id);
+
+    List<SysUser> queryByName(@Param("name") String name);
+
 }
