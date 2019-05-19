@@ -83,4 +83,13 @@ public class ProcessServiceImpl implements ProcessService {
         List<Process> processes = processMapper.selectByExample(processExample);
         return processes;
     }
+
+    @Override
+    public List<Process> queryAllProcess() {
+        ProcessExample processExample = new ProcessExample();
+        ProcessExample.Criteria criteria = processExample.createCriteria();
+        criteria.getAllCriteria();
+        List<Process> processes = processMapper.selectByExample(processExample);
+        return processes;
+    }
 }

@@ -24,6 +24,14 @@ public class ProcessController {
     @Autowired
     ProcessService processService;
 
+    @RequestMapping("/get_data")
+    @ResponseBody
+    public List<Process> getProcess(){
+        List<Process> processList = processService.queryAllProcess();
+        return processList;
+    }
+
+
     @RequestMapping("/get/{id}")
     @ResponseBody
     public Process queryProcess(@PathVariable("id")String id){
