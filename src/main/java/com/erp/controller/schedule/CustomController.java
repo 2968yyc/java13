@@ -6,8 +6,11 @@ import com.erp.bean.schedule.PageHander;
 import com.erp.service.schedule.impl.CustomServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 /**
  * @Author: xf
@@ -19,6 +22,18 @@ public class CustomController {
 
     @Autowired
     CustomServiceImpl customService;
+
+    @RequestMapping("get_data")
+    @ResponseBody
+    public List<Custom> getData(){
+        return customService.findAllOrder();
+    }
+
+    @RequestMapping("get/{id}")
+    @ResponseBody
+    public Custom queryCustom(@PathVariable("id") String id){
+        return  customService.queryCustom(id);
+    }
 
     @RequestMapping("find")
     public String findCustom(){
@@ -77,10 +92,23 @@ public class CustomController {
 
     @RequestMapping("delete_batch")
     @ResponseBody
-    public Info deleteCustom(String ids){
+    public Info deleteCustom(String[] ids){
         int i =customService.deleteCustomById(ids);
         Info info=new Info(200,"ok",null);
-        return i==1?info:null;
+        return i!=0?info:null;
+    }
+
+    @RequestMapping("search_custom_by_customName")
+    @ResponseBody
+    public PageHander searchCustomByName(String searchValue,int page,int rows){
+
+        return customService.searchByName(searchValue,page,rows);
+    }
+
+    @RequestMapping("search_custom_by_customId")
+    @ResponseBody
+    public PageHander searchCustomById(String searchValue,int page,int rows){
+        return customService.searchById(searchValue,page,rows);
     }
 
 

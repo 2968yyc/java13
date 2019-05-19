@@ -2,8 +2,8 @@ package com.erp.controller.user;
 
 import com.erp.bean.QueryVO;
 import com.erp.bean.device.Info;
+import com.erp.bean.user.ActiveUser;
 import com.erp.bean.user.SysUser;
-import com.erp.mapper.user.SysUserMapper;
 import com.erp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -78,6 +78,19 @@ public class UserController {
             sysPermissionList.add("user:edit");
             sysPermissionList.add("user:delete");
 
+            sysPermissionList.add("technologyPlan:delete");
+            sysPermissionList.add("technologyPlan:edit");
+            sysPermissionList.add("technologyPlan:add");
+
+            sysPermissionList.add("technologyRequirement:add");
+            sysPermissionList.add("technologyRequirement:edit");
+            sysPermissionList.add("technologyRequirement:delete");
+
+            //工序
+            sysPermissionList.add("process:add");
+            sysPermissionList.add("process:edit");
+            sysPermissionList.add("process:delete");
+
 
             //schedule
             sysPermissionList.add("custom:add");
@@ -86,6 +99,19 @@ public class UserController {
             sysPermissionList.add("work:add");
             sysPermissionList.add("work:edit");
             sysPermissionList.add("work:delete");
+            sysPermissionList.add("product:add");
+            sysPermissionList.add("product:edit");
+            sysPermissionList.add("product:delete");
+            sysPermissionList.add("task:add");
+            sysPermissionList.add("task:edit");
+            sysPermissionList.add("task:delete");
+            sysPermissionList.add("manufacture:add");
+            sysPermissionList.add("manufacture:edit");
+            sysPermissionList.add("manufacture:delete");
+            sysPermissionList.add("order:add");
+            sysPermissionList.add("order:edit");
+            sysPermissionList.add("order:delete");
+
 
             sysPermissionList.add("material:add");
             sysPermissionList.add("material:edit");
@@ -125,6 +151,7 @@ public class UserController {
             sysPermissionList.add("pCountCheck:delete");
 
             session.setAttribute("sysPermissionList",sysPermissionList);
+            session.setAttribute("activeUser",new ActiveUser("aa","超级管理员"));
             return new Info(1,"success",null);
 
         }

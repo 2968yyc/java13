@@ -4,10 +4,12 @@ import com.erp.bean.schedule.Custom;
 import com.erp.bean.schedule.CustomExample;
 import com.erp.bean.schedule.PageHander;
 import com.erp.mapper.schedule.CustomMapper;
+import com.github.pagehelper.PageHelper;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -21,6 +23,14 @@ public class CustomServiceImpl {
 
     @Autowired
     SqlSessionFactory sqlSessionFactory;
+
+    public List<Custom> findAllOrder(){
+        return customMapper.selectAll(0,1000);
+    }
+
+    public Custom queryCustom(String id){
+        return customMapper.selectByPrimaryKey(id);
+    }
 
     public PageHander findCustom(int page, int rows){
         /*SqlSession sqlSession=sqlSessionFactory.openSession();
@@ -51,8 +61,37 @@ public class CustomServiceImpl {
         return customMapper.updateByPrimaryKeySelective(custom);
     }
 
-    public int deleteCustomById(String customId){
-        int result=customMapper.deleteByPrimaryKey(customId);
+    public int deleteCustomById(String[] customId){
+        CustomExample customExample=new CustomExample();
+        customExample.or().andCustomIdIn(Arrays.asList(customId));
+        int result=customMapper.deleteByExample(customExample);
         return result;
+    }
+
+    public PageHander searchById(String searchValue,int page,int rows){
+        PageHander pageHander=new PageHander();
+        CustomExample customExample=new CustomExample();
+
+        customExample.createCriteria().andCustomIdLike("%"+searchValue+"%");
+        int total=(int) customMapper.countByExample(customExample);
+        pageHander.setTotal(total);
+
+        PageHelper.startPage(page,rows);
+        List<Custom> list= customMapper.selectByExample(customExample);
+        pageHander.setRows(list);
+        return pageHander;
+    }
+
+    public PageHander searchByName(String searchValue,int page,int rows){
+        PageHander pageHander=new PageHander();
+        CustomExample customExample=new CustomExample();
+        customExample.or().andCustomNameLike("%"+searchValue+"%");
+        int total=(int) customMapper.countByExample(customExample);
+        pageHander.setTotal(total);
+
+        PageHelper.startPage(page,rows);
+        List<Custom> list= customMapper.selectByExample(customExample);
+        pageHander.setRows(list);
+        return pageHander;
     }
 }

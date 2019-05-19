@@ -53,21 +53,21 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public QueryVO<Employee> queryByID(int page, int rows, String id) {
         List<Employee> employees = employeeMapper.queryById(id);
-        int length = employeeMapper.countAll();
+        int length = employees.size();
         return new QueryVO<>(length,employees);
     }
 
     @Override
     public QueryVO<Employee> queryByName(int page, int rows, String name) {
         List<Employee> employees = employeeMapper.queryByName(name);
-        int length = employeeMapper.countAll();
+        int length = employees.size();
         return new QueryVO<>(length,employees);
     }
 
     @Override
     public QueryVO<Employee> queryByDepartment(int page, int rows,String department) {
         List<Employee> employees = employeeMapper.selectByDepartment(department);
-        int length = employeeMapper.countAll();
+        int length = employees.size();
         return new QueryVO<>(length,employees);
     }
 
@@ -82,6 +82,5 @@ public class EmployeeServiceImpl implements EmployeeService {
         int insert = employeeMapper.insert(employee);
         return insert!=0;
     }
-
 
 }

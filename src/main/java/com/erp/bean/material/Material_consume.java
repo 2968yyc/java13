@@ -1,5 +1,7 @@
 package com.erp.bean.material;
 
+import com.erp.bean.schedule.Work;
+
 import java.util.Date;
 
 public class Material_consume {
@@ -23,6 +25,8 @@ public class Material_consume {
     private String note;
 
     private String materialConsumeParams;
+
+    private Work work;
 
     public String getMaterialConsumeParams() {
         return materialConsumeParams;
@@ -104,6 +108,14 @@ public class Material_consume {
         this.note = note == null ? null : note.trim();
     }
 
+    public Work getWork() {
+        return work;
+    }
+
+    public void setWork(Work work) {
+        this.work = work;
+    }
+
     public Material_consume() {
     }
 
@@ -122,7 +134,7 @@ public class Material_consume {
                 '}';
     }
 
-    public Material_consume(String consumeId, String workId, String materialId, Material material, Integer consumeAmount, Date consumeDate, String sender, String receiver, String note) {
+    public Material_consume(String consumeId, String workId, String materialId, Material material, Integer consumeAmount, Date consumeDate, String sender, String receiver, String note, String materialConsumeParams, Work work) {
         this.consumeId = consumeId;
         this.workId = workId;
         this.materialId = materialId;
@@ -132,5 +144,7 @@ public class Material_consume {
         this.sender = sender;
         this.receiver = receiver;
         this.note = note;
+        this.materialConsumeParams = materialConsumeParams;
+        this.work = work;
     }
 }

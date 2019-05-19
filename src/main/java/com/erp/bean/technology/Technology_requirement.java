@@ -13,6 +13,16 @@ public class Technology_requirement {
 
     private Date reviseTime;
 
+    private String technologyName;
+
+    public String getTechnologyName() {
+        return technologyName;
+    }
+
+    public void setTechnologyName(String technologyName) {
+        this.technologyName = technologyName;
+    }
+
     public String getTechnologyRequirementId() {
         return technologyRequirementId;
     }

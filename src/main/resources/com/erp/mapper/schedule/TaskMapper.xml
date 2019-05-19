@@ -208,4 +208,9 @@
       working_hours = #{workingHours,jdbcType=DECIMAL}
     where task_id = #{taskId,jdbcType=VARCHAR}
   </update>
+
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from task limit #{start},#{rows}
+  </select>
 </mapper>

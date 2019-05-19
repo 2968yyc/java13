@@ -32,6 +32,8 @@ public interface FinalMeasuretMapper {
 
     int countAllFinalMeasure();
 
+    int countAllFinalMeasureBySomething(@Param("fMeasureCheckId") String searchValue1,@Param("orderId") String searchValue2);
+
     List<FinalMeasuret> selectAllFMeasureCheckLeft();
 
     List<FinalMeasuret> searchFMeasureCheckByFMeasureCheckIdLeft(@Param("fMeasureCheckId") String searchValue);
