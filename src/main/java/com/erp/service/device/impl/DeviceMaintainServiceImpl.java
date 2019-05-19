@@ -4,6 +4,7 @@ import com.erp.bean.QueryVO;
 import com.erp.bean.device.Device_maintain;
 import com.erp.bean.device.Device_maintainExample;
 import com.erp.mapper.device.Device_maintainMapper;
+import com.erp.mapper.employee.EmployeeMapper;
 import com.erp.service.device.DeviceMaintainService;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ import java.util.List;
 public class DeviceMaintainServiceImpl implements DeviceMaintainService {
     @Autowired
     private Device_maintainMapper device_maintainMapper;
+    @Autowired
+    private EmployeeMapper employeeMapper;
 
     @Override
     public QueryVO getDeviceMaintainInPage(int page, int rows) {
@@ -28,7 +31,18 @@ public class DeviceMaintainServiceImpl implements DeviceMaintainService {
         long l = device_maintainMapper.countByExample(device_maintainExample);
         PageHelper.startPage(page, rows);
         List<Device_maintain> devicemaintains = device_maintainMapper.selectByExample(device_maintainExample);
+        //todo 添加emp信息
+        devicemaintains = fillEmpName(devicemaintains);
         return new QueryVO( (int)l,devicemaintains);
+    }
+
+    private List<Device_maintain> fillEmpName(List<Device_maintain> devicemaintains) {
+        for (Device_maintain devicemaintain : devicemaintains) {
+            String EmpId = devicemaintain.getDeviceMaintainEmpId();
+            String EmpName = employeeMapper.selectEmpNameByID(EmpId);
+            devicemaintain.setDeviceMaintainEmp(EmpName);
+        }
+        return devicemaintains;
     }
 
     @Override
@@ -60,7 +74,7 @@ public class DeviceMaintainServiceImpl implements DeviceMaintainService {
         long l = device_maintainMapper.countByExample(device_maintainExample);
         PageHelper.startPage(page, rows);
         List<Device_maintain> devices = device_maintainMapper.selectByExample(device_maintainExample);
-
+        devices=fillEmpName(devices);
         return new QueryVO( (int)l,devices);
     }
 
@@ -71,7 +85,7 @@ public class DeviceMaintainServiceImpl implements DeviceMaintainService {
         long l = device_maintainMapper.countByExample(device_maintainExample);
         PageHelper.startPage(page, rows);
         List<Device_maintain> devices = device_maintainMapper.selectByExample(device_maintainExample);
-
+        devices = fillEmpName(devices);
         return new QueryVO( (int)l,devices);
     }
 
