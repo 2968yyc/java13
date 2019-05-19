@@ -5,6 +5,7 @@ import com.erp.bean.material.Material;
 import com.erp.bean.material.Material_consume;
 import com.erp.mapper.material.MaterialMapper;
 import com.erp.mapper.material.Material_consumeMapper;
+import com.erp.mapper.schedule.WorkMapper;
 import com.erp.service.material.MaterialConsumeService;
 
 import com.github.pagehelper.PageHelper;
@@ -27,6 +28,9 @@ public class MaterialConsumeServiceImpl implements MaterialConsumeService {
     @Autowired
     MaterialMapper materialMapper;
 
+    @Autowired
+    WorkMapper workMapper;
+
     @Override
     public QueryVO<Material_consume> getMaterialConsumeList(Integer page, Integer rows) {
 
@@ -41,15 +45,15 @@ public class MaterialConsumeServiceImpl implements MaterialConsumeService {
 
         List<Material_consume> material = getMaterial(list);
 
+
         return new QueryVO<>(list1.size(),material);
     }
 
+
     private List<Material_consume> getMaterial(List<Material_consume> list) {
         for (int i = 0; i < list.size(); i++) {
-            Material_consume material_consume = list.get(i);
-            String materialId = material_consume.getMaterialId();
-            Material material = materialMapper.queryMaterialById(materialId);
-            material_consume.setMaterial(material);
+            list.get(i).setMaterial(materialMapper.queryMaterialById(list.get(i).getMaterialId()));
+            list.get(i).setWork(workMapper.selectByPrimaryKey(list.get(i).getWorkId()));
 
         }
 
