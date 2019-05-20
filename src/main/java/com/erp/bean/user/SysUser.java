@@ -9,6 +9,17 @@ public class SysUser {
 
     private String locked;
 
+    private String roleId;
+    private String roleName;
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
     public String getId() {
         return id;
     }
@@ -39,5 +50,13 @@ public class SysUser {
 
     public void setLocked(String locked) {
         this.locked = locked == null ? null : locked.trim();
+    }
+
+    public String getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(String roleId) {
+        this.roleId = roleId == null ? null : roleId.trim();
     }
 }

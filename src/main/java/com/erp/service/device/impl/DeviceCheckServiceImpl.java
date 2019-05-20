@@ -43,6 +43,9 @@ public class DeviceCheckServiceImpl implements DeviceCheckService {
 
     @Override
     public int addNew(Device_check device_check) {
+        Device_check device_check1 = device_checkMapper.selectByPrimaryKey(device_check.getDeviceCheckId());
+        if (device_check1!=null)
+            return 2;
         int insert = device_checkMapper.insert(device_check);
         return insert;
     }

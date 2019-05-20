@@ -1,5 +1,6 @@
 package com.erp.mapper.user;
 
+
 import com.erp.bean.user.SysUser;
 import com.erp.bean.user.SysUserExample;
 import org.apache.ibatis.annotations.Param;
@@ -28,13 +29,4 @@ public interface SysUserMapper {
     int updateByPrimaryKeySelective(SysUser record);
 
     int updateByPrimaryKey(SysUser record);
-
-    List<SysUser> selectSysUsers();
-
-    int countAll();
-
-    List<SysUser> queryById(@Param("id") String id);
-
-    List<SysUser> queryByName(@Param("name") String name);
-
 }

@@ -44,6 +44,10 @@ public class DeviceServiceImpl implements DeviceService {
 
     @Override
     public int addNew(Device device) {
+        Device device1 = deviceMapper.selectByPrimaryKey(device.getDeviceId());
+        if (device1!=null){
+            return 2;
+        }
         int insert = deviceMapper.insert(device);
         return insert;
     }

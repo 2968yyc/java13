@@ -34,6 +34,9 @@ public class DeviceTypeServiceImpl implements DeviceTypeService {
 
     @Override
     public int addNew(Device_type device_type) {
+        Device_type device_type1 = device_typeMapper.selectByPrimaryKey(device_type.getDeviceTypeId());
+        if (device_type1!=null)
+            return 0;
         int insert = device_typeMapper.insert(device_type);
         return insert;
     }
