@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: xf
@@ -62,9 +64,10 @@ public class OrderController {
     @RequestMapping("insert")
     @ResponseBody
     public Info insertOrder(Order order){
+
         int i =orderService.insertOrder(order);
         Info info=new Info(200,"ok",null);
-        return i!=0?info:null;
+        return i!=0?info:new Info(200,"ok",null);
     }
 
 
