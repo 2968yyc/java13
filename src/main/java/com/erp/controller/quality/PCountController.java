@@ -1,13 +1,18 @@
 package com.erp.controller.quality;
 
+import com.erp.annotation.UpdateMethod;
 import com.erp.bean.QueryVO;
 import com.erp.bean.device.Info;
 import com.erp.bean.quality.ProcessCount;
 import com.erp.service.quality.PCountService;
+import com.erp.utils.PermissionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 /**
  * @Author:ZCH
@@ -37,8 +42,8 @@ public class PCountController {
 
     @RequestMapping("pCountCheck/add_judge")
     @ResponseBody
-    public String add_judge(){
-        return "";
+    public Map<String, String> add_judge(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("pCountCheck:add",request);
     }
 
     @RequestMapping("p_count_check/add")
@@ -62,8 +67,8 @@ public class PCountController {
 
     @RequestMapping("pCountCheck/edit_judge")
     @ResponseBody
-    public String edit_judge(){
-        return "";
+    public Map<String, String> edit_judge(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("pCountCheck:edit", request);
     }
 
     @RequestMapping("p_count_check/edit")
@@ -71,6 +76,7 @@ public class PCountController {
         return "p_count_check_edit";
     }
 
+    @UpdateMethod("pCountCheck")
     @RequestMapping("p_count_check/update_all")
     @ResponseBody
     public Info update_all(ProcessCount processCount){
@@ -82,8 +88,8 @@ public class PCountController {
 
     @RequestMapping("pCountCheck/delete_judge")
     @ResponseBody
-    public String delete_judge(){
-        return "";
+    public Map<String, String> delete_judge(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("pCountCheck:delete", request);
     }
 
     @RequestMapping("p_count_check/delete_batch")

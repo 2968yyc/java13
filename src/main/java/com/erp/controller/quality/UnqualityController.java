@@ -1,14 +1,19 @@
 package com.erp.controller.quality;
 
+import com.erp.annotation.UpdateMethod;
 import com.erp.bean.QueryVO;
 import com.erp.bean.device.Info;
 import com.erp.bean.quality.Unqualify;
 import com.erp.service.quality.UnqualityService;
+import com.erp.utils.PermissionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 @Controller
 @RequestMapping("unqualify")
@@ -37,8 +42,8 @@ public class UnqualityController {
 
     @RequestMapping("add_judge")
     @ResponseBody
-    public String add_judge(){
-        return "";
+    public Map<String, String> add_judge(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("unqualify:add",request);
     }
 
     @RequestMapping("add")
@@ -63,8 +68,8 @@ public class UnqualityController {
 
     @RequestMapping("delete_judge")
     @ResponseBody
-    public String delete_judge(){
-        return "";
+    public Map<String, String> delete_judge(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("unqualify:delete",request);
     }
 
     @RequestMapping("delete_batch")
@@ -96,8 +101,8 @@ public class UnqualityController {
 
     @RequestMapping("edit_judge")
     @ResponseBody
-    public String edit_judge(){
-        return "";
+    public Map<String, String> edit_judge(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("unqualify:edit",request);
     }
 
     @RequestMapping("edit")
@@ -105,6 +110,7 @@ public class UnqualityController {
         return "unqualify_edit";
     }
 
+    @UpdateMethod("unqualify")
     @RequestMapping("update_all")
     @ResponseBody
     public Info update_all(Unqualify unqualify){

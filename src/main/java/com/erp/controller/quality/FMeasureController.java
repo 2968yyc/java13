@@ -1,13 +1,18 @@
 package com.erp.controller.quality;
 
+import com.erp.annotation.UpdateMethod;
 import com.erp.bean.QueryVO;
 import com.erp.bean.device.Info;
 import com.erp.bean.quality.FinalMeasuret;
 import com.erp.service.quality.FMeasureService;
+import com.erp.utils.PermissionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 /**
  * @Author:ZCH
@@ -37,8 +42,8 @@ public class FMeasureController {
 
     @RequestMapping("fMeasureCheck/add_judge")
     @ResponseBody
-    public String add_judge(){
-        return "";
+    public Map<String, String> add_judge(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("fMeasureCheck:add",request);
     }
 
     @RequestMapping("measure/add")
@@ -62,8 +67,8 @@ public class FMeasureController {
 
     @RequestMapping("fMeasureCheck/edit_judge")
     @ResponseBody
-    public String edit_judge(){
-        return "";
+    public Map<String, String> edit_judge(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("fMeasureCheck:edit",request);
     }
 
     @RequestMapping("measure/edit")
@@ -71,6 +76,7 @@ public class FMeasureController {
         return "measurement_edit";
     }
 
+    @UpdateMethod("fMeasureCheck")
     @RequestMapping("fMeasureCheck/update_all")
     @ResponseBody
     public Info update_all(FinalMeasuret finalMeasuret){
@@ -82,8 +88,8 @@ public class FMeasureController {
 
     @RequestMapping("fMeasureCheck/delete_judge")
     @ResponseBody
-    public String delete_judge(){
-        return "";
+    public Map<String, String> delete_judge(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("fMeasureCheck:delete",request);
     }
 
     @RequestMapping("measure/delete_batch")

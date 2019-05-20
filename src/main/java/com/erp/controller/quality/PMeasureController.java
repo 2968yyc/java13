@@ -1,13 +1,18 @@
 package com.erp.controller.quality;
 
+import com.erp.annotation.UpdateMethod;
 import com.erp.bean.QueryVO;
 import com.erp.bean.device.Info;
 import com.erp.bean.quality.ProcessMeasure;
 import com.erp.service.quality.PMeasureService;
+import com.erp.utils.PermissionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 /**
  * @Author:ZCH
@@ -37,8 +42,8 @@ public class PMeasureController {
 
     @RequestMapping("pMeasureCheck/add_judge")
     @ResponseBody
-    public String add_judge(){
-        return "";
+    public Map<String, String> add_judge(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("pMeasureCheck:add",request);
     }
 
     @RequestMapping("p_measure_check/add")
@@ -62,8 +67,8 @@ public class PMeasureController {
 
     @RequestMapping("pMeasureCheck/edit_judge")
     @ResponseBody
-    public String edit_judge(){
-        return "";
+    public Map<String, String> edit_judge(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("pMeasureCheck:edit",request);
     }
 
     @RequestMapping("p_measure_check/edit")
@@ -71,6 +76,7 @@ public class PMeasureController {
         return "p_measure_check_edit";
     }
 
+    @UpdateMethod("pMeasureCheck")
     @RequestMapping("p_measure_check/update_all")
     @ResponseBody
     public Info update_all(ProcessMeasure processMeasure){
@@ -82,8 +88,8 @@ public class PMeasureController {
 
     @RequestMapping("pMeasureCheck/delete_judge")
     @ResponseBody
-    public String delete_judge(){
-        return "";
+    public Map<String, String> delete_judge(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("pMeasureCheck:delete",request);
     }
 
     @RequestMapping("p_measure_check/delete_batch")
