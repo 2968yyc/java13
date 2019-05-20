@@ -10,6 +10,7 @@ public class SysUser {
     private String locked;
 
     private String roleId;
+
     private String roleName;
 
     public String getRoleName() {

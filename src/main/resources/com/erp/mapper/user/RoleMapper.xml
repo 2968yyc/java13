@@ -181,4 +181,8 @@
       available = #{available,jdbcType=CHAR}
     where role_id = #{roleId,jdbcType=VARCHAR}
   </update>
+
+  <select id="search_user_by_roleName" resultType="com.erp.bean.user.Role">
+    select role_id as roleId,role_name as roleName,available from role wherer role_name like #{searchValue}
+  </select>
 </mapper>

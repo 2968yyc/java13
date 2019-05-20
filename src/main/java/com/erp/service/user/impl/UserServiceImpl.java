@@ -86,26 +86,39 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public QueryVO<SysUser> searchByRoleName(int page, int rows, String searchValue) {
+
+        searchValue = "%"+ searchValue+"%";
+
+
         RoleExample roleExample = new RoleExample();
-        roleExample.or().andRoleNameLike("%"+searchValue+"%");
+        roleExample.or().andRoleNameLike(searchValue);
         List<Role> roles = roleMapper.selectByExample(roleExample);
-        List<String> roleIds = new ArrayList<>();
+        if (roles.size()==0){
+            return new QueryVO<SysUser>(0,new ArrayList<SysUser>());
+        }
+        List<String> list = new ArrayList<>();
         for (Role role : roles) {
-            roleIds.add(role.getRoleId());
+            String roleId = role.getRoleId();
+            list.add(roleId);
         }
 
         SysUserExample sysUserExample = new SysUserExample();
-        sysUserExample.or().andRoleIdIn(roleIds);
+
+        sysUserExample.or().andRoleIdIn(list);
+
         long l = sysUserMapper.countByExample(sysUserExample);
-        PageHelper.startPage(page, rows);
+
+        PageHelper.startPage(page,rows);
         List<SysUser> sysUsers = sysUserMapper.selectByExample(sysUserExample);
-        sysUsers = fillRoleName(sysUsers);
-        return new QueryVO<>((int)l,sysUsers);
+
+
+        return new QueryVO<>((int) l,sysUsers);
     }
 
     @Override
     public SysUser queryUserByName(String username) {
         SysUser user =  sysUserMapper.queryUserByName(username);
+
         return user;
     }
 

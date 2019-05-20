@@ -49,7 +49,7 @@ public class MaterialReceiveController {
     public QueryVO<Material_receive> queryReceiveByReceiveId(String searchValue,@RequestParam(defaultValue = "1",
             value = "page") Integer page, Integer rows){
 
-        PageHelper.startPage(page,rows);
+
         QueryVO<Material_receive> materialReceiveList =  materialReceiveService.queryReceiveByReceiveId(searchValue,page,rows);
 
         return materialReceiveList;
@@ -60,7 +60,7 @@ public class MaterialReceiveController {
     public QueryVO<Material_receive> queryReceiveByMaterialId(String searchValue,@RequestParam(defaultValue = "1",
             value = "page") Integer page, Integer rows){
 
-        PageHelper.startPage(page,rows);
+
         QueryVO<Material_receive> materialReceiveList =  materialReceiveService.queryReceiveByMaterialId(searchValue,page,rows);
 
 

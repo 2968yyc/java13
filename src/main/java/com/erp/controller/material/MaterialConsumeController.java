@@ -48,7 +48,6 @@ public class MaterialConsumeController {
     public QueryVO<Material_consume> queryReceiveByConsumeId(String searchValue,@RequestParam(defaultValue = "1",
             value = "page") Integer page, Integer rows){
 
-        PageHelper.startPage(page,rows);
         QueryVO<Material_consume> materialReceiveList =  materialConsumeService.queryConsumeByConsumeId(searchValue,page,rows);
 
 
@@ -59,7 +58,7 @@ public class MaterialConsumeController {
     public QueryVO<Material_consume> queryReceiveByWorkId(String searchValue,@RequestParam(defaultValue = "1",
             value = "page") Integer page, Integer rows){
 
-        PageHelper.startPage(page,rows);
+
         QueryVO<Material_consume> materialReceiveList =  materialConsumeService.queryConsumeByWorkId(searchValue,page,rows);
 
 
@@ -70,7 +69,7 @@ public class MaterialConsumeController {
     public QueryVO<Material_consume> queryReceiveByMaterialId(String searchValue,@RequestParam(defaultValue = "1",
             value = "page") Integer page, Integer rows){
 
-        PageHelper.startPage(page,rows);
+
         QueryVO<Material_consume> materialReceiveList =  materialConsumeService.queryConsumeByMaterialId(searchValue,page,rows);
 
 

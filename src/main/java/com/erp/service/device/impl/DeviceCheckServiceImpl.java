@@ -82,6 +82,9 @@ public class DeviceCheckServiceImpl implements DeviceCheckService {
         DeviceExample deviceExample = new DeviceExample();
         deviceExample.or().andDeviceNameLike("%"+searchValue+"%");
         List<Device> devices = deviceMapper.selectByExample(deviceExample);
+        if (devices.size()==0){
+            return new QueryVO( 0,new ArrayList<Device_check>());
+        }
         List<String> deviceIds = new ArrayList<>();
         for (Device device : devices) {
             String deviceId = device.getDeviceId();

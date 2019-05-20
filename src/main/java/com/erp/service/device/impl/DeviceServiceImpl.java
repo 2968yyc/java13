@@ -96,6 +96,9 @@ public class DeviceServiceImpl implements DeviceService {
         Device_typeExample device_typeExample = new Device_typeExample();
         device_typeExample.or().andDeviceTypeNameLike("%"+searchValue+"%");
         List<Device_type> deviceTypes = device_typeMapper.selectByExample(device_typeExample);
+        if (deviceTypes.size()==0){
+            return new QueryVO<>(0,new ArrayList<Device>());
+        }
         List<String> ids = new ArrayList<>();
         for (Device_type deviceType : deviceTypes) {
             ids.add(deviceType.getDeviceTypeId());
