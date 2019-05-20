@@ -150,4 +150,13 @@ public class Technology_requirementServiceImpl implements Technology_requirement
         }
         return technology_requirements;
     }
+
+    @Override
+    public int judgeById(Technology_requirement technology_requirement) {
+        Technology_requirement technology_requirement1 = technology_requirementMapper.selectByPrimaryKey(technology_requirement.getTechnologyRequirementId());
+        if(technology_requirement1 == null){
+            return 0;
+        }
+        return 1;
+    }
 }

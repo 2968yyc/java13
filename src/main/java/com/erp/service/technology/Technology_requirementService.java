@@ -22,4 +22,6 @@ public interface Technology_requirementService {
     List<Technology_requirement> searchAllByPage(Integer page, Integer rows, String searchValue);
 
     List<Technology_requirement> searchNameAllByPage(Integer page, Integer rows, String searchValue);
+
+    int judgeById(Technology_requirement technology_requirement);
 }

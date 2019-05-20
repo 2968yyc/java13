@@ -84,11 +84,15 @@ public class TechnologyPlanController {
 
     @RequestMapping("/insert")
     public @ResponseBody Info technologyadd(Technology_plan technology_plan){
-        int i = technologyPlanService.addByTechnologyPlan(technology_plan);
-        if (i==1){
-            return new Info(200,"添加成功",null);
-        }else{
-            return new Info(i,"添加失敗",null);
+        int j = technologyPlanService.judgeById(technology_plan);
+        if(j == 0){
+            int i = technologyPlanService.addByTechnologyPlan(technology_plan);
+            if (i==1){
+                return new Info(200,"添加成功",null);
+            }else{
+                return new Info(i,"添加失敗",null);
+            }}else{
+            return new Info(j,"添加失敗,工艺计划编号重复",null);
         }
     }
 

@@ -92,4 +92,13 @@ public class ProcessServiceImpl implements ProcessService {
         List<Process> processes = processMapper.selectByExample(processExample);
         return processes;
     }
+
+    @Override
+    public int judgeById(Process process) {
+        Process process1 = processMapper.selectByPrimaryKey(process.getProcessId());
+        if(process1 == null){
+            return 0;
+        }
+        return 1;
+    }
 }
