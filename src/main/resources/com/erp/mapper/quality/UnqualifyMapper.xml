@@ -294,7 +294,7 @@
 			unqualify_apply un
 			LEFT JOIN employee e on un.emp_id = e.emp_id
 			LEFT JOIN product p on un.product_id = p.product_id
-			where un.unqualify_apply_id like '%${id}%'
+			where un.unqualify_apply_id like #{id}
   </select>
 
   <select id="selectAllPageUnqualifyLeftByProductName" resultMap="BaseResultMapLeft">
@@ -304,7 +304,7 @@
 			unqualify_apply un
 			LEFT JOIN employee e on un.emp_id = e.emp_id
 			LEFT JOIN product p on un.product_id = p.product_id
-			where p.product_name like '%${productName}%'
+			where p.product_name like #{productName}
   </select>
 
   <select id="countAllUnqualifyBySomething" resultType="_int">
@@ -314,11 +314,11 @@
     LEFT JOIN product p on un.product_id = p.product_id
     <where>
       <if test="id != null">
-        and un.unqualify_apply_id like '%${id}%'
+        and un.unqualify_apply_id like #{id}
       </if>
 
       <if test="productName != null">
-        and p.product_name like '%${productName}%'
+        and p.product_name like #{productName}
       </if>
     </where>
 

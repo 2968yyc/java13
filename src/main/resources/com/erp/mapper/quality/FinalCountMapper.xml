@@ -347,11 +347,11 @@
 		employee e on fc.emp_id = e.emp_id
 		<where>
           <if test="fCountCheckId != null">
-            and fc.f_count_check_id like '%${fCountCheckId}%'
+            and fc.f_count_check_id like #{fCountCheckId}
           </if>
 
           <if test="orderId != null">
-            and fc.order_id like '%${orderId}%'
+            and fc.order_id like #{orderId}
           </if>
         </where>
   </select>
@@ -361,11 +361,11 @@
 		employee e on fc.emp_id = e.emp_id
     <where>
       <if test="fCountCheckId != null">
-        and fc.f_count_check_id like '%${fCountCheckId}%'
+        and fc.f_count_check_id like #{fCountCheckId}
       </if>
 
       <if test="orderId != null">
-        and fc.order_id like '%${orderId}%'
+        and fc.order_id like #{orderId}
       </if>
     </where>
   </select>

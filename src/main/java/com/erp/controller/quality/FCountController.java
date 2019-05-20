@@ -105,13 +105,15 @@ public class FCountController {
     @RequestMapping("f_count_check/search_fCountCheck_by_fCountCheckId")
     @ResponseBody
     public QueryVO searchFMeasureCheckByFMeasureCheckId(String searchValue, int page, int rows){
-        return fCountService.searchFCountByfCountCheckId(searchValue, page, rows);
+        String fMeasureCheckId = "%" + searchValue + "%";
+        return fCountService.searchFCountByfCountCheckId(fMeasureCheckId, page, rows);
     }
 
     @RequestMapping("f_count_check/search_fCountCheck_by_orderId")
     @ResponseBody
     public QueryVO searchfMeasureCheckByOrderId(String searchValue, int page, int rows){
-        return fCountService.searchFCountByOrderId(searchValue, page, rows);
+        String orderId = "%" + searchValue + "%";
+        return fCountService.searchFCountByOrderId(orderId, page, rows);
     }
 
     public Info returnInfo(boolean flag, String message){

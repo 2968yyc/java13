@@ -105,7 +105,8 @@ public class PMeasureController {
     @RequestMapping("p_measure_check/search_pMeasureCheck_by_pMeasureCheckId")
     @ResponseBody
     public QueryVO searchFMeasureCheckByFMeasureCheckId(String searchValue, int page, int rows){
-        return pMeasureService.searchPMeasureByfpMeasureCheckId(searchValue, page, rows);
+        String fMeasureCheckId = "%" + searchValue + "%";
+        return pMeasureService.searchPMeasureByfpMeasureCheckId(fMeasureCheckId, page, rows);
     }
 
     public Info returnInfo(boolean flag, String message){

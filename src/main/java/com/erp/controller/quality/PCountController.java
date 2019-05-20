@@ -105,7 +105,8 @@ public class PCountController {
     @RequestMapping("p_count_check/search_pCountCheck_by_pCountCheckId")
     @ResponseBody
     public QueryVO searchPCountBypCountCheckId(String searchValue, int page, int rows){
-        return pCountService.searchPCountBypCountCheckId(searchValue, page, rows);
+        String pCountCheckId = "%" + searchValue + "%";
+        return pCountService.searchPCountBypCountCheckId(pCountCheckId, page, rows);
     }
 
     public Info returnInfo(boolean flag, String message){

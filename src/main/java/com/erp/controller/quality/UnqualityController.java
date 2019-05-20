@@ -86,14 +86,16 @@ public class UnqualityController {
     @ResponseBody
     //根据不合格品申请编号查询的功能
     public QueryVO searchUnqualifyByUnqualifyId(String searchValue, int page, int rows){
-        return unqualityService.searchUnqualifyByUnqualifyId(searchValue, page, rows);
+        String unqualifyId = "%" + searchValue + "%";
+        return unqualityService.searchUnqualifyByUnqualifyId(unqualifyId, page, rows);
     }
 
     @RequestMapping("search_unqualify_by_productName")
     @ResponseBody
     //根据不合格品申请编号查询的功能
     public QueryVO searchUnqualifyByProductName(String searchValue, int page, int rows){
-        return unqualityService.searchUnqualifyByProductName(searchValue, page, rows);
+        String productName = "%" + searchValue + "%";
+        return unqualityService.searchUnqualifyByProductName(productName, page, rows);
     }
 
 
