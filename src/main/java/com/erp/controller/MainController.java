@@ -109,7 +109,7 @@ public class MainController {
     public Map<String, String> deletefile(String fileName,HttpServletRequest request){
         Map<String ,String > map =new HashMap<>();
 
-        String newFilePath=fileName.substring(fileName.lastIndexOf("="));
+        String newFilePath=fileName.substring(fileName.lastIndexOf("=")+1);
         String path=request.getSession().getServletContext().getRealPath(newFilePath);
         File file =new File(path);
         boolean res=file.delete();
