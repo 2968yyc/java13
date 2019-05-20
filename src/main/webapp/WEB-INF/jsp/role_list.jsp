@@ -17,17 +17,24 @@
 </table>
 
 <div  id="toolbar_role" style=" height: 22px; padding: 3px 11px; background: #fafafa;">
-    <div></div> <div style="float: left;">
+    <div></div>
+<c:forEach items="${sessionScope.sysPermissionList}" var="per" >
+    <c:if test="${per=='role:add' }" >
+    <div style="float: left;">
         <a href="#" class="easyui-linkbutton" plain="true" icon="icon-add" onclick="role_add()">新增</a>
     </div>
-
+    </c:if>
+    <c:if test="${per=='role:edit' }" >
     <div style="float: left;">
         <a href="#" class="easyui-linkbutton" plain="true" icon="icon-edit" onclick="role_edit()">编辑</a>
     </div>
-
+    </c:if>
+    <c:if test="${per=='role:delete' }" >
     <div style="float: left;">
         <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="role_delete()">删除</a>
     </div>
+    </c:if>
+</c:forEach>
  <div class="datagrid-btn-separator"></div>
 
     <div style="float: left;">
