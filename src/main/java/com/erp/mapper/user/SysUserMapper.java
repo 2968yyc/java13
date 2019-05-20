@@ -31,4 +31,8 @@ public interface SysUserMapper {
     int updateByPrimaryKey(SysUser record);
 
     SysUser queryUserByName(String username);
+
+    int querUserCountByRoleName(String searchValue);
+
+    List<SysUser> querUserByRoleName(String searchValue);
 }

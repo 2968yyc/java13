@@ -30,4 +30,6 @@ public interface RoleMapper {
     int updateByPrimaryKey(Role record);
 
     String getRoleNameByRoleId(String roleid);
+
+    List<Role> queryRoleByName(String searchValue);
 }
