@@ -1,15 +1,19 @@
 package com.erp.controller.schedule;
 
+import com.erp.annotation.UpdateMethod;
 import com.erp.bean.device.Info;
 import com.erp.bean.schedule.PageHander;
 import com.erp.bean.schedule.Order;
+import com.erp.bean.user.Permission;
 import com.erp.service.schedule.impl.OrderServiceImpl;
+import com.erp.utils.PermissionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,8 +56,8 @@ public class OrderController {
 
 
     @RequestMapping("add_judge")
-    public String addOrder1(){
-        return "order_list";
+    public @ResponseBody Map<String,String> addOrder1(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("order:add",request);
     }
 
     @RequestMapping("add")
@@ -72,14 +76,16 @@ public class OrderController {
 
 
     @RequestMapping("edit_judge")
-    public String editOrder1(){
-        return "order_list";
+    public @ResponseBody Map<String,String> editOrder1(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("order:edit",request);
     }
 
     @RequestMapping("edit")
     public String editOrder2(){
         return "order_edit";
     }
+
+    @UpdateMethod("order")
     @RequestMapping("update_all")
     @ResponseBody
     public Info editOrder3(Order order){
@@ -91,8 +97,8 @@ public class OrderController {
 
 
     @RequestMapping("delete_judge")
-    public String delOrder(){
-        return "order_list";
+    public @ResponseBody Map<String,String> delOrder(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("order:delete",request);
     }
 
     @RequestMapping("delete_batch")

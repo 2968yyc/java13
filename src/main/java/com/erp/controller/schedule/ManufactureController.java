@@ -1,16 +1,20 @@
 package com.erp.controller.schedule;
 
+import com.erp.annotation.UpdateMethod;
 import com.erp.bean.device.Info;
 import com.erp.bean.schedule.PageHander;
 import com.erp.bean.schedule.Manufacture;
 import com.erp.service.schedule.impl.ManufactureServiceImpl;
+import com.erp.utils.PermissionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: xf
@@ -50,8 +54,9 @@ public class ManufactureController {
 
 
     @RequestMapping("add_judge")
-    public String addManufacture1(){
-        return "manufacture_list";
+    public @ResponseBody
+    Map<String,String> addManufacture1(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("manufacture:add",request);
     }
 
     @RequestMapping("add")
@@ -69,14 +74,16 @@ public class ManufactureController {
 
 
     @RequestMapping("edit_judge")
-    public String editManufacture1(){
-        return "manufacture_list";
+    public @ResponseBody Map<String,String> editManufacture1(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("manufacture:edit",request);
     }
 
     @RequestMapping("edit")
     public String editManufacture2(){
         return "manufacture_edit";
     }
+
+    @UpdateMethod("manufacture")
     @RequestMapping("update_all")
     @ResponseBody
     public Info editManufacture3(Manufacture manufacture){
@@ -88,8 +95,8 @@ public class ManufactureController {
 
 
     @RequestMapping("delete_judge")
-    public String delManufacture(){
-        return "manufacture_list";
+    public @ResponseBody Map<String,String> delManufacture(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("manufacture:delete",request);
     }
 
     @RequestMapping("delete_batch")

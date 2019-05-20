@@ -1,16 +1,20 @@
 package com.erp.controller.schedule;
 
+import com.erp.annotation.UpdateMethod;
 import com.erp.bean.device.Info;
 import com.erp.bean.schedule.Custom;
 import com.erp.bean.schedule.PageHander;
 import com.erp.service.schedule.impl.CustomServiceImpl;
+import com.erp.utils.PermissionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: xf
@@ -48,8 +52,8 @@ public class CustomController {
 
 
     @RequestMapping("add_judge")
-    public String addCustom1(){
-        return "custom_list";
+    public @ResponseBody Map<String,String> addCustom1(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("custom:add",request);
     }
 
     @RequestMapping("add")
@@ -67,14 +71,16 @@ public class CustomController {
 
 
     @RequestMapping("edit_judge")
-    public String editCustom1(){
-        return "custom_list";
+    public @ResponseBody Map<String,String> editCustom1(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("custom:edit",request);
     }
 
     @RequestMapping("edit")
     public String editCustom2(){
         return "custom_edit";
     }
+
+    @UpdateMethod("custom")
     @RequestMapping("update_all")
     @ResponseBody
     public Info editCustom3(Custom custom){
@@ -86,8 +92,8 @@ public class CustomController {
 
 
     @RequestMapping("delete_judge")
-    public String delCustom(){
-        return "custom_list";
+    public @ResponseBody Map<String,String> delCustom(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("custom:delete",request);
     }
 
     @RequestMapping("delete_batch")

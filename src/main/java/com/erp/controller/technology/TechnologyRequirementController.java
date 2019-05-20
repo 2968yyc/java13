@@ -80,11 +80,15 @@ public class TechnologyRequirementController {
 
     @RequestMapping("/insert")
     public @ResponseBody Info technologyRequirementadd(Technology_requirement technology_requirement){
+        int j = technology_requirementService.judgeById(technology_requirement);
+        if(j == 0){
         int i = technology_requirementService.addByTechnologyRequirement(technology_requirement);
         if (i==1){
             return new Info(200,"添加成功",null);
         }else{
             return new Info(i,"添加失敗",null);
+        }}else{
+            return new Info(j,"添加失敗,工艺要求编号重复",null);
         }
     }
 
