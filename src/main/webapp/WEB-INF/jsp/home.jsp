@@ -181,7 +181,30 @@
 	</div>
 	<div id="MainPage" data-options="region:'center',title:''">
 		<div id="tabs" class="easyui-tabs">
-			<div title="首页" style="padding:20px;"></div>
+			<div title="首页" style="padding:20px;">
+				<object type="application/x-shockwave-flash" style="outline:none;" data="http://cdn.abowman.com/widgets/hamster/hamster.swf?" width="300" height="225">
+					<param name="movie" value="http://cdn.abowman.com/widgets/hamster/hamster.swf?">
+					<param name="AllowScriptAccess" value="always">
+					<param name="wmode" value="opaque">
+				</object>
+				<object type="application/x-shockwave-flash" style="outline:none;" data="http://cdn.abowman.com/widgets/dog/dog.swf?3?" width="300" height="225">
+					<param name="movie" value="http://cdn.abowman.com/widgets/dog/dog.swf?3?"></param><param name="AllowScriptAccess" value="always"></param>
+					<param name="wmode" value="opaque"></param>
+					<param name="bgcolor" value="FFFFFF"/>
+				</object>
+				<object type="application/x-shockwave-flash" style="outline:none;" data="http://cdn.abowman.com/widgets/penguins/penguins.swf?" width="300" height="200">
+					<param name="movie" value="http://cdn.abowman.com/widgets/penguins/penguins.swf?"></param><param name="AllowScriptAccess" value="always"></param>
+					<param name="wmode" value="opaque"></param><param name="scale" value="noscale"/>
+					<param name="salign" value="tl"/>
+				</object>
+
+
+				<object type="application/x-shockwave-flash" style="outline:none; src" data="http://cdn.abowman.com/widgets/fish/fish.swf?"  width="300" height="200" >
+					<param name="movie" value="http://cdn.abowman.com/widgets/fish/fish.swf?"  ></param>
+					<param name="AllowScriptAccess" value="always"></param>
+					<param name="wmode" value="opaque"></param><param name="scale" value="noscale"/><param name="salign" value="tl"/>
+				</object>
+			</div>
 		</div>
 	</div>
 
