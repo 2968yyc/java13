@@ -7,6 +7,7 @@ import com.erp.bean.device.Device_type;
 import com.erp.bean.device.Device_typeExample;
 import com.erp.mapper.device.DeviceMapper;
 import com.erp.mapper.device.Device_typeMapper;
+import com.erp.mapper.employee.EmployeeMapper;
 import com.erp.service.device.DeviceService;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,8 @@ public class DeviceServiceImpl implements DeviceService {
     private DeviceMapper deviceMapper;
     @Autowired
     private Device_typeMapper device_typeMapper;
+    @Autowired
+    private EmployeeMapper employeeMapper;
 
     @Override
     public QueryVO getDeviceInPage(int page, int rows) {
@@ -41,6 +44,10 @@ public class DeviceServiceImpl implements DeviceService {
 
     @Override
     public int addNew(Device device) {
+        Device device1 = deviceMapper.selectByPrimaryKey(device.getDeviceId());
+        if (device1!=null){
+            return 2;
+        }
         int insert = deviceMapper.insert(device);
         return insert;
     }
@@ -124,7 +131,8 @@ public class DeviceServiceImpl implements DeviceService {
         for (Device device : devices) {
             String deviceTypeId = device.getDeviceTypeId();
             Device_type device_type = device_typeMapper.selectByPrimaryKey(deviceTypeId);
-            //Todo 保管人 接口
+            String EmpName = employeeMapper.selectEmpNameByID(device.getDeviceKeeperId());
+            device.setDeviceKeeper(EmpName);
             device.setDeviceTypeName(device_type.getDeviceTypeName());
         }
         return devices;

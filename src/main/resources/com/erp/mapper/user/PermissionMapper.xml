@@ -1,23 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.erp.mapper.department.DepartmentMapper">
-
-  <select id="countAll" resultType="int">
-    select count(*) FROM department
+<mapper namespace="com.erp.mapper.user.PermissionMapper">
+  <select id="getPermissionIdByRoleId" resultType="string" >
+    select sys_permission_id from permission where sys_role_id = #{id}
   </select>
-
-  <select id="queryById" resultMap="BaseResultMap">
-    select * from department where department_id=#{id}
-  </select>
-
-  <select id="queryByName" resultMap="BaseResultMap">
-    select * from department where department_name like #{name}
-  </select>
-
-  <resultMap id="BaseResultMap" type="com.erp.bean.department.Department">
-    <id column="department_id" jdbcType="VARCHAR" property="departmentId" />
-    <result column="department_name" jdbcType="VARCHAR" property="departmentName" />
-    <result column="note" jdbcType="VARCHAR" property="note" />
+  <update id="updatePermissionByRoleId" >
+    update permission set sys_permission_id = #{permission} where sys_role_id = #{id}
+  </update>
+  <resultMap id="BaseResultMap" type="com.erp.bean.user.Permission">
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="sys_permission_id" jdbcType="VARCHAR" property="sysPermissionId" />
+    <result column="sys_role_id" jdbcType="VARCHAR" property="sysRoleId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -78,15 +71,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    department_id, department_name, note
+    id, sys_permission_id, sys_role_id
   </sql>
-  <select id="selectByExample" parameterType="com.erp.bean.department.DepartmentExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.erp.bean.user.PermissionExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from department
+    from permission
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -94,70 +87,60 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from department
-    where department_id = #{departmentId,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from department
-    where department_id = #{departmentId,jdbcType=VARCHAR}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.erp.bean.department.DepartmentExample">
-    delete from department
+  <delete id="deleteByExample" parameterType="com.erp.bean.user.PermissionExample">
+    delete from permission
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.erp.bean.department.Department">
-    insert into department (department_id, department_name, note
+  <insert id="insert" parameterType="com.erp.bean.user.Permission">
+    insert into permission (id, sys_permission_id, sys_role_id
       )
-    values (#{departmentId,jdbcType=VARCHAR}, #{departmentName,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}
+    values (#{id,jdbcType=VARCHAR}, #{sysPermissionId,jdbcType=VARCHAR}, #{sysRoleId,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.erp.bean.department.Department">
-    insert into department
+  <insert id="insertSelective" parameterType="com.erp.bean.user.Permission">
+    insert into permission
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="departmentId != null">
-        department_id,
+      <if test="id != null">
+        id,
       </if>
-      <if test="departmentName != null">
-        department_name,
+      <if test="sysPermissionId != null">
+        sys_permission_id,
       </if>
-      <if test="note != null">
-        note,
+      <if test="sysRoleId != null">
+        sys_role_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="departmentId != null">
-        #{departmentId,jdbcType=VARCHAR},
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
       </if>
-      <if test="departmentName != null">
-        #{departmentName,jdbcType=VARCHAR},
+      <if test="sysPermissionId != null">
+        #{sysPermissionId,jdbcType=VARCHAR},
       </if>
-      <if test="note != null">
-        #{note,jdbcType=VARCHAR},
+      <if test="sysRoleId != null">
+        #{sysRoleId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.erp.bean.department.DepartmentExample" resultType="java.lang.Long">
-    select count(*) from department
+  <select id="countByExample" parameterType="com.erp.bean.user.PermissionExample" resultType="java.lang.Long">
+    select count(*) from permission
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update department
+    update permission
     <set>
-      <if test="record.departmentId != null">
-        department_id = #{record.departmentId,jdbcType=VARCHAR},
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
       </if>
-      <if test="record.departmentName != null">
-        department_name = #{record.departmentName,jdbcType=VARCHAR},
+      <if test="record.sysPermissionId != null">
+        sys_permission_id = #{record.sysPermissionId,jdbcType=VARCHAR},
       </if>
-      <if test="record.note != null">
-        note = #{record.note,jdbcType=VARCHAR},
+      <if test="record.sysRoleId != null">
+        sys_role_id = #{record.sysRoleId,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -165,30 +148,12 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update department
-    set department_id = #{record.departmentId,jdbcType=VARCHAR},
-      department_name = #{record.departmentName,jdbcType=VARCHAR},
-      note = #{record.note,jdbcType=VARCHAR}
+    update permission
+    set id = #{record.id,jdbcType=VARCHAR},
+      sys_permission_id = #{record.sysPermissionId,jdbcType=VARCHAR},
+      sys_role_id = #{record.sysRoleId,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.erp.bean.department.Department">
-    update department
-    <set>
-      <if test="departmentName != null">
-        department_name = #{departmentName,jdbcType=VARCHAR},
-      </if>
-      <if test="note != null">
-        note = #{note,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where department_id = #{departmentId,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.erp.bean.department.Department">
-    update department
-    set department_name = #{departmentName,jdbcType=VARCHAR},
-      note = #{note,jdbcType=VARCHAR}
-    where department_id = #{departmentId,jdbcType=VARCHAR}
   </update>
 </mapper>

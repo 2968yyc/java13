@@ -39,8 +39,10 @@ public class DeviceCheckController {
         int res = deviceCheckService.addNew(device_check);
         if (res==1){
             return new Info(200,"更新成功",null);
-        }else{
-            return new Info(res,"该设备号已经存在，请更换设备号！",null);
+        }else if (res==2){
+            return new Info(res,"该设备例检编号已经存在，请更换设备例检编号！",null);
+        }else {
+            return new Info(res,"添加失败，请稍后再来",null);
         }
     }
     @RequestMapping("edit_judge")
@@ -58,7 +60,7 @@ public class DeviceCheckController {
         if (res==1){
             return new Info(200,"更新成功",null);
         }else{
-            return new Info(res,"该设备号已经存在，请更换设备号！",null);
+            return new Info(res,"更新失败！请稍后再来！！",null);
         }
     }
 
@@ -72,9 +74,9 @@ public class DeviceCheckController {
     public @ResponseBody Info deleteByIDs(String[] ids){
         int res = deviceCheckService.deleteByIDs(ids);
         if (res==1){
-            return new Info(200,"更新成功",null);
+            return new Info(200,"删除成功",null);
         }else{
-            return new Info(res,"该设备号已经存在，请更换设备号！",null);
+            return new Info(res,"删除失败，请稍后再来！",null);
         }
     }
     @RequestMapping("search_deviceCheck_by_deviceCheckId")
@@ -91,9 +93,9 @@ public class DeviceCheckController {
     public @ResponseBody Info updateNoteById(String deviceCheckId,String deviceCheckResult){
         int res = deviceCheckService.updateNoteById(deviceCheckId,deviceCheckResult);
         if (res==1){
-            return new Info(200,"更新成功",null);
+            return new Info(200,"更新成功！",null);
         }else{
-            return new Info(res,"该设备号已经存在，请更换设备号！",null);
+            return new Info(res,"更新失败！请稍后再来！",null);
         }
     }
 

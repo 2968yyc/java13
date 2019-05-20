@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * @Author: Qiu
  * @Date: 2019/5/17 21:35
@@ -145,7 +147,7 @@ public class MaterialConsumeController {
 
     @RequestMapping("delete_batch")
     @ResponseBody
-    public Info delete_batch(String ids){
+    public Info delete_batch(List<String> ids){
 
         Info info = new Info();
 

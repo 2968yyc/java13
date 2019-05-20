@@ -43,8 +43,10 @@ public class DeviceListController {
         int res = deviceService.addNew(device);
         if (res==1){
             return new Info(200,"更新成功",null);
-        }else{
+        }else if (res==2){
             return new Info(res,"该设备号已经存在，请更换设备号！",null);
+        }else{
+            return new Info(res,"更新失败，请稍后再来！",null);
         }
     }
 

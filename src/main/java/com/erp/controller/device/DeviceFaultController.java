@@ -41,9 +41,11 @@ public class DeviceFaultController {
     Info insert(Device_fault device_fault){
         int res = deviceFaultService.addNew(device_fault);
         if (res==1){
-            return new Info(200,"更新成功",null);
+            return new Info(200,"添加成功",null);
+        }else if (res==2){
+            return new Info(res,"该故障号已经存在，请更换故障编号！",null);
         }else{
-            return new Info(res,"该设备号已经存在，请更换设备号！",null);
+            return new Info(res,"添加失败，请稍后再来",null);
         }
     }
     @RequestMapping("edit_judge")
@@ -61,7 +63,7 @@ public class DeviceFaultController {
         if (res==1){
             return new Info(200,"更新成功",null);
         }else{
-            return new Info(res,"该设备号已经存在，请更换设备号！",null);
+            return new Info(res,"添加失败，请稍后再来！",null);
         }
     }
     @RequestMapping("delete_judge")
@@ -76,7 +78,7 @@ public class DeviceFaultController {
         if (res==1){
             return new Info(200,"更新成功",null);
         }else{
-            return new Info(res,"该设备号已经存在，请更换设备号！",null);
+            return new Info(res,"添加失败，请稍后再来！",null);
         }
     }
     @RequestMapping("search_deviceFault_by_deviceFaultId")
@@ -106,7 +108,7 @@ public class DeviceFaultController {
         if (res==1){
             return new Info(200,"更新成功",null);
         }else{
-            return new Info(res,"该设备号已经存在，请更换设备号！",null);
+            return new Info(res,"添加失败，请稍后再来！",null);
         }
     }
 
