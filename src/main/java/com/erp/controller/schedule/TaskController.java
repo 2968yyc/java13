@@ -64,7 +64,7 @@ public class TaskController {
     public Info insertTask(Task task){
         int i =taskService.insertTask(task);
         Info info=new Info(200,"ok",null);
-        return i!=0?info:null;
+        return i!=0?info:new Info(2,"生产派工编号重复",null);
     }
 
 

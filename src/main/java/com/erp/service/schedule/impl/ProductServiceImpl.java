@@ -53,7 +53,13 @@ public class ProductServiceImpl {
 
 
     public int insertProduct(Product product){
-        return productMapper.insertSelective(product);
+        int i=0;
+        try {
+            i=productMapper.insertSelective(product);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return i;
     }
 
     public int updateProduct(Product product){
