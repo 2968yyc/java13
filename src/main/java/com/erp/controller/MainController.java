@@ -160,7 +160,7 @@ public class MainController {
         Map<String ,String > map =new HashMap<>();
 
         String newFilePath=fileName.substring(fileName.lastIndexOf("=")+1);
-        String path=request.getSession().getServletContext().getRealPath("/WEB-INF/"+newFilePath);
+        String path=request.getSession().getServletContext().getRealPath(newFilePath);
         File file =new File(path);
         boolean res=file.delete();
         System.out.println(res);

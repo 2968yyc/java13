@@ -79,7 +79,7 @@ public class DeviceFaultServiceImpl implements DeviceFaultService {
         deviceExample.or().andDeviceNameLike("%"+searchValue+"%");
         List<Device> devices = deviceMapper.selectByExample(deviceExample);
         if (devices.size()==0){
-            return new QueryVO<>(0,null);
+            return new QueryVO<>(0,new ArrayList<Device_fault>());
         }
         List<String> deviceIds = new ArrayList<>();
         for (Device device : devices) {

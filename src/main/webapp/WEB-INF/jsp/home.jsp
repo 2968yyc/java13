@@ -51,8 +51,8 @@
 	</table>
 	</div>
 	
-	<!-- <div data-options="region:'west',title:'功能菜单',split:true"
-		style="width:213px;"> -->
+	<div data-options="region:'west',title:'功能菜单',split:true"
+		style="width:213px;">
 	<div id="HomeFuncAccordion" class="easyui-accordion" style="width:213px;"
 		data-options="region:'west',title:'功能菜单',split:false">
 		<div title="功能搜索"
@@ -178,7 +178,7 @@
 		</c:if>
 	</div>
 
-	<!-- </div> -->
+	</div>
 	<div id="MainPage" data-options="region:'center',title:''">
 		<div id="tabs" class="easyui-tabs">
 			<div title="首页" style="padding:20px;"></div>
