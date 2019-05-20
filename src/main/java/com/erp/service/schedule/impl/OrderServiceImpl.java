@@ -120,25 +120,27 @@ public class OrderServiceImpl {
         }
 
        //查询包含以上id的oder
-        OrderExample orderExample=new OrderExample();
-        orderExample.createCriteria().andCustomIdIn(idList);
-        int total=(int) orderMapper.countByExample(orderExample);
-        pageHander.setTotal(total);
 
-        PageHelper.startPage(page,rows);
-        List<Order> list= orderMapper.selectByExample(orderExample);
+        if(idList.size() != 0) {
+            OrderExample orderExample=new OrderExample();
+            orderExample.createCriteria().andCustomIdIn(idList);
+            int total=(int) orderMapper.countByExample(orderExample);
+             pageHander.setTotal(total);
 
-        list=getList(list);
-        pageHander.setRows(list);
+            PageHelper.startPage(page,rows);
+            List<Order> list= orderMapper.selectByExample(orderExample);
+            list=getList(list);
+            pageHander.setRows(list);
+        }else {
+            pageHander.setRows(new ArrayList());
+        }
+
         return pageHander;
     }
 
     //search_order_by_productName
     public PageHander searchByProductName(String searchValue,int page,int rows){
         PageHander pageHander=new PageHander();
-        if(searchValue.contains("\\")){
-            return null;
-        }
 
         //查询那么对应的id数组
         ProductExample pe=new ProductExample();
@@ -150,16 +152,20 @@ public class OrderServiceImpl {
         }
 
         //查询包含以上id的oder
-        OrderExample orderExample=new OrderExample();
-        orderExample.createCriteria().andProductIdIn(idList);
-        int total=(int) orderMapper.countByExample(orderExample);
-        pageHander.setTotal(total);
 
-        PageHelper.startPage(page,rows);
-        List<Order> list= orderMapper.selectByExample(orderExample);
+        if(idList.size() != 0) {
+            OrderExample orderExample=new OrderExample();
+            orderExample.createCriteria().andProductIdIn(idList);
+            int total=(int) orderMapper.countByExample(orderExample);
+            pageHander.setTotal(total);
 
-        list=getList(list);
-        pageHander.setRows(list);
+            PageHelper.startPage(page,rows);
+            List<Order> list= orderMapper.selectByExample(orderExample);
+            list=getList(list);
+            pageHander.setRows(list);
+        }else {
+            pageHander.setRows(new ArrayList());
+        }
         return pageHander;
     }
 
