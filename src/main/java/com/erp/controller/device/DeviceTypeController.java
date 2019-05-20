@@ -6,6 +6,7 @@ import com.erp.bean.device.Device_type;
 import com.erp.bean.device.Info;
 import com.erp.service.device.DeviceService;
 import com.erp.service.device.DeviceTypeService;
+import com.erp.utils.PermissionUtils;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -33,9 +36,9 @@ public class DeviceTypeController {
     }
 
     @RequestMapping("add_judge")
-    public @ResponseBody String  addDudge(){
-        //Todo 判断权限
-        return null;
+    public @ResponseBody
+    Map<String,String> addDudge(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("deviceType:add",request);
     }
     @RequestMapping("add")
     public String toAdd(){
@@ -52,9 +55,8 @@ public class DeviceTypeController {
     }
 
     @RequestMapping("edit_judge")
-    public @ResponseBody String  editDudge(){
-        //Todo 判断权限
-        return "";
+    public @ResponseBody Map<String,String>  editDudge(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("deviceType:edit",request);
     }
     @RequestMapping("edit")
     public String toEdit(){
@@ -71,9 +73,8 @@ public class DeviceTypeController {
     }
 
     @RequestMapping("delete_judge")
-    public @ResponseBody String  deleteDudge(){
-        //Todo 判断权限
-        return "";
+    public @ResponseBody Map<String,String> deleteDudge(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("deviceType:delete",request);
     }
 
     @RequestMapping("delete_batch")
