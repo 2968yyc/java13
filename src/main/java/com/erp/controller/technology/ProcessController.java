@@ -1,9 +1,11 @@
 package com.erp.controller.technology;
 
+import com.erp.annotation.UpdateMethod;
 import com.erp.bean.device.Info;
 import com.erp.bean.technology.PageHelper;
 import com.erp.bean.technology.Process;
 import com.erp.service.technology.ProcessService;
+import com.erp.utils.PermissionUtils;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author : zjf
@@ -75,9 +79,10 @@ public class ProcessController {
         }
     }
 
-    @RequestMapping("/add_judge")
-    public @ResponseBody String process_add(){
-        return "";
+    @RequestMapping("add_judge")
+    public @ResponseBody
+    Map<String,String> addDudge(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("process:add",request);
     }
 
     @RequestMapping("/add")
@@ -109,6 +114,7 @@ public class ProcessController {
         return "process_edit";
     }
 
+    @UpdateMethod("process")
     @RequestMapping("/update_all")
     public @ResponseBody Info processedit(Process process){
         int i = processService.editByProcess(process);
