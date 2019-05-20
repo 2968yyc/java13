@@ -7,8 +7,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.IOException;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -106,6 +107,47 @@ public class MainController {
         }
     }
 
+    @RequestMapping("file/download")
+    public void downloadFile(String fileName, HttpServletRequest req, HttpServletResponse resp){
+        String filepath=req.getSession().getServletContext().getRealPath("/WEB-INF/")+fileName;
+        InputStream bis=null;
+        BufferedOutputStream out=null;
+        try{
+            bis=new BufferedInputStream(new FileInputStream(new File(filepath)));
+            String name=fileName.substring(fileName.lastIndexOf("/"));
+            name= URLEncoder.encode(name,"utf-8");
+            resp.addHeader("Content-Disposition","attachment;filename="+name);
+            resp.setContentType("multipart/form-data");
+            out=new BufferedOutputStream(resp.getOutputStream());
+            byte[]b=new byte[2048];
+            int len=0;
+            while((len=bis.read(b))!=-1){
+                out.write(b,0,len);
+                out.flush();
+            }
+
+        }catch(FileNotFoundException e){
+            e.printStackTrace();
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            if(bis!=null){
+                try{
+                    bis.close();
+                }catch(IOException e){
+                    e.printStackTrace();
+                }
+            }
+            if(out!=null){
+                try{
+                    out.close();
+                }catch(IOException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
 
 
     @RequestMapping("file/delete")
