@@ -1,16 +1,20 @@
 package com.erp.controller.device;
 
+import com.erp.annotation.UpdateMethod;
 import com.erp.bean.QueryVO;
 import com.erp.bean.device.Device;
 import com.erp.bean.device.Info;
 import com.erp.service.device.DeviceService;
+import com.erp.utils.PermissionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: yyc
@@ -30,9 +34,9 @@ public class DeviceListController {
     }
 
     @RequestMapping("add_judge")
-    public @ResponseBody String  addDudge(){
-        //Todo 判断权限
-        return "";
+    public @ResponseBody
+    Map<String,String> addDudge(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("device:add",request);
     }
     @RequestMapping("add")
     public String toAdd(){
@@ -43,16 +47,17 @@ public class DeviceListController {
         int res = deviceService.addNew(device);
         if (res==1){
             return new Info(200,"更新成功",null);
-        }else{
+        }else if (res==2){
             return new Info(res,"该设备号已经存在，请更换设备号！",null);
+        }else{
+            return new Info(res,"更新失败，请稍后再来！",null);
         }
     }
 
 
     @RequestMapping("edit_judge")
-    public @ResponseBody String  editDudge(){
-        //Todo 判断权限
-        return "";
+    public @ResponseBody Map<String,String>  editDudge(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("device:edit",request);
     }
     @RequestMapping("edit")
     public String toEdit(){
@@ -70,9 +75,8 @@ public class DeviceListController {
 
 
     @RequestMapping("delete_judge")
-    public @ResponseBody String  deleteDudge(){
-        //Todo 判断权限
-        return "";
+    public @ResponseBody Map<String,String>  deleteDudge(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("device:delete",request);
     }
 
     @RequestMapping("delete_batch")
@@ -109,7 +113,7 @@ public class DeviceListController {
     public @ResponseBody Device getByDeviceTypeId(@PathVariable("id") String id){
         return deviceService.getByDeviceId(id);
     }
-
+    @UpdateMethod("deviceList")
     @RequestMapping("update_note")
     public @ResponseBody Info updateNote(String deviceId,String note){
 

@@ -68,7 +68,13 @@ public class OrderServiceImpl {
 
 
     public int insertOrder(Order order){
-        return orderMapper.insertSelective(order);
+        int i=0;
+        try {
+            i=orderMapper.insertSelective(order);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return i;
     }
 
     public int updateOrder(Order order){

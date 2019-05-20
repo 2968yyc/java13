@@ -52,7 +52,13 @@ public class TaskServiceImpl {
 
 
     public int insertTask(Task task){
-        return taskMapper.insertSelective(task);
+        int i=0;
+        try {
+            i=taskMapper.insertSelective(task);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return i;
     }
 
     public int updateTask(Task task){

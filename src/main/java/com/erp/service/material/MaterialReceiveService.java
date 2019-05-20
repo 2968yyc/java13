@@ -3,6 +3,8 @@ package com.erp.service.material;
 import com.erp.bean.QueryVO;
 import com.erp.bean.material.Material_receive;
 
+import java.util.List;
+
 /**
  * @Author: Qiu
  * @Date: 2019/5/17 21:40
@@ -20,7 +22,7 @@ public interface MaterialReceiveService {
 
     boolean update_note(Material_receive material_receive);
 
-    boolean delete_batch(String ids);
+    boolean delete_batch(List<String> ids);
 
     boolean update_all(Material_receive material_receive);
 }

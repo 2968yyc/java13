@@ -1,16 +1,21 @@
 package com.erp.controller.device;
 
+import com.erp.annotation.UpdateMethod;
 import com.erp.bean.QueryVO;
 import com.erp.bean.device.Device_fault;
 import com.erp.bean.device.Info;
+import com.erp.bean.technology.PageHelper;
 import com.erp.service.device.DeviceFaultService;
+import com.erp.utils.PermissionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: yyc
@@ -28,9 +33,9 @@ public class DeviceFaultController {
         return deviceFaultService.getDeviceFaultInPage(page, rows);
     }
     @RequestMapping("add_judge")
-    public @ResponseBody String  addDudge(){
-        //Todo 判断权限
-        return null;
+    public @ResponseBody
+    Map<String,String> addDudge(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("deviceFault:add",request);
     }
     @RequestMapping("add")
     public String toAdd(){
@@ -41,15 +46,16 @@ public class DeviceFaultController {
     Info insert(Device_fault device_fault){
         int res = deviceFaultService.addNew(device_fault);
         if (res==1){
-            return new Info(200,"更新成功",null);
+            return new Info(200,"添加成功",null);
+        }else if (res==2){
+            return new Info(res,"该故障号已经存在，请更换故障编号！",null);
         }else{
-            return new Info(res,"该设备号已经存在，请更换设备号！",null);
+            return new Info(res,"添加失败，请稍后再来",null);
         }
     }
     @RequestMapping("edit_judge")
-    public @ResponseBody String  editDudge(){
-        //Todo 判断权限
-        return "";
+    public @ResponseBody Map<String,String>  editDudge(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("deviceFault:edit",request);
     }
     @RequestMapping("edit")
     public String toEdit(){
@@ -61,13 +67,12 @@ public class DeviceFaultController {
         if (res==1){
             return new Info(200,"更新成功",null);
         }else{
-            return new Info(res,"该设备号已经存在，请更换设备号！",null);
+            return new Info(res,"添加失败，请稍后再来！",null);
         }
     }
     @RequestMapping("delete_judge")
-    public @ResponseBody String  deleteDudge(){
-        //Todo 判断权限
-        return "";
+    public @ResponseBody Map<String,String> deleteDudge(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("deviceFault:delete",request);
     }
 
     @RequestMapping("delete_batch")
@@ -76,7 +81,7 @@ public class DeviceFaultController {
         if (res==1){
             return new Info(200,"更新成功",null);
         }else{
-            return new Info(res,"该设备号已经存在，请更换设备号！",null);
+            return new Info(res,"添加失败，请稍后再来！",null);
         }
     }
     @RequestMapping("search_deviceFault_by_deviceFaultId")
@@ -99,6 +104,7 @@ public class DeviceFaultController {
     public @ResponseBody Device_fault getByDeviceTypeId(@PathVariable("id") String id){
         return deviceFaultService.getByDeviceFaultId(id);
     }
+    @UpdateMethod("deviceFault")
     @RequestMapping("update_note")
     public @ResponseBody Info updateNote(Device_fault device_fault){
 
@@ -106,7 +112,7 @@ public class DeviceFaultController {
         if (res==1){
             return new Info(200,"更新成功",null);
         }else{
-            return new Info(res,"该设备号已经存在，请更换设备号！",null);
+            return new Info(res,"添加失败，请稍后再来！",null);
         }
     }
 

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 
 
 /**
@@ -136,7 +137,7 @@ public class MaterialReceiveController {
 
     @RequestMapping("delete_batch")
     @ResponseBody
-    public Info delete_batch(String ids){
+    public Info delete_batch(List<String> ids){
 
         Info info = new Info();
 

@@ -118,11 +118,11 @@ function formatUserStatus(value){
 		
 	}
 	
-	//格式化角色信息
+	// //格式化角色信息
 	function formatRole(value, row, index){
 		return "<a href=javascript:openRole("+index+")>"+row.roleName+"</a>";
 	};
-	
+
 	//打开角色信息
 	function  openRole(index){
 		var row = onUserClickRow(index);

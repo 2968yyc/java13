@@ -4,7 +4,8 @@ import com.erp.bean.QueryVO;
 import com.erp.bean.device.Info;
 import com.erp.bean.user.ActiveUser;
 import com.erp.bean.user.SysUser;
-import com.erp.service.UserService;
+import com.erp.service.user.UserService;
+import com.erp.utils.PermissionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Isolation;
@@ -18,197 +19,76 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: yyc
  * @Date: 2019/5/17 21:55
  */
 @Controller
+@RequestMapping("user")
 public class UserController {
     @Autowired
     UserService userService;
-    @RequestMapping("/")
-    public String tologin(){
-        return "login";
-    }
 
-    @RequestMapping("ajaxLogin")
-    public @ResponseBody Info login(SysUser user, HttpServletRequest request){
-        boolean login = userService.login(user);
-        if (!login){
-            //TODO 'password_error authentication_error
-            return new Info(0,"account_error",null);
-        }else{
-            //TODO 所有人都是超级管理员，以后修改
-            HttpSession session = request.getSession();
-            List<String> sysPermissionList = (List<String>) session.getAttribute("sysPermissionList");
-            if (sysPermissionList==null){
-                sysPermissionList=new ArrayList<String>();
-            }
-            sysPermissionList.add("device:add");
-            sysPermissionList.add("device:edit");
-            sysPermissionList.add("device:delete");
-            sysPermissionList.add("deviceType:add");
-            sysPermissionList.add("deviceType:edit");
-            sysPermissionList.add("deviceType:delete");
-            sysPermissionList.add("deviceCheck:add");
-            sysPermissionList.add("deviceCheck:edit");
-            sysPermissionList.add("deviceCheck:delete");
-            sysPermissionList.add("deviceFault:add");
-            sysPermissionList.add("deviceFault:edit");
-            sysPermissionList.add("deviceFault:delete");
-            sysPermissionList.add("deviceMaintain:add");
-            sysPermissionList.add("deviceMaintain:edit");
-            sysPermissionList.add("deviceMaintain:delete");
-
-            //这里就按这样写
-            sysPermissionList.add("technology:add");
-            sysPermissionList.add("technology:edit");
-            sysPermissionList.add("technology:delete");
-            //部门
-            sysPermissionList.add("department:add");
-            sysPermissionList.add("department:edit");
-            sysPermissionList.add("department:delete");
-            //人员
-            sysPermissionList.add("employee:add");
-            sysPermissionList.add("employee:edit");
-            sysPermissionList.add("employee:delete");
-            //管理
-            sysPermissionList.add("user:add");
-            sysPermissionList.add("user:edit");
-            sysPermissionList.add("user:delete");
-
-            sysPermissionList.add("technologyPlan:delete");
-            sysPermissionList.add("technologyPlan:edit");
-            sysPermissionList.add("technologyPlan:add");
-
-            sysPermissionList.add("technologyRequirement:add");
-            sysPermissionList.add("technologyRequirement:edit");
-            sysPermissionList.add("technologyRequirement:delete");
-
-            //工序
-            sysPermissionList.add("process:add");
-            sysPermissionList.add("process:edit");
-            sysPermissionList.add("process:delete");
-
-
-            //schedule
-            sysPermissionList.add("custom:add");
-            sysPermissionList.add("custom:edit");
-            sysPermissionList.add("custom:delete");
-            sysPermissionList.add("work:add");
-            sysPermissionList.add("work:edit");
-            sysPermissionList.add("work:delete");
-            sysPermissionList.add("product:add");
-            sysPermissionList.add("product:edit");
-            sysPermissionList.add("product:delete");
-            sysPermissionList.add("task:add");
-            sysPermissionList.add("task:edit");
-            sysPermissionList.add("task:delete");
-            sysPermissionList.add("manufacture:add");
-            sysPermissionList.add("manufacture:edit");
-            sysPermissionList.add("manufacture:delete");
-            sysPermissionList.add("order:add");
-            sysPermissionList.add("order:edit");
-            sysPermissionList.add("order:delete");
-
-
-            sysPermissionList.add("material:add");
-            sysPermissionList.add("material:edit");
-            sysPermissionList.add("material:delete");
-
-            sysPermissionList.add("materialReceive:add");
-            sysPermissionList.add("materialReceive:edit");
-            sysPermissionList.add("materialReceive:delete");
-
-            sysPermissionList.add("materialConsume:add");
-            sysPermissionList.add("materialConsume:edit");
-            sysPermissionList.add("materialConsume:delete");
-
-            //不合格品管理
-            sysPermissionList.add("unqualify:add");
-            sysPermissionList.add("unqualify:edit");
-            sysPermissionList.add("unqualify:delete");
-
-            //成品计量质检
-            sysPermissionList.add("fMeasureCheck:add");
-            sysPermissionList.add("fMeasureCheck:edit");
-            sysPermissionList.add("fMeasureCheck:delete");
-
-            //成品计数质检
-            sysPermissionList.add("fCountCheck:add");
-            sysPermissionList.add("fCountCheck:edit");
-            sysPermissionList.add("fCountCheck:delete");
-
-            //工序计量质检
-            sysPermissionList.add("pMeasureCheck:add");
-            sysPermissionList.add("pMeasureCheck:edit");
-            sysPermissionList.add("pMeasureCheck:delete");
-
-            //工序计数质检
-            sysPermissionList.add("pCountCheck:add");
-            sysPermissionList.add("pCountCheck:edit");
-            sysPermissionList.add("pCountCheck:delete");
-
-            session.setAttribute("sysPermissionList",sysPermissionList);
-            session.setAttribute("activeUser",new ActiveUser("aa","超级管理员"));
-            return new Info(1,"success",null);
-
-        }
-    }
-
-    @RequestMapping("user/find")
+    @RequestMapping("find")
     public String userpage(){
         return "user_list";
     }
 
-    @RequestMapping("user/list")
+    @RequestMapping("list")
     public @ResponseBody QueryVO userList(int page,int rows){
         return userService.getUserInPage(page,rows);
     }
 
 
-    @RequestMapping("user/add_judge")
+    @RequestMapping("add_judge")
     @ResponseBody
-    public String add_judge(){
-        return "";
+    Map<String,String> addJudge(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("user:add",request);
     }
 
-    @RequestMapping("user/add")
+
+    @RequestMapping("add")
     public String add(){
         return "user_add";
     }
 
-    @RequestMapping("user/insert")
+    @RequestMapping("insert")
     @ResponseBody
     public Info insertEmployee(@ModelAttribute SysUser sysUser){
         Info info = new Info();
         boolean b1 = userService.selectById(sysUser.getId());
-        if (b1){
+        if (!b1){
             info.setStatus(0);
-            info.setMsg("编号不能重复！");
+            info.setMsg("该用户编号已经存在，请更换用户编号！");
             return info;
         }
-
+        boolean b2 = userService.selectByName(sysUser.getUsername());
+        if (!b2){
+            info.setStatus(0);
+            info.setMsg("该用户名已经存在，请更换用户名！");
+            return info;
+        }
         boolean b = userService.insertSysUser(sysUser);
         if(b){
             info.setStatus(200);
-            info.setMsg("插入成功！");
+            info.setMsg("新增用户信息成功！");
         }else {
             info.setStatus(0);
-            info.setMsg("插入异常！");
+            info.setMsg("提交异常！请您再次提交");
         }
         return info;
     }
 
     //删除部分
-    @RequestMapping("user/delete_judge")
+    @RequestMapping("delete_judge")
     @ResponseBody
     public String  deleteJudge(){
         return "";
     }
 
-    @RequestMapping("user/delete_batch")
+    @RequestMapping("delete_batch")
     @ResponseBody
     @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.REPEATABLE_READ)
     public Info delete_batch(@ModelAttribute("ids") String[] ids) {
@@ -228,18 +108,18 @@ public class UserController {
     }
 
     //修改部分
-    @RequestMapping("user/edit_judge")
+    @RequestMapping("edit_judge")
     @ResponseBody
     public String edit_judge(){
         return "";
     }
 
-    @RequestMapping("user/edit")
+    @RequestMapping("edit")
     public String edit(){
         return "user_edit";
     }
 
-    @RequestMapping("user/update_all")
+    @RequestMapping("update_all")
     @ResponseBody
     @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.REPEATABLE_READ)
     public Info updateUser(@ModelAttribute SysUser sysUser){
@@ -256,7 +136,7 @@ public class UserController {
     }
 
     //查询部分
-    @RequestMapping("user/search_user_by_userId")
+    @RequestMapping("search_user_by_userId")
     @ResponseBody
     @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.REPEATABLE_READ)
     public QueryVO<SysUser> searchById(String searchValue, int page, int rows){
@@ -264,12 +144,25 @@ public class UserController {
         return sysUserQueryVO;
     }
 
-    @RequestMapping("user/search_user_by_userName")
+    @RequestMapping("search_user_by_userName")
     @ResponseBody
     @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.REPEATABLE_READ)
     public QueryVO<SysUser> searchByName(String searchValue, int page, int rows){
         QueryVO<SysUser> sysUserQueryVO = userService.queryByName(page,rows,searchValue);
         return sysUserQueryVO;
+    }
+
+    @RequestMapping("search_user_by_roleName")
+    @ResponseBody
+    public QueryVO<SysUser> searchByRoleName(String searchValue, int page, int rows){
+        QueryVO<SysUser> sysUserQueryVO = userService.searchByRoleName(page,rows,searchValue);
+        return sysUserQueryVO;
+    }
+
+
+    @RequestMapping("role")
+    public String toRole(){
+        return "role_add";
     }
 
 

@@ -79,7 +79,13 @@ public class WorkServiceImpl {
 
 
     public int insertWork(Work work){
-        return workMapper.insertSelective(work);
+        int i=0;
+        try {
+            i=workMapper.insertSelective(work);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return i;
     }
 
     public int updateWork(Work work){

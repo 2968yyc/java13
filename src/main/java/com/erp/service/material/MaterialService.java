@@ -25,7 +25,7 @@ public interface MaterialService {
 
     boolean update_note(Material material);
 
-    boolean delete_batch(String ids);
+    boolean delete_batch(List<String> ids);
 
     boolean update_all(Material material);
 }

@@ -1,24 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.erp.mapper.user.SysUserMapper">
-  <select id="selectSysUsers" resultType="sysUser">
-    select * from sys_user;
-  </select>
-  <select id="countAll" resultType="int">
-    select count(*) from sys_user;
-  </select>
-  <select id="queryById" resultMap="BaseResultMap">
-    select * from sys_user where id=#{id};
-  </select>
-  <select id="queryByName" resultMap="BaseResultMap">
-    select * from sys_user where username=#{name};
-  </select>
-
   <resultMap id="BaseResultMap" type="com.erp.bean.user.SysUser">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="locked" jdbcType="CHAR" property="locked" />
+    <result column="role_id" jdbcType="VARCHAR" property="roleId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -79,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, username, password, locked
+    id, username, password, locked, role_id
   </sql>
   <select id="selectByExample" parameterType="com.erp.bean.user.SysUserExample" resultMap="BaseResultMap">
     select
@@ -113,9 +101,9 @@
   </delete>
   <insert id="insert" parameterType="com.erp.bean.user.SysUser">
     insert into sys_user (id, username, password, 
-      locked)
+      locked, role_id)
     values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{locked,jdbcType=CHAR})
+      #{locked,jdbcType=CHAR}, #{roleId,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.erp.bean.user.SysUser">
     insert into sys_user
@@ -132,6 +120,9 @@
       <if test="locked != null">
         locked,
       </if>
+      <if test="roleId != null">
+        role_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -145,6 +136,9 @@
       </if>
       <if test="locked != null">
         #{locked,jdbcType=CHAR},
+      </if>
+      <if test="roleId != null">
+        #{roleId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -169,6 +163,9 @@
       <if test="record.locked != null">
         locked = #{record.locked,jdbcType=CHAR},
       </if>
+      <if test="record.roleId != null">
+        role_id = #{record.roleId,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -179,7 +176,8 @@
     set id = #{record.id,jdbcType=VARCHAR},
       username = #{record.username,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
-      locked = #{record.locked,jdbcType=CHAR}
+      locked = #{record.locked,jdbcType=CHAR},
+      role_id = #{record.roleId,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -196,6 +194,9 @@
       <if test="locked != null">
         locked = #{locked,jdbcType=CHAR},
       </if>
+      <if test="roleId != null">
+        role_id = #{roleId,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -203,7 +204,8 @@
     update sys_user
     set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
-      locked = #{locked,jdbcType=CHAR}
+      locked = #{locked,jdbcType=CHAR},
+      role_id = #{roleId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

@@ -62,7 +62,7 @@ public class CustomController {
     public Info insertCustom(Custom custom){
         int i =customService.insertCustom(custom);
         Info info=new Info(200,"ok",null);
-        return i!=0?info:null;
+        return i!=0?info:new Info(2,"客户编号重复",null);
     }
 
 

@@ -11,7 +11,7 @@
   </select>
 
   <select id="queryByName" resultMap="BaseResultMap">
-    select * from department where department_name=#{name}
+    select * from department where department_name like #{name}
   </select>
 
   <resultMap id="BaseResultMap" type="com.erp.bean.department.Department">

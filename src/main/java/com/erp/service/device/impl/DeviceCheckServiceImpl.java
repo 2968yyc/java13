@@ -7,6 +7,7 @@ import com.erp.bean.device.Device_check;
 import com.erp.bean.device.Device_checkExample;
 import com.erp.mapper.device.DeviceMapper;
 import com.erp.mapper.device.Device_checkMapper;
+import com.erp.mapper.employee.EmployeeMapper;
 import com.erp.service.device.DeviceCheckService;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,8 @@ public class DeviceCheckServiceImpl implements DeviceCheckService {
     private Device_checkMapper device_checkMapper;
     @Autowired
     private DeviceMapper deviceMapper;
+    @Autowired
+    private EmployeeMapper employeeMapper;
 
     @Override
     public QueryVO<Device_check> getDeviceCheckInPage(int page, int rows) {
@@ -40,6 +43,9 @@ public class DeviceCheckServiceImpl implements DeviceCheckService {
 
     @Override
     public int addNew(Device_check device_check) {
+        Device_check device_check1 = device_checkMapper.selectByPrimaryKey(device_check.getDeviceCheckId());
+        if (device_check1!=null)
+            return 2;
         int insert = device_checkMapper.insert(device_check);
         return insert;
     }
@@ -102,6 +108,8 @@ public class DeviceCheckServiceImpl implements DeviceCheckService {
             String deviceId = device_check.getDeviceId();
             String nameById = deviceMapper.getNameById(deviceId);
             device_check.setDeviceName(nameById);
+            String EmpName = employeeMapper.selectEmpNameByID(device_check.getDeviceCheckEmpId());
+            device_check.setDeviceCheckEmp(EmpName);
         }
         return device_checks;
     }

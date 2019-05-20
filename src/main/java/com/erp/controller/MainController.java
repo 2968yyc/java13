@@ -1,6 +1,7 @@
 package com.erp.controller;
 
 import com.erp.bean.UploadInfo;
+import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -97,10 +98,9 @@ public class MainController {
         if (!newFile.getParentFile().exists()) {
             newFile.getParentFile().mkdir();
         }
-
         try {
             file.transferTo(newFile);
-            return new UploadInfo(0, "file/"+newFileName);
+            return new UploadInfo(0, "file" + newFileName);
         } catch (IOException e) {
             e.printStackTrace();
             return new UploadInfo(1, null,"网络异常，请重新上传");

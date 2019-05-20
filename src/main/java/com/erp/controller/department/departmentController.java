@@ -1,9 +1,11 @@
 package com.erp.controller.department;
 
+import com.erp.annotation.UpdateMethod;
 import com.erp.bean.QueryVO;
 import com.erp.bean.department.Department;
 import com.erp.bean.device.Info;
 import com.erp.service.department.DepartmentService;
+import com.erp.utils.PermissionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Isolation;
@@ -14,7 +16,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: xu
@@ -32,6 +36,13 @@ public class departmentController {
         return "department_list";
     }
 
+
+    @RequestMapping("get/{id}")
+    @ResponseBody
+    public Department getDepartmentDataById(@PathVariable("id")String id){
+        return departmentService.getDataById(id);
+    }
+
     @RequestMapping("list")
     public @ResponseBody
     QueryVO findDepartmentInPage(int page, int rows){
@@ -44,17 +55,12 @@ public class departmentController {
         return departmentService.getDepartmentData();
     }
 
-    @RequestMapping("get/{id}")
-    @ResponseBody
-    public Department getById(@PathVariable("id")String id){
-        return departmentService.queryData(id);
-    }
 
     //增加
     @RequestMapping("add_judge")
     @ResponseBody
-    public String add_judge(){
-        return "";
+    Map<String,String> addJudge(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("department:add",request);
     }
 
     @RequestMapping("add")
@@ -84,7 +90,7 @@ public class departmentController {
             info.setStatus(200);
             info.setMsg("插入成功！");
         }else {
-            info.setStatus(0);
+            info    .setStatus(0);
             info.setMsg("插入异常！");
         }
         return info;
@@ -129,6 +135,7 @@ public class departmentController {
     }
 
     @RequestMapping("update_all")
+    @UpdateMethod("department")
     @ResponseBody
     @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.REPEATABLE_READ)
     public Info updateDepartment(@ModelAttribute Department department){
@@ -157,8 +164,26 @@ public class departmentController {
     @ResponseBody
     @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.REPEATABLE_READ)
     public QueryVO<Department> searchByName(String searchValue, int page, int rows){
-        QueryVO<Department> departmentQueryVO = departmentService.queryByName(page, rows, searchValue);
+        QueryVO<Department> departmentQueryVO = departmentService.queryByName(page, rows, "%"+searchValue+"%");
         return departmentQueryVO;
     }
 
+    @RequestMapping("update_note")
+    @UpdateMethod("department")
+    @ResponseBody
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.REPEATABLE_READ)
+    public Info updateNote(String departmentId,String note){
+        Info info = new Info();
+        Department department = departmentService.getDataById(departmentId);
+        department.setNote(note);
+        boolean b = departmentService.updateDepartment(department);
+        if(b){
+            info.setStatus(200);
+            info.setMsg("更新成功");
+        }else {
+            info.setStatus(0);
+            info.setMsg("更新失败");
+        }
+        return info;
+    }
 }
