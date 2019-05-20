@@ -6,6 +6,7 @@ import com.erp.bean.employee.Employee;
 import com.erp.bean.material.Material;
 import com.erp.service.employee.EmployeeService;
 
+import com.erp.utils.PermissionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Isolation;
@@ -16,7 +17,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: xu
@@ -55,9 +58,10 @@ public class EmployeeController {
     //增加employee部分
     @RequestMapping("add_judge")
     @ResponseBody
-    public String add_judge(){
-        return "";
+    Map<String,String> addJudge(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("employee:add",request);
     }
+
 
     @RequestMapping("add")
     public String add(){
