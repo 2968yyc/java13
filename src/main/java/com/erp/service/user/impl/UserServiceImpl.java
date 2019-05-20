@@ -104,6 +104,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public SysUser queryUserByName(String username) {
+        SysUser user =  sysUserMapper.queryUserByName(username);
+        return user;
+    }
+
+    @Override
     public QueryVO<SysUser> getUserInPage(int page, int rows) {
         SysUserExample sysUserExample = new SysUserExample();
         sysUserExample.or();

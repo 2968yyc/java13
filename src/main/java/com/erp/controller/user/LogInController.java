@@ -12,7 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.*;
 
@@ -43,9 +45,23 @@ public class LogInController {
 
     }
 
+    @RequestMapping("ajaxQuery")
+    @ResponseBody
+    public Info query(String username){
+
+        SysUser user = userService.queryUserByName(username);
+
+
+        System.out.printf("query"+user.getRoleId());
+
+        return new Info(200,user.getRoleId(),null);
+
+
+    }
+
     @RequestMapping("ajaxLogin")
     public @ResponseBody
-    Info login(SysUser user,String randomcode ,HttpServletRequest request){
+    Info login(SysUser user, String remember, String randomcode , HttpServletRequest request){
         //验证码
         HttpSession session = request.getSession();
         if (randomcode!=null){
@@ -66,6 +82,7 @@ public class LogInController {
             return new Info(0,"authentication_error",null);
         }
         else{
+
 
             Set<String> sysPermissionList = (Set<String>) session.getAttribute("sysPermissionList");
             if (sysPermissionList==null){
@@ -90,8 +107,6 @@ public class LogInController {
             session.setAttribute("sysPermissionList",sysPermissionList);
             session.setAttribute("activeUser",new ActiveUser(sysUser.getUsername(),sysUser.getRoleName()));
             return new Info(200,"success",null);
-
-
         }
     }
 
