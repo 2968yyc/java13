@@ -103,6 +103,15 @@ public class MaterialConsumeServiceImpl implements MaterialConsumeService {
 
     @Override
     public boolean insertMaterialConsume(Material_consume material_consume) {
+
+
+        Material material = materialMapper.queryMaterialById(material_consume.getMaterialId());
+
+        material.setRemaining(material.getRemaining()-material_consume.getConsumeAmount());
+
+        materialMapper.updateByPrimaryKeySelective(material);
+
+
         int insert = material_consumeMapper.insertMaterialConsume(material_consume);
 
         return insert ==1?true:false;
@@ -128,6 +137,18 @@ public class MaterialConsumeServiceImpl implements MaterialConsumeService {
 
     @Override
     public boolean update_all(Material_consume material_consume) {
+
+
+        Material_consume materialConsume = material_consumeMapper.getMaterial_consume(material_consume.getConsumeId());
+
+        int i = materialConsume.getConsumeAmount() - material_consume.getConsumeAmount();
+
+        Material material = materialMapper.queryMaterialById(material_consume.getMaterialId());
+
+        material.setRemaining(material.getRemaining()+i);
+
+        materialMapper.updateByPrimaryKeySelective(material);
+
 
         int update = material_consumeMapper.updateByPrimaryKeySelective(material_consume);
 

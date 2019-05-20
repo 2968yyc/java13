@@ -19,9 +19,74 @@
 	.download a:hover{text-decoration:underline;color:#36F}
 	.download span{float:right}
 </style>
+	<script type="text/javascript" language="JavaScript">
+		function checkInCorrect()
+		{
+			var username = $("#username");
+				$.ajax({
+					url:'${baseurl}ajaxQuery',
+					data:{ username:username.val()},
+					type : 'post',
+					cache : false,
+					dataType : 'json',
+					success:function (res) {
+						if (res.msg != '001') {
+
+							var isSave =document.getElementById('remember_password').checked;   //保存按键是否选中
+							if (isSave) {
+								var username = document.getElementById('username').value;
+								var password = document.getElementById('password').value;
+								if (username != "" && password != "") {
+									SetCookie(username, password);
+								}
+							} else {
+								SetCookie("", "");
+							}
+						}
+					}
+				})
+
+
+		}
+
+		function SetCookie(username, password) {
+			var Then = new Date();
+			Then.setTime(Then.getTime() + 1866240000000);
+			document.cookie = "username=" + username + "%%" + password + ";expires=" + Then.toGMTString();
+		}
+
+		function GetCookie() {
+			var nmpsd;
+			var nm;
+			var psd;
+			var cookieString = new String(document.cookie);
+			var cookieHeader = "username=";
+			var beginPosition = cookieString.indexOf(cookieHeader);
+			cookieString = cookieString.substring(beginPosition);
+			var ends = cookieString.indexOf(";");
+			if (ends != -1) {
+				cookieString = cookieString.substring(0, ends);
+			}
+			if (beginPosition > -1) {
+				nmpsd = cookieString.substring(cookieHeader.length);
+				if (nmpsd != "") {
+					beginPosition = nmpsd.indexOf("%%");
+					nm = nmpsd.substring(0, beginPosition);
+					psd = nmpsd.substring(beginPosition + 2);
+					document.getElementById('username').value = nm;
+					document.getElementById('password').value = psd;
+					if (nm != "" && psd != "") {
+						// document.forms[0].checkbox.checked = true;
+						document.getElementById('remember_password').checked = true;
+					}
+				}
+			}
+		}
+	</script>
+
 </head>
 
-<body>
+<body onload="GetCookie()">
 	<div class="main">
 		<div class="header hide"> 大型生产管理ERP系统  </div>
 		<div class="content">
@@ -70,21 +135,16 @@
 					
 					<!-- REMEMBERME -->					
 					<div class="checkbox">
-						<input type="checkbox" name="remember" id="remember" checked="checked"/>
-						<label for="remember">
+						<input type="checkbox" name="remember_password" id="remember_password" value="true"/>
+						<label for="remember_password">
 							<span>记住密码</span>
 						</label>
 						<span id="errorspan" style="margin-left:88px;"></span>
 					</div>
 
-					<!-- LOGIN -->
-					<!-- 
-						<div class="enter">
-							<input class="button hide" name="submit" type="submit" value="登录" />
-						</div> 
-					-->
+
 					<div>
-						<a href="#" id="login" class="button hide">登录</a>
+						<a href="#" id="login" class="button hide" OnClick="checkInCorrect()">登录</a>
 					</div>
 					
 				</fieldset>
@@ -231,7 +291,9 @@
 											});
 								}
 							}
-						});
+						}
+				);
+
 
 		//刷新验证码
 		//实现思路，重新给图片的src赋值，后边加时间，防止缓存
@@ -245,5 +307,6 @@
 <script type="text/javascript">
 	DD_belatedPNG.fix("*");
 </script>
+
 <![endif]--></body>
 </html>

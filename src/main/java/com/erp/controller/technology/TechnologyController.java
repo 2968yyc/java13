@@ -78,11 +78,15 @@ public class TechnologyController {
 
     @RequestMapping("/insert")
     public @ResponseBody Info technologyadd(Technology technology){
+        int j = technologyService.judgeById(technology);
+        if(j == 0){
         int i = technologyService.addByTechnology(technology);
         if (i==1){
             return new Info(200,"添加成功",null);
         }else{
             return new Info(i,"添加失敗",null);
+        }}else {
+            return new Info(j,"添加失敗,工艺编号重复",null);
         }
     }
 

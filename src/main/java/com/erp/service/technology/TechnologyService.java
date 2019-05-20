@@ -25,4 +25,5 @@ public interface TechnologyService {
 
     List<Technology> queryAllTechnology();
 
+    int judgeById(Technology technology);
 }

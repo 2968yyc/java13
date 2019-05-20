@@ -1,5 +1,6 @@
 package com.erp.controller.material;
 
+import com.erp.annotation.UpdateMethod;
 import com.erp.bean.QueryVO;
 import com.erp.bean.device.Info;
 import com.erp.bean.material.Material;
@@ -99,13 +100,7 @@ public class MaterialConsumeController {
             info.setMsg("该消耗编号已存在");
         }else {
             boolean insert = materialConsumeService.insertMaterialConsume(material_consume);
-            if (!insert){
-                info.setStatus(0);
-                info.setMsg("新增失败");
-            }else {
-                info.setMsg("新增成功");
-                info.setStatus(200);
-            }
+            info = returnMsg(info,insert,"新增成功","新增失败");
         }
 
 
@@ -125,6 +120,7 @@ public class MaterialConsumeController {
         return "";
     }
 
+    @UpdateMethod("materialConsume")
     @RequestMapping("update_note")
     @ResponseBody
     public Info update_note(Material_consume material_consume){
@@ -133,14 +129,20 @@ public class MaterialConsumeController {
 
         boolean update = materialConsumeService.update_note(material_consume);
 
-        if (update){
-            info.setStatus(200);
-            info.setMsg("更新成功");
-        }else {
-            info.setStatus(0);
-            info.setMsg("更新失败");
-        }
+        info = returnMsg(info, update, "更新成功", "更新失败");
 
+
+        return info;
+    }
+
+    private Info returnMsg(Info info, boolean update, String success, String fail) {
+        if (update) {
+            info.setStatus(200);
+            info.setMsg(success);
+        } else {
+            info.setStatus(0);
+            info.setMsg(fail);
+        }
 
         return info;
     }
@@ -152,13 +154,7 @@ public class MaterialConsumeController {
         Info info = new Info();
 
         boolean isDele = materialConsumeService.delete_batch(ids);
-        if (isDele){
-            info.setStatus(200);
-            info.setMsg("删除成功");
-        }else {
-            info.setStatus(0);
-            info.setMsg("删除失败");
-        }
+        info = returnMsg(info, isDele, "删除成功", "删除失败");
 
         return info;
     }
@@ -168,6 +164,7 @@ public class MaterialConsumeController {
         return "materialConsume_edit";
     }
 
+    @UpdateMethod("materialConsume")
     @RequestMapping("update_all")
     @ResponseBody
     public Info update_all(Material_consume material_consume){
@@ -175,13 +172,7 @@ public class MaterialConsumeController {
 
         boolean isUpdate = materialConsumeService.update_all(material_consume);
 
-        if (isUpdate){
-            info.setStatus(200);
-            info.setMsg("编辑成功");
-        }else {
-            info.setStatus(0);
-            info.setMsg("编辑失败");
-        }
+        info = returnMsg(info, isUpdate, "编辑成功", "编辑失败");
 
         return info;
     }

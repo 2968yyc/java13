@@ -24,4 +24,6 @@ public interface ProcessService {
     List<Process> searchAllById(Integer page, Integer rows, String searchValue);
 
     List<Process> queryAllProcess();
+
+    int judgeById(Process process);
 }
