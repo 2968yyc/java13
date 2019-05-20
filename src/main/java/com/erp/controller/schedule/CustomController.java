@@ -89,6 +89,15 @@ public class CustomController {
         return i==1?info:null;
     }
 
+    @UpdateMethod("custom")
+    @RequestMapping("update_note")
+    @ResponseBody
+    public Info updateNote(Custom custom){
+        int i=customService.updateCustom(custom);
+        Info info=new Info(200,"ok",null);
+        return i==1?info:null;
+    }
+
 
 
     @RequestMapping("delete_judge")
