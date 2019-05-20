@@ -54,7 +54,13 @@ public class CustomServiceImpl {
 
 
     public int insertCustom(Custom custom){
-        return customMapper.insertSelective(custom);
+        int i=0;
+        try {
+            i=customMapper.insertSelective(custom);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return i;
     }
 
     public int updateCustom(Custom custom){

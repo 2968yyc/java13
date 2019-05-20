@@ -67,7 +67,7 @@ public class OrderController {
 
         int i =orderService.insertOrder(order);
         Info info=new Info(200,"ok",null);
-        return i!=0?info:new Info(200,"ok",null);
+        return i!=0?info:new Info(2,"订单编号重复",null);
     }
 
 
