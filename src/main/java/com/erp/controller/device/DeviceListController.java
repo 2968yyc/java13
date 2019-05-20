@@ -1,5 +1,6 @@
 package com.erp.controller.device;
 
+import com.erp.annotation.UpdateMethod;
 import com.erp.bean.QueryVO;
 import com.erp.bean.device.Device;
 import com.erp.bean.device.Info;
@@ -112,7 +113,7 @@ public class DeviceListController {
     public @ResponseBody Device getByDeviceTypeId(@PathVariable("id") String id){
         return deviceService.getByDeviceId(id);
     }
-
+    @UpdateMethod("deviceList")
     @RequestMapping("update_note")
     public @ResponseBody Info updateNote(String deviceId,String note){
 

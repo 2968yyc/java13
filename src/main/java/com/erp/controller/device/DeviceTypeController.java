@@ -1,5 +1,6 @@
 package com.erp.controller.device;
 
+import com.erp.annotation.UpdateMethod;
 import com.erp.bean.QueryVO;
 import com.erp.bean.device.Device;
 import com.erp.bean.device.Device_type;
@@ -96,7 +97,7 @@ public class DeviceTypeController {
         return deviceTypeService.searchDeviceTypeByDeviceTypeName(searchValue, page, rows);
 
     }
-
+    @UpdateMethod("deviceType")
     @RequestMapping("update_all")
     public @ResponseBody Info updateDeviceTypeById(Device_type device_type){
         int res = deviceTypeService.update(device_type);

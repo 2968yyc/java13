@@ -22,7 +22,7 @@ http://www.springframework.org/schema/context https://www.springframework.org/sc
 </bean>
 <mvc:annotation-driven conversion-service="mydateConverter"/>
 <context:component-scan base-package="com.erp.controller"/>
-
+    <aop:aspectj-autoproxy/>
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/jsp/"/>
         <property name="suffix" value=".jsp"/>
