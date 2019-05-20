@@ -142,18 +142,24 @@ public class WorkServiceImpl {
             idList.add(c.getProductId());
         }
 
+        if(idList.size()!=0){
+            WorkExample workExample=new WorkExample();
+            workExample.or().andProductIdIn(idList);
 
-        WorkExample workExample=new WorkExample();
-        workExample.or().andProductIdIn(idList);
+            int total=(int) workMapper.countByExample(workExample);
+            pageHander.setTotal(total);
 
-        int total=(int) workMapper.countByExample(workExample);
-        pageHander.setTotal(total);
+            PageHelper.startPage(page,rows);
+            List<Work> list= workMapper.selectByExample(workExample);
 
-        PageHelper.startPage(page,rows);
-        List<Work> list= workMapper.selectByExample(workExample);
+            list=getList(list);
+            pageHander.setRows(list);
 
-        list=getList(list);
-        pageHander.setRows(list);
+        }else{
+            pageHander.setRows(new ArrayList());
+        }
+
+
 
         return pageHander;
     }
@@ -168,19 +174,21 @@ public class WorkServiceImpl {
         for(Device c: deviceList){
             idList.add(c.getDeviceId());
         }
+        if(idList.size()!=0){
+            WorkExample workExample=new WorkExample();
+            workExample.or().andDeviceIdIn(idList);
 
+            int total=(int) workMapper.countByExample(workExample);
+            pageHander.setTotal(total);
 
-        WorkExample workExample=new WorkExample();
-        workExample.or().andDeviceIdIn(idList);
+            PageHelper.startPage(page,rows);
+            List<Work> list= workMapper.selectByExample(workExample);
 
-        int total=(int) workMapper.countByExample(workExample);
-        pageHander.setTotal(total);
-
-        PageHelper.startPage(page,rows);
-        List<Work> list= workMapper.selectByExample(workExample);
-
-        list=getList(list);
-        pageHander.setRows(list);
+            list=getList(list);
+            pageHander.setRows(list);
+        }else{
+            pageHander.setRows(new ArrayList());
+        }
 
         return pageHander;
     }

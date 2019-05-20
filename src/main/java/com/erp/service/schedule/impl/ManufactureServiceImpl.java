@@ -134,17 +134,23 @@ public class ManufactureServiceImpl {
         for(Technology o: technologies){
             names.add(o.getTechnologyId());
         }
+        if(names.size()!=0){
+            ManufactureExample manufactureExample=new ManufactureExample();
+            manufactureExample.or().andTechnologyIdIn(names);
+            int total=(int) manufactureMapper.countByExample(manufactureExample);
+            pageHander.setTotal(total);
 
-        ManufactureExample manufactureExample=new ManufactureExample();
-        manufactureExample.or().andTechnologyIdIn(names);
-        int total=(int) manufactureMapper.countByExample(manufactureExample);
-        pageHander.setTotal(total);
+            PageHelper.startPage(page,rows);
+            List<Manufacture> list= manufactureMapper.selectByExample(manufactureExample);
 
-        PageHelper.startPage(page,rows);
-        List<Manufacture> list= manufactureMapper.selectByExample(manufactureExample);
+            list=getList(list);
+            pageHander.setRows(list);
+        }else{
+            pageHander.setRows(new ArrayList());
+        }
 
-        list=getList(list);
-        pageHander.setRows(list);
+
+
         return pageHander;
     }
 

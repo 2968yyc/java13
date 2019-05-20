@@ -108,9 +108,6 @@ public class ProductServiceImpl {
     public PageHander searchByType(String searchValue,int page,int rows){
         PageHander pageHander=new PageHander();
         ProductExample productExample=new ProductExample();
-        if(searchValue.contains("\\") || searchValue.contains("%")){
-            return null;
-        }
         productExample.or().andProductTypeLike("%"+searchValue+"%");
         int total=(int) productMapper.countByExample(productExample);
         pageHander.setTotal(total);
