@@ -94,6 +94,7 @@ public class OrderController {
         return i==1?info:null;
     }
 
+<<<<<<< HEAD
     @UpdateMethod("order")
     @RequestMapping("update_note")
     @ResponseBody
@@ -105,6 +106,8 @@ public class OrderController {
 
 
 
+=======
+>>>>>>> xf_dev
     @RequestMapping("delete_judge")
     public @ResponseBody Map<String,String> delOrder(HttpServletRequest request){
         return PermissionUtils.permissionCheck("order:delete",request);
