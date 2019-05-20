@@ -44,8 +44,16 @@ public class LogInController {
 
     @RequestMapping("ajaxLogin")
     public @ResponseBody
-    Info login(SysUser user, HttpServletRequest request){
-        //Todo 验证码校验
+    Info login(SysUser user,String randomcode ,HttpServletRequest request){
+        //验证码
+        HttpSession session = request.getSession();
+        if (randomcode!=null){
+            String validateCode = (String) session.getAttribute("validateCode");
+            if (!validateCode.equals(randomcode)){
+                //没输入或瞎几把输入验证码
+                return new Info(0,"randomcode_error",null);
+            }
+        }
         boolean b = userService.selectByName(user.getUsername());
         if (b){
             return new Info(0,"account_error",null);
@@ -57,7 +65,7 @@ public class LogInController {
             return new Info(0,"authentication_error",null);
         }
         else{
-            HttpSession session = request.getSession();
+
             Set<String> sysPermissionList = (Set<String>) session.getAttribute("sysPermissionList");
             if (sysPermissionList==null){
                 sysPermissionList=new LinkedHashSet<>();
