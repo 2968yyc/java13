@@ -90,4 +90,13 @@ public class TechnologyServiceImpl implements TechnologyService {
         List<Technology> technologies = technologyMapper.selectByExample(technologyExample);
         return technologies;
     }
+
+    @Override
+    public int judgeById(Technology technology) {
+        Technology technology1 = technologyMapper.selectByPrimaryKey(technology.getTechnologyId());
+        if(technology1 == null){
+            return 0;
+        }
+        return 1;
+    }
 }

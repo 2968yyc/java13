@@ -164,4 +164,13 @@ public class TechnologyPlanServiceImpl implements TechnologyPlanService {
         List<Technology_plan> technology_plans = technology_planMapper.selectByExample(technology_planExample);
         return technology_plans;
     }
+
+    @Override
+    public int judgeById(Technology_plan technology_plan) {
+        Technology_plan technology_plan1 = technology_planMapper.selectByPrimaryKey(technology_plan.getTechnologyPlanId());
+        if(technology_plan1 == null ){
+            return 0;
+        }
+        return 1;
+    }
 }

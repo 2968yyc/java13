@@ -25,4 +25,6 @@ public interface TechnologyPlanService {
     Technology_plan queryTechnologyPlan(String id);
 
     List<Technology_plan> queryAllTechnologyPlan();
+
+    int judgeById(Technology_plan technology_plan);
 }
