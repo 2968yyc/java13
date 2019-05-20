@@ -1,16 +1,20 @@
 package com.erp.controller.schedule;
 
+import com.erp.annotation.UpdateMethod;
 import com.erp.bean.device.Info;
 import com.erp.bean.schedule.PageHander;
 import com.erp.bean.schedule.Work;
 import com.erp.service.schedule.impl.WorkServiceImpl;
+import com.erp.utils.PermissionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: xf
@@ -50,8 +54,9 @@ public class WorkController {
 
 
     @RequestMapping("add_judge")
-    public String addWork1(){
-        return "work_list";
+    public @ResponseBody
+    Map<String,String> addWork1(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("work:add",request);
     }
 
     @RequestMapping("add")
@@ -69,14 +74,16 @@ public class WorkController {
 
 
     @RequestMapping("edit_judge")
-    public String editWork1(){
-        return "work_list";
+    public @ResponseBody Map<String,String> editWork1(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("work:edit",request);
     }
 
     @RequestMapping("edit")
     public String editWork2(){
         return "work_edit";
     }
+
+    @UpdateMethod("work")
     @RequestMapping("update_all")
     @ResponseBody
     public Info editWork3(Work work){
@@ -88,8 +95,8 @@ public class WorkController {
 
 
     @RequestMapping("delete_judge")
-    public String delWork(){
-        return "work_list";
+    public @ResponseBody Map<String,String> delWork(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("work:delete",request);
     }
 
     @RequestMapping("delete_batch")

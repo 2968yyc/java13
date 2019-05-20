@@ -85,28 +85,6 @@ public class MainController {
     }
 
 
-    /*public void downloadfile(HttpServletRequest request,HttpServletResponse response) throws Exception{  
-        //模拟文件，myfile.txt为需要下载的文件  
-        String fileName = request.getSession().getServletContext().getRealPath("upload")+"/myfile.txt";  
-        //获取输入流  
-        InputStream bis = new BufferedInputStream(new FileInputStream(new File(fileName)));  
-        //假如以中文名下载的话  
-        String filename = "下载文件.txt";  
-        //转码，免得文件名中文乱码  
-        filename = URLEncoder.encode(filename,"UTF-8");  
-        //设置文件下载头  
-        response.addHeader("Content-Disposition", "attachment;filename=" + filename);    
-        //1.设置文件ContentType类型，这样设置，会自动判断下载文件类型    
-        response.setContentType("multipart/form-data");   
-        BufferedOutputStream out = new BufferedOutputStream(response.getOutputStream());  
-        int len = 0;  
-        while((len = bis.read()) != -1){  
-            out.write(len);  
-            out.flush();  
-        }  
-        out.close();  
-    } */
-
     @RequestMapping("file/download")
     public void downloadFile(String fileName,HttpServletRequest req, HttpServletResponse resp){
         String filepath=req.getSession().getServletContext().getRealPath("/WEB-INF/")+fileName;
@@ -118,7 +96,7 @@ public class MainController {
             name= URLEncoder.encode(name,"utf-8");
             resp.addHeader("Content-Disposition","attachment;filename="+name);
             resp.setContentType("multipart/form-data");
-             out= new BufferedOutputStream(resp.getOutputStream());
+            out= new BufferedOutputStream(resp.getOutputStream());
             byte[] b=new byte[2048];
             int len=0;
             while((len = bis.read(b))!=-1){
@@ -150,6 +128,31 @@ public class MainController {
     }
 
 
+    @RequestMapping("file/upload")
+    public @ResponseBody
+    UploadInfo uploadfile( @RequestParam(value = "file", required = false) MultipartFile file, HttpServletRequest request) {
+        String fileName = file.getOriginalFilename();
+        String path = request.getSession().getServletContext().getRealPath("/WEB-INF/file/");
+        String suffix = fileName.substring(fileName.lastIndexOf("."));
+        String prefix = fileName.substring(0, fileName.lastIndexOf("."));
+        long time = new Date().getTime();
+        String newFileName = prefix + time + suffix;
+        File newFile = new File(path + newFileName);
+        if (!newFile.getParentFile().exists()) {
+            newFile.getParentFile().mkdir();
+        }
+        try {
+            file.transferTo(newFile);
+            return new UploadInfo(0, "file/" + newFileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new UploadInfo(1, null, "网络异常，请重新上传");
+        }
+    }
+
+
+
+
 
     @RequestMapping("file/delete")
     @ResponseBody
@@ -160,6 +163,7 @@ public class MainController {
         String path=request.getSession().getServletContext().getRealPath(newFilePath);
         File file =new File(path);
         boolean res=file.delete();
+        System.out.println(res);
         map.put("data","success");
         return map;
     }
