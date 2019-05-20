@@ -5,6 +5,7 @@ import com.erp.bean.device.Info;
 import com.erp.bean.user.ActiveUser;
 import com.erp.bean.user.SysUser;
 import com.erp.service.user.UserService;
+import com.erp.utils.PermissionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Isolation;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: yyc
@@ -42,9 +44,10 @@ public class UserController {
 
     @RequestMapping("add_judge")
     @ResponseBody
-    public String add_judge(){
-        return "";
+    Map<String,String> addJudge(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("user:add",request);
     }
+
 
     @RequestMapping("add")
     public String add(){

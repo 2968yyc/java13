@@ -1,5 +1,6 @@
 package com.erp.controller.device;
 
+import com.erp.annotation.UpdateMethod;
 import com.erp.bean.QueryVO;
 import com.erp.bean.device.Device_maintain;
 import com.erp.bean.device.Info;
@@ -89,6 +90,7 @@ public class DeviceMaintainController {
         return deviceMaintainService.searchDeviceMaintainByDeviceFaultId(searchValue, page, rows);
 
     }
+    @UpdateMethod("deviceMaintain")
     @RequestMapping("update_note")
     public @ResponseBody Info updateNote(String deviceMaintainId,String note){
 

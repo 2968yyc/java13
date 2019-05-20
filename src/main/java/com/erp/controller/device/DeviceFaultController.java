@@ -1,5 +1,6 @@
 package com.erp.controller.device;
 
+import com.erp.annotation.UpdateMethod;
 import com.erp.bean.QueryVO;
 import com.erp.bean.device.Device_fault;
 import com.erp.bean.device.Info;
@@ -103,6 +104,7 @@ public class DeviceFaultController {
     public @ResponseBody Device_fault getByDeviceTypeId(@PathVariable("id") String id){
         return deviceFaultService.getByDeviceFaultId(id);
     }
+    @UpdateMethod("deviceFault")
     @RequestMapping("update_note")
     public @ResponseBody Info updateNote(Device_fault device_fault){
 
