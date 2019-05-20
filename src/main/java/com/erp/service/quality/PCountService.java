@@ -17,4 +17,6 @@ public interface PCountService {
     boolean deletePCountByCountCheckIds(String[] ids);
 
     QueryVO searchPCountBypCountCheckId(String searchValue, int page, int rows);
+
+    boolean selectPCountBypCountCheckId(String pCountCheckId);
 }

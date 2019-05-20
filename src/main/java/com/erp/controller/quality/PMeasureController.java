@@ -49,11 +49,12 @@ public class PMeasureController {
     @RequestMapping("p_measure_check/insert")
     @ResponseBody
     public Info insert(ProcessMeasure processMeasure){
-        boolean flag = pMeasureService.insert(processMeasure);
-        if (flag){
-            return new Info(200,"OK",null);
+        boolean b = pMeasureService.selectPMeasureBypMeasureCheckId(processMeasure.getpMeasureCheckId());
+        if (b){
+            boolean flag = pMeasureService.insert(processMeasure);
+            return returnInfo(flag, "插入失败，请稍后重试！");
         }else {
-            return new Info(0,"error",null);
+            return new Info(0, "工序计量质检编号已经存在，请更换！",null);
         }
     }
 
@@ -74,11 +75,7 @@ public class PMeasureController {
     @ResponseBody
     public Info update_all(ProcessMeasure processMeasure){
         boolean flag = pMeasureService.updatePMeasureBypMeasureCheckId(processMeasure);
-        if (flag){
-            return new Info(200,"OK",null);
-        }else {
-            return new Info(0,"error",null);
-        }
+        return returnInfo(flag, "更新失败，请稍后重试！");
     }
 
     /*----------------------------以下是删除功能----------------------------*/
@@ -94,11 +91,7 @@ public class PMeasureController {
     //删除功能
     public Info delete_batch(String[] ids){
         boolean flag = pMeasureService.deletePMeasureBypMeasureCheckIds(ids);
-        if (flag){
-            return new Info(200,"OK",null);
-        }else {
-            return new Info(0,"error",null);
-        }
+        return returnInfo(flag, "删除失败，请稍后重试！");
     }
 
     /*----------------------------以下是模糊查询功能----------------------------*/
@@ -107,5 +100,13 @@ public class PMeasureController {
     @ResponseBody
     public QueryVO searchFMeasureCheckByFMeasureCheckId(String searchValue, int page, int rows){
         return pMeasureService.searchPMeasureByfpMeasureCheckId(searchValue, page, rows);
+    }
+
+    public Info returnInfo(boolean flag, String message){
+        if (flag){
+            return new Info(200,"OK",null);
+        }else {
+            return new Info(0,message,null);
+        }
     }
 }

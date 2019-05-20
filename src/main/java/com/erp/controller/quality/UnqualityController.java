@@ -49,12 +49,13 @@ public class UnqualityController {
     @RequestMapping("insert")
     @ResponseBody
     //插入功能
-    public Info insert(Unqualify unqualify, Model model){
-        boolean flag = unqualityService.insertUnqualify(unqualify);
-        if (flag){
-            return new Info(200,"OK",null);
+    public Info insert(Unqualify unqualify){
+        boolean b = unqualityService.selectUnqualifyByUnqualifyId(unqualify.getUnqualifyApplyId());
+        if (b){
+            boolean flag = unqualityService.insertUnqualify(unqualify);
+            return returnInfo(flag, "插入失败，请稍后重试！");
         }else {
-            return new Info(0,"error",null);
+            return new Info(0,"该不合格品申请编号已经存在，请更换！", null);
         }
     }
 
@@ -71,11 +72,7 @@ public class UnqualityController {
     //删除功能
     public Info delete_batch(String[] ids){
         boolean flag = unqualityService.deleteUnqualifyById(ids);
-        if (flag){
-            return new Info(200,"OK",null);
-        }else {
-            return new Info(0,"error",null);
-        }
+        return returnInfo(flag, "删除不合格品信息失败");
     }
 
     /*----------------------------以下是模糊查询功能----------------------------*/
@@ -112,10 +109,14 @@ public class UnqualityController {
     @ResponseBody
     public Info update_all(Unqualify unqualify){
         boolean flag = unqualityService.updateUnqualifyByUnqualifyId(unqualify);
+        return returnInfo(flag, "修改不合格品申请信息失败");
+    }
+
+    public Info returnInfo(boolean flag, String message){
         if (flag){
             return new Info(200,"OK",null);
         }else {
-            return new Info(0,"error",null);
+            return new Info(0,message,null);
         }
     }
 }

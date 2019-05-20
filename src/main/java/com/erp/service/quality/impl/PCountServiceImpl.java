@@ -33,26 +33,38 @@ public class PCountServiceImpl implements PCountService {
 
     @Override
     public boolean insert(ProcessCount processCount) {
-        int insert = processCountMapper.insert(processCount);
-        return insert == 1;
+        try {
+            int insert = processCountMapper.insert(processCount);
+            return insert == 1;
+        }catch (Exception e){
+            return false;
+        }
     }
 
     @Override
     public boolean updatePCountBypCountCheckId(ProcessCount processCount) {
-        int update = processCountMapper.updateByPrimaryKey(processCount);
-        return update == 1;
+        try {
+            int update = processCountMapper.updateByPrimaryKey(processCount);
+            return update == 1;
+        }catch (Exception e){
+            return false;
+        }
     }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ)
     public boolean deletePCountByCountCheckIds(String[] ids) {
-        for (String id : ids) {
-            int key = processCountMapper.deleteByPrimaryKey(id);
-            if (key != 1){
-                return false;
+        try {
+            for (String id : ids) {
+                int key = processCountMapper.deleteByPrimaryKey(id);
+                if (key != 1){
+                    return false;
+                }
             }
+            return true;
+        }catch (Exception e){
+            return false;
         }
-        return true;
     }
 
     @Override
@@ -61,5 +73,11 @@ public class PCountServiceImpl implements PCountService {
         PageHelper.startPage(page, rows);
         List<ProcessCount> processCounts = processCountMapper.selectPCountCheckLeft(searchValue);
         return new QueryVO(total, processCounts);
+    }
+
+    @Override
+    public boolean selectPCountBypCountCheckId(String pCountCheckId){
+        ProcessCount processCount = processCountMapper.selectByPrimaryKey(pCountCheckId);
+        return processCount == null;
     }
 }

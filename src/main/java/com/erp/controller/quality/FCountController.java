@@ -43,17 +43,18 @@ public class FCountController {
 
     @RequestMapping("f_count_check/add")
     public String add(){
-        return "measurement_add";
+        return "f_count_check_add";
     }
 
     @RequestMapping("f_count_check/insert")
     @ResponseBody
     public Info insert(FinalCount finalCount){
-        boolean flag = fCountService.insert(finalCount);
-        if (flag){
-            return new Info(200,"OK",null);
+        boolean b = fCountService.selectFCountByfCountCheckId(finalCount.getfCountCheckId());
+        if (b){
+            boolean flag = fCountService.insert(finalCount);
+            return returnInfo(flag, "插入失败，请稍后重试！");
         }else {
-            return new Info(0,"error",null);
+            return new Info(0, "成品计数质检编号已经存在，请更换！", null);
         }
     }
 
@@ -67,18 +68,14 @@ public class FCountController {
 
     @RequestMapping("f_count_check/edit")
     public String edit(){
-        return "measurement_edit";
+        return "f_count_check_edit";
     }
 
     @RequestMapping("f_count_check/update_all")
     @ResponseBody
     public Info update_all(FinalCount finalCount){
         boolean flag = fCountService.updateFCountByfCountCheckId(finalCount);
-        if (flag){
-            return new Info(200,"OK",null);
-        }else {
-            return new Info(0,"error",null);
-        }
+        return returnInfo(flag, "更新失败，请稍后重试！");
     }
 
     /*----------------------------以下是删除功能----------------------------*/
@@ -94,11 +91,7 @@ public class FCountController {
     //删除功能
     public Info delete_batch(String[] ids){
         boolean flag = fCountService.deleteFCountByfCountCheckIds(ids);
-        if (flag){
-            return new Info(200,"OK",null);
-        }else {
-            return new Info(0,"error",null);
-        }
+        return returnInfo(flag, "删除失败，请稍后重试！");
     }
 
     /*----------------------------以下是模糊查询功能----------------------------*/
@@ -113,5 +106,13 @@ public class FCountController {
     @ResponseBody
     public QueryVO searchfMeasureCheckByOrderId(String searchValue, int page, int rows){
         return fCountService.searchFCountByOrderId(searchValue, page, rows);
+    }
+
+    public Info returnInfo(boolean flag, String message){
+        if (flag){
+            return new Info(200,"OK",null);
+        }else {
+            return new Info(0,message,null);
+        }
     }
 }

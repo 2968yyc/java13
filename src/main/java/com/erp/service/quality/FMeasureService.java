@@ -19,4 +19,6 @@ public interface FMeasureService {
     QueryVO searchfMeasureCheckByOrderId(String searchValue, int page, int rows);
 
     boolean insert(FinalMeasuret finalMeasuret);
+
+    boolean selectfMeasureCheckByFMeasureCheckId(String fMeasureCheckId);
 }

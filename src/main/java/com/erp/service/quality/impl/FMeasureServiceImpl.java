@@ -33,20 +33,28 @@ public class FMeasureServiceImpl implements FMeasureService {
 
     @Override
     public boolean updateMeasureByfMeasureCheckId(FinalMeasuret finalMeasuret) {
-        int update = finalMeasuretMapper.updateByPrimaryKey(finalMeasuret);
-        return update == 1;
+        try {
+            int update = finalMeasuretMapper.updateByPrimaryKey(finalMeasuret);
+            return update == 1;
+        }catch (Exception e){
+            return false;
+        }
     }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ)
     public boolean deleteMeasureByfMeasureCheckIds(String[] ids) {
-        for (String id : ids) {
-            int key = finalMeasuretMapper.deleteByPrimaryKey(id);
-            if (key != 1){
-                return false;
+        try {
+            for (String id : ids) {
+                int key = finalMeasuretMapper.deleteByPrimaryKey(id);
+                if (key != 1){
+                    return false;
+                }
             }
+            return true;
+        }catch (Exception e){
+            return false;
         }
-        return true;
     }
 
     @Override
@@ -67,9 +75,18 @@ public class FMeasureServiceImpl implements FMeasureService {
 
     @Override
     public boolean insert(FinalMeasuret finalMeasuret) {
-        int insert = finalMeasuretMapper.insert(finalMeasuret);
-        return insert == 1;
+        try {
+            int insert = finalMeasuretMapper.insert(finalMeasuret);
+            return insert == 1;
+        }catch (Exception e){
+            return false;
+        }
     }
 
+    @Override
+    public boolean selectfMeasureCheckByFMeasureCheckId(String fMeasureCheckId){
+        FinalMeasuret finalMeasuret = finalMeasuretMapper.selectByPrimaryKey(fMeasureCheckId);
+        return finalMeasuret == null;
+    }
 
 }

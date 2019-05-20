@@ -49,11 +49,12 @@ public class PCountController {
     @RequestMapping("p_count_check/insert")
     @ResponseBody
     public Info insert(ProcessCount processCount){
-        boolean flag = pCountService.insert(processCount);
-        if (flag){
-            return new Info(200,"OK",null);
+        boolean b = pCountService.selectPCountBypCountCheckId(processCount.getpCountCheckId());
+        if (b){
+            boolean flag = pCountService.insert(processCount);
+            return returnInfo(flag, "插入失败，请稍后重试！");
         }else {
-            return new Info(0,"error",null);
+            return new Info(0, "工序计数质检编号已经存在，请更换！", null);
         }
     }
 
@@ -74,11 +75,7 @@ public class PCountController {
     @ResponseBody
     public Info update_all(ProcessCount processCount){
         boolean flag = pCountService.updatePCountBypCountCheckId(processCount);
-        if (flag){
-            return new Info(200,"OK",null);
-        }else {
-            return new Info(0,"error",null);
-        }
+        return returnInfo(flag, "更新失败，请稍后重试！");
     }
 
     /*----------------------------以下是删除功能----------------------------*/
@@ -94,11 +91,7 @@ public class PCountController {
     //删除功能
     public Info delete_batch(String[] ids){
         boolean flag = pCountService.deletePCountByCountCheckIds(ids);
-        if (flag){
-            return new Info(200,"OK",null);
-        }else {
-            return new Info(0,"error",null);
-        }
+        return returnInfo(flag, "删除失败，请稍后重试！");
     }
 
     /*----------------------------以下是模糊查询功能----------------------------*/
@@ -107,5 +100,13 @@ public class PCountController {
     @ResponseBody
     public QueryVO searchPCountBypCountCheckId(String searchValue, int page, int rows){
         return pCountService.searchPCountBypCountCheckId(searchValue, page, rows);
+    }
+
+    public Info returnInfo(boolean flag, String message){
+        if (flag){
+            return new Info(200,"OK",null);
+        }else {
+            return new Info(0,message,null);
+        }
     }
 }
