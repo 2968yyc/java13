@@ -82,10 +82,11 @@ public class MainController {
         return map;
     }
 
+
     @RequestMapping("file/upload")
     public @ResponseBody
     UploadInfo uploadfile( @RequestParam(value = "file", required = false) MultipartFile file, HttpServletRequest request) {
-        String fileName=file.getOriginalFilename();
+        String fileName = file.getOriginalFilename();
         String path = request.getSession().getServletContext().getRealPath("/WEB-INF/file/");
         String suffix = fileName.substring(fileName.lastIndexOf("."));
         String prefix = fileName.substring(0, fileName.lastIndexOf("."));
@@ -95,6 +96,7 @@ public class MainController {
         if (!newFile.getParentFile().exists()) {
             newFile.getParentFile().mkdir();
         }
+
         try {
             file.transferTo(newFile);
             return new UploadInfo(0, "file/"+newFileName);
@@ -103,6 +105,8 @@ public class MainController {
             return new UploadInfo(1, null,"网络异常，请重新上传");
         }
     }
+
+
 
     @RequestMapping("file/delete")
     @ResponseBody
