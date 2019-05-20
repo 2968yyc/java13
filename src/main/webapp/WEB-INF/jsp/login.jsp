@@ -151,6 +151,112 @@
 			</form>
 		</div>
 	</div>
+	<script type="text/javascript">
+		$(function(){
+			var levitate=$('.levitate'),
+					timer,
+					fleft=true,
+					ftop=true,
+					x,y;
+			var stepLeft=5, //每一步横向移动的距离
+					stepTop=2,  //每一步纵向移动的距离
+					interval=100;  //定时器时间间隔
+
+			move();
+
+			function move(){
+				timer=setInterval(function(){
+					var nowleft=parseInt(levitate.css('left')),
+							nowtop=parseInt(levitate.css('top'));
+					if(nowleft<stepLeft){
+						if(ftop){
+							x=stepLeft;
+							y=stepTop;
+						}else{
+							x=stepLeft;
+							y=-stepTop;
+						}
+						fleft=true;
+					}else if(nowleft>$(window).width()-100){
+						if(ftop){
+							x=-stepLeft;
+							y=stepTop;
+						}else{
+							x=-stepLeft;
+							y=-stepTop;
+						}
+						fleft=false;
+					}
+
+					if(nowtop<stepTop){
+						if(fleft){
+							x=stepLeft;
+							y=stepTop;
+						}else{
+							x=-stepLeft;
+							y=stepTop;
+						}
+						ftop=true;
+					}else if(nowtop>$(window).height()-50){
+						if(fleft){
+							x=stepLeft;
+							y=-stepTop
+						}else{
+							x=-stepLeft;
+							y=-stepTop;
+						}
+						ftop=false;
+					}
+
+					step(x,y);
+				},interval)
+			}
+
+			function step(offsetLeft,offsetTop){
+				var left=parseInt(levitate.css('left'))+offsetLeft;
+				top=parseInt(levitate.css('top'))+offsetTop;
+				if(offsetLeft>0){
+					offsetLeft='+='+offsetLeft;
+					if(offsetTop>0){
+						offsetTop='+='+offsetTop;
+					}else{
+						offsetTop='-='+Math.abs(offsetTop);
+					}
+				}else{
+					offsetLeft='-='+Math.abs(offsetLeft);
+					if(offsetTop>0){
+						offsetTop='+='+offsetTop;
+					}else{
+						offsetTop='-='+Math.abs(offsetTop);
+					}
+				}
+				levitate.animate({'left':offsetLeft,'top':offsetTop},50);
+			}
+		})
+	</script>
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0
+		}
+		.levitate {
+			width: 100px;
+			height: 50px;
+			text-align: center;
+			line-height: 50px;
+			border-radius: 5px;
+			position:fixed;
+			top:0;
+			left:0;
+		}
+	</style>
+
+	<div title="首页" style="padding:20px;">
+		<div class="levitate" id="fdck">
+			<a href="http://www.cskaoyan.com/thread-652558-1-1.html" target="_blank"><img src="http://www.cskaoyan.com/data/attachment/common/cf/195956ga7dwfirqq0ddqzq.jpg" alt="风华漫舞站长首次直播" border="0"></a>
+		</div>
+
+	</div>
 <script type="text/javascript" src="js/login/placeholder.js"></script>
 <script type="text/javascript">
 		$("#login")
