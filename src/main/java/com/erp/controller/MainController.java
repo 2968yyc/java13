@@ -113,6 +113,7 @@ public class MainController {
         String path=request.getSession().getServletContext().getRealPath(newFilePath);
         File file =new File(path);
         boolean res=file.delete();
+        System.out.println(res);
         map.put("data","success");
         return map;
     }
