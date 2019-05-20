@@ -1,7 +1,6 @@
 package com.erp.service.quality.impl;
 
 import com.erp.bean.QueryVO;
-import com.erp.bean.quality.FinalMeasuret;
 import com.erp.bean.quality.ProcessMeasure;
 import com.erp.mapper.quality.ProcessMeasureMapper;
 import com.erp.service.quality.PMeasureService;
@@ -35,26 +34,38 @@ public class PMeasureServiceImpl implements PMeasureService {
 
     @Override
     public boolean insert(ProcessMeasure processMeasure) {
-        int insert = processMeasureMapper.insert(processMeasure);
-        return insert == 1;
+        try {
+            int insert = processMeasureMapper.insert(processMeasure);
+            return insert == 1;
+        }catch (Exception e){
+            return false;
+        }
     }
 
     @Override
     public boolean updatePMeasureBypMeasureCheckId(ProcessMeasure processMeasure) {
-        int update = processMeasureMapper.updateByPrimaryKey(processMeasure);
-        return update == 1;
+        try {
+            int update = processMeasureMapper.updateByPrimaryKey(processMeasure);
+            return update == 1;
+        }catch (Exception e){
+            return false;
+        }
     }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ)
     public boolean deletePMeasureBypMeasureCheckIds(String[] ids) {
-        for (String id : ids) {
-            int key = processMeasureMapper.deleteByPrimaryKey(id);
-            if (key != 1){
-                return false;
+        try {
+            for (String id : ids) {
+                int key = processMeasureMapper.deleteByPrimaryKey(id);
+                if (key != 1){
+                    return false;
+                }
             }
+            return true;
+        }catch (Exception e){
+            return false;
         }
-        return true;
     }
 
     @Override
@@ -63,5 +74,11 @@ public class PMeasureServiceImpl implements PMeasureService {
         PageHelper.startPage(page, rows);
         List<ProcessMeasure> measurets = processMeasureMapper.selectPMeasureCheckLeft(searchValue);
         return new QueryVO(total, measurets);
+    }
+
+    @Override
+    public boolean selectPMeasureBypMeasureCheckId(String pMeasureCheckId){
+        ProcessMeasure processMeasure = processMeasureMapper.selectByPrimaryKey(pMeasureCheckId);
+        return processMeasure == null;
     }
 }

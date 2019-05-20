@@ -19,4 +19,6 @@ public interface FCountService {
     QueryVO searchFCountByfCountCheckId(String searchValue, int page, int rows);
 
     QueryVO searchFCountByOrderId(String searchValue, int page, int rows);
+
+    boolean selectFCountByfCountCheckId(String fCountCheckId);
 }

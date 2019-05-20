@@ -1,11 +1,13 @@
 package com.erp.controller.technology;
 
+import com.erp.annotation.UpdateMethod;
 import com.erp.bean.device.Info;
 import com.erp.bean.technology.PageHelper;
 import com.erp.bean.technology.Technology;
 import com.erp.bean.technology.Technology_requirement;
 import com.erp.service.technology.TechnologyService;
 import com.erp.service.technology.Technology_requirementService;
+import com.erp.utils.PermissionUtils;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author : zjf
@@ -68,9 +72,10 @@ public class TechnologyRequirementController {
         }
     }
 
-    @RequestMapping("/add_judge")
-    public @ResponseBody String technologyRequirement_add(){
-        return "";
+    @RequestMapping("add_judge")
+    public @ResponseBody
+    Map<String,String> addDudge(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("technologyRequirement:add",request);
     }
 
     @RequestMapping("/add")
@@ -102,6 +107,7 @@ public class TechnologyRequirementController {
         return "technologyRequirement_edit";
     }
 
+    @UpdateMethod("technologyRequirement")
     @RequestMapping("/update_all")
     public @ResponseBody Info technologyRequirementnedit(Technology_requirement technology_requirement){
         int i = technology_requirementService.editBytechnologyRequirement(technology_requirement);
@@ -112,6 +118,7 @@ public class TechnologyRequirementController {
         }
     }
 
+    @UpdateMethod("technologyRequirement")
     @RequestMapping("/update_requirement")
     @ResponseBody
     public Info technologyRequirement_update(Technology_requirement technology_requirement){

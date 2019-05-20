@@ -35,26 +35,38 @@ public class FCountServiceImpl implements FCountService {
 
     @Override
     public boolean insert(FinalCount finalCount) {
-        int insert = finalCountMapper.insert(finalCount);
-        return insert == 1;
+        try{
+            int insert = finalCountMapper.insert(finalCount);
+            return insert == 1;
+        }catch (Exception e){
+            return false;
+        }
     }
 
     @Override
     public boolean updateFCountByfCountCheckId(FinalCount finalCount) {
-        int update = finalCountMapper.updateByPrimaryKey(finalCount);
-        return update == 1;
+        try {
+            int update = finalCountMapper.updateByPrimaryKey(finalCount);
+            return update == 1;
+        }catch (Exception e){
+            return false;
+        }
     }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ)
     public boolean deleteFCountByfCountCheckIds(String[] ids) {
-        for (String id : ids) {
-            int key = finalCountMapper.deleteByPrimaryKey(id);
-            if (key != 1){
-                return false;
+        try {
+            for (String id : ids) {
+                int key = finalCountMapper.deleteByPrimaryKey(id);
+                if (key != 1){
+                    return false;
+                }
             }
+            return true;
+        }catch (Exception e){
+            return false;
         }
-        return true;
     }
 
     @Override
@@ -71,5 +83,11 @@ public class FCountServiceImpl implements FCountService {
         PageHelper.startPage(page, rows);
         List<FinalMeasuret> measurets = finalCountMapper.selectFinalCountLeft(null, searchValue);
         return new QueryVO(total, measurets);
+    }
+
+    @Override
+    public boolean selectFCountByfCountCheckId(String fCountCheckId){
+        FinalCount finalCount = finalCountMapper.selectByPrimaryKey(fCountCheckId);
+        return finalCount == null;
     }
 }

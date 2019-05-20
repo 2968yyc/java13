@@ -94,6 +94,15 @@ public class OrderController {
         return i==1?info:null;
     }
 
+    @UpdateMethod("order")
+    @RequestMapping("update_note")
+    @ResponseBody
+    public Info updateNote(Order order){
+        int i=orderService.updateOrder(order);
+        Info info=new Info(200,"ok",null);
+        return i==1?info:null;
+    }
+
 
 
     @RequestMapping("delete_judge")
@@ -125,5 +134,6 @@ public class OrderController {
     public PageHander searchOrderByProductName(String searchValue,int page,int rows){
         return orderService.searchByProductName(searchValue,page,rows);
     }
+
 
  }

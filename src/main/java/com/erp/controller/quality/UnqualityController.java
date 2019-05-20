@@ -1,14 +1,19 @@
 package com.erp.controller.quality;
 
+import com.erp.annotation.UpdateMethod;
 import com.erp.bean.QueryVO;
 import com.erp.bean.device.Info;
 import com.erp.bean.quality.Unqualify;
 import com.erp.service.quality.UnqualityService;
+import com.erp.utils.PermissionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 @Controller
 @RequestMapping("unqualify")
@@ -37,8 +42,8 @@ public class UnqualityController {
 
     @RequestMapping("add_judge")
     @ResponseBody
-    public String add_judge(){
-        return "";
+    public Map<String, String> add_judge(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("unqualify:add",request);
     }
 
     @RequestMapping("add")
@@ -49,12 +54,13 @@ public class UnqualityController {
     @RequestMapping("insert")
     @ResponseBody
     //插入功能
-    public Info insert(Unqualify unqualify, Model model){
-        boolean flag = unqualityService.insertUnqualify(unqualify);
-        if (flag){
-            return new Info(200,"OK",null);
+    public Info insert(Unqualify unqualify){
+        boolean b = unqualityService.selectUnqualifyByUnqualifyId(unqualify.getUnqualifyApplyId());
+        if (b){
+            boolean flag = unqualityService.insertUnqualify(unqualify);
+            return returnInfo(flag, "插入失败，请稍后重试！");
         }else {
-            return new Info(0,"error",null);
+            return new Info(0,"该不合格品申请编号已经存在，请更换！", null);
         }
     }
 
@@ -62,8 +68,8 @@ public class UnqualityController {
 
     @RequestMapping("delete_judge")
     @ResponseBody
-    public String delete_judge(){
-        return "";
+    public Map<String, String> delete_judge(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("unqualify:delete",request);
     }
 
     @RequestMapping("delete_batch")
@@ -71,11 +77,7 @@ public class UnqualityController {
     //删除功能
     public Info delete_batch(String[] ids){
         boolean flag = unqualityService.deleteUnqualifyById(ids);
-        if (flag){
-            return new Info(200,"OK",null);
-        }else {
-            return new Info(0,"error",null);
-        }
+        return returnInfo(flag, "删除不合格品信息失败");
     }
 
     /*----------------------------以下是模糊查询功能----------------------------*/
@@ -84,14 +86,16 @@ public class UnqualityController {
     @ResponseBody
     //根据不合格品申请编号查询的功能
     public QueryVO searchUnqualifyByUnqualifyId(String searchValue, int page, int rows){
-        return unqualityService.searchUnqualifyByUnqualifyId(searchValue, page, rows);
+        String unqualifyId = "%" + searchValue + "%";
+        return unqualityService.searchUnqualifyByUnqualifyId(unqualifyId, page, rows);
     }
 
     @RequestMapping("search_unqualify_by_productName")
     @ResponseBody
     //根据不合格品申请编号查询的功能
     public QueryVO searchUnqualifyByProductName(String searchValue, int page, int rows){
-        return unqualityService.searchUnqualifyByProductName(searchValue, page, rows);
+        String productName = "%" + searchValue + "%";
+        return unqualityService.searchUnqualifyByProductName(productName, page, rows);
     }
 
 
@@ -99,8 +103,8 @@ public class UnqualityController {
 
     @RequestMapping("edit_judge")
     @ResponseBody
-    public String edit_judge(){
-        return "";
+    public Map<String, String> edit_judge(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("unqualify:edit",request);
     }
 
     @RequestMapping("edit")
@@ -108,14 +112,19 @@ public class UnqualityController {
         return "unqualify_edit";
     }
 
+    @UpdateMethod("unqualify")
     @RequestMapping("update_all")
     @ResponseBody
     public Info update_all(Unqualify unqualify){
         boolean flag = unqualityService.updateUnqualifyByUnqualifyId(unqualify);
+        return returnInfo(flag, "修改不合格品申请信息失败");
+    }
+
+    public Info returnInfo(boolean flag, String message){
         if (flag){
             return new Info(200,"OK",null);
         }else {
-            return new Info(0,"error",null);
+            return new Info(0,message,null);
         }
     }
 }

@@ -33,20 +33,28 @@ public class UnqualityServiceImpl implements UnqualityService {
 
     @Override
     public boolean insertUnqualify(Unqualify unqualify){
-        int insert = unqualifyMapper.insert(unqualify);
-        return insert == 1;
+        try {
+            int insert = unqualifyMapper.insert(unqualify);
+            return insert == 1;
+        }catch (Exception e){
+            return false;
+        }
     }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ)
     public boolean deleteUnqualifyById(String[] ids){
-        for (String id : ids) {
-            int key = unqualifyMapper.deleteByPrimaryKey(id);
-            if (key != 1){
-                return false;
+        try {
+            for (String id : ids) {
+                int key = unqualifyMapper.deleteByPrimaryKey(id);
+                if (key != 1){
+                    return false;
+                }
             }
+            return true;
+        }catch (Exception e){
+            return false;
         }
-        return true;
     }
 
     @Override
@@ -59,8 +67,12 @@ public class UnqualityServiceImpl implements UnqualityService {
 
     @Override
     public boolean updateUnqualifyByUnqualifyId(Unqualify unqualify){
-        int update = unqualifyMapper.updateByPrimaryKey(unqualify);
-        return update == 1;
+        try {
+            int update = unqualifyMapper.updateByPrimaryKey(unqualify);
+            return update == 1;
+        }catch (Exception e){
+            return false;
+        }
     }
 
     @Override
@@ -69,5 +81,11 @@ public class UnqualityServiceImpl implements UnqualityService {
         PageHelper.startPage(page, rows);
         List<Unqualify> unqualifies = unqualifyMapper.selectAllPageUnqualifyLeftByProductName(searchValue);
         return new QueryVO(total, unqualifies);
+    }
+
+    @Override
+    public boolean selectUnqualifyByUnqualifyId(String id){
+        Unqualify unqualify = unqualifyMapper.selectByPrimaryKey(id);
+        return unqualify == null;
     }
 }

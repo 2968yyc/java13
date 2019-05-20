@@ -92,6 +92,15 @@ public class ProductController {
         return i==1?info:null;
     }
 
+    @UpdateMethod("product")
+    @RequestMapping("update_note")
+    @ResponseBody
+    public Info updateNote(Product product){
+        int i=productService.updateProduct(product);
+        Info info=new Info(200,"ok",null);
+        return i==1?info:null;
+    }
+
 
 
     @RequestMapping("delete_judge")

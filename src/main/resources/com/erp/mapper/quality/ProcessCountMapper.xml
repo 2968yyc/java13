@@ -350,7 +350,7 @@
       left JOIN employee e on pc.emp_id = e.emp_id
       <where>
         <if test="pCountCheckId != null">
-          and pc.p_count_check_id like '%${pCountCheckId}%'
+          and pc.p_count_check_id like #{pCountCheckId}
         </if>
       </where>
   </select>
@@ -361,7 +361,7 @@
     left JOIN employee e on pc.emp_id = e.emp_id
     <where>
       <if test="pCountCheckId != null">
-        and pc.p_count_check_id like '%${pCountCheckId}%'
+        and pc.p_count_check_id like #{pCountCheckId}
       </if>
     </where>
   </select>
