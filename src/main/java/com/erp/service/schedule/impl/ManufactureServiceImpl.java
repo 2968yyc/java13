@@ -73,7 +73,13 @@ public class ManufactureServiceImpl {
 
 
     public int insertManufacture(Manufacture manufacture){
-        return manufactureMapper.insertSelective(manufacture);
+        int i=0;
+        try {
+            i=manufactureMapper.insertSelective(manufacture);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return i;
     }
 
     public int updateManufacture(Manufacture manufacture){

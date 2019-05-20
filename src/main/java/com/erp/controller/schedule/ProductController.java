@@ -64,7 +64,7 @@ public class ProductController {
     public Info insertProduct(Product product){
         int i =productService.insertProduct(product);
         Info info=new Info(200,"ok",null);
-        return i!=0?info:null;
+        return i!=0?info:new Info(2,"产品编号重复",null);
     }
 
 

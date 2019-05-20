@@ -1,5 +1,6 @@
 package com.erp.controller.device;
 
+import com.erp.annotation.UpdateMethod;
 import com.erp.bean.QueryVO;
 import com.erp.bean.device.Device_check;
 import com.erp.bean.device.Info;
@@ -91,6 +92,7 @@ public class DeviceCheckController {
         return deviceCheckService.searchDeviceCheckByDeviceName(searchValue, page, rows);
 
     }
+    @UpdateMethod("deviceCheck")
     @RequestMapping("update_note")
     public @ResponseBody Info updateNoteById(String deviceCheckId,String deviceCheckResult){
         int res = deviceCheckService.updateNoteById(deviceCheckId,deviceCheckResult);

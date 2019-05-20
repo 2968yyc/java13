@@ -64,7 +64,7 @@ public class WorkController {
     public Info insertWork(Work work){
         int i =workService.insertWork(work);
         Info info=new Info(200,"ok",null);
-        return i!=0?info:null;
+        return i!=0?info:new Info(2,"作业编号重复",null);
     }
 
 

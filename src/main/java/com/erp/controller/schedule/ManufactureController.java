@@ -64,7 +64,7 @@ public class ManufactureController {
     public Info insertManufacture(Manufacture manufacture){
         int i =manufactureService.insertManufacture(manufacture);
         Info info=new Info(200,"ok",null);
-        return i!=0?info:null;
+        return i!=0?info:new Info(2,"生产批号重复",null);
     }
 
 
