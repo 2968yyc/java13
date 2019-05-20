@@ -1,5 +1,6 @@
 package com.erp.controller.material;
 
+import com.erp.annotation.UpdateMethod;
 import com.erp.bean.QueryVO;
 import com.erp.bean.device.Info;
 import com.erp.bean.material.Material;
@@ -119,6 +120,7 @@ public class MaterialConsumeController {
         return "";
     }
 
+    @UpdateMethod("materialConsume")
     @RequestMapping("update_note")
     @ResponseBody
     public Info update_note(Material_consume material_consume){
@@ -162,6 +164,7 @@ public class MaterialConsumeController {
         return "materialConsume_edit";
     }
 
+    @UpdateMethod("materialConsume")
     @RequestMapping("update_all")
     @ResponseBody
     public Info update_all(Material_consume material_consume){

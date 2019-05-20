@@ -19,4 +19,6 @@ public interface UserService {
     QueryVO<SysUser> queryByName(int page,int rows,String name);
 
     QueryVO<SysUser> searchByRoleName(int page, int rows, String searchValue);
+
+    SysUser queryUserByName(String username);
 }
