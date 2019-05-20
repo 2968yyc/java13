@@ -99,13 +99,7 @@ public class MaterialConsumeController {
             info.setMsg("该消耗编号已存在");
         }else {
             boolean insert = materialConsumeService.insertMaterialConsume(material_consume);
-            if (!insert){
-                info.setStatus(0);
-                info.setMsg("新增失败");
-            }else {
-                info.setMsg("新增成功");
-                info.setStatus(200);
-            }
+            info = returnMsg(info,insert,"新增成功","新增失败");
         }
 
 

@@ -90,14 +90,7 @@ public class MaterialReceiveController {
             info.setMsg("该收入编号已存在");
         }else {
             boolean insert = materialReceiveService.insertMaterialReceive(material_receive);
-            if (!insert){
-                info.setStatus(0);
-                info.setMsg("新增失败");
-            }else {
-                info.setMsg("新增成功");
-                info.setStatus(200);
-            }
-
+            info = returnMsg(info,insert,"新增成功","新增失败");
         }
 
         return info;

@@ -7,7 +7,6 @@ import com.erp.service.material.MaterialService;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -101,13 +100,7 @@ public class MaterialController {
         }else {
 
             boolean insert = materialService.insertMaterial(material);
-            if (!insert){
-                info.setStatus(0);
-                info.setMsg("新增失败");
-            }else {
-                info.setMsg("新增成功");
-                info.setStatus(200);
-            }
+            info = returnMsg(info,insert,"新增成功","新增失败");
 
         }
 
@@ -145,15 +138,20 @@ public class MaterialController {
 
         boolean update = materialService.update_note(material);
 
-        if (update){
+        info = returnMsg(info, update, "更新成功", "更新失败");
+
+
+        return info;
+    }
+
+    private Info returnMsg(Info info, boolean update, String success, String fail) {
+        if (update) {
             info.setStatus(200);
-            info.setMsg("更新成功");
-        }else {
+            info.setMsg(success);
+        } else {
             info.setStatus(0);
-            info.setMsg("更新失败");
+            info.setMsg(fail);
         }
-
-
         return info;
     }
 
@@ -164,13 +162,7 @@ public class MaterialController {
         Info info = new Info();
 
         boolean isDele = materialService.delete_batch(ids);
-        if (isDele){
-            info.setStatus(200);
-            info.setMsg("删除成功");
-        }else {
-            info.setStatus(0);
-            info.setMsg("删除失败");
-        }
+        info = returnMsg(info, isDele, "删除成功", "删除失败");
 
         return info;
     }
@@ -187,13 +179,7 @@ public class MaterialController {
 
         boolean isUpdate = materialService.update_all(material);
 
-        if (isUpdate){
-            info.setStatus(200);
-            info.setMsg("编辑成功");
-        }else {
-            info.setStatus(0);
-            info.setMsg("编辑失败");
-        }
+        info = returnMsg(info, isUpdate, "编辑成功", "编辑失败");
 
         return info;
     }
