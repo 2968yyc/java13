@@ -1,13 +1,18 @@
 package com.erp.controller.quality;
 
+import com.erp.annotation.UpdateMethod;
 import com.erp.bean.QueryVO;
 import com.erp.bean.device.Info;
 import com.erp.bean.quality.ProcessMeasure;
 import com.erp.service.quality.PMeasureService;
+import com.erp.utils.PermissionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 /**
  * @Author:ZCH
@@ -37,8 +42,8 @@ public class PMeasureController {
 
     @RequestMapping("pMeasureCheck/add_judge")
     @ResponseBody
-    public String add_judge(){
-        return "";
+    public Map<String, String> add_judge(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("pMeasureCheck:add",request);
     }
 
     @RequestMapping("p_measure_check/add")
@@ -49,11 +54,12 @@ public class PMeasureController {
     @RequestMapping("p_measure_check/insert")
     @ResponseBody
     public Info insert(ProcessMeasure processMeasure){
-        boolean flag = pMeasureService.insert(processMeasure);
-        if (flag){
-            return new Info(200,"OK",null);
+        boolean b = pMeasureService.selectPMeasureBypMeasureCheckId(processMeasure.getpMeasureCheckId());
+        if (b){
+            boolean flag = pMeasureService.insert(processMeasure);
+            return returnInfo(flag, "插入失败，请稍后重试！");
         }else {
-            return new Info(0,"error",null);
+            return new Info(0, "工序计量质检编号已经存在，请更换！",null);
         }
     }
 
@@ -61,8 +67,8 @@ public class PMeasureController {
 
     @RequestMapping("pMeasureCheck/edit_judge")
     @ResponseBody
-    public String edit_judge(){
-        return "";
+    public Map<String, String> edit_judge(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("pMeasureCheck:edit",request);
     }
 
     @RequestMapping("p_measure_check/edit")
@@ -70,23 +76,20 @@ public class PMeasureController {
         return "p_measure_check_edit";
     }
 
+    @UpdateMethod("pMeasureCheck")
     @RequestMapping("p_measure_check/update_all")
     @ResponseBody
     public Info update_all(ProcessMeasure processMeasure){
         boolean flag = pMeasureService.updatePMeasureBypMeasureCheckId(processMeasure);
-        if (flag){
-            return new Info(200,"OK",null);
-        }else {
-            return new Info(0,"error",null);
-        }
+        return returnInfo(flag, "更新失败，请稍后重试！");
     }
 
     /*----------------------------以下是删除功能----------------------------*/
 
     @RequestMapping("pMeasureCheck/delete_judge")
     @ResponseBody
-    public String delete_judge(){
-        return "";
+    public Map<String, String> delete_judge(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("pMeasureCheck:delete",request);
     }
 
     @RequestMapping("p_measure_check/delete_batch")
@@ -94,11 +97,7 @@ public class PMeasureController {
     //删除功能
     public Info delete_batch(String[] ids){
         boolean flag = pMeasureService.deletePMeasureBypMeasureCheckIds(ids);
-        if (flag){
-            return new Info(200,"OK",null);
-        }else {
-            return new Info(0,"error",null);
-        }
+        return returnInfo(flag, "删除失败，请稍后重试！");
     }
 
     /*----------------------------以下是模糊查询功能----------------------------*/
@@ -106,6 +105,15 @@ public class PMeasureController {
     @RequestMapping("p_measure_check/search_pMeasureCheck_by_pMeasureCheckId")
     @ResponseBody
     public QueryVO searchFMeasureCheckByFMeasureCheckId(String searchValue, int page, int rows){
-        return pMeasureService.searchPMeasureByfpMeasureCheckId(searchValue, page, rows);
+        String fMeasureCheckId = "%" + searchValue + "%";
+        return pMeasureService.searchPMeasureByfpMeasureCheckId(fMeasureCheckId, page, rows);
+    }
+
+    public Info returnInfo(boolean flag, String message){
+        if (flag){
+            return new Info(200,"OK",null);
+        }else {
+            return new Info(0,message,null);
+        }
     }
 }

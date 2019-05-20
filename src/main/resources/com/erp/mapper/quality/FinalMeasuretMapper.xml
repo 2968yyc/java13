@@ -282,14 +282,14 @@
         SELECT fm.f_measure_check_id,fm.order_id,fm.check_item,fm.cdate,fm.measure_data,fm.emp_id,
       fm.result,fm.note,e.emp_name from final_measuret_check fm
 			LEFT JOIN employee e on fm.emp_id = e.emp_id
-			where fm.f_measure_check_id like '%${fMeasureCheckId}%'
+			where fm.f_measure_check_id like #{fMeasureCheckId}
   </select>
 
   <select id="searchfMeasureCheckByOrderIdLeft" resultMap="BaseResultMapLeft">
         SELECT fm.f_measure_check_id,fm.order_id,fm.check_item,fm.cdate,fm.measure_data,fm.emp_id,
       fm.result,fm.note,e.emp_name from final_measuret_check fm
 			LEFT JOIN employee e on fm.emp_id = e.emp_id
-			where fm.order_id like '%${orderId}%'
+			where fm.order_id like #{orderId}
   </select>
 
   <select id="countAllFinalMeasureBySomething" resultType="_int">
@@ -297,11 +297,11 @@
     LEFT JOIN employee e on fm.emp_id = e.emp_id
     <where>
       <if test="fMeasureCheckId != null">
-        and fm.f_measure_check_id like '%${fMeasureCheckId}%'
+        and fm.f_measure_check_id like #{fMeasureCheckId}
       </if>
 
       <if test="orderId != null">
-        and fm.order_id like '%${orderId}%'
+        and fm.order_id like #{orderId}
       </if>
     </where>
   </select>

@@ -91,19 +91,46 @@ public class UserController {
     @RequestMapping("delete_batch")
     @ResponseBody
     @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.REPEATABLE_READ)
-    public Info delete_batch(@ModelAttribute("ids") String[] ids) {
+    public Info delete_batch(@ModelAttribute("ids") String[] ids,HttpSession session) {
+
+        ActiveUser activeUser = (ActiveUser) session.getAttribute("activeUser");
+        String username = activeUser.getUsername();
+
+        SysUser user = userService.queryUserByName(username);
+
 
         Info info = new Info();
+
+        List<String> userId = new ArrayList<>();
+
+        int i = 0;
+
         for (String id:ids) {
-            boolean b = userService.deleteSysUser(id);
-            if (b) {
-                info.setStatus(200);
-                info.setMsg("删除成功");
-            } else {
-                info.setStatus(0);
-                info.setMsg("删除失败");
+
+            if (!user.getId().equals(id)){
+
+                i++;
+                boolean b = userService.deleteSysUser(id);
+                if (!b) {
+                    userId.add(id);
+                }
             }
+
         }
+
+
+        if (userId.size() == i){
+            info.setMsg("全部删除失败");
+            info.setStatus(0);
+        }else if (userId.size()>0){
+            info.setMsg("编号为："+ userId.toString()+"的目标 删除失败");
+            info.setStatus(0);
+        }else {
+            info.setMsg("删除成功");
+            info.setStatus(200);
+        }
+
+
         return info;
     }
 

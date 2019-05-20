@@ -1,12 +1,14 @@
 package com.erp.controller.technology;
 
 
+import com.erp.annotation.UpdateMethod;
 import com.erp.bean.device.Info;
 import com.erp.bean.technology.PageHelper;
 import com.erp.bean.technology.Process;
 import com.erp.bean.technology.Technology;
 import com.erp.service.technology.ProcessService;
 import com.erp.service.technology.TechnologyService;
+import com.erp.utils.PermissionUtils;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author : zjf
@@ -66,9 +70,10 @@ public class TechnologyController {
         }
     }
 
-    @RequestMapping("/add_judge")
-    public @ResponseBody String technology_add(){
-        return "";
+    @RequestMapping("add_judge")
+    public @ResponseBody
+    Map<String,String> addDudge(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("technology:add",request);
     }
 
     @RequestMapping("/add")
@@ -100,6 +105,7 @@ public class TechnologyController {
         return "technology_edit";
     }
 
+    @UpdateMethod("technology")
     @RequestMapping("/update_all")
     public @ResponseBody Info technologyedit(Technology technology){
         int i = technologyService.editByTechnology(technology);

@@ -17,4 +17,6 @@ public interface PMeasureService {
     boolean deletePMeasureBypMeasureCheckIds(String[] ids);
 
     QueryVO searchPMeasureByfpMeasureCheckId(String searchValue, int page, int rows);
+
+    boolean selectPMeasureBypMeasureCheckId(String pMeasureCheckId);
 }

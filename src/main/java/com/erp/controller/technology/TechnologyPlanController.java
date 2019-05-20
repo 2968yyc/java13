@@ -1,9 +1,11 @@
 package com.erp.controller.technology;
 
+import com.erp.annotation.UpdateMethod;
 import com.erp.bean.device.Info;
 import com.erp.bean.technology.PageHelper;
 import com.erp.bean.technology.Technology_plan;
 import com.erp.service.technology.TechnologyPlanService;
+import com.erp.utils.PermissionUtils;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author : zjf
@@ -72,9 +76,10 @@ public class TechnologyPlanController {
         }
     }
 
-    @RequestMapping("/add_judge")
-    public @ResponseBody String technologyPlan_add(){
-        return "";
+    @RequestMapping("add_judge")
+    public @ResponseBody
+    Map<String,String> addDudge(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("technologyPlan:add",request);
     }
 
     @RequestMapping("/add")
@@ -106,6 +111,7 @@ public class TechnologyPlanController {
         return "technologyPlan_edit";
     }
 
+    @UpdateMethod("technologyPlan")
     @RequestMapping("/update_all")
     public @ResponseBody Info technologyPlanedit(Technology_plan technology_plan){
         int i = technologyPlanService.editByTechnology(technology_plan);

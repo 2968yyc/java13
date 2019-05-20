@@ -103,17 +103,20 @@ public class Technology_requirementServiceImpl implements Technology_requirement
         TechnologyExample technologyExample = new TechnologyExample();
         TechnologyExample.Criteria criteria1 = technologyExample.createCriteria();
         criteria1.andTechnologyIdIn(lists);
-        //分页查询在最后一次查询之前
-        PageHelper.startPage(page, rows);
-        List<Technology> technologies = technologyMapper.selectByExample(technologyExample);
+        if(lists.size() != 0) {
+            //分页查询在最后一次查询之前
+            PageHelper.startPage(page, rows);
+            List<Technology> technologies = technologyMapper.selectByExample(technologyExample);
 
-        for (Technology technology : technologies) {
-            for (Technology_requirement technology_requirement : technology_requirements) {
-                if(technology.getTechnologyId().equals(technology_requirement.getTechnologyId())){
-                    //technology_plan获得name
-                    technology_requirement.setTechnologyName(technology.getTechnologyName());
+            for (Technology technology : technologies) {
+                for (Technology_requirement technology_requirement : technology_requirements) {
+                    if (technology.getTechnologyId().equals(technology_requirement.getTechnologyId())) {
+                        //technology_plan获得name
+                        technology_requirement.setTechnologyName(technology.getTechnologyName());
+                    }
                 }
             }
+            return technology_requirements;
         }
         return technology_requirements;
     }
@@ -130,9 +133,9 @@ public class Technology_requirementServiceImpl implements Technology_requirement
 //        List<Technology_plan> technology_plans = new ArrayList<>();
         List<String> ids = new ArrayList<>();
 
-        Map<String,String> map = new HashMap<>();
+        Map<String, String> map = new HashMap<>();
         for (Technology technology : technologies) {
-            map.put(technology.getTechnologyId(),technology.getTechnologyName());
+            map.put(technology.getTechnologyId(), technology.getTechnologyName());
             ids.add(technology.getTechnologyId());
         }
 
@@ -140,13 +143,20 @@ public class Technology_requirementServiceImpl implements Technology_requirement
         Technology_requirementExample technology_requirementExample = new Technology_requirementExample();
         Technology_requirementExample.Criteria criteria = technology_requirementExample.createCriteria();
         criteria.andTechnologyIdIn(ids);
-        List<Technology_requirement> technology_requirements = technology_requirementMapper.selectByExample(technology_requirementExample);
-        for (Technology_requirement technology_requirement : technology_requirements) {
-            for (String s : map.keySet()) {
-                if(s.equals(technology_requirement.getTechnologyId())){
-                    technology_requirement.setTechnologyName(map.get(s));
+
+        List<Technology_requirement> technology_requirements = new ArrayList<>();
+        if (ids.size() != 0) {
+            //分页查询在最后一次查询之前
+            PageHelper.startPage(page, rows);
+            technology_requirements = technology_requirementMapper.selectByExample(technology_requirementExample);
+            for (Technology_requirement technology_requirement : technology_requirements) {
+                for (String s : map.keySet()) {
+                    if (s.equals(technology_requirement.getTechnologyId())) {
+                        technology_requirement.setTechnologyName(map.get(s));
+                    }
                 }
             }
+            return technology_requirements;
         }
         return technology_requirements;
     }
