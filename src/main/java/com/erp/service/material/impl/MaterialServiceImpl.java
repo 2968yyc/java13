@@ -76,6 +76,9 @@ public class MaterialServiceImpl implements MaterialService {
     public boolean insertMaterial(Material material) {
 
 
+        material = updateStatus(material);
+
+
         int insert = materialMapper.insertMaterial(material);
 
         return insert == 1?true:false;
@@ -109,9 +112,27 @@ public class MaterialServiceImpl implements MaterialService {
 
     @Override
     public boolean update_all(Material material) {
+
+        material = updateStatus(material);
+
         int update = materialMapper.updateByPrimaryKeySelective(material);
 
 
         return update ==1?true:false;
+    }
+
+    private Material updateStatus(Material material) {
+        Integer remaining = material.getRemaining();
+        if (remaining <= 20 && remaining > 0) {
+            material.setStatus("短缺");
+        } else if (remaining >= 80) {
+            material.setStatus("充足");
+        } else if (remaining <= 0) {
+            material.setStatus("缺货");
+        } else {
+            material.setStatus("正常");
+        }
+
+        return material;
     }
 }
