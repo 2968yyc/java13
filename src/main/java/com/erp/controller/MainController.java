@@ -2,9 +2,7 @@ package com.erp.controller;
 
 import com.erp.bean.UploadInfo;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletContext;
@@ -12,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Author: Qiu
@@ -69,6 +69,52 @@ public class MainController {
             return new UploadInfo(1, null,"不支持此类文件上传");
         }
 
+    }
+
+    @RequestMapping("pic/delete")
+    @ResponseBody
+    public Map<String, String> deletePic(String picName,HttpServletRequest request){
+        Map<String ,String > map =new HashMap<>();
+        String path=request.getSession().getServletContext().getRealPath(picName);
+        File file =new File(path);
+        boolean res=file.delete();
+        map.put("data","success");
+        return map;
+    }
+
+    @RequestMapping("file/upload")
+    public @ResponseBody
+    UploadInfo uploadfile( @RequestParam(value = "file", required = false) MultipartFile file, HttpServletRequest request) {
+        String fileName=file.getOriginalFilename();
+        String path = request.getSession().getServletContext().getRealPath("/WEB-INF/file/");
+        String suffix = fileName.substring(fileName.lastIndexOf("."));
+        String prefix = fileName.substring(0, fileName.lastIndexOf("."));
+        long time = new Date().getTime();
+        String newFileName = prefix + time + suffix;
+        File newFile = new File(path + newFileName);
+        if (!newFile.getParentFile().exists()) {
+            newFile.getParentFile().mkdir();
+        }
+        try {
+            file.transferTo(newFile);
+            return new UploadInfo(0, "file/"+newFileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new UploadInfo(1, null,"网络异常，请重新上传");
+        }
+    }
+
+    @RequestMapping("file/delete")
+    @ResponseBody
+    public Map<String, String> deletefile(String fileName,HttpServletRequest request){
+        Map<String ,String > map =new HashMap<>();
+
+        String newFilePath=fileName.substring(fileName.lastIndexOf("=")+1);
+        String path=request.getSession().getServletContext().getRealPath(newFilePath);
+        File file =new File(path);
+        boolean res=file.delete();
+        map.put("data","success");
+        return map;
     }
 
 }

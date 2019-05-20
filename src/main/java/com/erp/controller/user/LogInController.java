@@ -6,6 +6,7 @@ import com.erp.bean.user.Permission;
 import com.erp.bean.user.SysUser;
 import com.erp.service.user.PermissionService;
 import com.erp.service.user.UserService;
+import com.erp.utils.PermissionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -76,34 +77,7 @@ public class LogInController {
             if (permissionId.length()>=2){
                 String[] perms = permissionId.split(",");
                 String[] suffix = new String[]{"", ":add", ":edit", ":delete"};
-                Map<String, String> prefix = new HashMap<>();
-                prefix.put("1", "order");
-                prefix.put("2", "custom");
-                prefix.put("3", "product");
-                prefix.put("6", "work");
-                prefix.put("7", "manufacture");
-                prefix.put("8", "task");
-                prefix.put("9", "technology");
-                prefix.put("10", "process");
-                prefix.put("11", "technologyPlan");
-                prefix.put("12", "technologyRequirement");
-                prefix.put("18", "material");
-                prefix.put("19", "materialReceive");
-                prefix.put("22", "materialConsume");
-                prefix.put("13", "fCountCheck");
-                prefix.put("14", "fMeasureCheck");
-                prefix.put("15", "pCountCheck");
-                prefix.put("16", "pMeasureCheck");
-                prefix.put("17", "unqualify");
-                prefix.put("23", "device");
-                prefix.put("27", "deviceType");
-                prefix.put("24", "deviceCheck");
-                prefix.put("25", "deviceFault");
-                prefix.put("26", "deviceMaintain");
-                prefix.put("4", "department");
-                prefix.put("5", "employee");
-                prefix.put("20", "user");
-                prefix.put("21", "role");
+                Map<String, String> prefix = PermissionUtils.getMap();
 
                 for (String perm : perms) {
                     String[] strings = splitLastChar(perm);

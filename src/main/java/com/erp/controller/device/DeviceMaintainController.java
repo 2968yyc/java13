@@ -5,10 +5,14 @@ import com.erp.bean.device.Device_maintain;
 import com.erp.bean.device.Info;
 import com.erp.service.device.DeviceMaintainService;
 import com.erp.service.device.DeviceService;
+import com.erp.utils.PermissionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 /**
  * @Author: yyc
@@ -26,9 +30,9 @@ public class DeviceMaintainController {
         return deviceMaintainService.getDeviceMaintainInPage(page, rows);
     }
     @RequestMapping("add_judge")
-    public @ResponseBody String  addDudge(){
-        //Todo 判断权限
-        return null;
+    public @ResponseBody
+    Map<String,String> addDudge(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("deviceMaintain:add",request);
     }
     @RequestMapping("add")
     public String toAdd(){
@@ -45,9 +49,8 @@ public class DeviceMaintainController {
         }
     }
     @RequestMapping("edit_judge")
-    public @ResponseBody String  editDudge(){
-        //Todo 判断权限
-        return "";
+    public @ResponseBody Map<String,String>  editDudge(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("deviceMaintain:edit",request);
     }
     @RequestMapping("edit")
     public String toEdit(){
@@ -63,9 +66,8 @@ public class DeviceMaintainController {
         }
     }
     @RequestMapping("delete_judge")
-    public @ResponseBody String  deleteDudge(){
-        //Todo 判断权限
-        return "";
+    public @ResponseBody Map<String,String>  deleteDudge(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("deviceMaintain:delete",request);
     }
 
     @RequestMapping("delete_batch")
