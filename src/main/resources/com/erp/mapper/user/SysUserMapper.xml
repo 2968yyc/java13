@@ -212,4 +212,13 @@
   <select id="queryUserByName" resultType="com.erp.bean.user.SysUser">
     select id,username,password,locked,role_Id as roleId from sys_user where username = #{username}
   </select>
+
+  <select id="querUserCountByRoleName" resultType="Integer">
+    select count(id,username,password,locked,role_Id as roleId) from sys_user su inner join role r where r.role_id = su.role_id and r.role_name like #{searchValue}
+  </select>
+
+  <select id="querUserByRoleName" resultType="com.erp.bean.user.SysUser">
+        select id,username,password,locked,role_Id as roleId from sys_user su inner join role r where r.role_id = su.role_id and r.role_name like #{searchValue}
+
+  </select>
 </mapper>
