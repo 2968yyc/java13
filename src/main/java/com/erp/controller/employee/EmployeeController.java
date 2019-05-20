@@ -1,5 +1,6 @@
 package com.erp.controller.employee;
 
+import com.erp.annotation.UpdateMethod;
 import com.erp.bean.QueryVO;
 import com.erp.bean.device.Info;
 import com.erp.bean.employee.Employee;
@@ -129,6 +130,7 @@ public class EmployeeController {
     }
 
     @RequestMapping("update_all")
+    @UpdateMethod("employee")
     @ResponseBody
     @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.REPEATABLE_READ)
     public Info updateEmployee(@ModelAttribute Employee employee){

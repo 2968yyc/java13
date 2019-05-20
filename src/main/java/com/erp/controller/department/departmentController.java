@@ -1,5 +1,6 @@
 package com.erp.controller.department;
 
+import com.erp.annotation.UpdateMethod;
 import com.erp.bean.QueryVO;
 import com.erp.bean.department.Department;
 import com.erp.bean.device.Info;
@@ -134,6 +135,7 @@ public class departmentController {
     }
 
     @RequestMapping("update_all")
+    @UpdateMethod("department")
     @ResponseBody
     @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.REPEATABLE_READ)
     public Info updateDepartment(@ModelAttribute Department department){
@@ -167,6 +169,7 @@ public class departmentController {
     }
 
     @RequestMapping("update_note")
+    @UpdateMethod("department")
     @ResponseBody
     @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.REPEATABLE_READ)
     public Info updateNote(String departmentId,String note){
