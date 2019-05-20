@@ -1,6 +1,7 @@
 package com.erp.aop;
 
 import com.erp.annotation.UpdateMethod;
+import com.erp.bean.device.Info;
 import com.erp.utils.PermissionUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -41,7 +42,7 @@ public class UpdateAspect  {
                     String domainName = updateMethod.value();
                     Map<String, String> res = PermissionUtils.permissionCheck(domainName + ":edit", request);
                     if (!res.isEmpty())
-                        return res;
+                        return new Info(0,res.get("msg"),null);
                     else {
                         Object proceed = proceedingJoinPoint.proceed();
                         return proceed;
