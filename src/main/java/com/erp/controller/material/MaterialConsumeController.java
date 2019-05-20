@@ -133,14 +133,20 @@ public class MaterialConsumeController {
 
         boolean update = materialConsumeService.update_note(material_consume);
 
-        if (update){
-            info.setStatus(200);
-            info.setMsg("更新成功");
-        }else {
-            info.setStatus(0);
-            info.setMsg("更新失败");
-        }
+        info = returnMsg(info, update, "更新成功", "更新失败");
 
+
+        return info;
+    }
+
+    private Info returnMsg(Info info, boolean update, String success, String fail) {
+        if (update) {
+            info.setStatus(200);
+            info.setMsg(success);
+        } else {
+            info.setStatus(0);
+            info.setMsg(fail);
+        }
 
         return info;
     }
@@ -152,13 +158,7 @@ public class MaterialConsumeController {
         Info info = new Info();
 
         boolean isDele = materialConsumeService.delete_batch(ids);
-        if (isDele){
-            info.setStatus(200);
-            info.setMsg("删除成功");
-        }else {
-            info.setStatus(0);
-            info.setMsg("删除失败");
-        }
+        info = returnMsg(info, isDele, "删除成功", "删除失败");
 
         return info;
     }
@@ -175,13 +175,7 @@ public class MaterialConsumeController {
 
         boolean isUpdate = materialConsumeService.update_all(material_consume);
 
-        if (isUpdate){
-            info.setStatus(200);
-            info.setMsg("编辑成功");
-        }else {
-            info.setStatus(0);
-            info.setMsg("编辑失败");
-        }
+        info = returnMsg(info, isUpdate, "编辑成功", "编辑失败");
 
         return info;
     }

@@ -48,7 +48,7 @@ public class MaterialReceiveServiceImpl implements MaterialReceiveService {
 
         List<Material_receive> material = getMaterial(list1);
 
-        return new QueryVO<Material_receive>(list.size(),material);
+        return new QueryVO<>(list.size(),material);
     }
 
     private List<Material_receive> getMaterial(List<Material_receive> list) {
@@ -70,7 +70,7 @@ public class MaterialReceiveServiceImpl implements MaterialReceiveService {
         PageHelper.startPage(page,rows);
         List<Material_receive> materialList1 = material_receiveMapper.queryReceiveByMaterialId(searchValue);
         List<Material_receive> material = getMaterial(materialList1);
-        return new QueryVO<Material_receive>(materialList.size(),material);
+        return new QueryVO<>(materialList.size(),material);
     }
 
     @Override
@@ -80,6 +80,14 @@ public class MaterialReceiveServiceImpl implements MaterialReceiveService {
 
     @Override
     public boolean insertMaterialReceive(Material_receive material_receive) {
+
+        Material material = materialMapper.queryMaterialById(material_receive.getMaterialId());
+
+        material.setRemaining(material.getRemaining()+material_receive.getAmount());
+
+        materialMapper.updateByPrimaryKeySelective(material);
+
+
         int insert = material_receiveMapper.insertMaterialReceive(material_receive);
 
         return insert == 1?true:false;
@@ -105,6 +113,19 @@ public class MaterialReceiveServiceImpl implements MaterialReceiveService {
 
     @Override
     public boolean update_all(Material_receive material_receive) {
+
+
+        Material_receive materialReceive = material_receiveMapper.getMaterialReceiveByReceiveId(material_receive.getReceiveId());
+
+        int i = materialReceive.getAmount() - material_receive.getAmount();
+
+        Material material = materialMapper.queryMaterialById(material_receive.getMaterialId());
+
+        material.setRemaining(material.getRemaining()+i);
+
+        materialMapper.updateByPrimaryKeySelective(material);
+
+
         int update = material_receiveMapper.updateByPrimaryKeySelective(material_receive);
 
 
