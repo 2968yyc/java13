@@ -11,9 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URLEncoder;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Author: Qiu
@@ -76,10 +74,10 @@ public class MainController {
     @RequestMapping("pic/delete")
     @ResponseBody
     public Map<String, String> deletePic(String picName,HttpServletRequest request){
+        List<String> images=new ArrayList<>();
+        images.add(picName);
+        request.getSession().setAttribute("images",images);
         Map<String ,String > map =new HashMap<>();
-        String path=request.getSession().getServletContext().getRealPath(picName);
-        File file =new File(path);
-        boolean res=file.delete();
         map.put("data","success");
         return map;
     }
@@ -149,8 +147,6 @@ public class MainController {
             return new UploadInfo(1, null, "网络异常，请重新上传");
         }
     }
-
-
 
 
 

@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -88,7 +90,17 @@ public class OrderController {
     @UpdateMethod("order")
     @RequestMapping("update_all")
     @ResponseBody
-    public Info editOrder3(Order order){
+    public Info editOrder3(Order order,HttpServletRequest req){
+        String image="";
+        if(order.getImage()!=null) {
+            image = order.getImage();
+        }
+        deleteImage(req,image);
+        String file="";
+        if(order.getFile()!=null) {
+            file = order.getFile();
+        }
+        deleteFile(req,file);
         int i=orderService.updateOrder(order);
         Info info=new Info(200,"ok",null);
         return i==1?info:null;
@@ -132,6 +144,40 @@ public class OrderController {
     @ResponseBody
     public PageHander searchOrderByProductName(String searchValue,int page,int rows){
         return orderService.searchByProductName(searchValue,page,rows);
+    }
+
+    public void deleteImage(HttpServletRequest request,String image){
+        String[] img1=image.split(",");
+        List<String> imgList = Arrays.asList(img1);
+
+        List<String> images=(List)request.getSession().getAttribute("images");
+        if(images!=null) {
+            for (String s : images) {
+                if (!imgList.contains(s)) {
+                    String path = request.getSession().getServletContext().getRealPath(s);
+                    File file = new File(path);
+                    boolean res = file.delete();
+                    System.out.println("delete " + s + " : " + res);
+                }
+            }
+        }
+    }
+
+    public void deleteFile(HttpServletRequest request,String file){
+        List<String> files=(List)request.getSession().getAttribute("files");
+        if(files!=null) {
+            String[] file1 = file.split(",");
+            List<String> fileList = Arrays.asList(file1);
+
+            for (String s : files) {
+                if (!fileList.contains(s)) {
+                    String path = request.getSession().getServletContext().getRealPath(s);
+                    File file2 = new File(path);
+                    boolean res = file2.delete();
+                    System.out.println("delete " + s + " : " + res);
+                }
+            }
+        }
     }
 
 
