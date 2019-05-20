@@ -143,7 +143,7 @@ public class MainController {
         }
         try {
             file.transferTo(newFile);
-            return new UploadInfo(0, "file/" + newFileName);
+            return new UploadInfo(0, "/file/" + newFileName);
         } catch (IOException e) {
             e.printStackTrace();
             return new UploadInfo(1, null, "网络异常，请重新上传");
