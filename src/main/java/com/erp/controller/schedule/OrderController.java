@@ -88,8 +88,6 @@ public class OrderController {
         return i==1?info:null;
     }
 
-
-
     @RequestMapping("delete_judge")
     public String delOrder(){
         return "order_list";
