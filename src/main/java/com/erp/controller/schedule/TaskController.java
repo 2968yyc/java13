@@ -1,16 +1,21 @@
 package com.erp.controller.schedule;
 
+import com.erp.annotation.UpdateMethod;
 import com.erp.bean.device.Info;
 import com.erp.bean.schedule.PageHander;
 import com.erp.bean.schedule.Task;
+import com.erp.bean.technology.PageHelper;
 import com.erp.service.schedule.impl.TaskServiceImpl;
+import com.erp.utils.PermissionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: xf
@@ -50,8 +55,9 @@ public class TaskController {
 
 
     @RequestMapping("add_judge")
-    public String addTask1(){
-        return "task_list";
+    public @ResponseBody
+    Map<String,String> addTask1(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("task:add",request);
     }
 
     @RequestMapping("add")
@@ -69,14 +75,16 @@ public class TaskController {
 
 
     @RequestMapping("edit_judge")
-    public String editTask1(){
-        return "task_list";
+    public @ResponseBody Map<String,String> editTask1(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("task:edit",request);
     }
 
     @RequestMapping("edit")
     public String editTask2(){
         return "task_edit";
     }
+
+    @UpdateMethod("task")
     @RequestMapping("update_all")
     @ResponseBody
     public Info editTask3(Task task){
@@ -88,8 +96,8 @@ public class TaskController {
 
 
     @RequestMapping("delete_judge")
-    public String delTask(){
-        return "task_list";
+    public @ResponseBody Map<String,String> delTask(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("task:delete",request);
     }
 
     @RequestMapping("delete_batch")

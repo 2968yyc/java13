@@ -1,16 +1,20 @@
 package com.erp.controller.schedule;
 
+import com.erp.annotation.UpdateMethod;
 import com.erp.bean.device.Info;
 import com.erp.bean.schedule.PageHander;
 import com.erp.bean.schedule.Product;
 import com.erp.service.schedule.impl.ProductServiceImpl;
+import com.erp.utils.PermissionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: xf
@@ -50,8 +54,9 @@ public class ProductController {
 
 
     @RequestMapping("add_judge")
-    public String addProduct1(){
-        return "product_list";
+    public @ResponseBody
+    Map<String,String> addProduct1(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("product:add",request);
     }
 
     @RequestMapping("add")
@@ -69,14 +74,16 @@ public class ProductController {
 
 
     @RequestMapping("edit_judge")
-    public String editProduct1(){
-        return "product_list";
+    public @ResponseBody Map<String,String> editProduct1(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("product:edit",request);
     }
 
     @RequestMapping("edit")
     public String editProduct2(){
         return "product_edit";
     }
+
+    @UpdateMethod("product")
     @RequestMapping("update_all")
     @ResponseBody
     public Info editProduct3(Product product){
@@ -88,8 +95,8 @@ public class ProductController {
 
 
     @RequestMapping("delete_judge")
-    public String delProduct(){
-        return "product_list";
+    public @ResponseBody Map<String,String> delProduct(HttpServletRequest request){
+        return PermissionUtils.permissionCheck("product:delete",request);
     }
 
     @RequestMapping("delete_batch")
